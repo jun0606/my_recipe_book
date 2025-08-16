@@ -1,0 +1,270 @@
+import 'package:json_annotation/json_annotation.dart';
+
+part 'practical_recipe.g.dart';
+
+@JsonSerializable()
+class PracticalRecipe {
+  final String id;
+  final String name;
+  final List<Ingredient> ingredients;
+  final int originalYield; // 원래 나오는 개수
+  final double originalTotalWeight; // 원래 총 무게 (g)
+  final String? description;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+
+  const PracticalRecipe({
+    required this.id,
+    required this.name,
+    required this.ingredients,
+    required this.originalYield,
+    required this.originalTotalWeight,
+    this.description,
+    required this.createdAt,
+    required this.updatedAt,
+  });
+
+  factory PracticalRecipe.fromJson(Map<String, dynamic> json) =>
+      _$PracticalRecipeFromJson(json);
+
+  Map<String, dynamic> toJson() => _$PracticalRecipeToJson(this);
+
+  /// 개수 기반으로 레시피 스케일링
+  PracticalRecipe scaleByCount(int targetCount) {
+    if (targetCount <= 0) {
+      throw ArgumentError('목표 개수는 1개 이상이어야 합니다');
+    }
+
+    final scaleFactor = targetCount / originalYield;
+    
+    return PracticalRecipe(
+      id: id,
+      name: name,
+      ingredients: ingredients.map((ingredient) => 
+        ingredient.scale(scaleFactor)
+      ).toList(),
+      originalYield: targetCount,
+      originalTotalWeight: originalTotalWeight * scaleFactor,
+      description: description,
+      createdAt: createdAt,
+      updatedAt: DateTime.now(),
+    );
+  }
+
+  /// 무게 기반으로 레시피 스케일링
+  PracticalRecipe scaleByWeight(double targetWeight) {
+    if (targetWeight <= 0) {
+      throw ArgumentError('목표 무게는 0보다 커야 합니다');
+    }
+
+    final scaleFactor = targetWeight / originalTotalWeight;
+    
+    return PracticalRecipe(
+      id: id,
+      name: name,
+      ingredients: ingredients.map((ingredient) => 
+        ingredient.scale(scaleFactor)
+      ).toList(),
+      originalYield: (originalYield * scaleFactor).round(),
+      originalTotalWeight: targetWeight,
+      description: description,
+      createdAt: createdAt,
+      updatedAt: DateTime.now(),
+    );
+  }
+
+  /// 분할 후 남은 재료 계산
+  Map<String, double> calculateRemainder(int actualDivisions) {
+    if (actualDivisions <= 0) {
+      throw ArgumentError('실제 분할 개수는 1개 이상이어야 합니다');
+    }
+
+    final Map<String, double> remainder = {};
+    final double perPieceWeight = originalTotalWeight / originalYield;
+    final double usedWeight = perPieceWeight * actualDivisions;
+    final double remainingWeight = originalTotalWeight - usedWeight;
+    
+    if (remainingWeight > 0) {
+      final double remainderRatio = remainingWeight / originalTotalWeight;
+      
+      for (final ingredient in ingredients) {
+        final remainingAmount = ingredient.amount * remainderRatio;
+        if (remainingAmount > 0.1) { // 0.1g 이상만 표시
+          remainder[ingredient.name] = remainingAmount;
+        }
+      }
+    }
+    
+    return remainder;
+  }
+
+  /// 총 재료 무게 계산
+  double get totalIngredientWeight {
+    return ingredients.fold(0.0, (sum, ingredient) => sum + ingredient.amount);
+  }
+
+  /// 레시피 복사 (수정용)
+  PracticalRecipe copyWith({
+    String? id,
+    String? name,
+    List<Ingredient>? ingredients,
+    int? originalYield,
+    double? originalTotalWeight,
+    String? description,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+  }) {
+    return PracticalRecipe(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      ingredients: ingredients ?? this.ingredients,
+      originalYield: originalYield ?? this.originalYield,
+      originalTotalWeight: originalTotalWeight ?? this.originalTotalWeight,
+      description: description ?? this.description,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+    );
+  }
+}
+
+@JsonSerializable()
+class Ingredient {
+  final String name;
+  final double amount;
+  final String unit;
+  final String? category; // 'flour', 'sugar', 'fat', 'liquid', 'leavening', 'other'
+
+  const Ingredient({
+    required this.name,
+    required this.amount,
+    required this.unit,
+    this.category,
+  });
+
+  factory Ingredient.fromJson(Map<String, dynamic> json) =>
+      _$IngredientFromJson(json);
+
+  Map<String, dynamic> toJson() => _$IngredientToJson(this);
+
+  /// 재료량 스케일링
+  Ingredient scale(double factor) {
+    return Ingredient(
+      name: name,
+      amount: amount * factor,
+      unit: unit,
+      category: category,
+    );
+  }
+
+  /// 재료 복사 (수정용)
+  Ingredient copyWith({
+    String? name,
+    double? amount,
+    String? unit,
+    String? category,
+  }) {
+    return Ingredient(
+      name: name ?? this.name,
+      amount: amount ?? this.amount,
+      unit: unit ?? this.unit,
+      category: category ?? this.category,
+    );
+  }
+
+  @override
+  String toString() {
+    return '$name ${amount.toStringAsFixed(1)}$unit';
+  }
+}
+
+/// 분할 계산 결과
+@JsonSerializable()
+class DivisionResult {
+  final PracticalRecipe scaledRecipe;
+  final Map<String, double> remainder;
+  final double scaleFactor;
+  final String calculationType; // 'count' or 'weight'
+  final DateTime calculatedAt;
+
+  const DivisionResult({
+    required this.scaledRecipe,
+    required this.remainder,
+    required this.scaleFactor,
+    required this.calculationType,
+    required this.calculatedAt,
+  });
+
+  factory DivisionResult.fromJson(Map<String, dynamic> json) =>
+      _$DivisionResultFromJson(json);
+
+  Map<String, dynamic> toJson() => _$DivisionResultToJson(this);
+
+  /// 남은 재료로 추가로 만들 수 있는 개수
+  int get additionalPossibleCount {
+    if (remainder.isEmpty) return 0;
+    
+    // 가장 적은 비율의 재료를 기준으로 계산
+    double minRatio = double.infinity;
+    
+    for (final ingredient in scaledRecipe.ingredients) {
+      final remainingAmount = remainder[ingredient.name] ?? 0;
+      if (remainingAmount > 0) {
+        final ratio = remainingAmount / ingredient.amount;
+        if (ratio < minRatio) {
+          minRatio = ratio;
+        }
+      }
+    }
+    
+    return minRatio == double.infinity ? 0 : minRatio.floor();
+  }
+
+  /// 남은 재료 활용 제안
+  List<String> get utilizationSuggestions {
+    final suggestions = <String>[];
+    
+    if (remainder.isEmpty) {
+      suggestions.add('재료가 정확히 소진되었습니다! 👍');
+      return suggestions;
+    }
+
+    final additionalCount = additionalPossibleCount;
+    if (additionalCount > 0) {
+      suggestions.add('남은 재료로 ${additionalCount}개 더 만들 수 있습니다');
+    }
+
+    // 특정 재료별 활용 제안
+    remainder.forEach((ingredientName, amount) {
+      if (amount > 5) { // 5g 이상인 경우만
+        switch (ingredientName.toLowerCase()) {
+          case '밀가루':
+            if (amount > 50) {
+              suggestions.add('남은 밀가루(${amount.toStringAsFixed(1)}g)로 간단한 팬케이크를 만들어보세요');
+            }
+            break;
+          case '설탕':
+            if (amount > 20) {
+              suggestions.add('남은 설탕(${amount.toStringAsFixed(1)}g)으로 캐러멜 소스를 만들어보세요');
+            }
+            break;
+          case '버터':
+            if (amount > 30) {
+              suggestions.add('남은 버터(${amount.toStringAsFixed(1)}g)로 버터 쿠키를 만들어보세요');
+            }
+            break;
+          case '계란':
+            if (amount > 0.5) {
+              suggestions.add('남은 계란으로 스크램블 에그나 계란후라이를 만들어보세요');
+            }
+            break;
+        }
+      }
+    });
+
+    if (suggestions.length == 1 && additionalCount == 0) {
+      suggestions.add('소량의 재료가 남았습니다. 다음 베이킹 때 활용해보세요');
+    }
+
+    return suggestions;
+  }
+}

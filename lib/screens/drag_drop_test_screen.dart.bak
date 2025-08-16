@@ -1,0 +1,164 @@
+import 'package:flutter/material.dart';
+import 'package:my_recipe_book/models/enhanced_recipe.dart';
+import 'package:my_recipe_book/models/user_configuration.dart';
+import 'package:my_recipe_book/widgets/modular_calculator/drag_drop_layout.dart';
+import 'package:my_recipe_book/services/user_settings_service.dart';
+import 'package:my_recipe_book/di/service_locator.dart';
+
+/// 드래그 앤 드롭 테스트 화면
+class DragDropTestScreen extends StatefulWidget {
+  const DragDropTestScreen({Key? key}) : super(key: key);
+
+  @override
+  State<DragDropTestScreen> createState() => _DragDropTestScreenState();
+}
+
+class _DragDropTestScreenState extends State<DragDropTestScreen> {
+  late UserConfiguration _userConfig;
+  late UserSettingsService _userSettingsService;
+  EnhancedRecipe? _testRecipe;
+
+  @override
+  void initState() {
+    super.initState();
+    _userSettingsService = getIt.get<UserSettingsService>();
+    _userConfig = UserConfiguration.defaultConfig('test_user');
+    _createTestRecipe();
+  }
+
+  void _createTestRecipe() {
+    // 테스트용 간단한 레시피 생성
+    _testRecipe = EnhancedRecipe(
+      id: 1,
+      title: '테스트 빵',
+      category: 'bread',
+      ingredients: [
+        {
+          'name': '강력분',
+          'amount': 500.0,
+          'unit': '그램',
+          'category': 'flour',
+        },
+        {
+          'name': '물',
+          'amount': 350.0,
+          'unit': '그램',
+          'category': 'liquid',
+        },
+        {
+          'name': '소금',
+          'amount': 10.0,
+          'unit': '그램',
+          'category': 'seasoning',
+        },
+        {
+          'name': '이스트',
+          'amount': 5.0,
+          'unit': '그램',
+          'category': 'leavening',
+        },
+      ],
+      instructions: [
+        {
+          'stepNumber': 1,
+          'instruction': '재료를 섞어 반죽을 만듭니다.',
+          'duration': 10,
+        },
+        {
+          'stepNumber': 2,
+          'instruction': '1차 발효를 진행합니다.',
+          'duration': 60,
+        },
+      ],
+      baseServings: 1,
+      isBaking: true,
+      bakingCategory: BakingCategory.bread,
+      optimizedFor: UserMode.homeBaker,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('드래그 앤 드롭 테스트'),
+        backgroundColor: Theme.of(context).primaryColor,
+        foregroundColor: Colors.white,
+        actions: [
+          PopupMenuButton<UserMode>(
+            icon: const Icon(Icons.person),
+            onSelected: (UserMode mode) {
+              setState(() {
+                _userConfig = _userConfig.changeMode(mode);
+              });
+            },
+            itemBuilder: (context) => UserMode.values.map((mode) {
+              return PopupMenuItem<UserMode>(
+                value: mode,
+                child: Row(
+                  children: [
+                    Icon(
+                      _userConfig.preferredMode == mode
+                          ? Icons.check_circle
+                          : Icons.circle_outlined,
+                      color: _userConfig.preferredMode == mode
+                          ? Theme.of(context).primaryColor
+                          : Colors.grey,
+                    ),
+                    const SizedBox(width: 8),
+                    Text(mode.displayName),
+                  ],
+                ),
+              );
+            }).toList(),
+          ),
+        ],
+      ),
+      body: DragDropCalculatorLayout(
+        recipe: _testRecipe,
+        userConfig: _userConfig,
+        userSettingsService: _userSettingsService,
+        onCalculationChanged: (calculations) {
+          // 계산 결과 처리
+          print('계산 결과: $calculations');
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('계산이 업데이트되었습니다'),
+              duration: const Duration(seconds: 2),
+            ),
+          );
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // 레시피 정보 표시
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: Text(_testRecipe?.title ?? '레시피 없음'),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('카테고리: ${_testRecipe?.category}'),
+                  Text('재료 수: ${_testRecipe?.ingredients.length}'),
+                  Text('베이킹 카테고리: ${_testRecipe?.bakingCategory.displayName}'),
+                  const SizedBox(height: 16),
+                  Text('현재 모드: ${_userConfig.preferredMode.displayName}'),
+                  Text('활성 모듈: ${_userConfig.activeModules.length}개'),
+                ],
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: const Text('확인'),
+                ),
+              ],
+            ),
+          );
+        },
+        child: const Icon(Icons.info),
+      ),
+    );
+  }
+}

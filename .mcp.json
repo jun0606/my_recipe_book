@@ -1,0 +1,31 @@
+{
+	"mcpServers": {
+		"filesystem": {
+			"command": "npx",
+			"args": ["-y", "@modelcontextprotocol/server-filesystem", "."],
+			"disabled": false,
+			"autoApprove": ["read_file", "write_file", "list_directory"]
+		},
+		"git": {
+			"command": "npx", 
+			"args": ["-y", "@modelcontextprotocol/server-git", "--repository", "."],
+			"disabled": false,
+			"autoApprove": ["git_status", "git_add", "git_commit"]
+		},
+		"task-master-ai": {
+			"command": "npx",
+			"args": ["-y", "--package=task-master-ai", "task-master-ai"],
+			"env": {
+				"OLLAMA_BASE_URL": "http://localhost:11434/api",
+				"TASK_PRIORITY": "high",
+        		"AUTO_SCHEDULING": "true",
+        		"AI_INTEGRATION": "true",
+        		"CONTEXT_AWARE": "true",
+        		"TEMPERATURE": "0.3",
+        		"TASKMASTER_LOG_LEVEL": "ERROR"
+			},
+			"disabled": false,
+			"autoApprove": ["get_tasks", "next_task", "set_task_status"]
+		}
+	}
+}

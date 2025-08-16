@@ -1,0 +1,2591 @@
+import 'package:flutter/material.dart';
+import '../services/real_time_recipe_analyzer.dart';
+import '../services/product_status_generator.dart';
+import '../services/recipe_history_service.dart';
+import '../services/advanced_baking_science_engine.dart';
+import '../models/recipe_history.dart';
+import '../screens/recipe_history_screen.dart';
+
+// 발효/오븐 모듈 추가
+import '../services/fermentation_module.dart';
+import '../services/oven_characteristics_module.dart';
+
+import '../services/reverse_recipe_engine.dart';
+import '../services/recipe_preset_manager.dart';
+import '../widgets/sous_chef/preset_selection_widget.dart';
+import '../widgets/sous_chef/text_based_recipe_generator.dart';
+import '../widgets/sous_chef/baking_result_feedback_simple.dart';
+import '../models/recipe.dart';
+import '../models/favorite_preset.dart';
+import '../widgets/fermentation/fermentation_timer_widget.dart';
+import '../models/fermentation_scenario.dart';
+
+class SousChefModeScreen extends StatefulWidget {
+  final Map<String, dynamic> recipeData;
+
+  const SousChefModeScreen({
+    super.key,
+    required this.recipeData,
+  });
+
+  @override
+  State<SousChefModeScreen> createState() => _SousChefModeScreenState();
+}
+
+class _SousChefModeScreenState extends State<SousChefModeScreen>
+    with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+  
+  RecipeAnalysisResult? _analysisResult;
+  bool _isAnalyzing = true;
+  
+  ProductStatus? _beforeStatus;
+  ProductStatus? _afterStatus;
+  
+  final _temperatureController = TextEditingController(text: '26');
+  final _humidityController = TextEditingController(text: '60');
+  final _altitudeController = TextEditingController(text: '0');
+  
+
+  
+  // 오븐 설정 컨트롤러들
+  // 오븐 컨트롤러 제거됨 - 스마트 타이머에 통합
+  // 베이킹 타이머 컨트롤러 제거됨 - 스마트 타이머에 통합
+  String _selectedOvenType = 'electric';
+  String _selectedPanColor = 'light';
+  
+  Map<String, dynamic>? _optimizationResult;
+  bool _isOptimizing = false;
+  
+  // 발효/오븐 모듈 인스턴스
+  final FermentationModule _fermentationModule = FermentationModule();
+  final OvenCharacteristicsModule _ovenModule = OvenCharacteristicsModule();
+
+  ReverseRecipeResult? _reverseRecipeResult;
+  RecipePreset? _selectedPreset;
+  
+  int _recipeDevelopmentTabIndex = 0;
+  
+  // 피드백 시스템 관련 변수들
+  FavoritePreset? _selectedFavoritePreset;
+  bool _showFeedbackSection = false;
+  bool _feedbackCompleted = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 3, vsync: this);
+    
+
+    
+    _performInitialAnalysis();
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    _temperatureController.dispose();
+    _humidityController.dispose();
+    _altitudeController.dispose();
+    
+    // 오븐 컨트롤러들 정리
+
+    // 오븐 컨트롤러 제거됨
+    // 베이킹 타이머 컨트롤러 제거됨
+    
+    super.dispose();
+  }
+
+  void _performInitialAnalysis() async {
+    try {
+      setState(() {
+        _isAnalyzing = true;
+      });
+
+      final ingredients = widget.recipeData['currentIngredients'] as List<Map<String, dynamic>>;
+      final recipeInfo = widget.recipeData['recipeInfo'] as Map<String, dynamic>? ?? {};
+      final recipeTitle = recipeInfo['title'] as String? ?? '';
+      
+      // 환경 변수 수집
+      final temperature = double.tryParse(_temperatureController.text) ?? 25.0;
+      final humidity = double.tryParse(_humidityController.text) ?? 65.0;
+      final altitude = double.tryParse(_altitudeController.text) ?? 0.0;
+      
+      // 개선된 분석 실행 (제목 + 환경 변수 포함)
+      final analysisResult = RealTimeRecipeAnalyzer.analyzeIngredients(
+        ingredients,
+        recipeTitle: recipeTitle.isNotEmpty ? recipeTitle : null,
+        ovenCapacityLiters: 30.0, // 기본 오븐 용량
+        environmentTemperature: temperature,
+        environmentHumidity: humidity,
+        altitude: altitude,
+      );
+      
+      final beforeStatus = ProductStatusGenerator.generateStatus(
+        analysisResult: analysisResult,
+        bakingContext: widget.recipeData['bakingContext'] as Map<String, dynamic>? ?? {},
+        environmentalConditions: {
+          'temperature': 26.0,
+          'humidity': 60.0,
+          'altitude': 0.0,
+          'ovenType': 'electric',
+        },
+      );
+      
+      setState(() {
+        _analysisResult = analysisResult;
+        _beforeStatus = beforeStatus;
+        _isAnalyzing = false;
+      });
+    } catch (e) {
+      setState(() {
+        _isAnalyzing = false;
+      });
+      _showErrorDialog('레시피 분석 중 오류가 발생했습니다: $e');
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Sous Chef Mode'),
+        backgroundColor: Colors.orange.shade600,
+        foregroundColor: Colors.white,
+        bottom: TabBar(
+          controller: _tabController,
+          labelColor: Colors.white,
+          unselectedLabelColor: Colors.white70,
+          indicatorColor: Colors.white,
+          tabs: const [
+            Tab(icon: Icon(Icons.analytics), text: 'Analysis'),
+            Tab(icon: Icon(Icons.science), text: 'Recipe Dev'),
+            Tab(icon: Icon(Icons.auto_awesome), text: 'Smart Presets'),
+          ],
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.history),
+            onPressed: _showHistory,
+            tooltip: '히스토리',
+          ),
+          if (_optimizationResult != null || _reverseRecipeResult != null)
+            TextButton(
+              onPressed: _applyAndReturn,
+              child: const Text('Apply', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+            ),
+        ],
+      ),
+      body: TabBarView(
+        controller: _tabController,
+        children: [
+          _buildAnalysisTab(),
+          _buildRecipeDevelopmentTab(),
+          _buildSmartPresetsTab(),
+        ],
+      ),
+    );
+  } 
+ Widget _buildAnalysisTab() {
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildRecipeHeader(),
+          const SizedBox(height: 16),
+          _buildAnalysisSection(),
+          const SizedBox(height: 16),
+          _buildEnvironmentSection(),
+          const SizedBox(height: 16),
+          _buildOptimizeButton(),
+          if (_afterStatus != null) ...[
+            const SizedBox(height: 16),
+            _buildComparisonSection(),
+          ],
+          // 시스템 바에 가려지지 않도록 충분한 여백 추가
+          const SizedBox(height: 100),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildRecipeDevelopmentTab() {
+    return Column(
+      children: [
+        Container(
+          margin: const EdgeInsets.all(16.0),
+          decoration: BoxDecoration(
+            color: Colors.grey.shade100,
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Row(
+            children: [
+              Expanded(child: _buildSubTabButton('Target', Icons.tune, 0)),
+              Expanded(child: _buildSubTabButton('Preset', Icons.bookmark, 1)),
+              Expanded(child: _buildSubTabButton('Text', Icons.auto_awesome, 2)),
+            ],
+          ),
+        ),
+        Expanded(
+          child: IndexedStack(
+            index: _recipeDevelopmentTabIndex,
+            children: [
+              _buildTargetBasedTab(),
+              _buildPresetBasedTab(),
+              _buildTextBasedTab(),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildSubTabButton(String title, IconData icon, int index) {
+    final isSelected = _recipeDevelopmentTabIndex == index;
+    return GestureDetector(
+      onTap: () => setState(() => _recipeDevelopmentTabIndex = index),
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+        decoration: BoxDecoration(
+          color: isSelected ? Colors.orange.shade600 : Colors.transparent,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(icon, size: 20, color: isSelected ? Colors.white : Colors.grey.shade600),
+            const SizedBox(height: 4),
+            Text(
+              title, 
+              style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: isSelected ? Colors.white : Colors.grey.shade600), 
+              textAlign: TextAlign.center,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ],
+        ),
+      ),
+    );
+  } 
+ Widget _buildRecipeHeader() {
+    final recipeInfo = widget.recipeData['recipeInfo'] as Map<String, dynamic>;
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(Icons.restaurant_menu, color: Colors.orange.shade600),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    recipeInfo['title'] ?? 'Recipe', 
+                    style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
+                  )
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            Text(
+              'Category: ${recipeInfo['category'] ?? 'General'}', 
+              style: TextStyle(fontSize: 14, color: Colors.grey.shade600),
+              overflow: TextOverflow.ellipsis,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildAnalysisSection() {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(Icons.analytics, color: Colors.blue.shade600),
+                const SizedBox(width: 8),
+                const Text('Recipe Analysis', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+              ],
+            ),
+            const SizedBox(height: 16),
+            if (_isAnalyzing) ...[
+              Center(
+                child: Column(
+                  children: [
+                    CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(Colors.blue.shade600),
+                    ),
+                    const SizedBox(height: 12),
+                    const Text(
+                      '레시피 분석 중...',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      '재료 비율과 베이킹 특성을 계산하고 있습니다',
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.grey.shade600,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ] else if (_analysisResult != null) ...[
+              // 기본 분석 정보 - 세로 배치로 변경
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: Colors.blue.shade50,
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(color: Colors.blue.shade200),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(Icons.analytics, size: 16, color: Colors.blue.shade600),
+                        const SizedBox(width: 4),
+                        Text(
+                          '베이킹 분석 결과',
+                          style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.blue.shade700,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    // 하이드레이션 - 별도 줄
+                    Row(
+                      children: [
+                        Icon(Icons.water_drop, size: 14, color: Colors.blue.shade600),
+                        const SizedBox(width: 4),
+                        Text(
+                          'Hydration: ',
+                          style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
+                        ),
+                        Expanded(
+                          child: Text(
+                            _analysisResult!.hydrationLevelText,
+                            style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 4),
+                    // 이스트 - 별도 줄
+                    Row(
+                      children: [
+                        Icon(Icons.scatter_plot, size: 14, color: Colors.orange.shade600),
+                        const SizedBox(width: 4),
+                        Text(
+                          'Yeast: ',
+                          style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
+                        ),
+                        Expanded(
+                          child: Text(
+                            _analysisResult!.yeastPercentageText,
+                            style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 4),
+                    // 빵 타입 - 별도 줄
+                    Row(
+                      children: [
+                        Icon(Icons.category, size: 14, color: Colors.green.shade600),
+                        const SizedBox(width: 4),
+                        Text(
+                          'Type: ',
+                          style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
+                        ),
+                        Expanded(
+                          child: Text(
+                            _analysisResult!.estimatedBakingType,
+                            style: TextStyle(
+                              fontSize: 12, 
+                              fontWeight: FontWeight.w600,
+                              color: Colors.green.shade700,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 8),
+              
+              // 반죽 총량 정보
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: Colors.orange.shade50,
+                  borderRadius: BorderRadius.circular(6),
+                  border: Border.all(color: Colors.orange.shade200),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(Icons.scale, size: 16, color: Colors.orange.shade600),
+                        const SizedBox(width: 4),
+                        Text(
+                          '반죽 정보',
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.orange.shade700,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      '총량: ${_analysisResult!.totalDoughAmountText}',
+                      style: const TextStyle(fontSize: 11),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    Text(
+                      _analysisResult!.qualityRecommendation,
+                      style: TextStyle(fontSize: 10, color: Colors.grey.shade600),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 8),
+              
+              // 환경 보정 정보
+              if (_analysisResult!.environmentalFactor != null) ...[
+                Row(
+                  children: [
+                    Icon(Icons.thermostat, size: 14, color: Colors.green.shade600),
+                    const SizedBox(width: 4),
+                    Expanded(
+                      child: Text(
+                        _analysisResult!.environmentalFactorText,
+                        style: TextStyle(
+                          fontSize: 11,
+                          color: Colors.green.shade700,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 6),
+              ],
+              
+              // 예측 특성
+              Text(
+                'Texture: ${_analysisResult!.predictedTexture}',
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
+                style: TextStyle(fontSize: 12, color: Colors.grey.shade700),
+              ),
+              
+              const SizedBox(height: 16),
+              
+              // 고도화된 분석 결과 표시
+              _buildAdvancedAnalysisResults(),
+            ],
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildEnvironmentSection() {
+    return Column(
+      children: [
+        // 기본 환경 설정
+        Card(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Icon(Icons.thermostat, color: Colors.green.shade600),
+                    const SizedBox(width: 8),
+                    const Text('기본 환경', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                  ],
+                ),
+                const SizedBox(height: 16),
+                LayoutBuilder(
+                  builder: (context, constraints) {
+                    if (constraints.maxWidth < 400) {
+                      return Column(
+                        children: [
+                          TextField(
+                            controller: _temperatureController,
+                            keyboardType: TextInputType.number,
+                            decoration: InputDecoration(
+                              labelText: '실내 온도 (°C)',
+                              border: const OutlineInputBorder(),
+                              prefixIcon: Icon(Icons.thermostat, color: Colors.orange.shade600),
+                            ),
+                          ),
+                          const SizedBox(height: 12),
+                          TextField(
+                            controller: _humidityController,
+                            keyboardType: TextInputType.number,
+                            decoration: InputDecoration(
+                              labelText: '실내 습도 (%)',
+                              border: const OutlineInputBorder(),
+                              prefixIcon: Icon(Icons.water_drop, color: Colors.blue.shade600),
+                            ),
+                          ),
+                          const SizedBox(height: 12),
+                          TextField(
+                            controller: _altitudeController,
+                            keyboardType: TextInputType.number,
+                            decoration: InputDecoration(
+                              labelText: '고도 (m)',
+                              border: const OutlineInputBorder(),
+                              prefixIcon: Icon(Icons.landscape, color: Colors.green.shade600),
+                            ),
+                          ),
+                        ],
+                      );
+                    } else {
+                      return Column(
+                        children: [
+                          Row(
+                            children: [
+                              Expanded(
+                                child: TextField(
+                                  controller: _temperatureController,
+                                  keyboardType: TextInputType.number,
+                                  decoration: InputDecoration(
+                                    labelText: '실내 온도 (°C)',
+                                    border: const OutlineInputBorder(),
+                                    prefixIcon: Icon(Icons.thermostat, color: Colors.orange.shade600),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 12),
+                              Expanded(
+                                child: TextField(
+                                  controller: _humidityController,
+                                  keyboardType: TextInputType.number,
+                                  decoration: InputDecoration(
+                                    labelText: '실내 습도 (%)',
+                                    border: const OutlineInputBorder(),
+                                    prefixIcon: Icon(Icons.water_drop, color: Colors.blue.shade600),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 12),
+                          TextField(
+                            controller: _altitudeController,
+                            keyboardType: TextInputType.number,
+                            decoration: InputDecoration(
+                              labelText: '고도 (m)',
+                              border: const OutlineInputBorder(),
+                              prefixIcon: Icon(Icons.landscape, color: Colors.green.shade600),
+                            ),
+                          ),
+                        ],
+                      );
+                    }
+                  },
+                ),
+              ],
+            ),
+          ),
+        ),
+        const SizedBox(height: 16),
+        
+
+        
+
+      ],
+    );
+  }
+
+}
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildOptimizeButton() {
+    return SizedBox(
+      width: double.infinity,
+      child: ElevatedButton(
+        onPressed: _isOptimizing ? null : _performOptimization,
+        style: ElevatedButton.styleFrom(backgroundColor: Colors.green.shade600, foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 16)),
+        child: _isOptimizing
+            ? const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox(
+                    width: 20, 
+                    height: 20, 
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2, 
+                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white)
+                    )
+                  ),
+                  SizedBox(width: 8),
+                  Flexible(child: Text('Optimizing...', overflow: TextOverflow.ellipsis)),
+                ]
+              )
+            : const Text('Apply Environment & Optimize'),
+      ),
+    );
+  }
+
+  Widget _buildComparisonSection() {
+    if (_beforeStatus == null || _afterStatus == null) return const SizedBox.shrink();
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(Icons.compare_arrows, color: Colors.purple.shade600),
+                const SizedBox(width: 8),
+                const Text('Before / After Comparison', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+              ],
+            ),
+            const SizedBox(height: 16),
+            Container(
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.grey.shade300),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Column(
+                children: [
+                  // 헤더
+                  Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade100,
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(8),
+                        topRight: Radius.circular(8),
+                      ),
+                    ),
+                    child: const Row(
+                      children: [
+                        Expanded(
+                          flex: 2,
+                          child: Text(
+                            '특성',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 3,
+                          child: Text(
+                            'Before',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 3,
+                          child: Text(
+                            'After',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  // 데이터 행들
+                  _buildComparisonRow('식감', _beforeStatus!.textureProfile.primary, _afterStatus!.textureProfile.primary),
+                  _buildComparisonRow('풍미', _beforeStatus!.flavorProfile.primary.join(', '), _afterStatus!.flavorProfile.primary.join(', ')),
+                  _buildComparisonRow('외관', _beforeStatus!.appearanceProfile.crustColor, _afterStatus!.appearanceProfile.crustColor),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTargetBasedTab() {
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildTargetHeader(),
+          const SizedBox(height: 16),
+          _buildTargetSliders(),
+          const SizedBox(height: 16),
+          _buildTargetPreview(),
+          const SizedBox(height: 16),
+          _buildGenerateFromTargetButton(),
+          // 시스템 바에 가려지지 않도록 충분한 여백 추가
+          const SizedBox(height: 100),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTargetHeader() {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(Icons.tune, color: Colors.purple.shade600),
+                const SizedBox(width: 8),
+                const Text(
+                  '목표 특성 설정',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            Text(
+              '원하는 베이킹 특성을 슬라이더로 조정하여 맞춤형 레시피를 생성하세요.',
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.grey.shade600,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTargetSliders() {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              '식감 특성',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 12),
+            _buildSlider('촉촉함', 0.7, (value) {}),
+            _buildSlider('쫄깃함', 0.6, (value) {}),
+            _buildSlider('부드러움', 0.8, (value) {}),
+            
+            const SizedBox(height: 16),
+            const Text(
+              '풍미 특성',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 12),
+            _buildSlider('단맛', 0.5, (value) {}),
+            _buildSlider('고소함', 0.7, (value) {}),
+            _buildSlider('발효향', 0.6, (value) {}),
+            
+            const SizedBox(height: 16),
+            const Text(
+              '외관 특성',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 12),
+            _buildSlider('크러스트 색상', 0.6, (value) {}),
+            _buildSlider('볼륨감', 0.8, (value) {}),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSlider(String label, double value, Function(double) onChanged) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 12.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                label,
+                style: const TextStyle(fontSize: 14),
+              ),
+              Text(
+                '${(value * 100).toInt()}%',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Colors.grey.shade600,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 4),
+          SliderTheme(
+            data: SliderTheme.of(context).copyWith(
+              activeTrackColor: Colors.purple.shade400,
+              inactiveTrackColor: Colors.grey.shade300,
+              thumbColor: Colors.purple.shade600,
+              overlayColor: Colors.purple.shade100,
+              trackHeight: 4.0,
+            ),
+            child: Slider(
+              value: value,
+              onChanged: onChanged,
+              min: 0.0,
+              max: 1.0,
+              divisions: 10,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTargetPreview() {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(Icons.preview, color: Colors.blue.shade600),
+                const SizedBox(width: 8),
+                const Text(
+                  '예상 결과',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Colors.blue.shade50,
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: Colors.blue.shade200),
+              ),
+              child: const Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '설정된 특성에 따른 예상 레시피:',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(height: 8),
+                  Text('• 촉촉하고 부드러운 식감의 식빵'),
+                  Text('• 적당한 단맛과 고소한 풍미'),
+                  Text('• 연한 갈색의 균일한 크러스트'),
+                  Text('• 높은 볼륨감으로 푹신한 모양'),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildGenerateFromTargetButton() {
+    return SizedBox(
+      width: double.infinity,
+      child: ElevatedButton(
+        onPressed: () {
+          // TODO: 목표 기반 레시피 생성 구현
+          _showInfoDialog('목표 기반 레시피 생성 기능은 곧 추가될 예정입니다.');
+        },
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.purple.shade600,
+          foregroundColor: Colors.white,
+          padding: const EdgeInsets.symmetric(vertical: 16),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
+        ),
+        child: const Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.auto_awesome),
+            SizedBox(width: 8),
+            Text(
+              '목표 기반 레시피 생성',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildPresetBasedTab() {
+    return PresetSelectionWidget(
+      selectedPreset: _selectedPreset,
+      onPresetSelected: (preset) {
+        setState(() => _selectedPreset = preset);
+        _generateFromPreset(preset);
+      },
+    );
+  }
+
+  Widget _buildTextBasedTab() {
+    return TextBasedRecipeGenerator(
+      environmentalConditions: _getEnvironmentalConditions(),
+      onRecipeGenerated: (result) => setState(() => _reverseRecipeResult = result),
+    );
+  }
+
+  Map<String, dynamic> _getEnvironmentalConditions() {
+    return {
+      'temperature': double.tryParse(_temperatureController.text) ?? 26.0,
+      'humidity': double.tryParse(_humidityController.text) ?? 60.0,
+      'altitude': double.tryParse(_altitudeController.text) ?? 0.0,
+      'ovenType': _selectedOvenType,
+    };
+  }
+
+  /// 발효 모듈 입력 데이터 생성
+  Map<String, dynamic> _getFermentationInputs() {
+    return {
+      'recipeData': widget.recipeData,
+      'room_temperature': double.tryParse(_temperatureController.text) ?? 26.0,
+      'room_humidity': double.tryParse(_humidityController.text) ?? 60.0,
+      'altitude': double.tryParse(_altitudeController.text) ?? 0.0,
+      'fermentation_temperature': (double.tryParse(_temperatureController.text) ?? 26.0) + 2.0,
+      'fermentation_humidity': (double.tryParse(_humidityController.text) ?? 60.0) + 10.0,
+      'fermentation_time': 90.0,
+      'analysisResult': _analysisResult,
+    };
+  }
+
+  /// 오븐 모듈 입력 데이터 생성
+  Map<String, dynamic> _getOvenInputs() {
+    return {
+      'recipeData': widget.recipeData,
+      'room_temperature': double.tryParse(_temperatureController.text) ?? 26.0,
+      'room_humidity': double.tryParse(_humidityController.text) ?? 60.0,
+      'altitude': double.tryParse(_altitudeController.text) ?? 0.0,
+      'oven_temperature': 180.0, // 기본값
+      'baking_time': 25.0, // 기본값
+      'oven_type': _selectedOvenType,
+      'pan_color': _selectedPanColor,
+      'analysisResult': _analysisResult,
+    };
+  }
+
+  void _performOptimization() async {
+    if (_analysisResult == null) {
+      _showErrorDialog('레시피 분석이 완료되지 않았습니다. 잠시 후 다시 시도해주세요.');
+      return;
+    }
+    
+    setState(() => _isOptimizing = true);
+
+    try {
+      final environmentalConditions = _getEnvironmentalConditions();
+      
+      // 발효 모듈 계산
+      final fermentationInputs = _getFermentationInputs();
+      final fermentationAdjustments = _fermentationModule.calculate(fermentationInputs);
+      
+      // 오븐 모듈 계산
+      final ovenInputs = _getOvenInputs();
+      final ovenAdjustments = _ovenModule.calculate(ovenInputs);
+      
+      // 통합된 환경 조건 생성
+      final enhancedEnvironmentalConditions = {
+        ...environmentalConditions,
+        'fermentationAdjustments': fermentationAdjustments,
+        'ovenAdjustments': ovenAdjustments,
+        'fermentationSettings': {
+          'temperature': (double.tryParse(_temperatureController.text) ?? 26.0) + 2.0,
+          'humidity': (double.tryParse(_humidityController.text) ?? 60.0) + 10.0,
+          'time': 90.0,
+        },
+        'ovenSettings': {
+          'temperature': 180.0, // 기본값
+          'time': 25.0, // 기본값
+          'type': _selectedOvenType,
+          'panColor': _selectedPanColor,
+        },
+      };
+      
+      final afterStatus = ProductStatusGenerator.generateStatus(
+        analysisResult: _analysisResult!,
+        bakingContext: widget.recipeData['bakingContext'] as Map<String, dynamic>? ?? {},
+        environmentalConditions: enhancedEnvironmentalConditions,
+      );
+
+      setState(() {
+        _afterStatus = afterStatus;
+        _optimizationResult = {
+          'environmentalConditions': enhancedEnvironmentalConditions,
+          'beforeStatus': _beforeStatus,
+          'afterStatus': afterStatus,
+          'fermentationAdjustments': fermentationAdjustments,
+          'ovenAdjustments': ovenAdjustments,
+        };
+      });
+    } catch (e) {
+      _showErrorDialog('최적화 중 오류가 발생했습니다: $e');
+    } finally {
+      setState(() => _isOptimizing = false);
+    }
+  }
+
+  void _generateFromPreset(RecipePreset preset) async {
+    try {
+      final result = await ReverseRecipeEngine.generateFromPreset(
+        presetId: preset.id,
+        environmentalConditions: _getEnvironmentalConditions(),
+        baseFlourWeight: 300.0,
+      );
+      setState(() => _reverseRecipeResult = result);
+    } catch (e) {
+      _showErrorDialog('Error generating recipe from preset: $e');
+    }
+  }
+
+  void _applyAndReturn() async {
+    Map<String, dynamic> resultToReturn = {};
+
+    // 히스토리 저장
+    await _saveToHistory();
+
+    if (_optimizationResult != null) {
+      resultToReturn = {
+        'optimizationResult': _optimizationResult,
+        'beforeStatus': _beforeStatus?.toJson(),
+        'afterStatus': _afterStatus?.toJson(),
+      };
+    }
+
+    if (_reverseRecipeResult != null) {
+      resultToReturn.addAll({
+        'optimizedIngredients': _reverseRecipeResult!.generatedIngredients,
+        'optimizationNotes': _reverseRecipeResult!.optimizationNotes,
+        'achievementScore': _reverseRecipeResult!.achievementScore,
+        'bakersPercentages': _reverseRecipeResult!.bakersPercentages,
+        'isReverseRecipe': true,
+      });
+    }
+
+    Navigator.pop(context, resultToReturn);
+  }
+
+  /// 히스토리에 저장
+  Future<void> _saveToHistory() async {
+    try {
+      final recipeInfo = widget.recipeData['recipeInfo'] as Map<String, dynamic>;
+      final currentIngredients = widget.recipeData['currentIngredients'] as List<Map<String, dynamic>>;
+      
+      RecipeHistory? history;
+
+      if (_optimizationResult != null && _beforeStatus != null && _afterStatus != null) {
+        // 최적화 히스토리
+        history = RecipeHistory.create(
+          recipeTitle: recipeInfo['title'] ?? 'Unknown Recipe',
+          recipeCategory: recipeInfo['category'] ?? 'General',
+          type: RecipeHistoryType.optimization,
+          originalIngredients: {'ingredients': currentIngredients},
+          optimizedIngredients: _optimizationResult!,
+          environmentalConditions: _getEnvironmentalConditions(),
+          beforeStatus: ProductStatusHistory.fromProductStatus(_beforeStatus!),
+          afterStatus: ProductStatusHistory.fromProductStatus(_afterStatus!),
+          optimizationNotes: ['환경 조건에 따른 최적화 적용'],
+        );
+      } else if (_reverseRecipeResult != null) {
+        // 역산 레시피 히스토리
+        final beforeStatus = ProductStatusHistory(
+          textureProfile: '기본',
+          flavorProfile: ['기본'],
+          appearanceProfile: '기본',
+          textureScore: 0.6,
+          flavorScore: 0.6,
+          appearanceScore: 0.6,
+          confidenceLevel: 0.5,
+        );
+        
+        final afterStatus = ProductStatusHistory(
+          textureProfile: _reverseRecipeResult!.predictedStatus.textureProfile.primary,
+          flavorProfile: _reverseRecipeResult!.predictedStatus.flavorProfile.primary,
+          appearanceProfile: _reverseRecipeResult!.predictedStatus.appearanceProfile.crustColor,
+          textureScore: 0.8,
+          flavorScore: 0.8,
+          appearanceScore: 0.8,
+          confidenceLevel: _reverseRecipeResult!.achievementScore,
+        );
+
+        history = RecipeHistory.create(
+          recipeTitle: recipeInfo['title'] ?? 'Generated Recipe',
+          recipeCategory: recipeInfo['category'] ?? 'General',
+          type: _selectedPreset != null ? RecipeHistoryType.presetGeneration : RecipeHistoryType.reverseRecipe,
+          originalIngredients: {'ingredients': currentIngredients},
+          optimizedIngredients: {'ingredients': _reverseRecipeResult!.generatedIngredients},
+          environmentalConditions: _getEnvironmentalConditions(),
+          beforeStatus: beforeStatus,
+          afterStatus: afterStatus,
+          optimizationNotes: _reverseRecipeResult!.optimizationNotes,
+          metadata: {
+            'achievementScore': _reverseRecipeResult!.achievementScore,
+            'bakersPercentages': _reverseRecipeResult!.bakersPercentages,
+            'presetId': _selectedPreset?.id,
+          },
+        );
+      }
+
+      if (history != null) {
+        await RecipeHistoryService.instance.addHistory(history);
+      }
+    } catch (e) {
+      print('히스토리 저장 오류: $e');
+      // 히스토리 저장 실패해도 메인 기능에는 영향 없도록 함
+    }
+  }
+
+  /// 고도화된 분석 결과 표시
+  Widget _buildAdvancedAnalysisResults() {
+    if (_analysisResult?.doughStateAnalysis == null) {
+      return const SizedBox.shrink();
+    }
+
+    return Column(
+      children: [
+        // 믹싱 시간 어드바이스 (오렌지색 박스) - 맨 위로 이동
+        Container(
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            color: Colors.orange.shade50,
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(color: Colors.orange.shade200),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Icon(Icons.blender, size: 16, color: Colors.orange.shade600),
+                  const SizedBox(width: 4),
+                  Text(
+                    '믹싱 시간 어드바이스',
+                    style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.orange.shade700,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8),
+              _buildAnalysisRow('믹싱가이드', _analysisResult!.mixingGuideText),
+              _buildAnalysisRow('총시간', _analysisResult!.totalMixingTimeText),
+              _buildAnalysisRow('복잡도', _analysisResult!.mixingComplexityText),
+              _buildAnalysisRow('글루텐발달', _analysisResult!.glutenDevelopmentText),
+            ],
+          ),
+        ),
+        
+        // 시럽 분석 표시 (시럽이 있을 때만)
+        if (_analysisResult!.syrupAnalysis?.hasSyrup == true) ...[
+          const SizedBox(height: 8),
+          Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: Colors.amber.shade50,
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(color: Colors.amber.shade200),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Icon(Icons.water_drop, size: 16, color: Colors.amber.shade600),
+                    const SizedBox(width: 4),
+                    Text(
+                      '시럽류 전문 분석',
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.amber.shade700,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8),
+                _buildAnalysisRow('시럽타입', _analysisResult!.syrupTypeText),
+                _buildAnalysisRow('함량', _analysisResult!.syrupPercentageText),
+                _buildAnalysisRow('갈변속도', _analysisResult!.browningSpeedText),
+                _buildAnalysisRow('발효영향', _analysisResult!.syrupFermentationEffectText),
+                _buildAnalysisRow('보습효과', _analysisResult!.syrupMoistureEffectText),
+              ],
+            ),
+          ),
+        ],
+        
+        // 지방 분석 표시 (지방이 있을 때만)
+        if (_analysisResult!.fatAnalysis?.hasFat == true) ...[
+          const SizedBox(height: 8),
+          Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: Colors.yellow.shade50,
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(color: Colors.yellow.shade200),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Icon(Icons.cake, size: 16, color: Colors.yellow.shade600),
+                    const SizedBox(width: 4),
+                    Text(
+                      '지방류 전문 분석',
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.yellow.shade700,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8),
+                _buildAnalysisRow('지방타입', _analysisResult!.fatTypeText),
+                _buildAnalysisRow('함량', _analysisResult!.fatPercentageText),
+                _buildAnalysisRow('크리밍능력', _analysisResult!.creamingAbilityText),
+                _buildAnalysisRow('쇼트닝효과', _analysisResult!.shorteningEffectText),
+                _buildAnalysisRow('질감효과', _analysisResult!.fatTextureEffectText),
+              ],
+            ),
+          ),
+        ],
+        const SizedBox(height: 8),
+        
+        // 반죽 상태 분석 (보라색 박스)
+        Container(
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            color: Colors.purple.shade50,
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(color: Colors.purple.shade200),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Icon(Icons.science, size: 16, color: Colors.purple.shade600),
+                  const SizedBox(width: 4),
+                  Text(
+                    '반죽 상태 분석',
+                    style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.purple.shade700,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8),
+              _buildAnalysisRow('종합상태', _analysisResult!.doughStateText),
+              _buildAnalysisRow('글루텐강도', _analysisResult!.glutenStrengthText),
+              _buildAnalysisRow('발효진행', _analysisResult!.fermentationProgressText),
+              _buildAnalysisRow('가스보유', _analysisResult!.gasRetentionText),
+            ],
+          ),
+        ),
+        const SizedBox(height: 8),
+        
+        // 물리화학 분석 (인디고 박스)
+        Container(
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            color: Colors.indigo.shade50,
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(color: Colors.indigo.shade200),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Icon(Icons.analytics, size: 16, color: Colors.indigo.shade600),
+                  const SizedBox(width: 4),
+                  Text(
+                    '물리화학 분석',
+                    style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.indigo.shade700,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8),
+              _buildAnalysisRow('반죽밀도', _analysisResult!.doughDensityText),
+              _buildAnalysisRow('점성지수', _analysisResult!.viscosityText),
+              _buildAnalysisRow('안정성', _analysisResult!.stabilityText),
+              _buildAnalysisRow('열전달효율', _analysisResult!.heatTransferEfficiencyText),
+              _buildAnalysisRow('열침투시간', _analysisResult!.heatPenetrationTimeText),
+            ],
+          ),
+        ),
+        const SizedBox(height: 8),
+        
+        // 최적 굽기 조건 (빨간색 박스)
+        Container(
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            color: Colors.red.shade50,
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(color: Colors.red.shade200),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Icon(Icons.local_fire_department, size: 16, color: Colors.red.shade600),
+                  const SizedBox(width: 4),
+                  Text(
+                    '최적 굽기 조건',
+                    style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.red.shade700,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8),
+              _buildAnalysisRow('온도프로파일', _analysisResult!.temperatureProfileText),
+              _buildAnalysisRow('굽기시간', _analysisResult!.totalBakingTimeText),
+              _buildAnalysisRow('스팀설정', _analysisResult!.steamSettingsText),
+              _buildAnalysisRow('성공예측', _analysisResult!.bakingSuccessPredictionText),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  /// 분석 결과 행 위젯
+  Widget _buildAnalysisRow(String label, String value) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 2),
+      child: Row(
+        children: [
+          SizedBox(
+            width: 80,
+            child: Text(
+              '$label:',
+              style: TextStyle(
+                fontSize: 11,
+                color: Colors.grey.shade600,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+          Expanded(
+            child: Text(
+              value,
+              style: const TextStyle(
+                fontSize: 11,
+                fontWeight: FontWeight.w600,
+              ),
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Error'),
+        content: Text(message),
+        actions: [TextButton(onPressed: () => Navigator.of(context).pop(), child: const Text('OK'))],
+      ),
+    );
+  }
+
+  void _showInfoDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('정보'),
+        content: Text(message),
+        actions: [TextButton(onPressed: () => Navigator.of(context).pop(), child: const Text('확인'))],
+      ),
+    );
+  }
+
+  /// 히스토리 화면 표시
+  void _showHistory() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const RecipeHistoryScreen(),
+      ),
+    );
+  }
+
+  Widget _buildComparisonRow(String property, String beforeValue, String afterValue) {
+    final isImproved = beforeValue != afterValue;
+    
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(color: Colors.grey.shade200),
+        ),
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            flex: 2,
+            child: Text(
+              property,
+              style: const TextStyle(fontWeight: FontWeight.w500),
+            ),
+          ),
+          Expanded(
+            flex: 3,
+            child: Text(
+              beforeValue,
+              textAlign: TextAlign.center,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 2,
+              style: TextStyle(
+                color: isImproved ? Colors.grey.shade600 : Colors.black,
+                fontSize: 12,
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 3,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                if (isImproved) ...[
+                  Icon(
+                    Icons.arrow_forward,
+                    size: 14,
+                    color: Colors.green.shade600,
+                  ),
+                  const SizedBox(width: 2),
+                ],
+                Flexible(
+                  child: Text(
+                    afterValue,
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
+                    style: TextStyle(
+                      color: isImproved ? Colors.green.shade700 : Colors.black,
+                      fontWeight: isImproved ? FontWeight.bold : FontWeight.normal,
+                      fontSize: 12,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSmartPresetsTab() {
+    // 현재 레시피 정보를 Recipe 객체로 변환
+    final recipeInfo = widget.recipeData['recipeInfo'] as Map<String, dynamic>;
+    final currentIngredients = widget.recipeData['currentIngredients'] as List<Map<String, dynamic>>;
+    
+    final recipe = Recipe(
+      id: null,
+      title: recipeInfo['title'] ?? '현재 레시피',
+      category: recipeInfo['category'] ?? 'General',
+      ingredients: currentIngredients.map((ingredient) => {
+        'name': ingredient['name'] ?? '',
+        'amount': ingredient['amount'] ?? 0.0,
+        'unit': ingredient['unit'] ?? 'g',
+      }).toList(),
+      instructions: [], // 빈 리스트로 초기화
+      baseServings: recipeInfo['servings'] ?? 4,
+      isBaking: true,
+    );
+
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // 현재 레시피 요약
+          Card(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.receipt_long,
+                        color: Colors.orange.shade600,
+                        size: 24,
+                      ),
+                      const SizedBox(width: 8),
+                      const Text(
+                        '현재 레시피 분석',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 12),
+                  Text(
+                    '레시피: ${recipe.title}',
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                  Text(
+                    '카테고리: ${recipe.category}',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.grey.shade600,
+                    ),
+                  ),
+                  Text(
+                    '재료 수: ${currentIngredients.length}개',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.grey.shade600,
+                    ),
+                  ),
+                  if (_analysisResult != null) ...[ 
+                    const SizedBox(height: 8),
+                    Text(
+                      '수분함량: ${_analysisResult!.hydrationLevelText}',
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.blue.shade600,
+                      ),
+                    ),
+                    Text(
+                      '예상 타입: ${_analysisResult!.estimatedBakingType}',
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.blue.shade600,
+                      ),
+                    ),
+                    // 종합 제빵 과학 통합 계산식 결과 표시
+                    if (_analysisResult!.doughStateAnalysis != null) ...[
+                      const SizedBox(height: 12),
+                      
+                      // 1. 반죽 상태 기본 분석
+                      Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: Colors.purple.shade50,
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(color: Colors.purple.shade200),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Icon(Icons.science, size: 16, color: Colors.purple.shade600),
+                                const SizedBox(width: 6),
+                                Text(
+                                  '반죽 상태 분석',
+                                  style: TextStyle(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.purple.shade700,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 8),
+                            _buildAnalysisRowWithIcon(Icons.assessment, '종합상태', _analysisResult!.doughStateText, Colors.purple.shade600),
+                            _buildAnalysisRowWithIcon(Icons.fitness_center, '글루텐강도', _analysisResult!.glutenStrengthText, Colors.orange.shade600),
+                            _buildAnalysisRowWithIcon(Icons.timeline, '발효진행', _analysisResult!.fermentationProgressText, Colors.green.shade600),
+                            _buildAnalysisRowWithIcon(Icons.bubble_chart, '가스보유', _analysisResult!.gasRetentionText, Colors.blue.shade600),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      
+                      // 2. 물리화학 분석
+                      Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: Colors.indigo.shade50,
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(color: Colors.indigo.shade200),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Icon(Icons.psychology, size: 16, color: Colors.indigo.shade600),
+                                const SizedBox(width: 6),
+                                Text(
+                                  '물리화학 분석',
+                                  style: TextStyle(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.indigo.shade700,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 8),
+                            _buildAnalysisRowWithIcon(Icons.density_medium, '반죽밀도', _analysisResult!.doughDensityText, Colors.indigo.shade600),
+                            _buildAnalysisRowWithIcon(Icons.water, '점성지수', _analysisResult!.viscosityText, Colors.cyan.shade600),
+                            _buildAnalysisRowWithIcon(Icons.security, '안정성', _analysisResult!.stabilityText, Colors.green.shade600),
+                            _buildAnalysisRowWithIcon(Icons.thermostat, '열전달효율', _analysisResult!.heatTransferEfficiencyText, Colors.red.shade600),
+                            _buildAnalysisRowWithIcon(Icons.access_time, '열침투시간', _analysisResult!.heatPenetrationTimeText, Colors.orange.shade600),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      
+                      // 3. 최적 굽기 조건
+                      if (_analysisResult!.optimalBaking != null) ...[
+                        Container(
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: Colors.red.shade50,
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(color: Colors.red.shade200),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Icon(Icons.local_fire_department, size: 16, color: Colors.red.shade600),
+                                  const SizedBox(width: 6),
+                                  Text(
+                                    '최적 굽기 조건',
+                                    style: TextStyle(
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.red.shade700,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 8),
+                              _buildAnalysisRowWithIcon(Icons.thermostat, '온도프로파일', _analysisResult!.temperatureProfileText, Colors.red.shade600),
+                              _buildAnalysisRowWithIcon(Icons.timer, '굽기시간', _analysisResult!.totalBakingTimeText, Colors.orange.shade600),
+                              _buildAnalysisRowWithIcon(Icons.water_drop, '스팀설정', _analysisResult!.steamSettingsText, Colors.blue.shade600),
+                              _buildAnalysisRowWithIcon(Icons.trending_up, '성공예측', _analysisResult!.bakingSuccessPredictionText, Colors.green.shade600),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ],
+                  ],
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(height: 16),
+
+          // 스마트 프리셋 추천 위젯 (간단 버전)
+          Card(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Row(
+                    children: [
+                      Icon(Icons.auto_awesome, color: Color(0xFF9C27B0)),
+                      SizedBox(width: 8),
+                      Text(
+                        'AI 스마트 프리셋 추천',
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 12),
+                  const Text('현재 레시피에 최적화된 프리셋을 추천합니다.'),
+                  const SizedBox(height: 12),
+                  ElevatedButton(
+                    onPressed: () {
+                      // 임시 더미 프리셋 생성
+                      final dummyPreset = FavoritePreset(
+                        id: 'dummy_preset',
+                        name: '추천 프리셋',
+                        description: '현재 레시피에 최적화된 설정',
+                        category: recipe.category,
+                        type: FavoritePresetType.standard,
+                        createdAt: DateTime.now(),
+                        lastUsedAt: DateTime.now(),
+                        usageCount: 1,
+                        presetData: {},
+                        environmentalConditions: {},
+                        tags: [],
+                        successRate: 0.8,
+                        averageImprovementScore: 0.7,
+                        isCustom: false,
+                        customizations: {},
+                      );
+                      _onPresetSelected(dummyPreset);
+                    },
+                    child: const Text('추천 프리셋 사용'),
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+          const SizedBox(height: 16),
+
+          // 피드백 섹션 (프리셋 선택 후 표시)
+          if (_showFeedbackSection) ...[
+            _buildFeedbackSection(),
+            const SizedBox(height: 16),
+          ],
+
+          // 추가 정보 카드
+          Card(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.tips_and_updates,
+                        color: Colors.green.shade600,
+                        size: 20,
+                      ),
+                      const SizedBox(width: 8),
+                      const Text(
+                        '스마트 추천 시스템 정보',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 12),
+                  const Text(
+                    '• AI가 현재 레시피와 베이킹 히스토리를 분석합니다',
+                    style: TextStyle(fontSize: 12),
+                  ),
+                  const Text(
+                    '• 성공률과 사용 빈도를 기반으로 최적의 프리셋을 추천합니다',
+                    style: TextStyle(fontSize: 12),
+                  ),
+                  const Text(
+                    '• 더 많은 베이킹을 할수록 추천 정확도가 향상됩니다',
+                    style: TextStyle(fontSize: 12),
+                  ),
+                  const SizedBox(height: 8),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.info_outline,
+                        size: 16,
+                        color: Colors.blue.shade600,
+                      ),
+                      const SizedBox(width: 4),
+                      Expanded(
+                        child: Text(
+                          '프리셋을 선택하면 자동으로 최적화된 설정이 적용됩니다',
+                          style: TextStyle(
+                            fontSize: 11,
+                            color: Colors.blue.shade600,
+                            fontStyle: FontStyle.italic,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+          // 시스템 바에 가려지지 않도록 충분한 여백 추가
+          const SizedBox(height: 100),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildFeedbackSection() {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(
+                  Icons.feedback,
+                  color: Colors.purple.shade600,
+                  size: 20,
+                ),
+                const SizedBox(width: 8),
+                const Text(
+                  '베이킹 완료 후 피드백',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            
+            if (_feedbackCompleted) ...[
+              // 피드백 완료 상태
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: Colors.green.shade50,
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(color: Colors.green.shade200),
+                ),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.check_circle,
+                      color: Colors.green.shade600,
+                      size: 20,
+                    ),
+                    const SizedBox(width: 8),
+                    const Expanded(
+                      child: Text(
+                        '피드백이 완료되었습니다. 다음 추천에 반영됩니다.',
+                        style: TextStyle(fontSize: 14),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ] else ...[
+              // 피드백 요청 상태
+              Text(
+                '선택한 프리셋으로 베이킹을 완료한 후, 결과를 평가해주세요.',
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.grey.shade700,
+                ),
+              ),
+              const SizedBox(height: 12),
+              
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: _showFeedbackDialog,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.purple.shade600,
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.rate_review, size: 20),
+                      SizedBox(width: 8),
+                      Text(
+                        '베이킹 결과 평가하기',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _onPresetSelected(FavoritePreset preset) {
+    // 프리셋 선택 시 처리 로직
+    setState(() {
+      _selectedFavoritePreset = preset;
+      _showFeedbackSection = true;
+      _feedbackCompleted = false;
+    });
+
+    // 프리셋 기반 최적화 실행
+    _applyPresetOptimization(preset);
+
+    // 성공 메시지 표시
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('${preset.name} 프리셋이 적용되었습니다'),
+        backgroundColor: Colors.green.shade600,
+        action: SnackBarAction(
+          label: '분석 보기',
+          textColor: Colors.white,
+          onPressed: () {
+            // 분석 탭으로 이동
+            _tabController.animateTo(0);
+          },
+        ),
+      ),
+    );
+  }
+
+  void _applyPresetOptimization(FavoritePreset preset) {
+    // 프리셋 기반 최적화 로직
+    // 실제로는 프리셋의 설정을 현재 레시피에 적용하는 복잡한 로직이 필요
+    
+    // 예시: 환경 조건 업데이트
+    if (preset.environmentalConditions.containsKey('temperature')) {
+      _temperatureController.text = preset.environmentalConditions['temperature'].toString();
+    }
+    if (preset.environmentalConditions.containsKey('humidity')) {
+      _humidityController.text = preset.environmentalConditions['humidity'].toString();
+    }
+    if (preset.environmentalConditions.containsKey('altitude')) {
+      _altitudeController.text = preset.environmentalConditions['altitude'].toString();
+    }
+
+    // 재분석 실행
+    _performOptimization();
+  }
+
+  void _showFeedbackDialog() {
+    if (_selectedFavoritePreset == null) {
+      _showErrorDialog('프리셋이 선택되지 않았습니다.');
+      return;
+    }
+
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => Dialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Container(
+          constraints: const BoxConstraints(
+            maxWidth: 500,
+            maxHeight: 600,
+          ),
+          child: BakingResultFeedbackSimple(
+            preset: _selectedFavoritePreset!,
+            recipeContext: {
+              'recipe_title': widget.recipeData['recipeInfo']['title'],
+              'category': widget.recipeData['recipeInfo']['category'],
+              'ingredients_count': (widget.recipeData['currentIngredients'] as List).length,
+              'environmental_conditions': _getEnvironmentalConditions(),
+              'analysis_result': _analysisResult?.toJson(),
+            },
+            onFeedbackSubmitted: _onFeedbackCompleted,
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _onFeedbackCompleted() {
+    setState(() {
+      _feedbackCompleted = true;
+    });
+
+    Navigator.of(context).pop(); // 다이얼로그 닫기
+
+    // 성공 메시지 표시
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: const Text('피드백이 성공적으로 저장되었습니다!'),
+        backgroundColor: Colors.green.shade600,
+        action: SnackBarAction(
+          label: '추천 업데이트',
+          textColor: Colors.white,
+          onPressed: _updateRecommendations,
+        ),
+      ),
+    );
+  }
+
+  void _updateRecommendations() {
+    // 학습 결과를 반영하여 추천 업데이트
+    // SmartPresetRecommendations 위젯을 새로고침
+    setState(() {
+      // 위젯 재빌드를 통해 최신 학습 데이터 반영
+    });
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: const Text('추천이 업데이트되었습니다'),
+        backgroundColor: Colors.blue.shade600,
+      ),
+    );
+  }
+
+  /// 분석 결과 행을 생성하는 헬퍼 메서드 (아이콘 포함)
+  Widget _buildAnalysisRowWithIcon(IconData icon, String label, String value, Color iconColor) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 2),
+      child: Row(
+        children: [
+          Icon(icon, size: 12, color: iconColor),
+          const SizedBox(width: 6),
+          Text(
+            '$label: ',
+            style: TextStyle(fontSize: 10, color: Colors.grey.shade600),
+          ),
+          Expanded(
+            child: Text(
+              value,
+              style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w600),
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// 발효 설정 변경 시 호출되는 리스너
+  void _onFermentationSettingsChanged() {
+    // 발효 설정이 변경되면 상태 업데이트
+    if (mounted) {
+      setState(() {
+        // UI 업데이트를 위한 setState
+      });
+      
+      // 발효 설정 유효성 검증
+      _validateFermentationSettings();
+      
+      // 디버그 정보 출력
+      print('🔧 발효 설정 변경됨:');
+      print('   - 온도: ${(double.tryParse(_temperatureController.text) ?? 26.0) + 2.0}°C (자동 계산)');
+      print('   - 습도: ${(double.tryParse(_humidityController.text) ?? 60.0) + 10.0}% (자동 계산)');
+      print('   - 시간: 90분 (기본값)');
+    }
+  }
+
+  /// 발효 설정 유효성 검증
+  void _validateFermentationSettings() {
+    final temp = (double.tryParse(_temperatureController.text) ?? 26.0) + 2.0;
+    final humidity = (double.tryParse(_humidityController.text) ?? 60.0) + 10.0;
+    final time = 90.0;
+    
+    // 온도 범위 검증 (20-35°C)
+    if (temp != null && (temp < 20 || temp > 35)) {
+      print('⚠️ 발효 온도 경고: ${temp}°C (권장: 20-35°C)');
+    }
+    
+    // 습도 범위 검증 (60-85%)
+    if (humidity != null && (humidity < 60 || humidity > 85)) {
+      print('⚠️ 발효 습도 경고: ${humidity}% (권장: 60-85%)');
+    }
+    
+    // 시간 범위 검증 (30-480분)
+    if (time != null && (time < 30 || time > 480)) {
+      print('⚠️ 발효 시간 경고: ${time}분 (권장: 30-480분)');
+    }
+  }
+
+  /// 스마트 타이머 버튼 텍스트 반환
+  String _getSmartTimerButtonText() {
+    final temp = (double.tryParse(_temperatureController.text) ?? 26.0) + 2.0;
+    final humidity = (double.tryParse(_humidityController.text) ?? 60.0) + 10.0;
+    final time = 90.0;
+    
+    if (temp != null && humidity != null && time != null) {
+      return '스마트\n타이머\n✓';
+    } else {
+      return '스마트\n타이머';
+    }
+  }
+
+  /// 스마트 타이머 버튼 색상 반환
+  Color _getSmartTimerButtonColor() {
+    final temp = (double.tryParse(_temperatureController.text) ?? 26.0) + 2.0;
+    final humidity = (double.tryParse(_humidityController.text) ?? 60.0) + 10.0;
+    final time = 90.0;
+    
+    if (temp != null && humidity != null && time != null) {
+      // 모든 값이 유효한 범위인지 확인
+      final tempValid = temp >= 20 && temp <= 35;
+      final humidityValid = humidity >= 60 && humidity <= 85;
+      final timeValid = time >= 30 && time <= 480;
+      
+      if (tempValid && humidityValid && timeValid) {
+        return Colors.green.shade600; // 모든 설정이 유효
+      } else {
+        return Colors.orange.shade600; // 일부 설정이 범위를 벗어남
+      }
+    } else {
+      return Colors.purple.shade600; // 기본 색상
+    }
+  }
+
+  /// 스마트 타이머 표시 (발효 + 오븐 기능 통합)
+  void _showSmartTimer() {
+    final environmentTemp = double.tryParse(_temperatureController.text) ?? 26.0;
+    final environmentHumidity = double.tryParse(_humidityController.text) ?? 65.0;
+    final altitude = double.tryParse(_altitudeController.text) ?? 0.0;
+    
+    // 기본 발효 설정값 (자동 계산)
+    final fermentationTemp = environmentTemp + 2.0; // 환경온도 + 2도
+    final fermentationHumidity = environmentHumidity + 10.0; // 환경습도 + 10%
+    final fermentationTime = 90.0; // 기본 90분
+    
+    // 기본 오븐 설정값 (자동 계산)
+    final ovenTemp = 180.0; // 기본 180도
+    final ovenTime = 25.0; // 기본 25분
+    
+    print('🚀 스마트 타이머 시작 (발효 + 오븐 통합):');
+    print('   🌡️ 환경 조건:');
+    print('      - 온도: ${environmentTemp}°C');
+    print('      - 습도: ${environmentHumidity}%');
+    print('      - 고도: ${altitude}m');
+    print('   🧑‍🍳 발효 설정 (자동 계산):');
+    print('      - 온도: ${fermentationTemp}°C');
+    print('      - 습도: ${fermentationHumidity}%');
+    print('      - 시간: ${fermentationTime}분');
+    print('   🔥 오븐 설정 (자동 계산):');
+    print('      - 온도: ${ovenTemp}°C');
+    print('      - 시간: ${ovenTime}분');
+    
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => FermentationTimerWidget(
+        environmentTemperature: environmentTemp,
+        environmentHumidity: environmentHumidity,
+        altitude: altitude,
+        // 발효 설정 값들 자동 계산하여 전달
+        targetFermentationTemperature: fermentationTemp,
+        targetFermentationHumidity: fermentationHumidity,
+        targetFermentationTime: fermentationTime,
+        onTimerComplete: () {
+          Navigator.of(context).pop();
+          
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('🎉 베이킹이 완료되었습니다! 맛있게 드세요.'),
+              backgroundColor: Colors.green,
+              duration: Duration(seconds: 5),
+            ),
+          );
+          
+          // 베이킹 완료 시 최종 분석
+          _performInitialAnalysis();
+        }, 
+      ),
+    );
+  }  /// 발효 설정 탭
+  Widget _buildFermentationSettingsTab(ScrollController scrollController) {
+    return SingleChildScrollView(
+      controller: scrollController,
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // 발효 단계 선택
+          _buildSectionCard(
+            title: '발효 단계',
+            icon: Icons.timeline,
+            child: Column(
+              children: [
+                _buildRadioOption('1차 발효', '1차', '1차'),
+                _buildRadioOption('분할 후 휴지', '분할후', '분할후'),
+                _buildRadioOption('성형 후 발효', '성형후', '성형후'),
+                _buildRadioOption('최종 발효', '최종', '최종'),
+                _buildRadioOption('오버나이트', '오버나이트', '오버나이트'),
+              ],
+            ),
+          ),
+          const SizedBox(height: 16),
+          
+          // 발효 방법 선택
+          _buildSectionCard(
+            title: '발효 방법',
+            icon: Icons.thermostat,
+            child: Column(
+              children: [
+                _buildRadioOption('실온 발효', '실온', '실온'),
+                _buildRadioOption('발효기 사용', '발효기', '발효기'),
+                _buildRadioOption('냉장 발효', '냉장', '냉장'),
+                _buildRadioOption('따뜻한 곳', '따뜻한곳', '따뜻한곳'),
+              ],
+            ),
+          ),
+          const SizedBox(height: 16),
+          
+          // 환경 설정
+          _buildSectionCard(
+            title: '환경 설정',
+            icon: Icons.tune,
+            child: Column(
+              children: [
+                _buildSliderSetting('온도', '°C', 15, 40, 
+                  (double.tryParse(_temperatureController.text) ?? 26.0) + 2.0,
+                  (value) => {}, // 자동 계산으로 변경됨
+                ),
+                _buildSliderSetting('습도', '%', 50, 90, 
+                  (double.tryParse(_humidityController.text) ?? 60.0) + 10.0,
+                  (value) => {}, // 자동 계산으로 변경됨
+                ),
+                _buildSliderSetting('목표 시간', '분', 30, 480, 
+                  90.0,
+                  (value) => {}, // 자동 계산으로 변경됨
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// 발효 조언 탭
+  Widget _buildFermentationAdviceTab(ScrollController scrollController) {
+    return SingleChildScrollView(
+      controller: scrollController,
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // 조언 요약
+          _buildSectionCard(
+            title: '발효 조언 요약',
+            icon: Icons.lightbulb,
+            child: Column(
+              children: [
+                _buildAdviceRow('권장 시간', '2시간 15분', Icons.schedule),
+                _buildAdviceRow('권장 온도', '26°C', Icons.thermostat),
+                _buildAdviceRow('권장 습도', '75%', Icons.water_drop),
+                _buildAdviceRow('예상 상태', '적정 발효', Icons.check_circle),
+                _buildAdviceRow('신뢰도', '92%', Icons.verified),
+              ],
+            ),
+          ),
+          const SizedBox(height: 16),
+          
+          // 발효 팁
+          _buildSectionCard(
+            title: '발효 팁',
+            icon: Icons.tips_and_updates,
+            child: Column(
+              children: [
+                _buildTipItem('30분마다 폴딩을 권장합니다', Icons.refresh),
+                _buildTipItem('표면 건조 방지가 필수입니다', Icons.water),
+                _buildTipItem('손가락 테스트로 확인하세요', Icons.touch_app),
+                _buildTipItem('과발효 주의가 필요합니다', Icons.warning),
+              ],
+            ),
+          ),
+          const SizedBox(height: 16),
+          
+          // 체크포인트
+          _buildSectionCard(
+            title: '체크포인트',
+            icon: Icons.checklist,
+            child: Column(
+              children: [
+                _buildCheckpointItem('30분 후', '폴딩 실시', false),
+                _buildCheckpointItem('1시간 후', '부피 1.3배 확인', false),
+                _buildCheckpointItem('1시간 45분', '부피 1.7배 확인', false),
+                _buildCheckpointItem('2시간 15분', '최종 발효 완료', false),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// 발효 타이머 탭
+  Widget _buildFermentationTimerTab(ScrollController scrollController) {
+    return SingleChildScrollView(
+      controller: scrollController,
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // 활성 타이머
+          _buildSectionCard(
+            title: '활성 타이머',
+            icon: Icons.timer,
+            child: Column(
+              children: [
+                _buildActiveTimer('1차 발효', 80, '24분', true),
+                _buildActiveTimer('성형 후 발효', 100, '완료!', false),
+              ],
+            ),
+          ),
+          const SizedBox(height: 16),
+          
+          // 타이머 시작 버튼
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton.icon(
+              onPressed: _showSmartTimer,
+              icon: const Icon(Icons.play_arrow),
+              label: const Text('스마트 타이머 (발효+오븐 통합)'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.purple.shade600,
+                foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// 섹션 카드 위젯
+  Widget _buildSectionCard({
+    required String title,
+    required IconData icon,
+    required Widget child,
+  }) {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(icon, color: Colors.purple.shade600),
+                const SizedBox(width: 8),
+                Text(
+                  title,
+                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            child,
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// 라디오 옵션 위젯
+  Widget _buildRadioOption(String title, String value, String groupValue) {
+    return RadioListTile<String>(
+      title: Text(title),
+      value: value,
+      groupValue: groupValue,
+      onChanged: (value) {
+        // 라디오 버튼 선택 처리
+      },
+      activeColor: Colors.purple.shade600,
+    );
+  }
+
+  /// 슬라이더 설정 위젯
+  Widget _buildSliderSetting(
+    String label,
+    String unit,
+    double min,
+    double max,
+    double value,
+    Function(double) onChanged,
+  ) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(label, style: const TextStyle(fontWeight: FontWeight.w500)),
+            Text('${value.round()}$unit', style: TextStyle(color: Colors.purple.shade600)),
+          ],
+        ),
+        Slider(
+          value: value,
+          min: min,
+          max: max,
+          divisions: (max - min).round(),
+          onChanged: onChanged,
+          activeColor: Colors.purple.shade600,
+        ),
+      ],
+    );
+  }
+
+  /// 조언 행 위젯
+  Widget _buildAdviceRow(String label, String value, IconData icon) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Row(
+        children: [
+          Icon(icon, size: 20, color: Colors.purple.shade600),
+          const SizedBox(width: 8),
+          Text(label, style: const TextStyle(fontWeight: FontWeight.w500)),
+          const Spacer(),
+          Text(value, style: TextStyle(color: Colors.purple.shade600, fontWeight: FontWeight.bold)),
+        ],
+      ),
+    );
+  }
+
+  /// 팁 아이템 위젯
+  Widget _buildTipItem(String tip, IconData icon) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Row(
+        children: [
+          Icon(icon, size: 20, color: Colors.green.shade600),
+          const SizedBox(width: 8),
+          Expanded(child: Text(tip)),
+        ],
+      ),
+    );
+  }
+
+  /// 체크포인트 아이템 위젯
+  Widget _buildCheckpointItem(String time, String description, bool isCompleted) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Row(
+        children: [
+          Icon(
+            isCompleted ? Icons.check_circle : Icons.radio_button_unchecked,
+            color: isCompleted ? Colors.green.shade600 : Colors.grey.shade400,
+          ),
+          const SizedBox(width: 8),
+          Text(time, style: const TextStyle(fontWeight: FontWeight.w500)),
+          const SizedBox(width: 8),
+          Expanded(child: Text(description)),
+        ],
+      ),
+    );
+  }
+
+  /// 활성 타이머 위젯
+  Widget _buildActiveTimer(String name, int progress, String remaining, bool isActive) {
+    return Card(
+      color: isActive ? Colors.purple.shade50 : Colors.grey.shade50,
+      child: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(name, style: const TextStyle(fontWeight: FontWeight.bold)),
+                Text('$progress%', style: TextStyle(color: Colors.purple.shade600)),
+              ],
+            ),
+            const SizedBox(height: 8),
+            LinearProgressIndicator(
+              value: progress / 100,
+              backgroundColor: Colors.grey.shade300,
+              valueColor: AlwaysStoppedAnimation<Color>(
+                isActive ? Colors.purple.shade600 : Colors.green.shade600,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('남은시간: $remaining'),
+                Row(
+                  children: [
+                    TextButton(
+                      onPressed: () {},
+                      child: const Text('중지'),
+                    ),
+                    TextButton(
+                      onPressed: () {},
+                      child: Text(isActive ? '연장' : '다음단계'),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
