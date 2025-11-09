@@ -1,0 +1,191 @@
+{
+  "tasks": [
+    {
+      "id": "313f2b59-8eb2-44fd-bd33-41bb791d8e2a",
+      "name": "Recipe 클래스 통합 및 lib/models/recipe.dart 삭제",
+      "description": "lib/models/recipe.dart 파일을 삭제하고, 해당 파일의 Recipe 클래스를 사용하던 모든 코드에서 lib/models/advanced_sous_chef_models.dart의 Recipe 클래스를 사용하도록 import 경로를 업데이트합니다.",
+      "status": "pending",
+      "dependencies": [],
+      "createdAt": "2025-08-18T05:59:10.211Z",
+      "updatedAt": "2025-08-18T05:59:10.211Z",
+      "relatedFiles": [
+        {
+          "path": "lib/models/recipe.dart",
+          "type": "TO_MODIFY",
+          "description": "삭제 대상 파일"
+        },
+        {
+          "path": "lib/models/advanced_sous_chef_models.dart",
+          "type": "REFERENCE",
+          "description": "통합 대상 파일"
+        }
+      ],
+      "implementationGuide": "1. lib/models/recipe.dart 파일 삭제. 2. 프로젝트 전체에서 'package:my_recipe_book/models/recipe.dart' import를 'package:my_recipe_book/models/advanced_sous_chef_models.dart'로 변경.",
+      "verificationCriteria": "lib/models/recipe.dart 파일이 삭제되었는지 확인하고, 프로젝트 빌드 및 실행 시 Recipe 클래스 관련 오류가 없는지 확인합니다.",
+      "analysisResult": "The refactoring aims to establish lib/models/advanced_sous_chef_models.dart as the single source of truth for core data models in the advanced Sous Chef system, resolving conflicts and improving code consistency."
+    },
+    {
+      "id": "b0f6a966-2a88-4b4a-883e-66e23fc61164",
+      "name": "Ingredient 클래스 통합 및 lib/models/ingredient.dart 삭제",
+      "description": "lib/models/ingredient.dart 파일을 삭제하고, 해당 파일의 Ingredient 클래스를 사용하던 모든 코드에서 lib/models/advanced_sous_chef_models.dart의 Ingredient 클래스를 사용하도록 import 경로를 업데이트합니다.",
+      "status": "pending",
+      "dependencies": [
+        {
+          "taskId": "313f2b59-8eb2-44fd-bd33-41bb791d8e2a"
+        }
+      ],
+      "createdAt": "2025-08-18T05:59:10.211Z",
+      "updatedAt": "2025-08-18T05:59:10.211Z",
+      "relatedFiles": [
+        {
+          "path": "lib/models/ingredient.dart",
+          "type": "TO_MODIFY",
+          "description": "삭제 대상 파일"
+        },
+        {
+          "path": "lib/models/advanced_sous_chef_models.dart",
+          "type": "REFERENCE",
+          "description": "통합 대상 파일"
+        }
+      ],
+      "implementationGuide": "1. lib/models/ingredient.dart 파일 삭제. 2. 프로젝트 전체에서 'package:my_recipe_book/models/ingredient.dart' import를 'package:my_recipe_book/models/advanced_sous_chef_models.dart'로 변경.",
+      "verificationCriteria": "lib/models/ingredient.dart 파일이 삭제되었는지 확인하고, 프로젝트 빌드 및 실행 시 Ingredient 클래스 관련 오류가 없는지 확인합니다.",
+      "analysisResult": "The refactoring aims to establish lib/models/advanced_sous_chef_models.dart as the single source of truth for core data models in the advanced Sous Chef system, resolving conflicts and improving code consistency."
+    },
+    {
+      "id": "3ddd50c9-2f3a-4fe6-bef4-50c302649897",
+      "name": "EnvironmentalConditions 클래스 통합 및 lib/models/environmental_conditions.dart 삭제",
+      "description": "lib/models/environmental_conditions.dart 파일을 삭제하고, 해당 파일의 EnvironmentalConditions 클래스를 사용하던 모든 코드에서 lib/models/advanced_sous_chef_models.dart의 EnvironmentalConditions 클래스를 사용하도록 import 경로를 업데이트합니다.",
+      "status": "pending",
+      "dependencies": [
+        {
+          "taskId": "b0f6a966-2a88-4b4a-883e-66e23fc61164"
+        }
+      ],
+      "createdAt": "2025-08-18T05:59:10.211Z",
+      "updatedAt": "2025-08-18T05:59:10.211Z",
+      "relatedFiles": [
+        {
+          "path": "lib/models/environmental_conditions.dart",
+          "type": "TO_MODIFY",
+          "description": "삭제 대상 파일"
+        },
+        {
+          "path": "lib/models/advanced_sous_chef_models.dart",
+          "type": "REFERENCE",
+          "description": "통합 대상 파일"
+        }
+      ],
+      "implementationGuide": "1. lib/models/environmental_conditions.dart 파일 삭제. 2. 프로젝트 전체에서 'package:my_recipe_book/models/environmental_conditions.dart' import를 'package:my_recipe_book/models/advanced_sous_chef_models.dart'로 변경.",
+      "verificationCriteria": "lib/models/environmental_conditions.dart 파일이 삭제되었는지 확인하고, 프로젝트 빌드 및 실행 시 EnvironmentalConditions 클래스 관련 오류가 없는지 확인합니다.",
+      "analysisResult": "The refactoring aims to establish lib/models/advanced_sous_chef_models.dart as the single source of truth for core data models in the advanced Sous Chef system, resolving conflicts and improving code consistency."
+    },
+    {
+      "id": "e81796ea-50cb-4efa-a7d8-747985bf3ce5",
+      "name": "Season Enum 통합 및 lib/models/fermentation_scenario_v2.dart 수정",
+      "description": "lib/models/fermentation_scenario_v2.dart 파일에서 Season enum 정의를 제거하고, 해당 enum을 사용하던 모든 코드에서 lib/models/advanced_sous_chef_models.dart의 Season enum을 사용하도록 import 경로를 업데이트합니다.",
+      "status": "pending",
+      "dependencies": [
+        {
+          "taskId": "3ddd50c9-2f3a-4fe6-bef4-50c302649897"
+        }
+      ],
+      "createdAt": "2025-08-18T05:59:10.211Z",
+      "updatedAt": "2025-08-18T05:59:10.211Z",
+      "relatedFiles": [
+        {
+          "path": "lib/models/fermentation_scenario_v2.dart",
+          "type": "TO_MODIFY",
+          "description": "수정 대상 파일"
+        },
+        {
+          "path": "lib/models/advanced_sous_chef_models.dart",
+          "type": "REFERENCE",
+          "description": "통합 대상 파일"
+        }
+      ],
+      "implementationGuide": "1. lib/models/fermentation_scenario_v2.dart 파일에서 Season enum 정의 제거. 2. 프로젝트 전체에서 'package:my_recipe_book/models/fermentation_scenario_v2.dart'에서 Season을 import하던 부분을 'package:my_recipe_book/models/advanced_sous_chef_models.dart'로 변경.",
+      "verificationCriteria": "lib/models/fermentation_scenario_v2.dart 파일에서 Season enum이 제거되었는지 확인하고, 프로젝트 빌드 및 실행 시 Season enum 관련 오류가 없는지 확인합니다.",
+      "analysisResult": "The refactoring aims to establish lib/models/advanced_sous_chef_models.dart as the single source of truth for core data models in the advanced Sous Chef system, resolving conflicts and improving code consistency."
+    },
+    {
+      "id": "e77d595c-3048-473e-a6c6-0c5ea3f14edb",
+      "name": "OvenType Enum 통합 및 lib/models/sous_chef_models.dart 수정",
+      "description": "lib/models/sous_chef_models.dart 파일에서 OvenType enum 정의를 제거하고, 해당 enum을 사용하던 모든 코드에서 lib/models/advanced_sous_chef_models.dart의 OvenType enum을 사용하도록 import 경로를 업데이트합니다.",
+      "status": "pending",
+      "dependencies": [
+        {
+          "taskId": "e81796ea-50cb-4efa-a7d8-747985bf3ce5"
+        }
+      ],
+      "createdAt": "2025-08-18T05:59:10.211Z",
+      "updatedAt": "2025-08-18T05:59:10.211Z",
+      "relatedFiles": [
+        {
+          "path": "lib/models/sous_chef_models.dart",
+          "type": "TO_MODIFY",
+          "description": "수정 대상 파일"
+        },
+        {
+          "path": "lib/models/advanced_sous_chef_models.dart",
+          "type": "REFERENCE",
+          "description": "통합 대상 파일"
+        }
+      ],
+      "implementationGuide": "1. lib/models/sous_chef_models.dart 파일에서 OvenType enum 정의 제거. 2. 프로젝트 전체에서 'package:my_recipe_book/models/sous_chef_models.dart'에서 OvenType을 import하던 부분을 'package:my_recipe_book/models/advanced_sous_chef_models.dart'로 변경.",
+      "verificationCriteria": "lib/models/sous_chef_models.dart 파일에서 OvenType enum이 제거되었는지 확인하고, 프로젝트 빌드 및 실행 시 OvenType enum 관련 오류가 없는지 확인합니다.",
+      "analysisResult": "The refactoring aims to establish lib/models/advanced_sous_chef_models.dart as the single source of truth for core data models in the advanced Sous Chef system, resolving conflicts and improving code consistency."
+    },
+    {
+      "id": "7e1b2660-9687-4f8a-89db-120bb1405559",
+      "name": "TemperatureRange 및 HumidityRange 클래스 통합 및 lib/models/fermentation_scenario_v2.dart 수정",
+      "description": "lib/models/fermentation_scenario_v2.dart 파일에서 TemperatureRange 및 HumidityRange 클래스 정의를 제거하고, 해당 클래스를 사용하던 모든 코드에서 lib/models/advanced_sous_chef_models.dart의 클래스를 사용하도록 import 경로를 업데이트합니다.",
+      "status": "pending",
+      "dependencies": [
+        {
+          "taskId": "e77d595c-3048-473e-a6c6-0c5ea3f14edb"
+        }
+      ],
+      "createdAt": "2025-08-18T05:59:10.211Z",
+      "updatedAt": "2025-08-18T05:59:10.211Z",
+      "relatedFiles": [
+        {
+          "path": "lib/models/fermentation_scenario_v2.dart",
+          "type": "TO_MODIFY",
+          "description": "수정 대상 파일"
+        },
+        {
+          "path": "lib/models/advanced_sous_chef_models.dart",
+          "type": "REFERENCE",
+          "description": "통합 대상 파일"
+        }
+      ],
+      "implementationGuide": "1. lib/models/fermentation_scenario_v2.dart 파일에서 TemperatureRange 및 HumidityRange 클래스 정의 제거. 2. 프로젝트 전체에서 'package:my_recipe_book/models/fermentation_scenario_v2.dart'에서 이 클래스들을 import하던 부분을 'package:my_recipe_book/models/advanced_sous_chef_models.dart'로 변경.",
+      "verificationCriteria": "lib/models/fermentation_scenario_v2.dart 파일에서 TemperatureRange 및 HumidityRange 클래스가 제거되었는지 확인하고, 프로젝트 빌드 및 실행 시 관련 오류가 없는지 확인합니다.",
+      "analysisResult": "The refactoring aims to establish lib/models/advanced_sous_chef_models.dart as the single source of truth for core data models in the advanced Sous Chef system, resolving conflicts and improving code consistency."
+    },
+    {
+      "id": "a52215c6-3655-4a46-a42e-f16283269ac7",
+      "name": "advanced_sous_chef_models.dart에 BakingModule, ProcessGuide, EnvironmentCorrection 플레이스홀더 클래스 추가",
+      "description": "lib/models/advanced_sous_chef_models.dart 파일에 BakingModule, ProcessGuide, EnvironmentCorrection 클래스의 플레이스홀더 정의를 추가합니다.",
+      "status": "pending",
+      "dependencies": [
+        {
+          "taskId": "7e1b2660-9687-4f8a-89db-120bb1405559"
+        }
+      ],
+      "createdAt": "2025-08-18T05:59:10.211Z",
+      "updatedAt": "2025-08-18T05:59:10.211Z",
+      "relatedFiles": [
+        {
+          "path": "lib/models/advanced_sous_chef_models.dart",
+          "type": "TO_MODIFY",
+          "description": "수정 대상 파일"
+        }
+      ],
+      "implementationGuide": "lib/models/advanced_sous_chef_models.dart 파일의 적절한 위치에 다음 클래스 정의를 추가합니다:\n\n```dart\n// Placeholder for BakingModule\nclass BakingModule {\n  final String name;\n  const BakingModule({required this.name});\n}\n\n// Placeholder for ProcessGuide\nclass ProcessGuide {\n  final String guideText;\n  const ProcessGuide({required this.guideText});\n}\n\n// Placeholder for EnvironmentCorrection\nclass EnvironmentCorrection {\n  final double temperatureFactor;\n  final double humidityFactor;\n  final double altitudeFactor;\n  const EnvironmentCorrection({\n    this.temperatureFactor = 1.0,\n    this.humidityFactor = 1.0,\n    this.altitudeFactor = 1.0,\n  });\n}\n```",
+      "verificationCriteria": "lib/models/advanced_sous_chef_models.dart 파일에 BakingModule, ProcessGuide, EnvironmentCorrection 클래스가 올바르게 추가되었는지 확인합니다.",
+      "analysisResult": "The refactoring aims to establish lib/models/advanced_sous_chef_models.dart as the single source of truth for core data models in the advanced Sous Chef system, resolving conflicts and improving code consistency."
+    }
+  ]
+}

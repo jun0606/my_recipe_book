@@ -1,0 +1,40 @@
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "C:/Users/junlyn/my_recipe_book"
+      ],
+      "disabled": false,
+      "autoApprove": [
+        "read_file",
+        "write_file",
+        "list_directory"
+      ]
+    },
+    "task-master-ai": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "--package=task-master-ai",
+        "task-master-ai"
+      ],
+      "env": {
+        "OLLAMA_BASE_URL": "http://localhost:11434/api",
+        "TASKMASTER_MODEL": "codellama:7b",
+        "TASKMASTER_LOG_LEVEL": "error"
+      },
+      "disabled": false,
+      "autoApprove": [
+        "get_tasks",
+        "next_task",
+        "get_task",
+        "set_task_status",
+        "expand_task",
+        "update_task"
+      ]
+    }
+  }
+}

@@ -1,0 +1,43 @@
+﻿{
+    "Status":  "SUCCESS",
+    "Errors":  [
+
+               ],
+    "Steps":  [
+                  {
+                      "Duration":  0.0487931,
+                      "Status":  "SUCCESS",
+                      "Result":  "워크스페이스 이미 정리됨",
+                      "Name":  "워크스페이스 정리"
+                  },
+                  {
+                      "Duration":  0.0089048,
+                      "Status":  "SUCCESS",
+                      "Result":  "디렉토리 0 개 생성/확인 완료",
+                      "Name":  "디렉토리 구조 생성"
+                  },
+                  {
+                      "Duration":  0.0060206,
+                      "Status":  "SUCCESS",
+                      "Result":  "MCP 설정 확인 완료",
+                      "Name":  "MCP 설정 확인"
+                  },
+                  {
+                      "Duration":  0.0050345,
+                      "Status":  "SUCCESS",
+                      "Result":  "Gemini CLI 설정 확인 완료",
+                      "Name":  "Gemini CLI 설정 확인"
+                  },
+                  {
+                      "Duration":  0.1285333,
+                      "Status":  "SUCCESS",
+                      "Result":  "세션 컨텍스트 초기화 완료 (ID: d42fa8a6)",
+                      "Name":  "세션 컨텍스트 초기화"
+                  }
+              ],
+    "StartTime":  {
+                      "value":  "\/Date(1753851454518)\/",
+                      "DisplayHint":  2,
+                      "DateTime":  "2025년 7월 30일 수요일 오후 1:57:34"
+                  }
+}

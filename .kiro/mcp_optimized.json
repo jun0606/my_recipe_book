@@ -1,0 +1,72 @@
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "C:/Users/junlyn/my_recipe_book"
+      ],
+      "disabled": false,
+      "autoApprove": [
+        "read_file",
+        "write_file",
+        "list_directory",
+        "search_files",
+        "create_directory",
+        "move_file",
+        "get_file_info"
+      ]
+    },
+    "git": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-git",
+        "--repository",
+        "C:/Users/junlyn/my_recipe_book"
+      ],
+      "disabled": false,
+      "autoApprove": [
+        "git_status",
+        "git_diff_unstaged",
+        "git_diff_staged",
+        "git_add",
+        "git_commit",
+        "git_log",
+        "git_show"
+      ]
+    },
+    "sequential-thinking": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ],
+      "disabled": false,
+      "autoApprove": [
+        "sequentialthinking"
+      ]
+    },
+    "task-master-ai": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "--package=task-master-ai",
+        "task-master-ai"
+      ],
+      "env": {
+        "OLLAMA_BASE_URL": "http://localhost:11434/api",
+        "TASKMASTER_LOG_LEVEL": "error"
+      },
+      "disabled": false,
+      "autoApprove": [
+        "get_tasks",
+        "next_task",
+        "get_task",
+        "set_task_status",
+        "generate"
+      ]
+    }
+  }
+}

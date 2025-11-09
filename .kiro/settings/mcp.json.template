@@ -1,0 +1,65 @@
+{
+  "mcpServers": {
+    "github": {
+      "command": "npx",
+      "args": [
+        "@modelcontextprotocol/server-github"
+      ],
+      "env": {
+        "GITHUB_TOKEN": "YOUR_GITHUB_TOKEN_HERE"
+      },
+      "disabled": false,
+      "autoApprove": [
+        "create_or_update_file",
+        "get_file_contents",
+        "push_files",
+        "list_commits"
+      ]
+    },
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "YOUR_PROJECT_PATH_HERE"
+      ],
+      "disabled": false,
+      "autoApprove": [
+        "read_file",
+        "directory_tree",
+        "read_multiple_files",
+        "write_file",
+        "edit_file",
+        "create_directory",
+        "list_directory",
+        "list_directory_with_sizes",
+        "search_files",
+        "get_file_info",
+        "list_allowed_directories",
+        "move_file"
+      ]
+    },
+    "memory": {
+      "command": "mcp-server-memory",
+      "args": [
+        "--root",
+        "."
+      ],
+      "disabled": false,
+      "autoApprove": [
+        "create_entities",
+        "read_graph"
+      ]
+    },
+    "fetch": {
+      "command": "uvx",
+      "args": [
+        "modelcontextprotocol.server-fetch@latest"
+      ],
+      "disabled": false,
+      "autoApprove": [
+        "fetch"
+      ]
+    }
+  }
+}
