@@ -547,7 +547,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         },
                       )
                     else
-                      const Center(
+                      Center(
                         child: Padding(
                           padding: EdgeInsets.all(16.0),
                           child: Text(l10n.noCategories),
