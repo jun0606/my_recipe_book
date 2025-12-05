@@ -306,5 +306,7 @@
   "saveHistory": "Save History",
   "guideDeactivated": "Ingredient guide deactivated",
   "view": "View",
-  "allIngredientsAdded": "🎉 All ingredients added!"
+  "allIngredientsAdded": "🎉 All ingredients added!",
+  "guideOn": "Start Guide",
+  "guideOff": "Stop Guide"
 }

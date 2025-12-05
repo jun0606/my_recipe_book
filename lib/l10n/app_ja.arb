@@ -306,5 +306,7 @@
   "saveHistory": "履歴保存",
   "guideDeactivated": "材料ガイドが無効になりました",
   "view": "表示",
-  "allIngredientsAdded": "🎉 すべての材料が追加されました！"
+  "allIngredientsAdded": "🎉 すべての材料が追加されました！",
+  "guideOn": "ガイド開始",
+  "guideOff": "ガイド終了"
 }

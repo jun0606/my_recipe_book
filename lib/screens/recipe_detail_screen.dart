@@ -1572,6 +1572,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
   }
 
   Widget _buildGuideFAB() {
+    final l10n = AppLocalizations.of(context)!;
     return Positioned(
       bottom: 16,
       left: 16,
@@ -1580,13 +1581,14 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
         onPressed: _showIngredientGuide,
         backgroundColor: _isGuideActive ? Colors.green : Colors.blue,
         icon: Icon(_isGuideActive ? Icons.lightbulb : Icons.lightbulb_outline),
-        label: Text(_isGuideActive ? '가이드 끄기' : '가이드 켜기'),
+        label: Text(_isGuideActive ? l10n.guideOff : l10n.guideOn),
       ),
     );
   }
 
   // 재료 가이드 관련 메소드들
   void _showIngredientGuide() {
+    final l10n = AppLocalizations.of(context)!;
     if (_isGuideActive) {
       // 가이드 비활성화
       setState(() {
@@ -1754,6 +1756,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
 
   // 화면 탭으로 다음 재료로 이동
   void _onScreenTap() {
+    final l10n = AppLocalizations.of(context)!;
     if (!_isGuideActive) return;
 
     // 현재 재료를 완료로 표시

@@ -306,5 +306,7 @@
   "saveHistory": "히스토리 저장",
   "guideDeactivated": "재료 가이드가 비활성화되었습니다",
   "view": "보기",
-  "allIngredientsAdded": "🎉 모든 재료 투입이 완료되었습니다!"
+  "allIngredientsAdded": "🎉 모든 재료 투입이 완료되었습니다!",
+  "guideOn": "가이드 켜기",
+  "guideOff": "가이드 끄기"
 }
