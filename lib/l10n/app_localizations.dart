@@ -1155,6 +1155,438 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Unit'**
   String get unitSelection;
+
+  /// No description provided for @editIngredientTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Ingredient'**
+  String get editIngredientTitle;
+
+  /// No description provided for @recipeTitleInput.
+  ///
+  /// In en, this message translates to:
+  /// **'Recipe Title'**
+  String get recipeTitleInput;
+
+  /// No description provided for @categoryInput.
+  ///
+  /// In en, this message translates to:
+  /// **'Category'**
+  String get categoryInput;
+
+  /// No description provided for @servingsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Servings'**
+  String get servingsLabel;
+
+  /// No description provided for @splitWeightLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Split Weight'**
+  String get splitWeightLabel;
+
+  /// No description provided for @splitCountLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Split Count'**
+  String get splitCountLabel;
+
+  /// No description provided for @temperatureLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Temperature (°C)'**
+  String get temperatureLabel;
+
+  /// No description provided for @timeMinutesLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Time (minutes)'**
+  String get timeMinutesLabel;
+
+  /// No description provided for @humidityLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Humidity (%)'**
+  String get humidityLabel;
+
+  /// No description provided for @speedLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Speed'**
+  String get speedLabel;
+
+  /// No description provided for @stepNumberLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Step {number}'**
+  String stepNumberLabel(Object number);
+
+  /// No description provided for @enterValidIngredientAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid ingredient amount.'**
+  String get enterValidIngredientAmount;
+
+  /// No description provided for @enterIngredientNameAndAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter both ingredient name and amount.'**
+  String get enterIngredientNameAndAmount;
+
+  /// No description provided for @writeAllInstructionSteps.
+  ///
+  /// In en, this message translates to:
+  /// **'Please write all instruction steps.'**
+  String get writeAllInstructionSteps;
+
+  /// No description provided for @addAtLeastOneIngredient.
+  ///
+  /// In en, this message translates to:
+  /// **'Please add at least one ingredient.'**
+  String get addAtLeastOneIngredient;
+
+  /// No description provided for @recipeModified.
+  ///
+  /// In en, this message translates to:
+  /// **'Recipe has been modified.'**
+  String get recipeModified;
+
+  /// No description provided for @recipeModifyError.
+  ///
+  /// In en, this message translates to:
+  /// **'Error modifying recipe: {error}'**
+  String recipeModifyError(Object error);
+
+  /// No description provided for @recipeSaveError.
+  ///
+  /// In en, this message translates to:
+  /// **'Error saving recipe: {error}'**
+  String recipeSaveError(Object error);
+
+  /// No description provided for @backupFileShare.
+  ///
+  /// In en, this message translates to:
+  /// **'Share Backup File'**
+  String get backupFileShare;
+
+  /// No description provided for @backupCancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Backup cancelled'**
+  String get backupCancelled;
+
+  /// No description provided for @favoritesTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Favorites'**
+  String get favoritesTab;
+
+  /// No description provided for @statisticsTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Statistics'**
+  String get statisticsTab;
+
+  /// No description provided for @recommendationsTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Recommendations'**
+  String get recommendationsTab;
+
+  /// No description provided for @sortBy.
+  ///
+  /// In en, this message translates to:
+  /// **'Sort By'**
+  String get sortBy;
+
+  /// No description provided for @deleteFavorite.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Favorite'**
+  String get deleteFavorite;
+
+  /// No description provided for @confirmText.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm'**
+  String get confirmText;
+
+  /// No description provided for @errorTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Error'**
+  String get errorTitle;
+
+  /// No description provided for @infoTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Information'**
+  String get infoTitle;
+
+  /// No description provided for @successCases.
+  ///
+  /// In en, this message translates to:
+  /// **'Success cases: {count} times'**
+  String successCases(Object count);
+
+  /// No description provided for @averageImprovement.
+  ///
+  /// In en, this message translates to:
+  /// **'Average improvement: {percent}%'**
+  String averageImprovement(Object percent);
+
+  /// No description provided for @addToFavorites.
+  ///
+  /// In en, this message translates to:
+  /// **'Add to Favorites'**
+  String get addToFavorites;
+
+  /// No description provided for @noPerformanceData.
+  ///
+  /// In en, this message translates to:
+  /// **'No performance data yet.'**
+  String get noPerformanceData;
+
+  /// No description provided for @successRate.
+  ///
+  /// In en, this message translates to:
+  /// **'Success rate: {percent}%'**
+  String successRate(Object percent);
+
+  /// No description provided for @noUsageData.
+  ///
+  /// In en, this message translates to:
+  /// **'No usage data yet.'**
+  String get noUsageData;
+
+  /// No description provided for @recipeHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'Recipe History'**
+  String get recipeHistory;
+
+  /// No description provided for @deleteAllAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete All'**
+  String get deleteAllAction;
+
+  /// No description provided for @improvementLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Improvement: '**
+  String get improvementLabel;
+
+  /// No description provided for @improvementPrefix.
+  ///
+  /// In en, this message translates to:
+  /// **'Improved: '**
+  String get improvementPrefix;
+
+  /// No description provided for @notEnoughImprovementData.
+  ///
+  /// In en, this message translates to:
+  /// **'Not enough improvement data yet.'**
+  String get notEnoughImprovementData;
+
+  /// No description provided for @closeAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get closeAction;
+
+  /// No description provided for @deleteAllTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete All'**
+  String get deleteAllTitle;
+
+  /// No description provided for @confirmDeleteAllHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete all history?\nThis action cannot be undone.'**
+  String get confirmDeleteAllHistory;
+
+  /// No description provided for @userGuide.
+  ///
+  /// In en, this message translates to:
+  /// **'User Guide'**
+  String get userGuide;
+
+  /// No description provided for @initializingGuideSystem.
+  ///
+  /// In en, this message translates to:
+  /// **'Initializing guide system...'**
+  String get initializingGuideSystem;
+
+  /// No description provided for @shareAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Share'**
+  String get shareAction;
+
+  /// No description provided for @completeAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Mark Complete'**
+  String get completeAction;
+
+  /// No description provided for @guideCompleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Guide completed!'**
+  String get guideCompleted;
+
+  /// No description provided for @fermenterSettingGuide.
+  ///
+  /// In en, this message translates to:
+  /// **'Fermenter Setting Guide'**
+  String get fermenterSettingGuide;
+
+  /// No description provided for @fermenterSettingGuideDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Step-by-step guide for new fermenter settings'**
+  String get fermenterSettingGuideDesc;
+
+  /// No description provided for @troubleshootingGuide.
+  ///
+  /// In en, this message translates to:
+  /// **'Troubleshooting Guide'**
+  String get troubleshootingGuide;
+
+  /// No description provided for @guideShareFeatureComingSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Guide sharing feature coming soon'**
+  String get guideShareFeatureComingSoon;
+
+  /// No description provided for @guideExportFeatureComingSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Guide export feature coming soon'**
+  String get guideExportFeatureComingSoon;
+
+  /// No description provided for @fermenterGuideComingSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Fermenter guide creation feature coming soon'**
+  String get fermenterGuideComingSoon;
+
+  /// No description provided for @troubleshootingGuideComingSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Troubleshooting guide creation feature coming soon'**
+  String get troubleshootingGuideComingSoon;
+
+  /// No description provided for @overallStatistics.
+  ///
+  /// In en, this message translates to:
+  /// **'Overall Statistics'**
+  String get overallStatistics;
+
+  /// No description provided for @topPerformers.
+  ///
+  /// In en, this message translates to:
+  /// **'Top Performers'**
+  String get topPerformers;
+
+  /// No description provided for @mostUsedPresets.
+  ///
+  /// In en, this message translates to:
+  /// **'Most Used Presets'**
+  String get mostUsedPresets;
+
+  /// No description provided for @categoryDistribution.
+  ///
+  /// In en, this message translates to:
+  /// **'Category Distribution'**
+  String get categoryDistribution;
+
+  /// No description provided for @totalFavorites.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Favorites'**
+  String get totalFavorites;
+
+  /// No description provided for @customPresets.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom'**
+  String get customPresets;
+
+  /// No description provided for @averageSuccessRate.
+  ///
+  /// In en, this message translates to:
+  /// **'Average Success Rate'**
+  String get averageSuccessRate;
+
+  /// No description provided for @averageImprovementScore.
+  ///
+  /// In en, this message translates to:
+  /// **'Average Improvement'**
+  String get averageImprovementScore;
+
+  /// No description provided for @recommendedEnvironment.
+  ///
+  /// In en, this message translates to:
+  /// **'Recommended Environment'**
+  String get recommendedEnvironment;
+
+  /// No description provided for @temperatureShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Temp'**
+  String get temperatureShort;
+
+  /// No description provided for @humidityShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Humidity'**
+  String get humidityShort;
+
+  /// No description provided for @altitudeShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Altitude'**
+  String get altitudeShort;
+
+  /// No description provided for @recentlyUsed.
+  ///
+  /// In en, this message translates to:
+  /// **'Recently Used'**
+  String get recentlyUsed;
+
+  /// No description provided for @noFavoritesYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No favorites yet'**
+  String get noFavoritesYet;
+
+  /// No description provided for @addPresetInSousChef.
+  ///
+  /// In en, this message translates to:
+  /// **'Add presets to favorites in Sous Chef mode'**
+  String get addPresetInSousChef;
+
+  /// No description provided for @noRecommendationsYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No recommendations yet'**
+  String get noRecommendationsYet;
+
+  /// No description provided for @useMoreForRecommendations.
+  ///
+  /// In en, this message translates to:
+  /// **'Use Sous Chef mode more to get personalized recommendations'**
+  String get useMoreForRecommendations;
+
+  /// No description provided for @confidenceLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Confidence {percent}%'**
+  String confidenceLabel(Object percent);
 }
 
 class _AppLocalizationsDelegate

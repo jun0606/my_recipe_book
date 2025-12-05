@@ -603,4 +603,242 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get unitSelection => 'Unit';
+
+  @override
+  String get editIngredientTitle => 'Edit Ingredient';
+
+  @override
+  String get recipeTitleInput => 'Recipe Title';
+
+  @override
+  String get categoryInput => 'Category';
+
+  @override
+  String get servingsLabel => 'Servings';
+
+  @override
+  String get splitWeightLabel => 'Split Weight';
+
+  @override
+  String get splitCountLabel => 'Split Count';
+
+  @override
+  String get temperatureLabel => 'Temperature (°C)';
+
+  @override
+  String get timeMinutesLabel => 'Time (minutes)';
+
+  @override
+  String get humidityLabel => 'Humidity (%)';
+
+  @override
+  String get speedLabel => 'Speed';
+
+  @override
+  String stepNumberLabel(Object number) {
+    return 'Step $number';
+  }
+
+  @override
+  String get enterValidIngredientAmount =>
+      'Please enter a valid ingredient amount.';
+
+  @override
+  String get enterIngredientNameAndAmount =>
+      'Please enter both ingredient name and amount.';
+
+  @override
+  String get writeAllInstructionSteps => 'Please write all instruction steps.';
+
+  @override
+  String get addAtLeastOneIngredient => 'Please add at least one ingredient.';
+
+  @override
+  String get recipeModified => 'Recipe has been modified.';
+
+  @override
+  String recipeModifyError(Object error) {
+    return 'Error modifying recipe: $error';
+  }
+
+  @override
+  String recipeSaveError(Object error) {
+    return 'Error saving recipe: $error';
+  }
+
+  @override
+  String get backupFileShare => 'Share Backup File';
+
+  @override
+  String get backupCancelled => 'Backup cancelled';
+
+  @override
+  String get favoritesTab => 'Favorites';
+
+  @override
+  String get statisticsTab => 'Statistics';
+
+  @override
+  String get recommendationsTab => 'Recommendations';
+
+  @override
+  String get sortBy => 'Sort By';
+
+  @override
+  String get deleteFavorite => 'Delete Favorite';
+
+  @override
+  String get confirmText => 'Confirm';
+
+  @override
+  String get errorTitle => 'Error';
+
+  @override
+  String get infoTitle => 'Information';
+
+  @override
+  String successCases(Object count) {
+    return 'Success cases: $count times';
+  }
+
+  @override
+  String averageImprovement(Object percent) {
+    return 'Average improvement: $percent%';
+  }
+
+  @override
+  String get addToFavorites => 'Add to Favorites';
+
+  @override
+  String get noPerformanceData => 'No performance data yet.';
+
+  @override
+  String successRate(Object percent) {
+    return 'Success rate: $percent%';
+  }
+
+  @override
+  String get noUsageData => 'No usage data yet.';
+
+  @override
+  String get recipeHistory => 'Recipe History';
+
+  @override
+  String get deleteAllAction => 'Delete All';
+
+  @override
+  String get improvementLabel => 'Improvement: ';
+
+  @override
+  String get improvementPrefix => 'Improved: ';
+
+  @override
+  String get notEnoughImprovementData => 'Not enough improvement data yet.';
+
+  @override
+  String get closeAction => 'Close';
+
+  @override
+  String get deleteAllTitle => 'Delete All';
+
+  @override
+  String get confirmDeleteAllHistory =>
+      'Are you sure you want to delete all history?\nThis action cannot be undone.';
+
+  @override
+  String get userGuide => 'User Guide';
+
+  @override
+  String get initializingGuideSystem => 'Initializing guide system...';
+
+  @override
+  String get shareAction => 'Share';
+
+  @override
+  String get completeAction => 'Mark Complete';
+
+  @override
+  String get guideCompleted => 'Guide completed!';
+
+  @override
+  String get fermenterSettingGuide => 'Fermenter Setting Guide';
+
+  @override
+  String get fermenterSettingGuideDesc =>
+      'Step-by-step guide for new fermenter settings';
+
+  @override
+  String get troubleshootingGuide => 'Troubleshooting Guide';
+
+  @override
+  String get guideShareFeatureComingSoon => 'Guide sharing feature coming soon';
+
+  @override
+  String get guideExportFeatureComingSoon => 'Guide export feature coming soon';
+
+  @override
+  String get fermenterGuideComingSoon =>
+      'Fermenter guide creation feature coming soon';
+
+  @override
+  String get troubleshootingGuideComingSoon =>
+      'Troubleshooting guide creation feature coming soon';
+
+  @override
+  String get overallStatistics => 'Overall Statistics';
+
+  @override
+  String get topPerformers => 'Top Performers';
+
+  @override
+  String get mostUsedPresets => 'Most Used Presets';
+
+  @override
+  String get categoryDistribution => 'Category Distribution';
+
+  @override
+  String get totalFavorites => 'Total Favorites';
+
+  @override
+  String get customPresets => 'Custom';
+
+  @override
+  String get averageSuccessRate => 'Average Success Rate';
+
+  @override
+  String get averageImprovementScore => 'Average Improvement';
+
+  @override
+  String get recommendedEnvironment => 'Recommended Environment';
+
+  @override
+  String get temperatureShort => 'Temp';
+
+  @override
+  String get humidityShort => 'Humidity';
+
+  @override
+  String get altitudeShort => 'Altitude';
+
+  @override
+  String get recentlyUsed => 'Recently Used';
+
+  @override
+  String get noFavoritesYet => 'No favorites yet';
+
+  @override
+  String get addPresetInSousChef =>
+      'Add presets to favorites in Sous Chef mode';
+
+  @override
+  String get noRecommendationsYet => 'No recommendations yet';
+
+  @override
+  String get useMoreForRecommendations =>
+      'Use Sous Chef mode more to get personalized recommendations';
+
+  @override
+  String confidenceLabel(Object percent) {
+    return 'Confidence $percent%';
+  }
 }

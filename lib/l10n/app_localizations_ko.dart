@@ -596,4 +596,234 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get unitSelection => '단위';
+
+  @override
+  String get editIngredientTitle => '재료 수정';
+
+  @override
+  String get recipeTitleInput => '레시피 제목';
+
+  @override
+  String get categoryInput => '카테고리';
+
+  @override
+  String get servingsLabel => '인분';
+
+  @override
+  String get splitWeightLabel => '분할 무게';
+
+  @override
+  String get splitCountLabel => '분할 개수';
+
+  @override
+  String get temperatureLabel => '온도 (°C)';
+
+  @override
+  String get timeMinutesLabel => '시간 (분)';
+
+  @override
+  String get humidityLabel => '습도 (%)';
+
+  @override
+  String get speedLabel => '속도';
+
+  @override
+  String stepNumberLabel(Object number) {
+    return '단계 $number';
+  }
+
+  @override
+  String get enterValidIngredientAmount => '유효한 재료 양을 입력하세요.';
+
+  @override
+  String get enterIngredientNameAndAmount => '재료 이름과 양을 모두 입력하세요.';
+
+  @override
+  String get writeAllInstructionSteps => '모든 조리법 단계를 작성하세요.';
+
+  @override
+  String get addAtLeastOneIngredient => '최소 하나의 재료를 추가하세요.';
+
+  @override
+  String get recipeModified => '레시피가 수정되었습니다.';
+
+  @override
+  String recipeModifyError(Object error) {
+    return '레시피 수정 중 오류가 발생했습니다: $error';
+  }
+
+  @override
+  String recipeSaveError(Object error) {
+    return '레시피 저장 중 오류가 발생했습니다: $error';
+  }
+
+  @override
+  String get backupFileShare => '백업 파일 공유';
+
+  @override
+  String get backupCancelled => '백업이 취소되었습니다';
+
+  @override
+  String get favoritesTab => '즐겨찾기';
+
+  @override
+  String get statisticsTab => '통계';
+
+  @override
+  String get recommendationsTab => '추천';
+
+  @override
+  String get sortBy => '정렬 기준';
+
+  @override
+  String get deleteFavorite => '즐겨찾기 삭제';
+
+  @override
+  String get confirmText => '확인';
+
+  @override
+  String get errorTitle => '오류';
+
+  @override
+  String get infoTitle => '정보';
+
+  @override
+  String successCases(Object count) {
+    return '성공 사례: $count회';
+  }
+
+  @override
+  String averageImprovement(Object percent) {
+    return '평균 개선도: $percent%';
+  }
+
+  @override
+  String get addToFavorites => '즐겨찾기 추가';
+
+  @override
+  String get noPerformanceData => '아직 성과 데이터가 없습니다.';
+
+  @override
+  String successRate(Object percent) {
+    return '성공률: $percent%';
+  }
+
+  @override
+  String get noUsageData => '아직 사용 데이터가 없습니다.';
+
+  @override
+  String get recipeHistory => '레시피 히스토리';
+
+  @override
+  String get deleteAllAction => '전체 삭제';
+
+  @override
+  String get improvementLabel => '개선도: ';
+
+  @override
+  String get improvementPrefix => '개선: ';
+
+  @override
+  String get notEnoughImprovementData => '아직 개선 데이터가 충분하지 않습니다.';
+
+  @override
+  String get closeAction => '닫기';
+
+  @override
+  String get deleteAllTitle => '전체 삭제';
+
+  @override
+  String get confirmDeleteAllHistory => '모든 히스토리를 삭제하시겠습니까?\n이 작업은 되돌릴 수 없습니다.';
+
+  @override
+  String get userGuide => '사용자 가이드';
+
+  @override
+  String get initializingGuideSystem => '가이드 시스템을 초기화하는 중...';
+
+  @override
+  String get shareAction => '공유';
+
+  @override
+  String get completeAction => '완료 처리';
+
+  @override
+  String get guideCompleted => '가이드가 완료되었습니다!';
+
+  @override
+  String get fermenterSettingGuide => '발효기 설정 가이드';
+
+  @override
+  String get fermenterSettingGuideDesc => '새로운 발효기 설정을 위한 단계별 가이드';
+
+  @override
+  String get troubleshootingGuide => '문제 해결 가이드';
+
+  @override
+  String get guideShareFeatureComingSoon => '가이드 공유 기능은 준비 중입니다';
+
+  @override
+  String get guideExportFeatureComingSoon => '가이드 내보내기 기능은 준비 중입니다';
+
+  @override
+  String get fermenterGuideComingSoon => '발효기 설정 가이드 생성 기능은 준비 중입니다';
+
+  @override
+  String get troubleshootingGuideComingSoon => '문제 해결 가이드 생성 기능은 준비 중입니다';
+
+  @override
+  String get overallStatistics => '전체 통계';
+
+  @override
+  String get topPerformers => '최고 성과 프리셋';
+
+  @override
+  String get mostUsedPresets => '자주 사용하는 프리셋';
+
+  @override
+  String get categoryDistribution => '카테고리별 분포';
+
+  @override
+  String get totalFavorites => '총 즐겨찾기';
+
+  @override
+  String get customPresets => '커스텀';
+
+  @override
+  String get averageSuccessRate => '평균 성공률';
+
+  @override
+  String get averageImprovementScore => '평균 개선도';
+
+  @override
+  String get recommendedEnvironment => '추천 환경 조건';
+
+  @override
+  String get temperatureShort => '온도';
+
+  @override
+  String get humidityShort => '습도';
+
+  @override
+  String get altitudeShort => '고도';
+
+  @override
+  String get recentlyUsed => '최근 사용';
+
+  @override
+  String get noFavoritesYet => '아직 즐겨찾기가 없습니다';
+
+  @override
+  String get addPresetInSousChef => '수쉐프 모드에서 프리셋을 즐겨찾기에 추가해보세요';
+
+  @override
+  String get noRecommendationsYet => '아직 추천할 프리셋이 없습니다';
+
+  @override
+  String get useMoreForRecommendations => '수쉐프 모드를 더 사용하면 맞춤 추천을 받을 수 있습니다';
+
+  @override
+  String confidenceLabel(Object percent) {
+    return '신뢰도 $percent%';
+  }
 }
