@@ -1030,4 +1030,13 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get changeAmount => '変化';
+
+  @override
+  String get mixingStepTitle => 'ミキシングステップ';
+
+  @override
+  String get fermentationStepTitle => '発酵ステップ';
+
+  @override
+  String get ovenStepTitle => 'オーブンステップ';
 }

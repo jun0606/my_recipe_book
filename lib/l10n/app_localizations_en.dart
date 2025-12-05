@@ -1047,4 +1047,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get changeAmount => 'Change';
+
+  @override
+  String get mixingStepTitle => 'Mixing Step';
+
+  @override
+  String get fermentationStepTitle => 'Fermentation Step';
+
+  @override
+  String get ovenStepTitle => 'Oven Step';
 }

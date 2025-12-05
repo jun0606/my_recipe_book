@@ -321,5 +321,20 @@
   "changeAmount": "変化",
   "mixingStepTitle": "ミキシングステップ",
   "fermentationStepTitle": "発酵ステップ",
-  "ovenStepTitle": "オーブンステップ"
+  "ovenStepTitle": "オーブンステップ",
+  "recipeCalculator": "レシピ計算機",
+  "calculationControl": "計算コントロール",
+  "calculationMode": "計算モード:",
+  "baseIngredient": "基準材料:",
+  "runCalculation": "計算実行",
+  "reset": "リセット",
+  "originalRecipe": "オリジナルレシピ",
+  "calculationResult": "計算結果",
+  "totalWeight": "総量",
+  "splitCount": "分割数",
+  "splitWeight": "分割重量",
+  "remainingWeight": "残り重量",
+  "bakersPercentageComparison": "ベーカーズパーセント比較",
+  "ingredientsSectionTitle": "材料",
+  "instructionsSectionTitle": "作り方"
 }

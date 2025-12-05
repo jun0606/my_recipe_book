@@ -1030,4 +1030,13 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get changeAmount => '변화';
+
+  @override
+  String get mixingStepTitle => '믹싱 단계';
+
+  @override
+  String get fermentationStepTitle => '발효 단계';
+
+  @override
+  String get ovenStepTitle => '오븐 단계';
 }

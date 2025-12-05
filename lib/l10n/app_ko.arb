@@ -321,5 +321,20 @@
   "changeAmount": "변화",
   "mixingStepTitle": "믹싱 단계",
   "fermentationStepTitle": "발효 단계",
-  "ovenStepTitle": "오븐 단계"
+  "ovenStepTitle": "오븐 단계",
+  "recipeCalculator": "레시피 계산기",
+  "calculationControl": "계산 컨트롤",
+  "calculationMode": "계산 모드:",
+  "baseIngredient": "기준 재료:",
+  "runCalculation": "계산 실행",
+  "reset": "초기화",
+  "originalRecipe": "오리지널 레시피",
+  "calculationResult": "계산 결과",
+  "totalWeight": "총량",
+  "splitCount": "분할개수",
+  "splitWeight": "분할 무게",
+  "remainingWeight": "남은재료 무게",
+  "bakersPercentageComparison": "베이커스 퍼센트 비교",
+  "ingredientsSectionTitle": "재료",
+  "instructionsSectionTitle": "조리법"
 }

@@ -321,5 +321,20 @@
   "changeAmount": "Change",
   "mixingStepTitle": "Mixing Step",
   "fermentationStepTitle": "Fermentation Step",
-  "ovenStepTitle": "Oven Step"
+  "ovenStepTitle": "Oven Step",
+  "recipeCalculator": "Recipe Calculator",
+  "calculationControl": "Calculation Control",
+  "calculationMode": "Calculation Mode:",
+  "baseIngredient": "Base Ingredient:",
+  "runCalculation": "Run Calculation",
+  "reset": "Reset",
+  "originalRecipe": "Original Recipe",
+  "calculationResult": "Result",
+  "totalWeight": "Total Weight",
+  "splitCount": "Split Count",
+  "splitWeight": "Split Weight",
+  "remainingWeight": "Remaining Weight",
+  "bakersPercentageComparison": "Baker's Percentage Comparison",
+  "ingredientsSectionTitle": "Ingredients",
+  "instructionsSectionTitle": "Instructions"
 }

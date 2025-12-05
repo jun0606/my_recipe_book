@@ -1971,6 +1971,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Change'**
   String get changeAmount;
+
+  /// No description provided for @mixingStepTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Mixing Step'**
+  String get mixingStepTitle;
+
+  /// No description provided for @fermentationStepTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Fermentation Step'**
+  String get fermentationStepTitle;
+
+  /// No description provided for @ovenStepTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Oven Step'**
+  String get ovenStepTitle;
 }
 
 class _AppLocalizationsDelegate

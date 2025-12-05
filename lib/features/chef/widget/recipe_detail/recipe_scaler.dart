@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../models/recipe.dart';
 import '../../../../models/ingredient.dart';
+import '../../../../l10n/app_localizations.dart';
 
 /// 파스텔 톤 UI 테마 (부드럽고 따뜻한 색상)
 class RecipeScalerTheme {
@@ -211,6 +212,7 @@ class _RecipeScalerState extends State<RecipeScaler> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Card(
       elevation: 2,
       margin: const EdgeInsets.all(8),
@@ -239,7 +241,7 @@ class _RecipeScalerState extends State<RecipeScaler> {
                 ),
                 const SizedBox(width: 12),
                 Text(
-                  '레시피 계산기',
+                  l10n.recipeCalculator,
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -265,6 +267,7 @@ class _RecipeScalerState extends State<RecipeScaler> {
 
   /// 계산 컨트롤 UI
   Widget _buildCalculationControls() {
+    final l10n = AppLocalizations.of(context)!;
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -293,7 +296,7 @@ class _RecipeScalerState extends State<RecipeScaler> {
               ),
               const SizedBox(width: 10),
               Text(
-                '계산 컨트롤',
+                l10n.calculationControl,
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
@@ -315,7 +318,7 @@ class _RecipeScalerState extends State<RecipeScaler> {
             child: Row(
               children: [
                 Text(
-                  '계산 모드:',
+                  l10n.calculationMode,
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
                     color: RecipeScalerTheme.textPrimary,
@@ -380,7 +383,7 @@ class _RecipeScalerState extends State<RecipeScaler> {
             child: Row(
               children: [
                 Text(
-                  '기준 재료:',
+                  l10n.baseIngredient,
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
                     color: RecipeScalerTheme.textPrimary,
@@ -437,8 +440,8 @@ class _RecipeScalerState extends State<RecipeScaler> {
                       ? _calculateIngredients
                       : _calculateForTargetSplit,
                   icon: const Icon(Icons.play_arrow_rounded, size: 18),
-                  label: const Text(
-                    '계산 실행',
+                  label: Text(
+                    l10n.runCalculation,
                     style: TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.w600,
@@ -459,8 +462,8 @@ class _RecipeScalerState extends State<RecipeScaler> {
                 child: OutlinedButton.icon(
                   onPressed: _resetCalculation,
                   icon: const Icon(Icons.refresh_rounded, size: 18),
-                  label: const Text(
-                    '초기화',
+                  label: Text(
+                    l10n.reset,
                     style: TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.w600,
