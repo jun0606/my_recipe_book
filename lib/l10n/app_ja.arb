@@ -336,5 +336,8 @@
   "remainingWeight": "残り重量",
   "bakersPercentageComparison": "ベーカーズパーセント比較",
   "ingredientsSectionTitle": "材料",
-  "instructionsSectionTitle": "作り方"
+  "instructionsSectionTitle": "作り方",
+  "multiplierLabel": "倍率:",
+  "calcModePercentage": "パーセント計算",
+  "calcModeTargetSplit": "目標分割数"
 }

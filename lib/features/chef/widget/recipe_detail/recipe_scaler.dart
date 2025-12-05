@@ -345,7 +345,7 @@ class _RecipeScalerState extends State<RecipeScaler> {
                         return DropdownMenuItem(
                           value: mode,
                           child: Text(
-                            mode.displayName,
+                            mode.getDisplayName(l10n),
                             style: TextStyle(
                               fontSize: 13,
                               color: RecipeScalerTheme.textPrimary,
@@ -910,7 +910,7 @@ class _RecipeScalerState extends State<RecipeScaler> {
         child: Row(
           children: [
             Text(
-              '배율:',
+              l10n.multiplierLabel,
               style: TextStyle(
                 fontWeight: FontWeight.w600,
                 color: RecipeScalerTheme.textPrimary,
@@ -1091,11 +1091,17 @@ class _RecipeScalerState extends State<RecipeScaler> {
 
 /// 계산 모드 열거형
 enum CalculationMode {
-  percentage('퍼센트계산'),
-  targetSplit('목표분할개수');
+  percentage,
+  targetSplit;
 
-  const CalculationMode(this.displayName);
-  final String displayName;
+  String getDisplayName(AppLocalizations l10n) {
+    switch (this) {
+      case CalculationMode.percentage:
+        return l10n.calcModePercentage;
+      case CalculationMode.targetSplit:
+        return l10n.calcModeTargetSplit;
+    }
+  }
 }
 
 /// 범위 검증 유틸리티

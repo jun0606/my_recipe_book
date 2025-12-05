@@ -336,5 +336,8 @@
   "remainingWeight": "남은재료 무게",
   "bakersPercentageComparison": "베이커스 퍼센트 비교",
   "ingredientsSectionTitle": "재료",
-  "instructionsSectionTitle": "조리법"
+  "instructionsSectionTitle": "조리법",
+  "multiplierLabel": "배율:",
+  "calcModePercentage": "퍼센트계산",
+  "calcModeTargetSplit": "목표분할개수"
 }

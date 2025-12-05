@@ -336,5 +336,8 @@
   "remainingWeight": "Remaining Weight",
   "bakersPercentageComparison": "Baker's Percentage Comparison",
   "ingredientsSectionTitle": "Ingredients",
-  "instructionsSectionTitle": "Instructions"
+  "instructionsSectionTitle": "Instructions",
+  "multiplierLabel": "Multiplier:",
+  "calcModePercentage": "Percentage",
+  "calcModeTargetSplit": "Target Split Count"
 }
