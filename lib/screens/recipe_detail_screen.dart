@@ -157,18 +157,6 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
           _calculatedIngredients = List.from(_currentRecipe.ingredients);
         });
       }
-    });
-  }
-
-  void _copyRecipe() {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('레시피 복제 방식 선택'),
-        content: const Text('어떤 방식으로 복제하시겠습니까?'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
             child: Text(l10n.cancel),
           ),
           TextButton(
@@ -210,17 +198,6 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
         ],
       ),
     );
-  }
-
-  void _deleteRecipe() {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('레시피 삭제'),
-        content: Text('${_currentRecipe.title} 레시피를 삭제하시겠습니까?'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
             child: Text(l10n.cancel),
           ),
           TextButton(
