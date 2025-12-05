@@ -254,9 +254,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get delete => 'Delete';
 
   @override
-  String recipeDeleted(Object title) {
-    return '$title recipe deleted.';
-  }
+  String get recipeDeleted => 'Recipe deleted';
 
   @override
   String deleteRecipeFailed(Object error) {
@@ -957,4 +955,59 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get addMixingStepExample => 'e.g., Medium 15min → Low 10min';
+
+  @override
+  String sousChefModeError(Object error) {
+    return 'Cannot start Sous Chef mode: $error';
+  }
+
+  @override
+  String get copyRecipeMethodTitle => 'Select Copy Method';
+
+  @override
+  String get copyRecipeMethodContent =>
+      'How would you like to copy this recipe?';
+
+  @override
+  String get deleteRecipeTitle => 'Delete Recipe';
+
+  @override
+  String deleteRecipeContent(Object title) {
+    return 'Are you sure you want to delete $title?';
+  }
+
+  @override
+  String deleteFailed(Object error) {
+    return 'Delete failed: $error';
+  }
+
+  @override
+  String get recipeSaveNotReady => 'Recipe save feature is coming soon';
+
+  @override
+  String get baseServings => 'Base Servings: ';
+
+  @override
+  String get multiplier => 'Multiplier: ';
+
+  @override
+  String get edit => 'Edit';
+
+  @override
+  String get copy => 'Copy';
+
+  @override
+  String get derivedGraph => 'Derived Graph';
+
+  @override
+  String get saveHistory => 'Save History';
+
+  @override
+  String get guideDeactivated => 'Ingredient guide deactivated';
+
+  @override
+  String get view => 'View';
+
+  @override
+  String get allIngredientsAdded => '🎉 All ingredients added!';
 }

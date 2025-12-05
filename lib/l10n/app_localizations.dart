@@ -529,8 +529,8 @@ abstract class AppLocalizations {
   /// No description provided for @recipeDeleted.
   ///
   /// In en, this message translates to:
-  /// **'{title} recipe deleted.'**
-  String recipeDeleted(Object title);
+  /// **'Recipe deleted'**
+  String get recipeDeleted;
 
   /// No description provided for @deleteRecipeFailed.
   ///
@@ -1809,6 +1809,102 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'e.g., Medium 15min → Low 10min'**
   String get addMixingStepExample;
+
+  /// No description provided for @sousChefModeError.
+  ///
+  /// In en, this message translates to:
+  /// **'Cannot start Sous Chef mode: {error}'**
+  String sousChefModeError(Object error);
+
+  /// No description provided for @copyRecipeMethodTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Copy Method'**
+  String get copyRecipeMethodTitle;
+
+  /// No description provided for @copyRecipeMethodContent.
+  ///
+  /// In en, this message translates to:
+  /// **'How would you like to copy this recipe?'**
+  String get copyRecipeMethodContent;
+
+  /// No description provided for @deleteRecipeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Recipe'**
+  String get deleteRecipeTitle;
+
+  /// No description provided for @deleteRecipeContent.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete {title}?'**
+  String deleteRecipeContent(Object title);
+
+  /// No description provided for @deleteFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete failed: {error}'**
+  String deleteFailed(Object error);
+
+  /// No description provided for @recipeSaveNotReady.
+  ///
+  /// In en, this message translates to:
+  /// **'Recipe save feature is coming soon'**
+  String get recipeSaveNotReady;
+
+  /// No description provided for @baseServings.
+  ///
+  /// In en, this message translates to:
+  /// **'Base Servings: '**
+  String get baseServings;
+
+  /// No description provided for @multiplier.
+  ///
+  /// In en, this message translates to:
+  /// **'Multiplier: '**
+  String get multiplier;
+
+  /// No description provided for @edit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get edit;
+
+  /// No description provided for @copy.
+  ///
+  /// In en, this message translates to:
+  /// **'Copy'**
+  String get copy;
+
+  /// No description provided for @derivedGraph.
+  ///
+  /// In en, this message translates to:
+  /// **'Derived Graph'**
+  String get derivedGraph;
+
+  /// No description provided for @saveHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'Save History'**
+  String get saveHistory;
+
+  /// No description provided for @guideDeactivated.
+  ///
+  /// In en, this message translates to:
+  /// **'Ingredient guide deactivated'**
+  String get guideDeactivated;
+
+  /// No description provided for @view.
+  ///
+  /// In en, this message translates to:
+  /// **'View'**
+  String get view;
+
+  /// No description provided for @allIngredientsAdded.
+  ///
+  /// In en, this message translates to:
+  /// **'🎉 All ingredients added!'**
+  String get allIngredientsAdded;
 }
 
 class _AppLocalizationsDelegate

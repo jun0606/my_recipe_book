@@ -252,9 +252,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get delete => '삭제';
 
   @override
-  String recipeDeleted(Object title) {
-    return '$title 레시피가 삭제되었습니다.';
-  }
+  String get recipeDeleted => '레시피가 삭제되었습니다';
 
   @override
   String deleteRecipeFailed(Object error) {
@@ -941,4 +939,58 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get addMixingStepExample => '예: 중속 15분 → 저속 10분';
+
+  @override
+  String sousChefModeError(Object error) {
+    return '수쉐프 모드를 실행할 수 없습니다: $error';
+  }
+
+  @override
+  String get copyRecipeMethodTitle => '레시피 복제 방식 선택';
+
+  @override
+  String get copyRecipeMethodContent => '어떤 방식으로 복제하시겠습니까?';
+
+  @override
+  String get deleteRecipeTitle => '레시피 삭제';
+
+  @override
+  String deleteRecipeContent(Object title) {
+    return '$title 레시피를 삭제하시겠습니까?';
+  }
+
+  @override
+  String deleteFailed(Object error) {
+    return '삭제 실패: $error';
+  }
+
+  @override
+  String get recipeSaveNotReady => '레시피 저장 기능은 준비 중입니다';
+
+  @override
+  String get baseServings => '기본 인분: ';
+
+  @override
+  String get multiplier => '배수: ';
+
+  @override
+  String get edit => '수정';
+
+  @override
+  String get copy => '복사';
+
+  @override
+  String get derivedGraph => '파생도';
+
+  @override
+  String get saveHistory => '히스토리 저장';
+
+  @override
+  String get guideDeactivated => '재료 가이드가 비활성화되었습니다';
+
+  @override
+  String get view => '보기';
+
+  @override
+  String get allIngredientsAdded => '🎉 모든 재료 투입이 완료되었습니다!';
 }

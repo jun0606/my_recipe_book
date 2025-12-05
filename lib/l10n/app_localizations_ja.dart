@@ -252,9 +252,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get delete => '削除';
 
   @override
-  String recipeDeleted(Object title) {
-    return '$title レシピが削除されました。';
-  }
+  String get recipeDeleted => 'レシピが削除されました';
 
   @override
   String deleteRecipeFailed(Object error) {
@@ -941,4 +939,58 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get addMixingStepExample => '例: 中速 15分 → 低速 10分';
+
+  @override
+  String sousChefModeError(Object error) {
+    return 'スーシェフモードを開始できません: $error';
+  }
+
+  @override
+  String get copyRecipeMethodTitle => 'レシピコピー方法の選択';
+
+  @override
+  String get copyRecipeMethodContent => 'どのようにコピーしますか？';
+
+  @override
+  String get deleteRecipeTitle => 'レシピ削除';
+
+  @override
+  String deleteRecipeContent(Object title) {
+    return '$title レシピを削除しますか？';
+  }
+
+  @override
+  String deleteFailed(Object error) {
+    return '削除失敗: $error';
+  }
+
+  @override
+  String get recipeSaveNotReady => 'レシピ保存機能は準備中です';
+
+  @override
+  String get baseServings => '基本人数: ';
+
+  @override
+  String get multiplier => '倍率: ';
+
+  @override
+  String get edit => '編集';
+
+  @override
+  String get copy => 'コピー';
+
+  @override
+  String get derivedGraph => '派生図';
+
+  @override
+  String get saveHistory => '履歴保存';
+
+  @override
+  String get guideDeactivated => '材料ガイドが無効になりました';
+
+  @override
+  String get view => '表示';
+
+  @override
+  String get allIngredientsAdded => '🎉 すべての材料が追加されました！';
 }

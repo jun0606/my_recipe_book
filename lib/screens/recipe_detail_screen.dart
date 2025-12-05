@@ -237,7 +237,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                   Navigator.pop(context); // 다이얼로그 닫기
                   Navigator.pop(context); // 상세 페이지 닫기
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
+                    SnackBar(
                       content: Text(l10n.recipeDeleted),
                       backgroundColor: Colors.green,
                     ),
