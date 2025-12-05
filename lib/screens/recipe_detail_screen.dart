@@ -1040,7 +1040,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
 
           // 단계 내용 또는 미입력 안내
           if (mixingSteps == null || mixingSteps.isEmpty) ...[
-            _buildEmptyStepsInfo('믹싱', Colors.blue.shade600),
+            _buildEmptyStepsInfo(context, '믹싱', Colors.blue.shade600),
           ] else ...[
             _buildStepsList(mixingSteps, Colors.blue.shade600),
           ],
@@ -1092,7 +1092,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
 
           // 단계 내용 또는 미입력 안내
           if (fermentationSteps == null || fermentationSteps.isEmpty) ...[
-            _buildEmptyStepsInfo('발효', Colors.purple.shade600),
+            _buildEmptyStepsInfo(context, '발효', Colors.purple.shade600),
           ] else ...[
             _buildStepsList(fermentationSteps, Colors.purple.shade600),
           ],
@@ -1144,7 +1144,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
 
           // 단계 내용 또는 미입력 안내
           if (ovenSteps == null || ovenSteps.isEmpty) ...[
-            _buildEmptyStepsInfo('오븐', Colors.red.shade600),
+            _buildEmptyStepsInfo(context, '오븐', Colors.red.shade600),
           ] else ...[
             _buildStepsList(ovenSteps, Colors.red.shade600),
           ],
@@ -1153,7 +1153,8 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
     );
   }
 
-  Widget _buildEmptyStepsInfo(String stepType, Color color) {
+  Widget _buildEmptyStepsInfo(BuildContext context, String stepType, Color color) {
+    final l10n = AppLocalizations.of(context)!;
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(

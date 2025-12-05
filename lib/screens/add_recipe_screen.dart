@@ -784,19 +784,19 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
 
               // 믹싱 설정 (베이킹 모드일 때만)
               if (_isBakingMode) ...[
-                _buildMixingSettings(),
+                _buildMixingSettings(context),
                 SizedBox(height: 16),
               ],
 
               // 발효 설정 (베이킹 모드일 때만)
               if (_isBakingMode) ...[
-                _buildFermentationSettings(),
+                _buildFermentationSettings(context),
                 SizedBox(height: 16),
               ],
 
               // 오븐 설정 (베이킹 모드일 때만)
               if (_isBakingMode) ...[
-                _buildOvenSettings(),
+                _buildOvenSettings(context),
                 SizedBox(height: 16),
               ],
 
@@ -1180,7 +1180,8 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
     );
   }
 
-  Widget _buildOvenSettings() {
+  Widget _buildOvenSettings(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Container(
       margin: EdgeInsets.symmetric(vertical: 4),
       decoration: BoxDecoration(
@@ -1422,7 +1423,8 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
     );
   }
 
-  Widget _buildFermentationSettings() {
+  Widget _buildFermentationSettings(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Container(
       margin: EdgeInsets.symmetric(vertical: 4),
       decoration: BoxDecoration(
@@ -1779,7 +1781,8 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
     return totalMinutes > 0 ? totalMinutes : 0;
   }
 
-  Widget _buildMixingSettings() {
+  Widget _buildMixingSettings(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Container(
       margin: EdgeInsets.symmetric(vertical: 4),
       decoration: BoxDecoration(
