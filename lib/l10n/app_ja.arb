@@ -289,5 +289,22 @@
   "addMixingStepMessage": "ミキシングのステップを追加してください",
   "addOvenStepExample": "例: 180°C 40分 → 200°C 20分",
   "addFermentationStepExample": "例: 1次発酵 80% 240分 → 2次発酵 85% 120分",
-  "addMixingStepExample": "例: 中速 15分 → 低速 10分"
+  "addMixingStepExample": "例: 中速 15分 → 低速 10分",
+  "sousChefModeError": "スーシェフモードを開始できません: {error}",
+  "copyRecipeMethodTitle": "レシピコピー方法の選択",
+  "copyRecipeMethodContent": "どのようにコピーしますか？",
+  "deleteRecipeTitle": "レシピ削除",
+  "deleteRecipeContent": "{title} レシピを削除しますか？",
+  "recipeDeleted": "レシピが削除されました",
+  "deleteFailed": "削除失敗: {error}",
+  "recipeSaveNotReady": "レシピ保存機能は準備中です",
+  "baseServings": "基本人数: ",
+  "multiplier": "倍率: ",
+  "edit": "編集",
+  "copy": "コピー",
+  "derivedGraph": "派生図",
+  "saveHistory": "履歴保存",
+  "guideDeactivated": "材料ガイドが無効になりました",
+  "view": "表示",
+  "allIngredientsAdded": "🎉 すべての材料が追加されました！"
 }

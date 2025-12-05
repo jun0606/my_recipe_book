@@ -289,5 +289,22 @@
   "addMixingStepMessage": "믹싱 단계를 추가해주세요",
   "addOvenStepExample": "예: 180°C 40분 → 200°C 20분",
   "addFermentationStepExample": "예: 1차 발효 80% 240분 → 2차 발효 85% 120분",
-  "addMixingStepExample": "예: 중속 15분 → 저속 10분"
+  "addMixingStepExample": "예: 중속 15분 → 저속 10분",
+  "sousChefModeError": "수쉐프 모드를 실행할 수 없습니다: {error}",
+  "copyRecipeMethodTitle": "레시피 복제 방식 선택",
+  "copyRecipeMethodContent": "어떤 방식으로 복제하시겠습니까?",
+  "deleteRecipeTitle": "레시피 삭제",
+  "deleteRecipeContent": "{title} 레시피를 삭제하시겠습니까?",
+  "recipeDeleted": "레시피가 삭제되었습니다",
+  "deleteFailed": "삭제 실패: {error}",
+  "recipeSaveNotReady": "레시피 저장 기능은 준비 중입니다",
+  "baseServings": "기본 인분: ",
+  "multiplier": "배수: ",
+  "edit": "수정",
+  "copy": "복사",
+  "derivedGraph": "파생도",
+  "saveHistory": "히스토리 저장",
+  "guideDeactivated": "재료 가이드가 비활성화되었습니다",
+  "view": "보기",
+  "allIngredientsAdded": "🎉 모든 재료 투입이 완료되었습니다!"
 }

@@ -923,4 +923,22 @@ class AppLocalizationsKo extends AppLocalizations {
   String stepCommentLabel(Object number) {
     return '$number단계 코멘트 (선택사항)';
   }
+
+  @override
+  String get addOvenStepMessage => '오븐 단계를 추가해주세요';
+
+  @override
+  String get addFermentationStepMessage => '발효 단계를 추가해주세요';
+
+  @override
+  String get addMixingStepMessage => '믹싱 단계를 추가해주세요';
+
+  @override
+  String get addOvenStepExample => '예: 180°C 40분 → 200°C 20분';
+
+  @override
+  String get addFermentationStepExample => '예: 1차 발효 80% 240분 → 2차 발효 85% 120분';
+
+  @override
+  String get addMixingStepExample => '예: 중속 15분 → 저속 10분';
 }

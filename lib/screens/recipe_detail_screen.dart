@@ -133,9 +133,10 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
       );
     } catch (e) {
       print('수쉐프 모드 실행 중 오류: $e');
+      final l10n = AppLocalizations.of(context)!;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('수쉐프 모드를 실행할 수 없습니다: $e'),
+          content: Text(l10n.sousChefModeError(e.toString())),
           backgroundColor: Colors.red,
         ),
       );
@@ -166,8 +167,8 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
       builder: (context) {
         final l10n = AppLocalizations.of(context)!;
         return AlertDialog(
-          title: const Text('레시피 복제 방식 선택'),
-          content: const Text('어떤 방식으로 복제하시겠습니까?'),
+          title: Text(l10n.copyRecipeMethodTitle),
+          content: Text(l10n.copyRecipeMethodContent),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
@@ -221,8 +222,8 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
       builder: (context) {
         final l10n = AppLocalizations.of(context)!;
         return AlertDialog(
-          title: const Text('레시피 삭제'),
-          content: Text('${_currentRecipe.title} 레시피를 삭제하시겠습니까?'),
+          title: Text(l10n.deleteRecipeTitle),
+          content: Text(l10n.deleteRecipeContent(_currentRecipe.title)),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
@@ -237,7 +238,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                   Navigator.pop(context); // 상세 페이지 닫기
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
-                      content: Text('레시피가 삭제되었습니다'),
+                      content: Text(l10n.recipeDeleted),
                       backgroundColor: Colors.green,
                     ),
                   );
@@ -245,7 +246,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                   Navigator.pop(context);
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text('삭제 실패: $e'),
+                      content: Text(l10n.deleteFailed(e.toString())),
                       backgroundColor: Colors.red,
                     ),
                   );
@@ -262,15 +263,17 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
   void _saveRecipeToHistory() async {
     // 복잡한 RecipeHistory 모델 대신 간단하게만 저장 가능하도록 구현
     // 현재는 시뮬레이션으로 처리
+    final l10n = AppLocalizations.of(context)!;
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('레시피 저장 기능은 준비 중입니다'),
+      SnackBar(
+        content: Text(l10n.recipeSaveNotReady),
         backgroundColor: Colors.blue,
       ),
     );
   }
 
   Widget _buildIngredientsList() {
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -285,13 +288,13 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
             ),
             child: Row(
               children: [
-                const Text('기본 인분: '),
+                Text(l10n.baseServings),
                 Text(
                   '${_currentRecipe.baseServings}인분',
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
                 const Spacer(),
-                const Text('배수: '),
+                Text(l10n.multiplier),
                 Text(
                   '${_servingMultiplier.toStringAsFixed(1)}배',
                   style: TextStyle(
@@ -729,7 +732,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                   children: [
                     Icon(Icons.edit, color: Colors.blue),
                     SizedBox(width: 8),
-                    Text('수정'),
+                    Text(l10n.edit),
                   ],
                 ),
               ),
@@ -739,7 +742,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                   children: [
                     Icon(Icons.copy, color: Colors.green),
                     SizedBox(width: 8),
-                    Text('복사'),
+                    Text(l10n.copy),
                   ],
                 ),
               ),
@@ -749,7 +752,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                   children: [
                     Icon(Icons.account_tree, color: Colors.teal),
                     SizedBox(width: 8),
-                    Text('파생도'),
+                    Text(l10n.derivedGraph),
                   ],
                 ),
               ),
@@ -759,7 +762,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                   children: [
                     Icon(Icons.save, color: Colors.orange),
                     SizedBox(width: 8),
-                    Text('히스토리 저장'),
+                    Text(l10n.saveHistory),
                   ],
                 ),
               ),
@@ -770,7 +773,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                     children: [
                       Icon(Icons.auto_awesome, color: Colors.purple),
                       SizedBox(width: 8),
-                      Text('수쉐프 모드'),
+                      Text(l10n.sousChefMode),
                     ],
                   ),
                 ),
@@ -780,7 +783,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                   children: [
                     Icon(Icons.delete, color: Colors.red),
                     SizedBox(width: 8),
-                    Text('삭제'),
+                    Text(l10n.delete),
                   ],
                 ),
               ),
@@ -1594,10 +1597,10 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: const Text('재료 가이드가 비활성화되었습니다'),
+          content: Text(l10n.guideDeactivated),
           backgroundColor: Colors.blue,
           action: SnackBarAction(
-            label: '보기',
+            label: l10n.view,
             textColor: Colors.white,
             onPressed: () =>
                 ScaffoldMessenger.of(context).hideCurrentSnackBar(),
@@ -1778,11 +1781,11 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: const Text('🎉 모든 재료 투입이 완료되었습니다!'),
+          content: Text(l10n.allIngredientsAdded),
           backgroundColor: Colors.green,
           duration: const Duration(seconds: 3),
           action: SnackBarAction(
-            label: '완료',
+            label: l10n.complete,
             textColor: Colors.white,
             onPressed: () =>
                 ScaffoldMessenger.of(context).hideCurrentSnackBar(),

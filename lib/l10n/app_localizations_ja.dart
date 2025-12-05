@@ -923,4 +923,22 @@ class AppLocalizationsJa extends AppLocalizations {
   String stepCommentLabel(Object number) {
     return 'ステップ $number コメント (任意)';
   }
+
+  @override
+  String get addOvenStepMessage => 'オーブンのステップを追加してください';
+
+  @override
+  String get addFermentationStepMessage => '発酵のステップを追加してください';
+
+  @override
+  String get addMixingStepMessage => 'ミキシングのステップを追加してください';
+
+  @override
+  String get addOvenStepExample => '例: 180°C 40分 → 200°C 20分';
+
+  @override
+  String get addFermentationStepExample => '例: 1次発酵 80% 240分 → 2次発酵 85% 120分';
+
+  @override
+  String get addMixingStepExample => '例: 中速 15分 → 低速 10分';
 }

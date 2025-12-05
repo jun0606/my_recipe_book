@@ -1773,6 +1773,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Step {number} Comment (Optional)'**
   String stepCommentLabel(Object number);
+
+  /// No description provided for @addOvenStepMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Please add an oven step'**
+  String get addOvenStepMessage;
+
+  /// No description provided for @addFermentationStepMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Please add a fermentation step'**
+  String get addFermentationStepMessage;
+
+  /// No description provided for @addMixingStepMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Please add a mixing step'**
+  String get addMixingStepMessage;
+
+  /// No description provided for @addOvenStepExample.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g., 180°C 40min → 200°C 20min'**
+  String get addOvenStepExample;
+
+  /// No description provided for @addFermentationStepExample.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g., 1st ferment 80% 240min → 2nd ferment 85% 120min'**
+  String get addFermentationStepExample;
+
+  /// No description provided for @addMixingStepExample.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g., Medium 15min → Low 10min'**
+  String get addMixingStepExample;
 }
 
 class _AppLocalizationsDelegate

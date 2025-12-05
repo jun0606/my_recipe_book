@@ -289,5 +289,22 @@
   "addMixingStepMessage": "Please add a mixing step",
   "addOvenStepExample": "e.g., 180°C 40min → 200°C 20min",
   "addFermentationStepExample": "e.g., 1st ferment 80% 240min → 2nd ferment 85% 120min",
-  "addMixingStepExample": "e.g., Medium 15min → Low 10min"
+  "addMixingStepExample": "e.g., Medium 15min → Low 10min",
+  "sousChefModeError": "Cannot start Sous Chef mode: {error}",
+  "copyRecipeMethodTitle": "Select Copy Method",
+  "copyRecipeMethodContent": "How would you like to copy this recipe?",
+  "deleteRecipeTitle": "Delete Recipe",
+  "deleteRecipeContent": "Are you sure you want to delete {title}?",
+  "recipeDeleted": "Recipe deleted",
+  "deleteFailed": "Delete failed: {error}",
+  "recipeSaveNotReady": "Recipe save feature is coming soon",
+  "baseServings": "Base Servings: ",
+  "multiplier": "Multiplier: ",
+  "edit": "Edit",
+  "copy": "Copy",
+  "derivedGraph": "Derived Graph",
+  "saveHistory": "Save History",
+  "guideDeactivated": "Ingredient guide deactivated",
+  "view": "View",
+  "allIngredientsAdded": "🎉 All ingredients added!"
 }

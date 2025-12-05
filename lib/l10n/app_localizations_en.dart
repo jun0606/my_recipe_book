@@ -938,4 +938,23 @@ class AppLocalizationsEn extends AppLocalizations {
   String stepCommentLabel(Object number) {
     return 'Step $number Comment (Optional)';
   }
+
+  @override
+  String get addOvenStepMessage => 'Please add an oven step';
+
+  @override
+  String get addFermentationStepMessage => 'Please add a fermentation step';
+
+  @override
+  String get addMixingStepMessage => 'Please add a mixing step';
+
+  @override
+  String get addOvenStepExample => 'e.g., 180°C 40min → 200°C 20min';
+
+  @override
+  String get addFermentationStepExample =>
+      'e.g., 1st ferment 80% 240min → 2nd ferment 85% 120min';
+
+  @override
+  String get addMixingStepExample => 'e.g., Medium 15min → Low 10min';
 }
