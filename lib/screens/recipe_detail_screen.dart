@@ -726,7 +726,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
               }
             },
             itemBuilder: (context) => [
-              const PopupMenuItem(
+              PopupMenuItem(
                 value: 'edit',
                 child: Row(
                   children: [
@@ -736,7 +736,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                   ],
                 ),
               ),
-              const PopupMenuItem(
+              PopupMenuItem(
                 value: 'copy',
                 child: Row(
                   children: [
@@ -746,7 +746,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                   ],
                 ),
               ),
-              const PopupMenuItem(
+              PopupMenuItem(
                 value: 'tree',
                 child: Row(
                   children: [
@@ -756,7 +756,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                   ],
                 ),
               ),
-              const PopupMenuItem(
+              PopupMenuItem(
                 value: 'save_history',
                 child: Row(
                   children: [
@@ -767,7 +767,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                 ),
               ),
               if (_currentRecipe.isBaking)
-                const PopupMenuItem(
+                PopupMenuItem(
                   value: 'sous_chef',
                   child: Row(
                     children: [
@@ -777,7 +777,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                     ],
                   ),
                 ),
-              const PopupMenuItem(
+              PopupMenuItem(
                 value: 'delete',
                 child: Row(
                   children: [

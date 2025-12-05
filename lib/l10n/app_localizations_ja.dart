@@ -993,4 +993,10 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get allIngredientsAdded => '🎉 すべての材料が追加されました！';
+
+  @override
+  String get guideOn => 'ガイド開始';
+
+  @override
+  String get guideOff => 'ガイド終了';
 }

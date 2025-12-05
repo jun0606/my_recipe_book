@@ -1905,6 +1905,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'🎉 All ingredients added!'**
   String get allIngredientsAdded;
+
+  /// No description provided for @guideOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Guide'**
+  String get guideOn;
+
+  /// No description provided for @guideOff.
+  ///
+  /// In en, this message translates to:
+  /// **'Stop Guide'**
+  String get guideOff;
 }
 
 class _AppLocalizationsDelegate

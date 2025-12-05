@@ -1010,4 +1010,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get allIngredientsAdded => '🎉 All ingredients added!';
+
+  @override
+  String get guideOn => 'Start Guide';
+
+  @override
+  String get guideOff => 'Stop Guide';
 }

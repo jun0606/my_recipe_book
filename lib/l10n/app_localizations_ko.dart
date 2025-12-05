@@ -993,4 +993,10 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get allIngredientsAdded => '🎉 모든 재료 투입이 완료되었습니다!';
+
+  @override
+  String get guideOn => '가이드 켜기';
+
+  @override
+  String get guideOff => '가이드 끄기';
 }
