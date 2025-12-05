@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import '../l10n/app_localizations.dart';
 import '../models/recipe.dart';
 import '../models/history.dart';
 import '../models/ingredient.dart';
@@ -60,14 +59,11 @@ class _RecipeComparisonScreenState extends State<RecipeComparisonScreen> {
     } catch (e) {
       print('비교 데이터 로드 중 오류: $e');
     } finally {
-      setState(() => _isLoading = false);
+        body: const Center(child: CircularProgressIndicator()),
+      );
     }
-  }
 
-  @override
-  Widget build(BuildContext context) {
-    if (_isLoading) {
-      return Scaffold(
+    if (_oldRecipe == null || _currentRecipe == null) {
   }
 
   Widget _buildComparisonView() {
