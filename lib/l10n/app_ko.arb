@@ -281,5 +281,7 @@
   "saveDerivedRecipeTitle": "파생 레시피 저장",
   "ingredientsSectionTitle": "재료",
   "instructionsSectionTitle": "조리법",
-  "enterInstruction": "조리법을 입력하세요"
+  "enterInstruction": "조리법을 입력하세요",
+  "stepLabel": "단계 {number}",
+  "stepCommentLabel": "{number}단계 코멘트 (선택사항)"
 }

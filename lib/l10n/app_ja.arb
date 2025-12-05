@@ -281,5 +281,7 @@
   "saveDerivedRecipeTitle": "派生レシピ保存",
   "ingredientsSectionTitle": "材料",
   "instructionsSectionTitle": "作り方",
-  "enterInstruction": "作り方を入力してください"
+  "enterInstruction": "作り方を入力してください",
+  "stepLabel": "ステップ {number}",
+  "stepCommentLabel": "ステップ {number} コメント (任意)"
 }

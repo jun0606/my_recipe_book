@@ -281,5 +281,7 @@
   "saveDerivedRecipeTitle": "Save Derived Recipe",
   "ingredientsSectionTitle": "Ingredients",
   "instructionsSectionTitle": "Instructions",
-  "enterInstruction": "Enter instructions"
+  "enterInstruction": "Enter instructions",
+  "stepLabel": "Step {number}",
+  "stepCommentLabel": "Step {number} Comment (Optional)"
 }

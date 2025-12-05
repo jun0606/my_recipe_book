@@ -905,7 +905,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                             child: TextFormField(
                               initialValue: _instructions[index]['text'],
                               decoration:
-                                  InputDecoration(labelText: '단계 ${index + 1}'),
+                                  InputDecoration(labelText: l10n.stepLabel(index + 1)),
                               onChanged: (value) =>
                                   _instructions[index]['text'] = value,
                               validator: (value) =>
@@ -1386,7 +1386,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                             _ovenSteps[index]['comment']?.toString() ?? '',
                         style: TextStyle(fontSize: 13),
                         decoration: InputDecoration(
-                          labelText: '${index + 1}단계 코멘트 (선택사항)',
+                          labelText: l10n.stepCommentLabel(index + 1),
                           labelStyle: TextStyle(
                               fontSize: 11, color: Colors.grey.shade600),
                           hintText: l10n.hintOvenCondition,
