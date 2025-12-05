@@ -60,8 +60,9 @@ class _UserSetupScreenState extends State<UserSetupScreen>
     final String? selected = await showDialog<String>(
       context: context,
       builder: (BuildContext context) {
+        final l10nDialog = AppLocalizations.of(context)!;
         return AlertDialog(
-          title: Text('언어 선택'),
+          title: Text(l10nDialog.languageSelection),
           content: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -170,7 +171,7 @@ class _UserSetupScreenState extends State<UserSetupScreen>
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('호칭 선택',
+                                Text(l10n.titleSelection,
                                     style: TextStyle(
                                         fontSize: 16.sp,
                                         color: Colors.grey[700])),

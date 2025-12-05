@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import '../utils/image_utils.dart';
+import '../l10n/app_localizations.dart';
 
 import '../models/recipe.dart';
 import '../models/ingredient.dart';
@@ -183,11 +184,11 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
       if (result.isGranted) {
         _pickImageFromGallery(); // 재귀 호출로 다시 시도
       } else {
-        _showPermissionRequiredDialog('갤러리 접근');
+        _showPermissionRequiredDialog(l10n.galleryAccessFeature);
       }
     } else if (status.isPermanentlyDenied) {
       // 영구 거부: 설정 유도
-      _showPermissionRequiredDialog('갤러리 접근', permanent: true);
+      _showPermissionRequiredDialog(l10n.galleryAccessFeature, permanent: true);
     }
   }
 
@@ -206,34 +207,35 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
       }
     } else {
       // 권한 없음: 사용자 안내
-      _showPermissionRequiredDialog('카메라');
+      _showPermissionRequiredDialog(l10n.cameraFeature);
     }
   }
 
   void _showPermissionRequiredDialog(String feature, {bool permanent = false}) {
+    final l10n = AppLocalizations.of(context)!;
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('$feature 권한 필요'),
+        title: Text(l10n.permissionRequired(feature)),
         content: Text(permanent
-            ? '$feature 권한이 필요합니다. 설정 > 개인정보 보호 > $feature 에서 권한을 허용해주세요.'
-            : '$feature 권한이 필요합니다. 권한을 허용하시겠습니까?'),
+            ? l10n.permissionPermanentlyDenied(feature)
+            : l10n.permissionRequiredMessage(feature)),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text('취소'),
+            child: Text(l10n.cancel),
           ),
           if (!permanent)
             TextButton(
               onPressed: () {
                 Navigator.pop(context);
-                if (feature == '갤러리 접근') {
+                if (feature == l10n.galleryAccessFeature) {
                   Permission.photos.request();
                 } else {
                   Permission.camera.request();
                 }
               },
-              child: Text('권한 요청'),
+              child: Text(l10n.requestPermission),
             ),
           if (permanent)
             TextButton(
@@ -241,7 +243,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                 Navigator.pop(context);
                 openAppSettings();
               },
-              child: Text('설정으로 이동'),
+              child: Text(l10n.goToSettings),
             ),
         ],
       ),
@@ -253,12 +255,13 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
     showModalBottomSheet(
       context: context,
       builder: (BuildContext bc) {
+        final l10nSheet = AppLocalizations.of(context)!;
         return SafeArea(
           child: Wrap(
             children: <Widget>[
               ListTile(
                 leading: Icon(Icons.photo_library),
-                title: Text('갤러리에서 선택'),
+                title: Text(l10nSheet.selectFromGallery),
                 onTap: () async {
                   Navigator.of(context).pop();
                   if (isInstructionImage) {
@@ -281,7 +284,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
               ),
               ListTile(
                 leading: Icon(Icons.camera_alt),
-                title: Text('카메라로 촬영'),
+                title: Text(l10nSheet.takeWithCamera),
                 onTap: () async {
                   Navigator.of(context).pop();
                   if (isInstructionImage) {

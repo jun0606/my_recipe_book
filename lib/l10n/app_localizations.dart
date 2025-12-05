@@ -753,6 +753,408 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Name and title reset. Restarting app.'**
   String get userNameAndTitleReset;
+
+  /// No description provided for @textScaleSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Text Size Settings'**
+  String get textScaleSettings;
+
+  /// No description provided for @useSystemTextScale.
+  ///
+  /// In en, this message translates to:
+  /// **'Use System Text Size Setting'**
+  String get useSystemTextScale;
+
+  /// No description provided for @followDeviceAccessibility.
+  ///
+  /// In en, this message translates to:
+  /// **'Follow device accessibility settings'**
+  String get followDeviceAccessibility;
+
+  /// No description provided for @textScaleAdjustment.
+  ///
+  /// In en, this message translates to:
+  /// **'Text Size Adjustment'**
+  String get textScaleAdjustment;
+
+  /// No description provided for @currentSize.
+  ///
+  /// In en, this message translates to:
+  /// **'Current size: {size}%'**
+  String currentSize(Object size);
+
+  /// No description provided for @preview.
+  ///
+  /// In en, this message translates to:
+  /// **'Preview'**
+  String get preview;
+
+  /// No description provided for @previewBodyText.
+  ///
+  /// In en, this message translates to:
+  /// **'This is an example of body text. Recipe content and descriptions will be displayed at this size.'**
+  String get previewBodyText;
+
+  /// No description provided for @previewSmallText.
+  ///
+  /// In en, this message translates to:
+  /// **'This is an example of small text.'**
+  String get previewSmallText;
+
+  /// No description provided for @sizeSmall.
+  ///
+  /// In en, this message translates to:
+  /// **'Small'**
+  String get sizeSmall;
+
+  /// No description provided for @sizeNormal.
+  ///
+  /// In en, this message translates to:
+  /// **'Normal'**
+  String get sizeNormal;
+
+  /// No description provided for @sizeLarge.
+  ///
+  /// In en, this message translates to:
+  /// **'Large'**
+  String get sizeLarge;
+
+  /// No description provided for @sizeVeryLarge.
+  ///
+  /// In en, this message translates to:
+  /// **'Very Large'**
+  String get sizeVeryLarge;
+
+  /// No description provided for @helpTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Help'**
+  String get helpTitle;
+
+  /// No description provided for @textScaleHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'• Use system setting to apply device accessibility settings.\n• Use custom setting to adjust text size only within the app.\n• You can also use both settings together.'**
+  String get textScaleHelp;
+
+  /// No description provided for @permissionRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'{feature} Permission Required'**
+  String permissionRequired(Object feature);
+
+  /// No description provided for @permissionRequiredMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'{feature} permission is required. Would you like to allow it?'**
+  String permissionRequiredMessage(Object feature);
+
+  /// No description provided for @permissionPermanentlyDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'{feature} permission is required. Please allow it in Settings > Privacy > {feature}.'**
+  String permissionPermanentlyDenied(Object feature);
+
+  /// No description provided for @requestPermission.
+  ///
+  /// In en, this message translates to:
+  /// **'Request Permission'**
+  String get requestPermission;
+
+  /// No description provided for @goToSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Go to Settings'**
+  String get goToSettings;
+
+  /// No description provided for @cameraFeature.
+  ///
+  /// In en, this message translates to:
+  /// **'Camera'**
+  String get cameraFeature;
+
+  /// No description provided for @galleryAccessFeature.
+  ///
+  /// In en, this message translates to:
+  /// **'Gallery Access'**
+  String get galleryAccessFeature;
+
+  /// No description provided for @photosFeature.
+  ///
+  /// In en, this message translates to:
+  /// **'Photos Library'**
+  String get photosFeature;
+
+  /// No description provided for @derivedRecipeSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save Derived Recipe'**
+  String get derivedRecipeSave;
+
+  /// No description provided for @recipeCopy.
+  ///
+  /// In en, this message translates to:
+  /// **'Copy Recipe'**
+  String get recipeCopy;
+
+  /// No description provided for @recipeModify.
+  ///
+  /// In en, this message translates to:
+  /// **'Modify Recipe'**
+  String get recipeModify;
+
+  /// No description provided for @recipeImageUpload.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload Photo'**
+  String get recipeImageUpload;
+
+  /// No description provided for @recipeImageCamera.
+  ///
+  /// In en, this message translates to:
+  /// **'Take Photo with Camera'**
+  String get recipeImageCamera;
+
+  /// No description provided for @selectFromGallery.
+  ///
+  /// In en, this message translates to:
+  /// **'Select from Gallery'**
+  String get selectFromGallery;
+
+  /// No description provided for @takeWithCamera.
+  ///
+  /// In en, this message translates to:
+  /// **'Take with Camera'**
+  String get takeWithCamera;
+
+  /// No description provided for @bakingModeActivate.
+  ///
+  /// In en, this message translates to:
+  /// **'Activate Baking Mode'**
+  String get bakingModeActivate;
+
+  /// No description provided for @servingsInput.
+  ///
+  /// In en, this message translates to:
+  /// **'Servings'**
+  String get servingsInput;
+
+  /// No description provided for @servingsRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter servings'**
+  String get servingsRequired;
+
+  /// No description provided for @validServingsRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid number of servings'**
+  String get validServingsRequired;
+
+  /// No description provided for @splitWeight.
+  ///
+  /// In en, this message translates to:
+  /// **'Split Weight'**
+  String get splitWeight;
+
+  /// No description provided for @splitCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Split Count'**
+  String get splitCount;
+
+  /// No description provided for @splitWeightOrCountRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter split weight or split count'**
+  String get splitWeightOrCountRequired;
+
+  /// No description provided for @validSplitWeightRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid split weight'**
+  String get validSplitWeightRequired;
+
+  /// No description provided for @validSplitCountRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid split count'**
+  String get validSplitCountRequired;
+
+  /// No description provided for @splitWeightExceedsTotal.
+  ///
+  /// In en, this message translates to:
+  /// **'Split weight cannot exceed total ingredient weight. (Total: {total}g)'**
+  String splitWeightExceedsTotal(Object total);
+
+  /// No description provided for @eachWeight.
+  ///
+  /// In en, this message translates to:
+  /// **'{weight}{unit} each'**
+  String eachWeight(Object unit, Object weight);
+
+  /// No description provided for @totalSplits.
+  ///
+  /// In en, this message translates to:
+  /// **'Can split into {count} pieces (Remaining: {remaining}{unit})'**
+  String totalSplits(Object count, Object remaining, Object unit);
+
+  /// No description provided for @resetInput.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset Input'**
+  String get resetInput;
+
+  /// No description provided for @ingredients.
+  ///
+  /// In en, this message translates to:
+  /// **'Ingredients'**
+  String get ingredients;
+
+  /// No description provided for @ingredientName.
+  ///
+  /// In en, this message translates to:
+  /// **'Ingredient Name'**
+  String get ingredientName;
+
+  /// No description provided for @ingredientEdit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Ingredient'**
+  String get ingredientEdit;
+
+  /// No description provided for @ingredientAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount'**
+  String get ingredientAmount;
+
+  /// No description provided for @validIngredientRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter valid ingredient name and amount.'**
+  String get validIngredientRequired;
+
+  /// No description provided for @validAmountRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid ingredient amount.'**
+  String get validAmountRequired;
+
+  /// No description provided for @ingredientNameAndAmountRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter both ingredient name and amount.'**
+  String get ingredientNameAndAmountRequired;
+
+  /// No description provided for @copyLabel.
+  ///
+  /// In en, this message translates to:
+  /// **' (Copy)'**
+  String get copyLabel;
+
+  /// No description provided for @derivedLabel.
+  ///
+  /// In en, this message translates to:
+  /// **' (Derived)'**
+  String get derivedLabel;
+
+  /// No description provided for @recipeGenealogy.
+  ///
+  /// In en, this message translates to:
+  /// **'Recipe Genealogy'**
+  String get recipeGenealogy;
+
+  /// No description provided for @retryAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get retryAction;
+
+  /// No description provided for @goBackAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Go Back'**
+  String get goBackAction;
+
+  /// No description provided for @favoritePresets.
+  ///
+  /// In en, this message translates to:
+  /// **'Favorite Presets'**
+  String get favoritePresets;
+
+  /// No description provided for @addCustomPreset.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Custom Preset'**
+  String get addCustomPreset;
+
+  /// No description provided for @exportAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Export'**
+  String get exportAction;
+
+  /// No description provided for @importAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Import'**
+  String get importAction;
+
+  /// No description provided for @cleanupAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Cleanup'**
+  String get cleanupAction;
+
+  /// No description provided for @useAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Use'**
+  String get useAction;
+
+  /// No description provided for @editAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get editAction;
+
+  /// No description provided for @duplicateAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Duplicate'**
+  String get duplicateAction;
+
+  /// No description provided for @noPresetsAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'No saved presets.'**
+  String get noPresetsAvailable;
+
+  /// No description provided for @addFirstPreset.
+  ///
+  /// In en, this message translates to:
+  /// **'Add your first preset!'**
+  String get addFirstPreset;
+
+  /// No description provided for @languageSelection.
+  ///
+  /// In en, this message translates to:
+  /// **'Language Selection'**
+  String get languageSelection;
+
+  /// No description provided for @titleSelection.
+  ///
+  /// In en, this message translates to:
+  /// **'Title Selection'**
+  String get titleSelection;
+
+  /// No description provided for @unitSelection.
+  ///
+  /// In en, this message translates to:
+  /// **'Unit'**
+  String get unitSelection;
 }
 
 class _AppLocalizationsDelegate

@@ -382,4 +382,225 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get userNameAndTitleReset => 'Name and title reset. Restarting app.';
+
+  @override
+  String get textScaleSettings => 'Text Size Settings';
+
+  @override
+  String get useSystemTextScale => 'Use System Text Size Setting';
+
+  @override
+  String get followDeviceAccessibility =>
+      'Follow device accessibility settings';
+
+  @override
+  String get textScaleAdjustment => 'Text Size Adjustment';
+
+  @override
+  String currentSize(Object size) {
+    return 'Current size: $size%';
+  }
+
+  @override
+  String get preview => 'Preview';
+
+  @override
+  String get previewBodyText =>
+      'This is an example of body text. Recipe content and descriptions will be displayed at this size.';
+
+  @override
+  String get previewSmallText => 'This is an example of small text.';
+
+  @override
+  String get sizeSmall => 'Small';
+
+  @override
+  String get sizeNormal => 'Normal';
+
+  @override
+  String get sizeLarge => 'Large';
+
+  @override
+  String get sizeVeryLarge => 'Very Large';
+
+  @override
+  String get helpTitle => 'Help';
+
+  @override
+  String get textScaleHelp =>
+      '• Use system setting to apply device accessibility settings.\n• Use custom setting to adjust text size only within the app.\n• You can also use both settings together.';
+
+  @override
+  String permissionRequired(Object feature) {
+    return '$feature Permission Required';
+  }
+
+  @override
+  String permissionRequiredMessage(Object feature) {
+    return '$feature permission is required. Would you like to allow it?';
+  }
+
+  @override
+  String permissionPermanentlyDenied(Object feature) {
+    return '$feature permission is required. Please allow it in Settings > Privacy > $feature.';
+  }
+
+  @override
+  String get requestPermission => 'Request Permission';
+
+  @override
+  String get goToSettings => 'Go to Settings';
+
+  @override
+  String get cameraFeature => 'Camera';
+
+  @override
+  String get galleryAccessFeature => 'Gallery Access';
+
+  @override
+  String get photosFeature => 'Photos Library';
+
+  @override
+  String get derivedRecipeSave => 'Save Derived Recipe';
+
+  @override
+  String get recipeCopy => 'Copy Recipe';
+
+  @override
+  String get recipeModify => 'Modify Recipe';
+
+  @override
+  String get recipeImageUpload => 'Upload Photo';
+
+  @override
+  String get recipeImageCamera => 'Take Photo with Camera';
+
+  @override
+  String get selectFromGallery => 'Select from Gallery';
+
+  @override
+  String get takeWithCamera => 'Take with Camera';
+
+  @override
+  String get bakingModeActivate => 'Activate Baking Mode';
+
+  @override
+  String get servingsInput => 'Servings';
+
+  @override
+  String get servingsRequired => 'Please enter servings';
+
+  @override
+  String get validServingsRequired => 'Please enter a valid number of servings';
+
+  @override
+  String get splitWeight => 'Split Weight';
+
+  @override
+  String get splitCount => 'Split Count';
+
+  @override
+  String get splitWeightOrCountRequired =>
+      'Please enter split weight or split count';
+
+  @override
+  String get validSplitWeightRequired => 'Please enter a valid split weight';
+
+  @override
+  String get validSplitCountRequired => 'Please enter a valid split count';
+
+  @override
+  String splitWeightExceedsTotal(Object total) {
+    return 'Split weight cannot exceed total ingredient weight. (Total: ${total}g)';
+  }
+
+  @override
+  String eachWeight(Object unit, Object weight) {
+    return '$weight$unit each';
+  }
+
+  @override
+  String totalSplits(Object count, Object remaining, Object unit) {
+    return 'Can split into $count pieces (Remaining: $remaining$unit)';
+  }
+
+  @override
+  String get resetInput => 'Reset Input';
+
+  @override
+  String get ingredients => 'Ingredients';
+
+  @override
+  String get ingredientName => 'Ingredient Name';
+
+  @override
+  String get ingredientEdit => 'Edit Ingredient';
+
+  @override
+  String get ingredientAmount => 'Amount';
+
+  @override
+  String get validIngredientRequired =>
+      'Please enter valid ingredient name and amount.';
+
+  @override
+  String get validAmountRequired => 'Please enter a valid ingredient amount.';
+
+  @override
+  String get ingredientNameAndAmountRequired =>
+      'Please enter both ingredient name and amount.';
+
+  @override
+  String get copyLabel => ' (Copy)';
+
+  @override
+  String get derivedLabel => ' (Derived)';
+
+  @override
+  String get recipeGenealogy => 'Recipe Genealogy';
+
+  @override
+  String get retryAction => 'Retry';
+
+  @override
+  String get goBackAction => 'Go Back';
+
+  @override
+  String get favoritePresets => 'Favorite Presets';
+
+  @override
+  String get addCustomPreset => 'Add Custom Preset';
+
+  @override
+  String get exportAction => 'Export';
+
+  @override
+  String get importAction => 'Import';
+
+  @override
+  String get cleanupAction => 'Cleanup';
+
+  @override
+  String get useAction => 'Use';
+
+  @override
+  String get editAction => 'Edit';
+
+  @override
+  String get duplicateAction => 'Duplicate';
+
+  @override
+  String get noPresetsAvailable => 'No saved presets.';
+
+  @override
+  String get addFirstPreset => 'Add your first preset!';
+
+  @override
+  String get languageSelection => 'Language Selection';
+
+  @override
+  String get titleSelection => 'Title Selection';
+
+  @override
+  String get unitSelection => 'Unit';
 }

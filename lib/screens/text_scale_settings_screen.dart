@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/text_scale_provider.dart';
+import '../l10n/app_localizations.dart';
 
 /// 텍스트 크기 설정 화면
 class TextScaleSettingsScreen extends StatefulWidget {
@@ -25,9 +26,10 @@ class _TextScaleSettingsScreenState extends State<TextScaleSettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('텍스트 크기 설정'),
+        title: Text(l10n.textScaleSettings),
       ),
       body: Consumer<TextScaleProvider>(
         builder: (context, textScaleProvider, child) {
@@ -39,8 +41,8 @@ class _TextScaleSettingsScreenState extends State<TextScaleSettingsScreen> {
                 // 시스템 설정 사용 여부
                 Card(
                   child: SwitchListTile(
-                    title: const Text('시스템 텍스트 크기 설정 사용'),
-                    subtitle: const Text('기기의 접근성 설정을 따릅니다'),
+                    title: Text(l10n.useSystemTextScale),
+                    subtitle: Text(l10n.followDeviceAccessibility),
                     value: textScaleProvider.useSystemTextScale,
                     onChanged: (value) {
                       textScaleProvider.updateUseSystemTextScale(value);
@@ -58,12 +60,15 @@ class _TextScaleSettingsScreenState extends State<TextScaleSettingsScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          '텍스트 크기 조절',
+                          l10n.textScaleAdjustment,
                           style: Theme.of(context).textTheme.titleMedium,
                         ),
                         const SizedBox(height: 8),
                         Text(
-                          '현재 크기: ${(textScaleProvider.textScaleFactor * 100).round()}%',
+                          l10n.currentSize(
+                              (textScaleProvider.textScaleFactor * 100)
+                                  .round()
+                                  .toString()),
                           style: Theme.of(context).textTheme.bodyMedium,
                         ),
                         const SizedBox(height: 16),
@@ -93,17 +98,17 @@ class _TextScaleSettingsScreenState extends State<TextScaleSettingsScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                '미리보기',
+                                l10n.preview,
                                 style: Theme.of(context).textTheme.titleMedium,
                               ),
                               const SizedBox(height: 8),
                               Text(
-                                '이것은 본문 텍스트의 예시입니다. 레시피 내용이나 설명이 이런 크기로 표시됩니다.',
+                                l10n.previewBodyText,
                                 style: Theme.of(context).textTheme.bodyMedium,
                               ),
                               const SizedBox(height: 8),
                               Text(
-                                '작은 텍스트 예시입니다.',
+                                l10n.previewSmallText,
                                 style: Theme.of(context).textTheme.bodySmall,
                               ),
                             ],
@@ -119,25 +124,25 @@ class _TextScaleSettingsScreenState extends State<TextScaleSettingsScreen> {
                           children: [
                             _buildQuickButton(
                               context,
-                              '작게',
+                              l10n.sizeSmall,
                               0.9,
                               textScaleProvider,
                             ),
                             _buildQuickButton(
                               context,
-                              '보통',
+                              l10n.sizeNormal,
                               1.0,
                               textScaleProvider,
                             ),
                             _buildQuickButton(
                               context,
-                              '크게',
+                              l10n.sizeLarge,
                               1.2,
                               textScaleProvider,
                             ),
                             _buildQuickButton(
                               context,
-                              '매우 크게',
+                              l10n.sizeVeryLarge,
                               1.5,
                               textScaleProvider,
                             ),
@@ -165,7 +170,7 @@ class _TextScaleSettingsScreenState extends State<TextScaleSettingsScreen> {
                             ),
                             const SizedBox(width: 8),
                             Text(
-                              '도움말',
+                              l10n.helpTitle,
                               style: Theme.of(context)
                                   .textTheme
                                   .titleMedium
@@ -176,10 +181,8 @@ class _TextScaleSettingsScreenState extends State<TextScaleSettingsScreen> {
                           ],
                         ),
                         const SizedBox(height: 8),
-                        const Text(
-                          '• 시스템 설정을 사용하면 기기의 접근성 설정이 적용됩니다.\n'
-                          '• 커스텀 설정을 사용하면 앱 내에서만 텍스트 크기가 조절됩니다.\n'
-                          '• 두 설정을 함께 사용할 수도 있습니다.',
+                        Text(
+                          l10n.textScaleHelp,
                         ),
                       ],
                     ),

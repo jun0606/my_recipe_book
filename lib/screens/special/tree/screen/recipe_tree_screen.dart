@@ -114,7 +114,7 @@ class _RecipeTreeScreenState extends State<RecipeTreeScreen> {
   Widget build(BuildContext context) {
     if (_isLoading) {
       return Scaffold(
-        appBar: AppBar(title: Text('레시피 계보')),
+        appBar: AppBar(title: Text(AppLocalizations.of(context)!.recipeGenealogy)),
         body: Center(child: CircularProgressIndicator()),
       );
     }
@@ -132,7 +132,7 @@ class _RecipeTreeScreenState extends State<RecipeTreeScreen> {
               SizedBox(height: 24),
               ElevatedButton(
                 onPressed: _loadRecipeTree,
-                child: Text('다시 시도'),
+                child: Text(AppLocalizations.of(context)!.retryAction),
               ),
             ],
           ),
@@ -174,7 +174,7 @@ class _RecipeTreeScreenState extends State<RecipeTreeScreen> {
               ElevatedButton.icon(
                 onPressed: () => Navigator.of(context).pop(),
                 icon: Icon(Icons.arrow_back),
-                label: Text('돌아가기'),
+                label: Text(AppLocalizations.of(context)!.goBackAction),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue.shade600,
                   foregroundColor: Colors.white,

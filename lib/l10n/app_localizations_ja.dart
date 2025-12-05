@@ -379,4 +379,220 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get userNameAndTitleReset => '名前と称号がリセットされました。アプリを再起動します。';
+
+  @override
+  String get textScaleSettings => 'テキストサイズ設定';
+
+  @override
+  String get useSystemTextScale => 'システムのテキストサイズ設定を使用';
+
+  @override
+  String get followDeviceAccessibility => 'デバイスのアクセシビリティ設定に従います';
+
+  @override
+  String get textScaleAdjustment => 'テキストサイズ調整';
+
+  @override
+  String currentSize(Object size) {
+    return '現在のサイズ: $size%';
+  }
+
+  @override
+  String get preview => 'プレビュー';
+
+  @override
+  String get previewBodyText => 'これは本文テキストの例です。レシピの内容や説明はこのサイズで表示されます。';
+
+  @override
+  String get previewSmallText => '小さいテキストの例です。';
+
+  @override
+  String get sizeSmall => '小';
+
+  @override
+  String get sizeNormal => '標準';
+
+  @override
+  String get sizeLarge => '大';
+
+  @override
+  String get sizeVeryLarge => '特大';
+
+  @override
+  String get helpTitle => 'ヘルプ';
+
+  @override
+  String get textScaleHelp =>
+      '• システム設定を使用すると、デバイスのアクセシビリティ設定が適用されます。\n• カスタム設定を使用すると、アプリ内でのみテキストサイズが調整されます。\n• 両方の設定を一緒に使用することもできます。';
+
+  @override
+  String permissionRequired(Object feature) {
+    return '$feature 権限が必要';
+  }
+
+  @override
+  String permissionRequiredMessage(Object feature) {
+    return '$feature 権限が必要です。許可しますか？';
+  }
+
+  @override
+  String permissionPermanentlyDenied(Object feature) {
+    return '$feature 権限が必要です。設定 > プライバシー > $feature で権限を許可してください。';
+  }
+
+  @override
+  String get requestPermission => '権限をリクエスト';
+
+  @override
+  String get goToSettings => '設定へ移動';
+
+  @override
+  String get cameraFeature => 'カメラ';
+
+  @override
+  String get galleryAccessFeature => 'ギャラリーアクセス';
+
+  @override
+  String get photosFeature => 'フォトライブラリ';
+
+  @override
+  String get derivedRecipeSave => '派生レシピを保存';
+
+  @override
+  String get recipeCopy => 'レシピをコピー';
+
+  @override
+  String get recipeModify => 'レシピを編集';
+
+  @override
+  String get recipeImageUpload => '写真をアップロード';
+
+  @override
+  String get recipeImageCamera => 'カメラで撮影';
+
+  @override
+  String get selectFromGallery => 'ギャラリーから選択';
+
+  @override
+  String get takeWithCamera => 'カメラで撮影';
+
+  @override
+  String get bakingModeActivate => 'ベーキングモードをアクティブ化';
+
+  @override
+  String get servingsInput => '人前';
+
+  @override
+  String get servingsRequired => '人前を入力してください';
+
+  @override
+  String get validServingsRequired => '有効な人前の数を入力してください';
+
+  @override
+  String get splitWeight => '分割重量';
+
+  @override
+  String get splitCount => '分割個数';
+
+  @override
+  String get splitWeightOrCountRequired => '分割重量または分割個数を入力してください';
+
+  @override
+  String get validSplitWeightRequired => '有効な分割重量を入力してください';
+
+  @override
+  String get validSplitCountRequired => '有効な分割個数を入力してください';
+
+  @override
+  String splitWeightExceedsTotal(Object total) {
+    return '分割重量は総材料重量を超えることはできません。（合計: ${total}g）';
+  }
+
+  @override
+  String eachWeight(Object unit, Object weight) {
+    return '各 $weight$unit ずつ';
+  }
+
+  @override
+  String totalSplits(Object count, Object remaining, Object unit) {
+    return '合計 $count個に分割可能（残り: $remaining$unit）';
+  }
+
+  @override
+  String get resetInput => '入力値をリセット';
+
+  @override
+  String get ingredients => '材料';
+
+  @override
+  String get ingredientName => '材料名';
+
+  @override
+  String get ingredientEdit => '材料を編集';
+
+  @override
+  String get ingredientAmount => '量';
+
+  @override
+  String get validIngredientRequired => '有効な材料名と量を入力してください。';
+
+  @override
+  String get validAmountRequired => '有効な材料の量を入力してください。';
+
+  @override
+  String get ingredientNameAndAmountRequired => '材料名と量の両方を入力してください。';
+
+  @override
+  String get copyLabel => ' (コピー)';
+
+  @override
+  String get derivedLabel => ' (派生)';
+
+  @override
+  String get recipeGenealogy => 'レシピ系譜';
+
+  @override
+  String get retryAction => '再試行';
+
+  @override
+  String get goBackAction => '戻る';
+
+  @override
+  String get favoritePresets => 'お気に入りプリセット';
+
+  @override
+  String get addCustomPreset => 'カスタムプリセットを追加';
+
+  @override
+  String get exportAction => 'エクスポート';
+
+  @override
+  String get importAction => 'インポート';
+
+  @override
+  String get cleanupAction => '整理';
+
+  @override
+  String get useAction => '使用';
+
+  @override
+  String get editAction => '編集';
+
+  @override
+  String get duplicateAction => '複製';
+
+  @override
+  String get noPresetsAvailable => '保存されたプリセットがありません。';
+
+  @override
+  String get addFirstPreset => '最初のプリセットを追加しましょう！';
+
+  @override
+  String get languageSelection => '言語選択';
+
+  @override
+  String get titleSelection => '称号選択';
+
+  @override
+  String get unitSelection => '単位';
 }

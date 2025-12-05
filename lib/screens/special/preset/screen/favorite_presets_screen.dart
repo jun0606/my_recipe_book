@@ -4,6 +4,7 @@
 library favorite_presets_screen;
 
 import 'package:flutter/material.dart';
+import '../../../l10n/app_localizations.dart';
 import '../models/favorite_preset.dart';
 import '../services/favorite_preset_service.dart';
 
@@ -61,7 +62,7 @@ class _FavoritePresetsScreenState extends State<FavoritePresetsScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('즐겨찾기 프리셋'),
+        title: Text(AppLocalizations.of(context)!.favoritePresets),
         backgroundColor: Colors.orange.shade600,
         foregroundColor: Colors.white,
         bottom: TabBar(
@@ -88,13 +89,16 @@ class _FavoritePresetsScreenState extends State<FavoritePresetsScreen>
           ),
           PopupMenuButton<String>(
             onSelected: _handleMenuAction,
-            itemBuilder: (context) => [
-              const PopupMenuItem(
-                  value: 'add_custom', child: Text('커스텀 프리셋 추가')),
-              const PopupMenuItem(value: 'export', child: Text('내보내기')),
-              const PopupMenuItem(value: 'import', child: Text('가져오기')),
-              const PopupMenuItem(value: 'cleanup', child: Text('정리')),
-            ],
+            itemBuilder: (context) {
+              final l10nMenu = AppLocalizations.of(context)!;
+              return [
+                PopupMenuItem(
+                    value: 'add_custom', child: Text(l10nMenu.addCustomPreset)),
+                PopupMenuItem(value: 'export', child: Text(l10nMenu.exportAction)),
+                PopupMenuItem(value: 'import', child: Text(l10nMenu.importAction)),
+                PopupMenuItem(value: 'cleanup', child: Text(l10nMenu.cleanupAction)),
+              ];
+            },
           ),
         ],
       ),

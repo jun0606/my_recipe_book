@@ -380,4 +380,220 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get userNameAndTitleReset => '이름과 호칭이 초기화되었습니다. 앱을 다시 시작합니다.';
+
+  @override
+  String get textScaleSettings => '텍스트 크기 설정';
+
+  @override
+  String get useSystemTextScale => '시스템 텍스트 크기 설정 사용';
+
+  @override
+  String get followDeviceAccessibility => '기기의 접근성 설정을 따릅니다';
+
+  @override
+  String get textScaleAdjustment => '텍스트 크기 조절';
+
+  @override
+  String currentSize(Object size) {
+    return '현재 크기: $size%';
+  }
+
+  @override
+  String get preview => '미리보기';
+
+  @override
+  String get previewBodyText => '이것은 본문 텍스트의 예시입니다. 레시피 내용이나 설명이 이런 크기로 표시됩니다.';
+
+  @override
+  String get previewSmallText => '작은 텍스트 예시입니다.';
+
+  @override
+  String get sizeSmall => '작게';
+
+  @override
+  String get sizeNormal => '보통';
+
+  @override
+  String get sizeLarge => '크게';
+
+  @override
+  String get sizeVeryLarge => '매우 크게';
+
+  @override
+  String get helpTitle => '도움말';
+
+  @override
+  String get textScaleHelp =>
+      '• 시스템 설정을 사용하면 기기의 접근성 설정이 적용됩니다.\n• 커스텀 설정을 사용하면 앱 내에서만 텍스트 크기가 조절됩니다.\n• 두 설정을 함께 사용할 수도 있습니다.';
+
+  @override
+  String permissionRequired(Object feature) {
+    return '$feature 권한 필요';
+  }
+
+  @override
+  String permissionRequiredMessage(Object feature) {
+    return '$feature 권한이 필요합니다. 권한을 허용하시겠습니까?';
+  }
+
+  @override
+  String permissionPermanentlyDenied(Object feature) {
+    return '$feature 권한이 필요합니다. 설정 > 개인정보 보호 > $feature 에서 권한을 허용해주세요.';
+  }
+
+  @override
+  String get requestPermission => '권한 요청';
+
+  @override
+  String get goToSettings => '설정으로 이동';
+
+  @override
+  String get cameraFeature => '카메라';
+
+  @override
+  String get galleryAccessFeature => '갤러리 접근';
+
+  @override
+  String get photosFeature => '사진 라이브러리';
+
+  @override
+  String get derivedRecipeSave => '파생 레시피 저장';
+
+  @override
+  String get recipeCopy => '레시피 복사';
+
+  @override
+  String get recipeModify => '레시피 수정';
+
+  @override
+  String get recipeImageUpload => '사진 업로드';
+
+  @override
+  String get recipeImageCamera => '카메라로 촬영';
+
+  @override
+  String get selectFromGallery => '갤러리에서 선택';
+
+  @override
+  String get takeWithCamera => '카메라로 촬영';
+
+  @override
+  String get bakingModeActivate => '베이킹 모드 활성화';
+
+  @override
+  String get servingsInput => '인분';
+
+  @override
+  String get servingsRequired => '인분을 입력하세요';
+
+  @override
+  String get validServingsRequired => '유효한 인분 수를 입력하세요';
+
+  @override
+  String get splitWeight => '분할 무게';
+
+  @override
+  String get splitCount => '분할 개수';
+
+  @override
+  String get splitWeightOrCountRequired => '분할량 또는 분할 개수를 입력하세요';
+
+  @override
+  String get validSplitWeightRequired => '유효한 분할량을 입력하세요';
+
+  @override
+  String get validSplitCountRequired => '유효한 분할 개수를 입력하세요';
+
+  @override
+  String splitWeightExceedsTotal(Object total) {
+    return '분할량은 총 재료 무게를 초과할 수 없습니다. (총: ${total}g)';
+  }
+
+  @override
+  String eachWeight(Object unit, Object weight) {
+    return '각 $weight$unit 씩';
+  }
+
+  @override
+  String totalSplits(Object count, Object remaining, Object unit) {
+    return '총 $count개로 분할 가능 (남는 양: $remaining$unit)';
+  }
+
+  @override
+  String get resetInput => '입력값 초기화';
+
+  @override
+  String get ingredients => '재료';
+
+  @override
+  String get ingredientName => '재료 이름';
+
+  @override
+  String get ingredientEdit => '재료 수정';
+
+  @override
+  String get ingredientAmount => '양';
+
+  @override
+  String get validIngredientRequired => '유효한 재료 이름과 양을 입력하세요.';
+
+  @override
+  String get validAmountRequired => '유효한 재료 양을 입력하세요.';
+
+  @override
+  String get ingredientNameAndAmountRequired => '재료 이름과 양을 모두 입력하세요.';
+
+  @override
+  String get copyLabel => ' (복사본)';
+
+  @override
+  String get derivedLabel => ' (파생)';
+
+  @override
+  String get recipeGenealogy => '레시피 계보';
+
+  @override
+  String get retryAction => '다시 시도';
+
+  @override
+  String get goBackAction => '돌아가기';
+
+  @override
+  String get favoritePresets => '즐겨찾기 프리셋';
+
+  @override
+  String get addCustomPreset => '커스텀 프리셋 추가';
+
+  @override
+  String get exportAction => '내보내기';
+
+  @override
+  String get importAction => '가져오기';
+
+  @override
+  String get cleanupAction => '정리';
+
+  @override
+  String get useAction => '사용하기';
+
+  @override
+  String get editAction => '수정';
+
+  @override
+  String get duplicateAction => '복제';
+
+  @override
+  String get noPresetsAvailable => '저장된 프리셋이 없습니다.';
+
+  @override
+  String get addFirstPreset => '첫 번째 프리셋을 추가해보세요!';
+
+  @override
+  String get languageSelection => '언어 선택';
+
+  @override
+  String get titleSelection => '호칭 선택';
+
+  @override
+  String get unitSelection => '단위';
 }
