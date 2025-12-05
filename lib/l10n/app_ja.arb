@@ -308,5 +308,15 @@
   "view": "表示",
   "allIngredientsAdded": "🎉 すべての材料が追加されました！",
   "guideOn": "ガイド開始",
-  "guideOff": "ガイド終了"
+  "guideOff": "ガイド終了",
+  "mixingStep": "ミキシング",
+  "fermentationStep": "発酵",
+  "ovenStep": "オーブン",
+  "stepInfoNotEntered": "{stepType} 情報が入力されていません",
+  "canAddStepInEdit": "レシピ編集で {stepType} ステップを追加できます",
+  "noInstructions": "作り方が登録されていません。",
+  "ingredientName": "材料名",
+  "originalAmount": "元",
+  "calculatedAmount": "計算後",
+  "changeAmount": "変化"
 }

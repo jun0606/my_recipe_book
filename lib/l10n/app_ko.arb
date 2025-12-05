@@ -308,5 +308,15 @@
   "view": "보기",
   "allIngredientsAdded": "🎉 모든 재료 투입이 완료되었습니다!",
   "guideOn": "가이드 켜기",
-  "guideOff": "가이드 끄기"
+  "guideOff": "가이드 끄기",
+  "mixingStep": "믹싱",
+  "fermentationStep": "발효",
+  "ovenStep": "오븐",
+  "stepInfoNotEntered": "{stepType} 정보가 입력되지 않았습니다",
+  "canAddStepInEdit": "레시피 수정에서 {stepType} 단계를 추가할 수 있습니다",
+  "noInstructions": "조리법이 등록되지 않았습니다.",
+  "ingredientName": "재료명",
+  "originalAmount": "원래",
+  "calculatedAmount": "계산됨",
+  "changeAmount": "변화"
 }

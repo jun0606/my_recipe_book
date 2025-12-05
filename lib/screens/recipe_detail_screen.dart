@@ -353,7 +353,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
               Expanded(
                 flex: 3,
                 child: Text(
-                  '재료명',
+                  l10n.ingredientName,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 14,
@@ -364,7 +364,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
               Expanded(
                 flex: 2,
                 child: Text(
-                  '원래',
+                  l10n.originalAmount,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
@@ -376,7 +376,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
               Expanded(
                 flex: 2,
                 child: Text(
-                  '계산됨',
+                  l10n.calculatedAmount,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
@@ -388,7 +388,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
               Expanded(
                 flex: 1,
                 child: Text(
-                  '변화',
+                  l10n.changeAmount,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
@@ -666,7 +666,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
             child: Padding(
               padding: EdgeInsets.all(32),
               child: Text(
-                '조리법이 등록되지 않았습니다.',
+                l10n.noInstructions,
                 style: TextStyle(
                   color: Colors.grey,
                   fontStyle: FontStyle.italic,
@@ -1043,7 +1043,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
 
           // 단계 내용 또는 미입력 안내
           if (mixingSteps == null || mixingSteps.isEmpty) ...[
-            _buildEmptyStepsInfo(context, '믹싱', Colors.blue.shade600),
+            _buildEmptyStepsInfo(context, l10n.mixingStep, Colors.blue.shade600),
           ] else ...[
             _buildStepsList(mixingSteps, Colors.blue.shade600),
           ],
@@ -1095,7 +1095,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
 
           // 단계 내용 또는 미입력 안내
           if (fermentationSteps == null || fermentationSteps.isEmpty) ...[
-            _buildEmptyStepsInfo(context, '발효', Colors.purple.shade600),
+            _buildEmptyStepsInfo(context, l10n.fermentationStep, Colors.purple.shade600),
           ] else ...[
             _buildStepsList(fermentationSteps, Colors.purple.shade600),
           ],
@@ -1147,7 +1147,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
 
           // 단계 내용 또는 미입력 안내
           if (ovenSteps == null || ovenSteps.isEmpty) ...[
-            _buildEmptyStepsInfo(context, '오븐', Colors.red.shade600),
+            _buildEmptyStepsInfo(context, l10n.ovenStep, Colors.red.shade600),
           ] else ...[
             _buildStepsList(ovenSteps, Colors.red.shade600),
           ],
@@ -1174,7 +1174,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
           ),
           const SizedBox(height: 8),
           Text(
-            '$stepType 정보가 입력되지 않았습니다',
+            l10n.stepInfoNotEntered(stepType),
             style: TextStyle(
               color: Colors.grey.shade700,
               fontSize: 14,
@@ -1183,7 +1183,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
           ),
           const SizedBox(height: 4),
           Text(
-            '레시피 수정에서 $stepType 단계를 추가할 수 있습니다',
+            l10n.canAddStepInEdit(stepType),
             style: TextStyle(
               color: Colors.grey.shade600,
               fontSize: 12,

@@ -308,5 +308,15 @@
   "view": "View",
   "allIngredientsAdded": "🎉 All ingredients added!",
   "guideOn": "Start Guide",
-  "guideOff": "Stop Guide"
+  "guideOff": "Stop Guide",
+  "mixingStep": "Mixing",
+  "fermentationStep": "Fermentation",
+  "ovenStep": "Oven",
+  "stepInfoNotEntered": "{stepType} info not entered",
+  "canAddStepInEdit": "You can add {stepType} steps in Edit Recipe",
+  "noInstructions": "No instructions available.",
+  "ingredientName": "Ingredient",
+  "originalAmount": "Original",
+  "calculatedAmount": "Calculated",
+  "changeAmount": "Change"
 }
