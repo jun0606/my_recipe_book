@@ -318,5 +318,8 @@
   "ingredientName": "Ingredient",
   "originalAmount": "Original",
   "calculatedAmount": "Calculated",
-  "changeAmount": "Change"
+  "changeAmount": "Change",
+  "mixingStepTitle": "Mixing Step",
+  "fermentationStepTitle": "Fermentation Step",
+  "ovenStepTitle": "Oven Step"
 }

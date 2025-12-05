@@ -318,5 +318,8 @@
   "ingredientName": "재료명",
   "originalAmount": "원래",
   "calculatedAmount": "계산됨",
-  "changeAmount": "변화"
+  "changeAmount": "변화",
+  "mixingStepTitle": "믹싱 단계",
+  "fermentationStepTitle": "발효 단계",
+  "ovenStepTitle": "오븐 단계"
 }

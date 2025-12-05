@@ -318,5 +318,8 @@
   "ingredientName": "材料名",
   "originalAmount": "元",
   "calculatedAmount": "計算後",
-  "changeAmount": "変化"
+  "changeAmount": "変化",
+  "mixingStepTitle": "ミキシングステップ",
+  "fermentationStepTitle": "発酵ステップ",
+  "ovenStepTitle": "オーブンステップ"
 }

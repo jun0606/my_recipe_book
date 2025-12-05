@@ -1004,6 +1004,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
 
   Widget _buildMixingStepsSection() {
     final mixingSteps = _currentRecipe.mixingSteps;
+    final l10n = AppLocalizations.of(context)!;
 
     return Container(
       padding: const EdgeInsets.all(16),
@@ -1032,7 +1033,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
               ),
               const SizedBox(width: 8),
               Text(
-                '믹싱 단계',
+                l10n.mixingStepTitle,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -1056,6 +1057,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
 
   Widget _buildFermentationStepsSection() {
     final fermentationSteps = _currentRecipe.fermentationSteps;
+    final l10n = AppLocalizations.of(context)!;
 
     return Container(
       padding: const EdgeInsets.all(16),
@@ -1084,7 +1086,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
               ),
               const SizedBox(width: 8),
               Text(
-                '발효 단계',
+                l10n.fermentationStepTitle,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -1108,6 +1110,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
 
   Widget _buildOvenStepsSection() {
     final ovenSteps = _currentRecipe.ovenSteps;
+    final l10n = AppLocalizations.of(context)!;
 
     return Container(
       padding: const EdgeInsets.all(16),
@@ -1136,7 +1139,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
               ),
               const SizedBox(width: 8),
               Text(
-                '오븐 단계',
+                l10n.ovenStepTitle,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
