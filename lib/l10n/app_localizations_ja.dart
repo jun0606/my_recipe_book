@@ -898,4 +898,19 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get cannotLoadComparisonData => 'レシピ比較データを読み込めません';
+
+  @override
+  String get copyRecipeTitle => 'レシピコピー';
+
+  @override
+  String get saveDerivedRecipeTitle => '派生レシピ保存';
+
+  @override
+  String get ingredientsSectionTitle => '材料';
+
+  @override
+  String get instructionsSectionTitle => '作り方';
+
+  @override
+  String get enterInstruction => '作り方を入力してください';
 }

@@ -913,4 +913,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get cannotLoadComparisonData => 'Cannot load recipe comparison data';
+
+  @override
+  String get copyRecipeTitle => 'Copy Recipe';
+
+  @override
+  String get saveDerivedRecipeTitle => 'Save Derived Recipe';
+
+  @override
+  String get ingredientsSectionTitle => 'Ingredients';
+
+  @override
+  String get instructionsSectionTitle => 'Instructions';
+
+  @override
+  String get enterInstruction => 'Enter instructions';
 }

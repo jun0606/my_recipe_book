@@ -1731,6 +1731,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Cannot load recipe comparison data'**
   String get cannotLoadComparisonData;
+
+  /// No description provided for @copyRecipeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Copy Recipe'**
+  String get copyRecipeTitle;
+
+  /// No description provided for @saveDerivedRecipeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Save Derived Recipe'**
+  String get saveDerivedRecipeTitle;
+
+  /// No description provided for @ingredientsSectionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Ingredients'**
+  String get ingredientsSectionTitle;
+
+  /// No description provided for @instructionsSectionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Instructions'**
+  String get instructionsSectionTitle;
+
+  /// No description provided for @enterInstruction.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter instructions'**
+  String get enterInstruction;
 }
 
 class _AppLocalizationsDelegate

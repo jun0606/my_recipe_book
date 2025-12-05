@@ -89,7 +89,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get addRecipeTitle => '레시피 추가';
 
   @override
-  String get editRecipeTitle => '레시피 편집';
+  String get editRecipeTitle => '레시피 수정';
 
   @override
   String get recipeTitleLabel => '레시피 제목';
@@ -898,4 +898,19 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get cannotLoadComparisonData => '비교할 레시피 데이터를 불러올 수 없습니다';
+
+  @override
+  String get copyRecipeTitle => '레시피 복사';
+
+  @override
+  String get saveDerivedRecipeTitle => '파생 레시피 저장';
+
+  @override
+  String get ingredientsSectionTitle => '재료';
+
+  @override
+  String get instructionsSectionTitle => '조리법';
+
+  @override
+  String get enterInstruction => '조리법을 입력하세요';
 }

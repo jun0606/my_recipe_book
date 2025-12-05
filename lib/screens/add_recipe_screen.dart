@@ -811,7 +811,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                   Expanded(
                       child: TextFormField(
                           controller: _ingredientAmountController,
-                          decoration: InputDecoration(labelText: '양'),
+                          decoration: InputDecoration(labelText: l10n.ingredientAmount),
                           keyboardType: TextInputType.number)),
                   SizedBox(width: 10),
                   DropdownButton<String>(
