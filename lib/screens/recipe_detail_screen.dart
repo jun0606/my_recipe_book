@@ -1598,7 +1598,9 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
 
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
+      builder: (context) {
+        final l10n = AppLocalizations.of(context)!;
+        return AlertDialog(
         title: Text(ingredient.name),
         content: SingleChildScrollView(
           child: Text(guideText),
