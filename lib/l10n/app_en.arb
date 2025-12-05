@@ -274,5 +274,12 @@
   "filterTooltip": "Filter",
   "refreshTooltip": "Refresh",
   "quickGuideTooltip": "Quick Guide",
-  "cannotLoadComparisonData": "Cannot load recipe comparison data"
+  "cannotLoadComparisonData": "Cannot load recipe comparison data",
+  "addRecipeTitle": "Add Recipe",
+  "editRecipeTitle": "Edit Recipe",
+  "copyRecipeTitle": "Copy Recipe",
+  "saveDerivedRecipeTitle": "Save Derived Recipe",
+  "ingredientsSectionTitle": "Ingredients",
+  "instructionsSectionTitle": "Instructions",
+  "enterInstruction": "Enter instructions"
 }

@@ -274,5 +274,12 @@
   "filterTooltip": "フィルター",
   "refreshTooltip": "更新",
   "quickGuideTooltip": "クイックガイド",
-  "cannotLoadComparisonData": "レシピ比較データを読み込めません"
+  "cannotLoadComparisonData": "レシピ比較データを読み込めません",
+  "addRecipeTitle": "レシピ追加",
+  "editRecipeTitle": "レシピ編集",
+  "copyRecipeTitle": "レシピコピー",
+  "saveDerivedRecipeTitle": "派生レシピ保存",
+  "ingredientsSectionTitle": "材料",
+  "instructionsSectionTitle": "作り方",
+  "enterInstruction": "作り方を入力してください"
 }

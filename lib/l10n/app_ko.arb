@@ -274,5 +274,12 @@
   "filterTooltip": "필터",
   "refreshTooltip": "새로고침",
   "quickGuideTooltip": "빠른 가이드 생성",
-  "cannotLoadComparisonData": "비교할 레시피 데이터를 불러올 수 없습니다"
+  "cannotLoadComparisonData": "비교할 레시피 데이터를 불러올 수 없습니다",
+  "addRecipeTitle": "레시피 추가",
+  "editRecipeTitle": "레시피 수정",
+  "copyRecipeTitle": "레시피 복사",
+  "saveDerivedRecipeTitle": "파생 레시피 저장",
+  "ingredientsSectionTitle": "재료",
+  "instructionsSectionTitle": "조리법",
+  "enterInstruction": "조리법을 입력하세요"
 }

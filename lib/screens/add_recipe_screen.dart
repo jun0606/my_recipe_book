@@ -584,8 +584,8 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
     return Scaffold(
       appBar: AppBar(
           title: Text(widget.isCopy
-              ? (widget.isDerivedCopy ? '파생 레시피 저장' : '레시피 복사')
-              : (widget.recipe == null ? '레시피 추가' : '레시피 수정'))),
+              ? (widget.isDerivedCopy ? l10n.saveDerivedRecipeTitle : l10n.copyRecipeTitle)
+              : (widget.recipe == null ? l10n.addRecipeTitle : l10n.editRecipeTitle))),
       body: SingleChildScrollView(
         padding: EdgeInsets.fromLTRB(16, 16, 16, 100), // 하단 여백을 100으로 늘림
         child: Form(
@@ -800,7 +800,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                 SizedBox(height: 16),
               ],
 
-              Text('재료', style: Theme.of(context).textTheme.titleLarge),
+              Text(l10n.ingredientsSectionTitle, style: Theme.of(context).textTheme.titleLarge),
               Row(
                 children: [
                   Expanded(
@@ -891,7 +891,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                 },
               ),
               SizedBox(height: 20),
-              Text('조리법', style: Theme.of(context).textTheme.titleLarge),
+              Text(l10n.instructionsSectionTitle, style: Theme.of(context).textTheme.titleLarge),
               ListView.builder(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
@@ -909,7 +909,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                               onChanged: (value) =>
                                   _instructions[index]['text'] = value,
                               validator: (value) =>
-                                  value!.isEmpty ? '조리법을 입력하세요' : null,
+                                  value!.isEmpty ? l10n.enterInstruction : null,
                               maxLines: null,
                               keyboardType: TextInputType.multiline,
                             ),
