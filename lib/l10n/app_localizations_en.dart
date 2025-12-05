@@ -529,7 +529,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get ingredients => 'Ingredients';
 
   @override
-  String get ingredientName => 'Ingredient Name';
+  String get ingredientName => 'Ingredient';
 
   @override
   String get ingredientEdit => 'Edit Ingredient';
@@ -1016,4 +1016,35 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get guideOff => 'Stop Guide';
+
+  @override
+  String get mixingStep => 'Mixing';
+
+  @override
+  String get fermentationStep => 'Fermentation';
+
+  @override
+  String get ovenStep => 'Oven';
+
+  @override
+  String stepInfoNotEntered(Object stepType) {
+    return '$stepType info not entered';
+  }
+
+  @override
+  String canAddStepInEdit(Object stepType) {
+    return 'You can add $stepType steps in Edit Recipe';
+  }
+
+  @override
+  String get noInstructions => 'No instructions available.';
+
+  @override
+  String get originalAmount => 'Original';
+
+  @override
+  String get calculatedAmount => 'Calculated';
+
+  @override
+  String get changeAmount => 'Change';
 }

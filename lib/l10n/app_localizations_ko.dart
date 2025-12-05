@@ -524,7 +524,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get ingredients => '재료';
 
   @override
-  String get ingredientName => '재료 이름';
+  String get ingredientName => '재료명';
 
   @override
   String get ingredientEdit => '재료 수정';
@@ -999,4 +999,35 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get guideOff => '가이드 끄기';
+
+  @override
+  String get mixingStep => '믹싱';
+
+  @override
+  String get fermentationStep => '발효';
+
+  @override
+  String get ovenStep => '오븐';
+
+  @override
+  String stepInfoNotEntered(Object stepType) {
+    return '$stepType 정보가 입력되지 않았습니다';
+  }
+
+  @override
+  String canAddStepInEdit(Object stepType) {
+    return '레시피 수정에서 $stepType 단계를 추가할 수 있습니다';
+  }
+
+  @override
+  String get noInstructions => '조리법이 등록되지 않았습니다.';
+
+  @override
+  String get originalAmount => '원래';
+
+  @override
+  String get calculatedAmount => '계산됨';
+
+  @override
+  String get changeAmount => '변화';
 }

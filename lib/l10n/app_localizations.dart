@@ -1015,7 +1015,7 @@ abstract class AppLocalizations {
   /// No description provided for @ingredientName.
   ///
   /// In en, this message translates to:
-  /// **'Ingredient Name'**
+  /// **'Ingredient'**
   String get ingredientName;
 
   /// No description provided for @ingredientEdit.
@@ -1917,6 +1917,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Stop Guide'**
   String get guideOff;
+
+  /// No description provided for @mixingStep.
+  ///
+  /// In en, this message translates to:
+  /// **'Mixing'**
+  String get mixingStep;
+
+  /// No description provided for @fermentationStep.
+  ///
+  /// In en, this message translates to:
+  /// **'Fermentation'**
+  String get fermentationStep;
+
+  /// No description provided for @ovenStep.
+  ///
+  /// In en, this message translates to:
+  /// **'Oven'**
+  String get ovenStep;
+
+  /// No description provided for @stepInfoNotEntered.
+  ///
+  /// In en, this message translates to:
+  /// **'{stepType} info not entered'**
+  String stepInfoNotEntered(Object stepType);
+
+  /// No description provided for @canAddStepInEdit.
+  ///
+  /// In en, this message translates to:
+  /// **'You can add {stepType} steps in Edit Recipe'**
+  String canAddStepInEdit(Object stepType);
+
+  /// No description provided for @noInstructions.
+  ///
+  /// In en, this message translates to:
+  /// **'No instructions available.'**
+  String get noInstructions;
+
+  /// No description provided for @originalAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'Original'**
+  String get originalAmount;
+
+  /// No description provided for @calculatedAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'Calculated'**
+  String get calculatedAmount;
+
+  /// No description provided for @changeAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'Change'**
+  String get changeAmount;
 }
 
 class _AppLocalizationsDelegate

@@ -999,4 +999,35 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get guideOff => 'ガイド終了';
+
+  @override
+  String get mixingStep => 'ミキシング';
+
+  @override
+  String get fermentationStep => '発酵';
+
+  @override
+  String get ovenStep => 'オーブン';
+
+  @override
+  String stepInfoNotEntered(Object stepType) {
+    return '$stepType 情報が入力されていません';
+  }
+
+  @override
+  String canAddStepInEdit(Object stepType) {
+    return 'レシピ編集で $stepType ステップを追加できます';
+  }
+
+  @override
+  String get noInstructions => '作り方が登録されていません。';
+
+  @override
+  String get originalAmount => '元';
+
+  @override
+  String get calculatedAmount => '計算後';
+
+  @override
+  String get changeAmount => '変化';
 }

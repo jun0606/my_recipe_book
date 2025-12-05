@@ -338,6 +338,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
   }
 
   Widget _buildIngredientsTable() {
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       children: [
         // 테이블 헤더
@@ -658,11 +659,12 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
   }
 
   Widget _buildInstructionsList() {
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (_currentRecipe.instructions.isEmpty)
-          const Center(
+          Center(
             child: Padding(
               padding: EdgeInsets.all(32),
               child: Text(
