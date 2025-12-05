@@ -1761,6 +1761,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Enter instructions'**
   String get enterInstruction;
+
+  /// No description provided for @stepLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Step {number}'**
+  String stepLabel(Object number);
+
+  /// No description provided for @stepCommentLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Step {number} Comment (Optional)'**
+  String stepCommentLabel(Object number);
 }
 
 class _AppLocalizationsDelegate

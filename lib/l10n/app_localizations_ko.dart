@@ -913,4 +913,14 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get enterInstruction => '조리법을 입력하세요';
+
+  @override
+  String stepLabel(Object number) {
+    return '단계 $number';
+  }
+
+  @override
+  String stepCommentLabel(Object number) {
+    return '$number단계 코멘트 (선택사항)';
+  }
 }

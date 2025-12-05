@@ -283,5 +283,11 @@
   "instructionsSectionTitle": "Instructions",
   "enterInstruction": "Enter instructions",
   "stepLabel": "Step {number}",
-  "stepCommentLabel": "Step {number} Comment (Optional)"
+  "stepCommentLabel": "Step {number} Comment (Optional)",
+  "addOvenStepMessage": "Please add an oven step",
+  "addFermentationStepMessage": "Please add a fermentation step",
+  "addMixingStepMessage": "Please add a mixing step",
+  "addOvenStepExample": "e.g., 180°C 40min → 200°C 20min",
+  "addFermentationStepExample": "e.g., 1st ferment 80% 240min → 2nd ferment 85% 120min",
+  "addMixingStepExample": "e.g., Medium 15min → Low 10min"
 }

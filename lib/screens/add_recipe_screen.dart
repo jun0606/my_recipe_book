@@ -1259,8 +1259,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                 ),
                 child: Center(
                   child: Text(
-                    '''오븐 단계를 추가해주세요
-예: 180°C 40분 → 200°C 20분''',
+                    '${l10n.addOvenStepMessage}\n${l10n.addOvenStepExample}',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.grey.shade600,
@@ -1503,8 +1502,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                 ),
                 child: Center(
                   child: Text(
-                    '''발효 단계를 추가해주세요
-예: 1차 발효 80% 240분 → 2차 발효 85% 120분''',
+                    '${l10n.addFermentationStepMessage}\n${l10n.addFermentationStepExample}',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.grey.shade600,
@@ -1860,8 +1858,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                 ),
                 child: Center(
                   child: Text(
-                    '''믹싱 단계를 추가해주세요
-예: 중속 15분 → 저속 10분''',
+                    '${l10n.addMixingStepMessage}\n${l10n.addMixingStepExample}',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.grey.shade600,

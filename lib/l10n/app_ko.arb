@@ -283,5 +283,11 @@
   "instructionsSectionTitle": "조리법",
   "enterInstruction": "조리법을 입력하세요",
   "stepLabel": "단계 {number}",
-  "stepCommentLabel": "{number}단계 코멘트 (선택사항)"
+  "stepCommentLabel": "{number}단계 코멘트 (선택사항)",
+  "addOvenStepMessage": "오븐 단계를 추가해주세요",
+  "addFermentationStepMessage": "발효 단계를 추가해주세요",
+  "addMixingStepMessage": "믹싱 단계를 추가해주세요",
+  "addOvenStepExample": "예: 180°C 40분 → 200°C 20분",
+  "addFermentationStepExample": "예: 1차 발효 80% 240분 → 2차 발효 85% 120분",
+  "addMixingStepExample": "예: 중속 15분 → 저속 10분"
 }

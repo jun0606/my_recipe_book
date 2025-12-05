@@ -913,4 +913,14 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get enterInstruction => '作り方を入力してください';
+
+  @override
+  String stepLabel(Object number) {
+    return 'ステップ $number';
+  }
+
+  @override
+  String stepCommentLabel(Object number) {
+    return 'ステップ $number コメント (任意)';
+  }
 }

@@ -928,4 +928,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get enterInstruction => 'Enter instructions';
+
+  @override
+  String stepLabel(Object number) {
+    return 'Step $number';
+  }
+
+  @override
+  String stepCommentLabel(Object number) {
+    return 'Step $number Comment (Optional)';
+  }
 }
