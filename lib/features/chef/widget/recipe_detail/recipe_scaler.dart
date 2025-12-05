@@ -581,6 +581,7 @@ class _RecipeScalerState extends State<RecipeScaler> {
 
   /// 레시피 비교 정보 (사용자가 원하는 형식)
   Widget _buildRecipeComparison() {
+    final l10n = AppLocalizations.of(context)!;
     // 총량 계산
     final originalTotal = widget.recipe.ingredients
         .fold<double>(0, (sum, ing) => sum + ing.amount);
