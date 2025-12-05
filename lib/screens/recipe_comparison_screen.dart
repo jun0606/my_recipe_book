@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import '../l10n/app_localizations.dart';
 import '../models/recipe.dart';
 import '../models/history.dart';
 import '../models/ingredient.dart';
@@ -67,43 +68,6 @@ class _RecipeComparisonScreenState extends State<RecipeComparisonScreen> {
   Widget build(BuildContext context) {
     if (_isLoading) {
       return Scaffold(
-        appBar: AppBar(
-          title: const Text('레시피 버전 비교'),
-          backgroundColor: Colors.blue.shade600,
-          foregroundColor: Colors.white,
-        ),
-        body: const Center(child: CircularProgressIndicator()),
-      );
-    }
-
-    if (_oldRecipe == null || _currentRecipe == null) {
-      return Scaffold(
-        appBar: AppBar(
-          title: const Text('레시피 버전 비교'),
-          backgroundColor: Colors.blue.shade600,
-          foregroundColor: Colors.white,
-        ),
-        body: const Center(
-          child: Text(l10n.cannotLoadComparisonData),
-        ),
-      );
-    }
-
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('레시피 버전 비교'),
-        backgroundColor: Colors.blue.shade600,
-        foregroundColor: Colors.white,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.refresh),
-            onPressed: _loadComparisonData,
-            tooltip: l10n.refreshTooltip,
-          ),
-        ],
-      ),
-      body: _buildComparisonView(),
-    );
   }
 
   Widget _buildComparisonView() {
