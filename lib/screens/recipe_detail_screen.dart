@@ -970,7 +970,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
           ),
 
           // 수쉐프 모드 FAB (베이킹 레시피인 경우)
-          if (_currentRecipe.isBaking) _buildSousChefFAB(),
+          if (_currentRecipe.isBaking) _buildSousChefFAB(context),
 
           // 가이드 활성화 FAB
           _buildGuideFAB(),
@@ -1553,7 +1553,8 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
     );
   }
 
-  Widget _buildSousChefFAB() {
+  Widget _buildSousChefFAB(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Positioned(
       bottom: 16,
       right: 16,
