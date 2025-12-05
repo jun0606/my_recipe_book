@@ -322,7 +322,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
       final amount = double.tryParse(_ingredientAmountController.text);
       if (amount == null || amount <= 0) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('유효한 재료 양을 입력하세요.')),
+          SnackBar(content: Text(l10n.validAmountRequired)),
         );
         return;
       }
@@ -344,7 +344,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
       });
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('재료 이름과 양을 모두 입력하세요.')),
+        SnackBar(content: Text(l10n.ingredientNameAndAmountRequired)),
       );
     }
   }
@@ -363,18 +363,18 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
         return StatefulBuilder(
           builder: (context, setDialogState) {
             return AlertDialog(
-              title: Text('재료 수정'),
+              title: Text(l10n.editIngredientTitle),
               content: SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     TextFormField(
                       controller: nameController,
-                      decoration: InputDecoration(labelText: '재료 이름'),
+                      decoration: InputDecoration(labelText: l10n.ingredientName),
                     ),
                     TextFormField(
                       controller: amountController,
-                      decoration: InputDecoration(labelText: '양'),
+                      decoration: InputDecoration(labelText: l10n.ingredientAmount),
                       keyboardType: TextInputType.number,
                     ),
                     DropdownButton<String>(
@@ -417,7 +417,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                       Navigator.pop(context);
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('유효한 재료 이름과 양을 입력하세요.')),
+                        SnackBar(content: Text(l10n.validIngredientRequired)),
                       );
                     }
                   },
@@ -608,7 +608,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
               SizedBox(height: 20),
               TextFormField(
                 initialValue: _title,
-                decoration: InputDecoration(labelText: '레시피 제목'),
+                decoration: InputDecoration(labelText: l10n.recipeTitleInput),
                 onChanged: (value) => _title = value,
                 validator: (value) => value!.isEmpty ? '제목을 입력하세요' : null,
               ),
@@ -620,11 +620,11 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                         value: category, child: Text(category)))
                     .toList(),
                 onChanged: (value) => setState(() => _category = value!),
-                decoration: InputDecoration(labelText: '카테고리'),
+                decoration: InputDecoration(labelText: l10n.categoryInput),
               ),
               SizedBox(height: 10),
               SwitchListTile(
-                title: Text('베이킹 모드 활성화'),
+                title: Text(l10n.bakingModeActivate),
                 value: _isBakingMode,
                 onChanged: (bool value) {
                   setState(() {
@@ -638,7 +638,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
               if (!_isBakingMode)
                 TextFormField(
                   controller: _servingsController,
-                  decoration: InputDecoration(labelText: '인분'),
+                  decoration: InputDecoration(labelText: l10n.servingsInput),
                   keyboardType: TextInputType.number,
                   validator: (value) {
                     if (value!.isEmpty) return '인분을 입력하세요';
@@ -658,7 +658,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                           child: TextFormField(
                             controller: _splitAmountController,
                             decoration: InputDecoration(
-                              labelText: '분할 무게',
+                              labelText: l10n.splitWeightLabel,
                               helperText: _getSplitAmountHintText(),
                               border: OutlineInputBorder(),
                             ),
@@ -740,7 +740,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                           child: TextFormField(
                             controller: _splitCountController,
                             decoration: InputDecoration(
-                              labelText: '분할 개수',
+                              labelText: l10n.splitCountLabel,
                               helperText: _getSplitCountHintText(),
                             ),
                             keyboardType: TextInputType.number,
@@ -803,7 +803,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                   Expanded(
                       child: TextFormField(
                           controller: _ingredientNameController,
-                          decoration: InputDecoration(labelText: '재료 이름'))),
+                          decoration: InputDecoration(labelText: l10n.ingredientName))),
                   SizedBox(width: 10),
                   Expanded(
                       child: TextFormField(
@@ -976,13 +976,13 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                 if (_formKey.currentState!.validate()) {
                   if (_instructions.any((instr) => instr['text'].isEmpty)) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('모든 조리법 단계를 작성하세요.')),
+                      SnackBar(content: Text(l10n.writeAllInstructionSteps)),
                     );
                     return;
                   }
                   if (_ingredients.isEmpty) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('최소 하나의 재료를 추가하세요.')),
+                      SnackBar(content: Text(l10n.addAtLeastOneIngredient)),
                     );
                     return;
                   }
@@ -1153,12 +1153,12 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                       try {
                         await provider.updateRecipe(recipe, '레시피 수정');
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('레시피가 수정되었습니다.')),
+                          SnackBar(content: Text(l10n.recipeModified)),
                         );
                       } catch (e) {
                         print('AddRecipeScreen: 레시피 수정 중 오류 발생 - $e');
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('레시피 수정 중 오류가 발생했습니다: $e')),
+                          SnackBar(content: Text(l10n.recipeModifyError(e.toString()))),
                         );
                         // 오류 발생 시 처리
                         return; // Navigator.pop 호출하지 않고 함수 종료
@@ -1167,7 +1167,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                     Navigator.pop(context, recipe);
                   } catch (e) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('레시피 저장 중 오류가 발생했습니다: $e')),
+                      SnackBar(content: Text(l10n.recipeSaveError(e.toString()))),
                     );
                   }
                 }

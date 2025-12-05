@@ -70,10 +70,10 @@ class _FavoritePresetsScreenState extends State<FavoritePresetsScreen>
           labelColor: Colors.white,
           unselectedLabelColor: Colors.white70,
           indicatorColor: Colors.white,
-          tabs: const [
-            Tab(icon: Icon(Icons.favorite), text: '즐겨찾기'),
-            Tab(icon: Icon(Icons.analytics), text: '통계'),
-            Tab(icon: Icon(Icons.auto_awesome), text: '추천'),
+          tabs: [
+            Tab(icon: Icon(Icons.favorite), text: AppLocalizations.of(context)!.favoritesTab),
+            Tab(icon: Icon(Icons.analytics), text: AppLocalizations.of(context)!.statisticsTab),
+            Tab(icon: Icon(Icons.auto_awesome), text: AppLocalizations.of(context)!.recommendationsTab),
           ],
         ),
         actions: [
@@ -204,11 +204,11 @@ class _FavoritePresetsScreenState extends State<FavoritePresetsScreen>
                     onSelected: (action) =>
                         _handleFavoriteAction(action, favorite),
                     itemBuilder: (context) => [
-                      const PopupMenuItem(value: 'use', child: Text('사용하기')),
-                      const PopupMenuItem(value: 'edit', child: Text('수정')),
-                      const PopupMenuItem(
-                          value: 'duplicate', child: Text('복제')),
-                      const PopupMenuItem(value: 'delete', child: Text('삭제')),
+                      PopupMenuItem(value: 'use', child: Text(l10nMenu.useAction)),
+                      PopupMenuItem(value: 'edit', child: Text(l10nMenu.editAction)),
+                      PopupMenuItem(
+                          value: 'duplicate', child: Text(l10nMenu.duplicateAction)),
+                      PopupMenuItem(value: 'delete', child: Text(l10nMenu.delete)),
                     ],
                   ),
                 ],
@@ -622,7 +622,7 @@ class _FavoritePresetsScreenState extends State<FavoritePresetsScreen>
                     backgroundColor: Colors.purple.shade600,
                     foregroundColor: Colors.white,
                   ),
-                  child: const Text('즐겨찾기 추가'),
+                  child: Text(l10n.addToFavorites),
                 ),
               ],
             ),
@@ -666,7 +666,7 @@ class _FavoritePresetsScreenState extends State<FavoritePresetsScreen>
             ),
             const SizedBox(height: 16),
             if (_stats!.topPerformers.isEmpty)
-              const Text('아직 성과 데이터가 없습니다.')
+              Text(l10n.noPerformanceData)
             else
               ..._stats!.topPerformers.take(3).map(
                     (preset) => ListTile(
@@ -712,7 +712,7 @@ class _FavoritePresetsScreenState extends State<FavoritePresetsScreen>
             ),
             const SizedBox(height: 16),
             if (_stats!.mostUsed.isEmpty)
-              const Text('아직 사용 데이터가 없습니다.')
+              Text(l10n.noUsageData)
             else
               ..._stats!.mostUsed.take(3).map(
                     (preset) => ListTile(
@@ -811,7 +811,7 @@ class _FavoritePresetsScreenState extends State<FavoritePresetsScreen>
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('정렬 기준'),
+        title: Text(l10n.sortBy),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: FavoritePresetSortOption.values.map((option) {
@@ -901,12 +901,12 @@ class _FavoritePresetsScreenState extends State<FavoritePresetsScreen>
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('즐겨찾기 삭제'),
+        title: Text(l10n.deleteFavorite),
         content: Text('${favorite.name}을(를) 삭제하시겠습니까?'),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('취소'),
+            child: Text(l10n.cancel),
           ),
           TextButton(
             onPressed: () async {
@@ -920,7 +920,7 @@ class _FavoritePresetsScreenState extends State<FavoritePresetsScreen>
                 _showErrorDialog('삭제 중 오류가 발생했습니다: $e');
               }
             },
-            child: const Text('삭제', style: TextStyle(color: Colors.red)),
+            child: Text(l10n.delete, style: TextStyle(color: Colors.red)),
           ),
         ],
       ),
@@ -979,12 +979,12 @@ class _FavoritePresetsScreenState extends State<FavoritePresetsScreen>
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('오류'),
+        title: Text(l10n.errorTitle),
         content: Text(message),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('확인'),
+            child: Text(l10n.confirmText),
           ),
         ],
       ),
@@ -995,12 +995,12 @@ class _FavoritePresetsScreenState extends State<FavoritePresetsScreen>
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('정보'),
+        title: Text(l10n.infoTitle),
         content: Text(message),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('확인'),
+            child: Text(l10n.confirmText),
           ),
         ],
       ),
