@@ -1617,17 +1617,6 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
       // 즉시 첫 번째 재료로 스크롤 (setState 전에 호출)
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _scrollToCurrentIngredient();
-      });
-    }
-  }
-
-  void _showIngredientDialog(int index) {
-    if (index < 0 || index >= _calculatedIngredients.length) return;
-
-    final ingredient = _calculatedIngredients[index];
-    final guideText = _getIngredientGuide(ingredient);
-
-    showDialog(
       context: context,
       builder: (context) => AlertDialog(
         title: Text(ingredient.name),
