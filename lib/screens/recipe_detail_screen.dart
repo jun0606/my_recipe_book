@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../l10n/app_localizations.dart';
 import '../models/recipe.dart';
 import '../models/ingredient.dart';
 import '../providers/recipe_provider.dart';
