@@ -343,5 +343,12 @@
   "timesLabel": "倍",
   "targetCountLabel": "目標数:",
   "countUnit": "個",
-  "targetCountError": "目標数は1個以上である必要があります"
+  "targetCountError": "目標数は1個以上である必要があります",
+  "noDescription": "説明なし",
+  "mixingSpeedLow": "低速",
+  "mixingSpeedMedium": "中速",
+  "mixingSpeedHigh": "高速",
+  "mixingSpeedMax": "最高速",
+  "mixingSpeedPulse": "パルス",
+  "mixingSpeedEgg": "卵/泡"
 }

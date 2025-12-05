@@ -1078,4 +1078,16 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get calcModeTargetSplit => '목표분할개수';
+
+  @override
+  String get timesLabel => '배';
+
+  @override
+  String get targetCountLabel => '목표 개수:';
+
+  @override
+  String get countUnit => '개';
+
+  @override
+  String get targetCountError => '목표 개수는 1개 이상이어야 합니다';
 }

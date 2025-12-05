@@ -343,5 +343,12 @@
   "timesLabel": "x",
   "targetCountLabel": "Target Count:",
   "countUnit": "ea",
-  "targetCountError": "Target count must be at least 1"
+  "targetCountError": "Target count must be at least 1",
+  "noDescription": "No description",
+  "mixingSpeedLow": "Low",
+  "mixingSpeedMedium": "Medium",
+  "mixingSpeedHigh": "High",
+  "mixingSpeedMax": "Max",
+  "mixingSpeedPulse": "Pulse",
+  "mixingSpeedEgg": "Egg/Foam"
 }

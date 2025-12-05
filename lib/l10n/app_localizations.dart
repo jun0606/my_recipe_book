@@ -2067,6 +2067,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Target Split Count'**
   String get calcModeTargetSplit;
+
+  /// No description provided for @timesLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'x'**
+  String get timesLabel;
+
+  /// No description provided for @targetCountLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Target Count:'**
+  String get targetCountLabel;
+
+  /// No description provided for @countUnit.
+  ///
+  /// In en, this message translates to:
+  /// **'ea'**
+  String get countUnit;
+
+  /// No description provided for @targetCountError.
+  ///
+  /// In en, this message translates to:
+  /// **'Target count must be at least 1'**
+  String get targetCountError;
 }
 
 class _AppLocalizationsDelegate

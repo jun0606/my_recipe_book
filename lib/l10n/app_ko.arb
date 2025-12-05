@@ -343,5 +343,12 @@
   "timesLabel": "배",
   "targetCountLabel": "목표 개수:",
   "countUnit": "개",
-  "targetCountError": "목표 개수는 1개 이상이어야 합니다"
+  "targetCountError": "목표 개수는 1개 이상이어야 합니다",
+  "noDescription": "설명 없음",
+  "mixingSpeedLow": "저속",
+  "mixingSpeedMedium": "중속",
+  "mixingSpeedHigh": "고속",
+  "mixingSpeedMax": "최고속",
+  "mixingSpeedPulse": "펄스",
+  "mixingSpeedEgg": "계란/거품"
 }

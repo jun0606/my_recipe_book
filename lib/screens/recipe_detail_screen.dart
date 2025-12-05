@@ -1251,7 +1251,8 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
         step['desc'] ??
         step['text'] ??
         step['instruction'] ??
-        '설명 없음';
+        step['instruction'] ??
+        l10n.noDescription;
 
     final time = step['time'] ?? step['duration'];
     final temperature = step['temperature'] ?? step['temp'];
@@ -1481,9 +1482,11 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
   }
 
   Widget _buildSpeedTag(dynamic speed) {
+    final l10n = AppLocalizations.of(context)!;
     // 속도 값에 따라 색상 결정
     Color tagColor;
     Color textColor;
+    String displayText = speed.toString();
 
     final speedStr = speed.toString().toLowerCase().trim();
 
@@ -1492,12 +1495,14 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
       // 저속: 파란색 (안전하고 부드러운 느낌)
       tagColor = Colors.blue.shade100;
       textColor = Colors.blue.shade700;
+      displayText = l10n.mixingSpeedLow;
     } else if (speedStr.contains('중속') ||
         speedStr.contains('2단') ||
         speedStr == '2') {
       // 중속: 노란색 (중간 강도)
       tagColor = Colors.yellow.shade100;
       textColor = Colors.yellow.shade800;
+      displayText = l10n.mixingSpeedMedium;
     } else if (speedStr.contains('고속') ||
         speedStr.contains('3단') ||
         speedStr == '3' ||
@@ -1508,6 +1513,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
       // 고속: 빨간색 (강한 힘과 속도)
       tagColor = Colors.red.shade100;
       textColor = Colors.red.shade700;
+      displayText = l10n.mixingSpeedHigh;
     } else if (speedStr.contains('최고') ||
         speedStr.contains('최고속') ||
         speedStr.contains('터보') ||
@@ -1515,10 +1521,12 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
       // 최고속: 진한 빨간색 (최대 출력)
       tagColor = Colors.red.shade200;
       textColor = Colors.red.shade900;
+      displayText = l10n.mixingSpeedMax;
     } else if (speedStr.contains('펄스') || speedStr.contains('간헐')) {
       // 펄스: 보라색 (특별한 동작)
       tagColor = Colors.purple.shade100;
       textColor = Colors.purple.shade700;
+      displayText = l10n.mixingSpeedPulse;
     } else if (speedStr.contains('계란') ||
         speedStr.contains('거품') ||
         speedStr.contains('휘핑') ||
@@ -1526,6 +1534,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
       // 계란/거품용: 연한 파란색 (부드러운 동작)
       tagColor = Colors.cyan.shade100;
       textColor = Colors.cyan.shade700;
+      displayText = l10n.mixingSpeedEgg;
     } else {
       // 기본값: 초록색 (일반적인 경우)
       tagColor = Colors.green.shade100;
@@ -1549,7 +1558,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
           ),
           const SizedBox(width: 4),
           Text(
-            speed.toString(),
+            displayText,
             style: TextStyle(
               fontSize: 11,
               color: textColor,

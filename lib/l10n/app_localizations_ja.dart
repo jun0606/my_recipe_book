@@ -1078,4 +1078,16 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get calcModeTargetSplit => '目標分割数';
+
+  @override
+  String get timesLabel => '倍';
+
+  @override
+  String get targetCountLabel => '目標数:';
+
+  @override
+  String get countUnit => '個';
+
+  @override
+  String get targetCountError => '目標数は1個以上である必要があります';
 }

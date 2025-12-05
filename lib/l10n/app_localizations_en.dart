@@ -1095,4 +1095,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get calcModeTargetSplit => 'Target Split Count';
+
+  @override
+  String get timesLabel => 'x';
+
+  @override
+  String get targetCountLabel => 'Target Count:';
+
+  @override
+  String get countUnit => 'ea';
+
+  @override
+  String get targetCountError => 'Target count must be at least 1';
 }
