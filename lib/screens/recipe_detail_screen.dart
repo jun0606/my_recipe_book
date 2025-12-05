@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../l10n/app_localizations.dart';
 import '../models/recipe.dart';
 import '../models/ingredient.dart';
 import '../providers/recipe_provider.dart';
@@ -157,76 +156,105 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
           _calculatedIngredients = List.from(_currentRecipe.ingredients);
         });
       }
-            child: Text(l10n.cancel),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context); // 다이얼로그 닫기
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => AddRecipeScreen(
-                    recipe: _currentRecipe,
-                    isCopy: true,
-                    isDerivedCopy: false,
-                  ),
-                ),
-              );
-            },
-            child: Text(l10n.simpleCopy),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context); // 다이얼로그 닫기
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => AddRecipeScreen(
-                    recipe: _currentRecipe,
-                    isCopy: false,
-                    isDerivedCopy: true,
-                  ),
-                ),
-              );
-            },
-            child: Text(l10n.derivedRecipe),
-            style: TextButton.styleFrom(
-              foregroundColor: Colors.blue,
-              textStyle: const TextStyle(fontWeight: FontWeight.bold),
+    });
+  }
+
+  void _copyRecipe() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        final l10n = AppLocalizations.of(context)!;
+        return AlertDialog(
+          title: const Text('레시피 복제 방식 선택'),
+          content: const Text('어떤 방식으로 복제하시겠습니까?'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text(l10n.cancel),
             ),
-          ),
-        ],
-      ),
-    );
-            child: Text(l10n.cancel),
-          ),
-          TextButton(
-            onPressed: () async {
-              try {
-                await Provider.of<RecipeProvider>(context, listen: false)
-                    .deleteRecipe(_currentRecipe.id!);
+            TextButton(
+              onPressed: () {
                 Navigator.pop(context); // 다이얼로그 닫기
-                Navigator.pop(context); // 상세 페이지 닫기
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('레시피가 삭제되었습니다'),
-                    backgroundColor: Colors.green,
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AddRecipeScreen(
+                      recipe: _currentRecipe,
+                      isCopy: true,
+                      isDerivedCopy: false,
+                    ),
                   ),
                 );
-              } catch (e) {
-                Navigator.pop(context);
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text('삭제 실패: $e'),
-                    backgroundColor: Colors.red,
+              },
+              child: Text(l10n.simpleCopy),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context); // 다이얼로그 닫기
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AddRecipeScreen(
+                      recipe: _currentRecipe,
+                      isCopy: false,
+                      isDerivedCopy: true,
+                    ),
                   ),
                 );
-              }
-            },
-            child: Text(l10n.delete, style: TextStyle(color: Colors.red)),
-          ),
-        ],
-      ),
+              },
+              child: Text(l10n.derivedRecipe),
+              style: TextButton.styleFrom(
+                foregroundColor: Colors.blue,
+                textStyle: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _deleteRecipe() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        final l10n = AppLocalizations.of(context)!;
+        return AlertDialog(
+          title: const Text('레시피 삭제'),
+          content: Text('${_currentRecipe.title} 레시피를 삭제하시겠습니까?'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text(l10n.cancel),
+            ),
+            TextButton(
+              onPressed: () async {
+                try {
+                  await Provider.of<RecipeProvider>(context, listen: false)
+                      .deleteRecipe(_currentRecipe.id!);
+                  Navigator.pop(context); // 다이얼로그 닫기
+                  Navigator.pop(context); // 상세 페이지 닫기
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('레시피가 삭제되었습니다'),
+                      backgroundColor: Colors.green,
+                    ),
+                  );
+                } catch (e) {
+                  Navigator.pop(context);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('삭제 실패: $e'),
+                      backgroundColor: Colors.red,
+                    ),
+                  );
+                }
+              },
+              child: Text(l10n.delete, style: TextStyle(color: Colors.red)),
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -656,7 +684,6 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
@@ -1598,9 +1625,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
 
     showDialog(
       context: context,
-      builder: (context) {
-        final l10n = AppLocalizations.of(context)!;
-        return AlertDialog(
+      builder: (context) => AlertDialog(
         title: Text(ingredient.name),
         content: SingleChildScrollView(
           child: Text(guideText),
