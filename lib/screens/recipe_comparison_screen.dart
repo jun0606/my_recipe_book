@@ -84,7 +84,7 @@ class _RecipeComparisonScreenState extends State<RecipeComparisonScreen> {
           foregroundColor: Colors.white,
         ),
         body: const Center(
-          child: Text('비교할 레시피 데이터를 불러올 수 없습니다.'),
+          child: Text(l10n.cannotLoadComparisonData),
         ),
       );
     }
@@ -98,7 +98,7 @@ class _RecipeComparisonScreenState extends State<RecipeComparisonScreen> {
           IconButton(
             icon: const Icon(Icons.refresh),
             onPressed: _loadComparisonData,
-            tooltip: '새로고침',
+            tooltip: l10n.refreshTooltip,
           ),
         ],
       ),

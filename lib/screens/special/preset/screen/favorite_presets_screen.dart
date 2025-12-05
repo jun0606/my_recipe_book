@@ -80,12 +80,12 @@ class _FavoritePresetsScreenState extends State<FavoritePresetsScreen>
           IconButton(
             icon: const Icon(Icons.sort),
             onPressed: _showSortDialog,
-            tooltip: '정렬',
+            tooltip: l10n.sortTooltip,
           ),
           IconButton(
             icon: const Icon(Icons.filter_list),
             onPressed: _showFilterDialog,
-            tooltip: '필터',
+            tooltip: l10n.filterTooltip,
           ),
           PopupMenuButton<String>(
             onSelected: _handleMenuAction,

@@ -155,11 +155,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context, false),
-              child: Text('아니오'),
+              child: Text(l10n.no),
             ),
             TextButton(
               onPressed: () => Navigator.pop(context, true),
-              child: Text('네'),
+              child: Text(l10n.yes),
             ),
           ],
         ),
@@ -282,7 +282,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ),
               );
             },
-            tooltip: '텍스트 크기 설정',
+            tooltip: l10n.textSizeSettingsTooltip,
           ),
         ],
       ),
@@ -412,7 +412,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             style: Theme.of(context).textTheme.titleMedium),
                         const SizedBox(width: 8),
                         Chip(
-                          label: Text('자동 저장', style: TextStyle(fontSize: 12)),
+                          label: Text(l10n.autoSave, style: TextStyle(fontSize: 12)),
                           backgroundColor: Colors.green[100],
                         ),
                       ],
@@ -424,7 +424,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           .languageCode,
                       items: [
                         DropdownMenuItem(value: 'en', child: Text('English')),
-                        DropdownMenuItem(value: 'ko', child: Text('한국어')),
+                        DropdownMenuItem(value: 'ko', child: Text(l10n.korean)),
                         DropdownMenuItem(value: 'ja', child: Text('日本語')),
                       ],
                       onChanged: (value) {
@@ -550,7 +550,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       const Center(
                         child: Padding(
                           padding: EdgeInsets.all(16.0),
-                          child: Text('카테고리가 없습니다'),
+                          child: Text(l10n.noCategories),
                         ),
                       ),
                   ],

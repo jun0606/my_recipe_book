@@ -141,7 +141,7 @@ class _UserGuideScreenState extends State<UserGuideScreen>
           IconButton(
             onPressed: _showQuickActions,
             icon: const Icon(Icons.add_circle_outline),
-            tooltip: '빠른 가이드 생성',
+            tooltip: l10n.quickGuideTooltip,
           ),
         ],
       ),
@@ -634,7 +634,7 @@ class _UserGuideScreenState extends State<UserGuideScreen>
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('취소'),
+            child: Text(l10n.cancel),
           ),
           TextButton(
             onPressed: () {
@@ -650,7 +650,7 @@ class _UserGuideScreenState extends State<UserGuideScreen>
                 ),
               );
             },
-            child: const Text('완료'),
+            child: Text(l10n.complete),
           ),
         ],
       ),
