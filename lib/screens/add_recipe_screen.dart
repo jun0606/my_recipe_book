@@ -360,6 +360,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
     showDialog(
       context: context,
       builder: (context) {
+        final l10n = AppLocalizations.of(context)!;
         return StatefulBuilder(
           builder: (context, setDialogState) {
             return AlertDialog(
@@ -576,6 +577,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final provider = Provider.of<RecipeProvider>(context);
     final isKeyboardVisible = MediaQuery.of(context).viewInsets.bottom > 0;
     return Scaffold(
