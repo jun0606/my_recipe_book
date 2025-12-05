@@ -121,7 +121,7 @@ abstract class AppLocalizations {
   /// No description provided for @noCategories.
   ///
   /// In en, this message translates to:
-  /// **'No categories available.'**
+  /// **'No categories'**
   String get noCategories;
 
   /// No description provided for @cannotDeleteCategoryWithRecipes.
@@ -1587,6 +1587,150 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Confidence {percent}%'**
   String confidenceLabel(Object percent);
+
+  /// No description provided for @yes.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes'**
+  String get yes;
+
+  /// No description provided for @no.
+  ///
+  /// In en, this message translates to:
+  /// **'No'**
+  String get no;
+
+  /// No description provided for @close.
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get close;
+
+  /// No description provided for @previous.
+  ///
+  /// In en, this message translates to:
+  /// **'Previous'**
+  String get previous;
+
+  /// No description provided for @next.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get next;
+
+  /// No description provided for @complete.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete'**
+  String get complete;
+
+  /// No description provided for @addStep.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Step'**
+  String get addStep;
+
+  /// No description provided for @simpleCopy.
+  ///
+  /// In en, this message translates to:
+  /// **'Simple Copy'**
+  String get simpleCopy;
+
+  /// No description provided for @derivedRecipe.
+  ///
+  /// In en, this message translates to:
+  /// **'Derived Recipe'**
+  String get derivedRecipe;
+
+  /// No description provided for @recipeEdit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Recipe'**
+  String get recipeEdit;
+
+  /// No description provided for @sousChefMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Sous Chef Mode'**
+  String get sousChefMode;
+
+  /// No description provided for @historyTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'History'**
+  String get historyTooltip;
+
+  /// No description provided for @korean.
+  ///
+  /// In en, this message translates to:
+  /// **'Korean'**
+  String get korean;
+
+  /// No description provided for @autoSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Auto Save'**
+  String get autoSave;
+
+  /// No description provided for @textSizeSettingsTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Text Size Settings'**
+  String get textSizeSettingsTooltip;
+
+  /// No description provided for @enterTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a title'**
+  String get enterTitle;
+
+  /// No description provided for @hintOvenCondition.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g., Until the top is golden brown'**
+  String get hintOvenCondition;
+
+  /// No description provided for @hintFermentCondition.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g., Until the dough doubles in size'**
+  String get hintFermentCondition;
+
+  /// No description provided for @hintMixCondition.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g., Until the dough is smooth'**
+  String get hintMixCondition;
+
+  /// No description provided for @sortTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Sort'**
+  String get sortTooltip;
+
+  /// No description provided for @filterTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Filter'**
+  String get filterTooltip;
+
+  /// No description provided for @refreshTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Refresh'**
+  String get refreshTooltip;
+
+  /// No description provided for @quickGuideTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Quick Guide'**
+  String get quickGuideTooltip;
+
+  /// No description provided for @cannotLoadComparisonData.
+  ///
+  /// In en, this message translates to:
+  /// **'Cannot load recipe comparison data'**
+  String get cannotLoadComparisonData;
 }
 
 class _AppLocalizationsDelegate

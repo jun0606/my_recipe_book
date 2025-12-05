@@ -168,7 +168,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('취소'),
+            child: Text(l10n.cancel),
           ),
           TextButton(
             onPressed: () {
@@ -184,7 +184,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                 ),
               );
             },
-            child: const Text('단순 복제'),
+            child: Text(l10n.simpleCopy),
           ),
           TextButton(
             onPressed: () {
@@ -200,7 +200,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                 ),
               );
             },
-            child: const Text('파생 레시피'),
+            child: Text(l10n.derivedRecipe),
             style: TextButton.styleFrom(
               foregroundColor: Colors.blue,
               textStyle: const TextStyle(fontWeight: FontWeight.bold),
@@ -220,7 +220,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('취소'),
+            child: Text(l10n.cancel),
           ),
           TextButton(
             onPressed: () async {
@@ -245,7 +245,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                 );
               }
             },
-            child: const Text('삭제', style: TextStyle(color: Colors.red)),
+            child: Text(l10n.delete, style: TextStyle(color: Colors.red)),
           ),
         ],
       ),
@@ -689,7 +689,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
           IconButton(
             icon: const Icon(Icons.history),
             onPressed: _showRecipeHistory,
-            tooltip: '히스토리',
+            tooltip: l10n.historyTooltip,
           ),
           PopupMenuButton<String>(
             onSelected: (value) {
@@ -1182,7 +1182,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
           ElevatedButton.icon(
             onPressed: _editRecipe,
             icon: const Icon(Icons.edit, size: 16),
-            label: const Text('레시피 수정'),
+            label: Text(l10n.recipeEdit),
             style: ElevatedButton.styleFrom(
               backgroundColor: color,
               foregroundColor: Colors.white,
@@ -1553,7 +1553,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
         onPressed: _showSousChefMode,
         backgroundColor: Colors.purple,
         icon: const Icon(Icons.auto_awesome),
-        label: const Text('수쉐프 모드'),
+        label: Text(l10n.sousChefMode),
       ),
     );
   }
@@ -1627,7 +1627,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('닫기'),
+            child: Text(l10n.close),
           ),
           if (index > 0)
             TextButton(
@@ -1635,7 +1635,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                 Navigator.of(context).pop();
                 _showIngredientDialog(index - 1);
               },
-              child: const Text('이전'),
+              child: Text(l10n.previous),
             ),
           if (index < _calculatedIngredients.length - 1)
             TextButton(
@@ -1643,7 +1643,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                 Navigator.of(context).pop();
                 _showIngredientDialog(index + 1);
               },
-              child: const Text('다음'),
+              child: Text(l10n.next),
             ),
         ],
       ),

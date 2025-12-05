@@ -18,7 +18,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get categoryList => '카테고리 목록';
 
   @override
-  String get noCategories => '카테고리가 없습니다.';
+  String get noCategories => '카테고리가 없습니다';
 
   @override
   String cannotDeleteCategoryWithRecipes(Object category) {
@@ -826,4 +826,76 @@ class AppLocalizationsKo extends AppLocalizations {
   String confidenceLabel(Object percent) {
     return '신뢰도 $percent%';
   }
+
+  @override
+  String get yes => '네';
+
+  @override
+  String get no => '아니오';
+
+  @override
+  String get close => '닫기';
+
+  @override
+  String get previous => '이전';
+
+  @override
+  String get next => '다음';
+
+  @override
+  String get complete => '완료';
+
+  @override
+  String get addStep => '단계 추가';
+
+  @override
+  String get simpleCopy => '단순 복제';
+
+  @override
+  String get derivedRecipe => '파생 레시피';
+
+  @override
+  String get recipeEdit => '레시피 수정';
+
+  @override
+  String get sousChefMode => '수쉐프 모드';
+
+  @override
+  String get historyTooltip => '히스토리';
+
+  @override
+  String get korean => '한국어';
+
+  @override
+  String get autoSave => '자동 저장';
+
+  @override
+  String get textSizeSettingsTooltip => '텍스트 크기 설정';
+
+  @override
+  String get enterTitle => '제목을 입력하세요';
+
+  @override
+  String get hintOvenCondition => '예: 윗면이 갈색이 될 때까지';
+
+  @override
+  String get hintFermentCondition => '예: 반죽이 2배로 부풀 때까지';
+
+  @override
+  String get hintMixCondition => '예: 반죽이 매끈해질 때까지';
+
+  @override
+  String get sortTooltip => '정렬';
+
+  @override
+  String get filterTooltip => '필터';
+
+  @override
+  String get refreshTooltip => '새로고침';
+
+  @override
+  String get quickGuideTooltip => '빠른 가이드 생성';
+
+  @override
+  String get cannotLoadComparisonData => '비교할 레시피 데이터를 불러올 수 없습니다';
 }

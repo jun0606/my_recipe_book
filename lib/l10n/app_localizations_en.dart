@@ -18,7 +18,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get categoryList => 'Category List';
 
   @override
-  String get noCategories => 'No categories available.';
+  String get noCategories => 'No categories';
 
   @override
   String cannotDeleteCategoryWithRecipes(Object category) {
@@ -841,4 +841,76 @@ class AppLocalizationsEn extends AppLocalizations {
   String confidenceLabel(Object percent) {
     return 'Confidence $percent%';
   }
+
+  @override
+  String get yes => 'Yes';
+
+  @override
+  String get no => 'No';
+
+  @override
+  String get close => 'Close';
+
+  @override
+  String get previous => 'Previous';
+
+  @override
+  String get next => 'Next';
+
+  @override
+  String get complete => 'Complete';
+
+  @override
+  String get addStep => 'Add Step';
+
+  @override
+  String get simpleCopy => 'Simple Copy';
+
+  @override
+  String get derivedRecipe => 'Derived Recipe';
+
+  @override
+  String get recipeEdit => 'Edit Recipe';
+
+  @override
+  String get sousChefMode => 'Sous Chef Mode';
+
+  @override
+  String get historyTooltip => 'History';
+
+  @override
+  String get korean => 'Korean';
+
+  @override
+  String get autoSave => 'Auto Save';
+
+  @override
+  String get textSizeSettingsTooltip => 'Text Size Settings';
+
+  @override
+  String get enterTitle => 'Please enter a title';
+
+  @override
+  String get hintOvenCondition => 'e.g., Until the top is golden brown';
+
+  @override
+  String get hintFermentCondition => 'e.g., Until the dough doubles in size';
+
+  @override
+  String get hintMixCondition => 'e.g., Until the dough is smooth';
+
+  @override
+  String get sortTooltip => 'Sort';
+
+  @override
+  String get filterTooltip => 'Filter';
+
+  @override
+  String get refreshTooltip => 'Refresh';
+
+  @override
+  String get quickGuideTooltip => 'Quick Guide';
+
+  @override
+  String get cannotLoadComparisonData => 'Cannot load recipe comparison data';
 }

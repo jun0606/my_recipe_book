@@ -400,7 +400,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
               actions: [
                 TextButton(
                   onPressed: () => Navigator.pop(context),
-                  child: Text('취소'),
+                  child: Text(l10n.cancel),
                 ),
                 TextButton(
                   onPressed: () {
@@ -423,7 +423,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                       );
                     }
                   },
-                  child: Text('저장'),
+                  child: Text(l10n.save),
                 ),
               ],
             );
@@ -613,7 +613,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                 initialValue: _title,
                 decoration: InputDecoration(labelText: l10n.recipeTitleInput),
                 onChanged: (value) => _title = value,
-                validator: (value) => value!.isEmpty ? '제목을 입력하세요' : null,
+                validator: (value) => value!.isEmpty ? l10n.enterTitle : null,
               ),
               SizedBox(height: 10),
               DropdownButtonFormField<String>(
@@ -963,7 +963,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
               ),
               TextButton.icon(
                 icon: Icon(Icons.add),
-                label: Text('단계 추가'),
+                label: Text(l10n.addStep),
                 onPressed: () => setState(() => _instructions
                     .add(<String, dynamic>{'text': '', 'imagePath': null})),
               ),
@@ -1234,7 +1234,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                       });
                     },
                     icon: Icon(Icons.add, size: 16),
-                    label: Text('추가', style: TextStyle(fontSize: 12)),
+                    label: Text(l10n.add, style: TextStyle(fontSize: 12)),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.orange.shade600,
                       foregroundColor: Colors.white,
@@ -1388,7 +1388,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                           labelText: '${index + 1}단계 코멘트 (선택사항)',
                           labelStyle: TextStyle(
                               fontSize: 11, color: Colors.grey.shade600),
-                          hintText: '예: 윗면이 갈색이 될 때까지',
+                          hintText: l10n.hintOvenCondition,
                           hintStyle: TextStyle(
                               fontSize: 11, color: Colors.grey.shade400),
                           contentPadding:
@@ -1677,7 +1677,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                           labelText: '${index + 1}차 발효 코멘트 (선택사항)',
                           labelStyle: TextStyle(
                               fontSize: 11, color: Colors.grey.shade600),
-                          hintText: '예: 반죽이 2배로 부풀 때까지',
+                          hintText: l10n.hintFermentCondition,
                           hintStyle: TextStyle(
                               fontSize: 11, color: Colors.grey.shade400),
                           contentPadding:
@@ -2007,7 +2007,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                           labelText: '${index + 1}차 믹싱 코멘트 (선택사항)',
                           labelStyle: TextStyle(
                               fontSize: 11, color: Colors.grey.shade600),
-                          hintText: '예: 반죽이 매끈해질 때까지',
+                          hintText: l10n.hintMixCondition,
                           hintStyle: TextStyle(
                               fontSize: 11, color: Colors.grey.shade400),
                           contentPadding:

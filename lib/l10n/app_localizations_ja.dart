@@ -18,7 +18,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get categoryList => 'カテゴリ一覧';
 
   @override
-  String get noCategories => 'カテゴリがありません。';
+  String get noCategories => 'カテゴリーがありません';
 
   @override
   String cannotDeleteCategoryWithRecipes(Object category) {
@@ -826,4 +826,76 @@ class AppLocalizationsJa extends AppLocalizations {
   String confidenceLabel(Object percent) {
     return '信頼度 $percent%';
   }
+
+  @override
+  String get yes => 'はい';
+
+  @override
+  String get no => 'いいえ';
+
+  @override
+  String get close => '閉じる';
+
+  @override
+  String get previous => '前へ';
+
+  @override
+  String get next => '次へ';
+
+  @override
+  String get complete => '完了';
+
+  @override
+  String get addStep => 'ステップを追加';
+
+  @override
+  String get simpleCopy => '単純コピー';
+
+  @override
+  String get derivedRecipe => '派生レシピ';
+
+  @override
+  String get recipeEdit => 'レシピを編集';
+
+  @override
+  String get sousChefMode => 'スーシェフモード';
+
+  @override
+  String get historyTooltip => '履歴';
+
+  @override
+  String get korean => '韓国語';
+
+  @override
+  String get autoSave => '自動保存';
+
+  @override
+  String get textSizeSettingsTooltip => 'テキストサイズ設定';
+
+  @override
+  String get enterTitle => 'タイトルを入力してください';
+
+  @override
+  String get hintOvenCondition => '例: 表面が黄金色になるまで';
+
+  @override
+  String get hintFermentCondition => '例: 生地が2倍に膨らむまで';
+
+  @override
+  String get hintMixCondition => '例: 生地が滑らかになるまで';
+
+  @override
+  String get sortTooltip => '並び替え';
+
+  @override
+  String get filterTooltip => 'フィルター';
+
+  @override
+  String get refreshTooltip => '更新';
+
+  @override
+  String get quickGuideTooltip => 'クイックガイド';
+
+  @override
+  String get cannotLoadComparisonData => 'レシピ比較データを読み込めません';
 }
