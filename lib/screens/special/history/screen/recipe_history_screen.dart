@@ -59,7 +59,7 @@ class _RecipeHistoryScreenState extends State<RecipeHistoryScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('레시피 히스토리'),
+        title: Text(AppLocalizations.of(context)!.recipeHistory),
         backgroundColor: Colors.purple.shade600,
         foregroundColor: Colors.white,
         bottom: TabBar(
@@ -81,9 +81,9 @@ class _RecipeHistoryScreenState extends State<RecipeHistoryScreen>
           PopupMenuButton<String>(
             onSelected: _handleMenuAction,
             itemBuilder: (context) => [
-              const PopupMenuItem(value: 'export', child: Text('내보내기')),
-              const PopupMenuItem(value: 'import', child: Text('가져오기')),
-              const PopupMenuItem(value: 'clear', child: Text('전체 삭제')),
+              PopupMenuItem(value: 'export', child: Text(l10nMenu.exportAction)),
+              PopupMenuItem(value: 'import', child: Text(l10nMenu.importAction)),
+              PopupMenuItem(value: 'clear', child: Text(l10nMenu.deleteAllAction)),
             ],
           ),
         ],
@@ -823,14 +823,14 @@ class _RecipeHistoryScreenState extends State<RecipeHistoryScreen>
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('닫기'),
+            child: Text(l10n.closeAction),
           ),
           TextButton(
             onPressed: () {
               Navigator.of(context).pop();
               _deleteHistory(history);
             },
-            child: const Text('삭제', style: TextStyle(color: Colors.red)),
+            child: Text(l10n.delete, style: TextStyle(color: Colors.red)),
           ),
         ],
       ),
@@ -899,12 +899,12 @@ class _RecipeHistoryScreenState extends State<RecipeHistoryScreen>
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('전체 삭제'),
-        content: const Text('모든 히스토리를 삭제하시겠습니까?\n이 작업은 되돌릴 수 없습니다.'),
+        title: Text(l10n.deleteAllTitle),
+        content: Text(l10n.confirmDeleteAllHistory),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('취소'),
+            child: Text(l10n.cancel),
           ),
           TextButton(
             onPressed: () async {
@@ -913,7 +913,7 @@ class _RecipeHistoryScreenState extends State<RecipeHistoryScreen>
               _loadData();
               _showInfoDialog('모든 히스토리가 삭제되었습니다.');
             },
-            child: const Text('삭제', style: TextStyle(color: Colors.red)),
+            child: Text(l10n.delete, style: TextStyle(color: Colors.red)),
           ),
         ],
       ),
@@ -957,12 +957,12 @@ class _RecipeHistoryScreenState extends State<RecipeHistoryScreen>
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('오류'),
+        title: Text(l10n.errorTitle),
         content: Text(message),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('확인'),
+            child: Text(l10n.confirmText),
           ),
         ],
       ),
@@ -974,12 +974,12 @@ class _RecipeHistoryScreenState extends State<RecipeHistoryScreen>
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('정보'),
+        title: Text(l10n.infoTitle),
         content: Text(message),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('확인'),
+            child: Text(l10n.confirmText),
           ),
         ],
       ),

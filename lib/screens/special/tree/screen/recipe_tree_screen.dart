@@ -122,7 +122,7 @@ class _RecipeTreeScreenState extends State<RecipeTreeScreen> {
 
     if (_errorMessage.isNotEmpty) {
       return Scaffold(
-        appBar: AppBar(title: Text('레시피 계보')),
+        appBar: AppBar(title: Text(AppLocalizations.of(context)!.recipeGenealogy)),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -143,7 +143,7 @@ class _RecipeTreeScreenState extends State<RecipeTreeScreen> {
 
     if (_treeRecipes.isEmpty) {
       return Scaffold(
-        appBar: AppBar(title: Text('레시피 계보')),
+        appBar: AppBar(title: Text(AppLocalizations.of(context)!.recipeGenealogy)),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -195,7 +195,7 @@ class _RecipeTreeScreenState extends State<RecipeTreeScreen> {
     developer.log('RecipeTreeScreen: 최소 깊이 계산 - minDepth: $minDepth');
 
     return Scaffold(
-      appBar: AppBar(title: Text('레시피 계보')),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.recipeGenealogy)),
       body: SingleChildScrollView(
         controller: _horizontalController, // 수평 스크롤 컨트롤러
         scrollDirection: Axis.horizontal, // 수평 스크롤 추가

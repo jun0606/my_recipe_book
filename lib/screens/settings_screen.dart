@@ -125,7 +125,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       if (selectedDirectory == null) {
         // 사용자가 취소한 경우
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('백업이 취소되었습니다')),
+          SnackBar(content: Text(l10n.backupCancelled)),
         );
         return;
       }
@@ -150,7 +150,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       final shareResult = await showDialog<bool>(
         context: context,
         builder: (context) => AlertDialog(
-          title: Text('백업 파일 공유'),
+          title: Text(l10n.backupFileShare),
           content: Text('백업 파일을 다른 앱으로 공유하시겠습니까?'),
           actions: [
             TextButton(
