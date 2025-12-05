@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../l10n/app_localizations.dart';
 import '../models/recipe.dart';
 import '../models/ingredient.dart';
 import '../providers/recipe_provider.dart';
@@ -673,6 +674,19 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
             );
           }).toList(),
       ],
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    return Scaffold(
+      key: _scaffoldKey,
+      appBar: AppBar(
+        title: Text(_currentRecipe.title),
+        backgroundColor: Colors.orange.shade600,
+        foregroundColor: Colors.white,
+        elevation: 0,
         actions: [
           IconButton(
             icon: const Icon(Icons.history),
