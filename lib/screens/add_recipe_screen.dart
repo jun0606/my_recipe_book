@@ -184,10 +184,12 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
       if (result.isGranted) {
         _pickImageFromGallery(); // 재귀 호출로 다시 시도
       } else {
+        final l10n = AppLocalizations.of(context)!;
         _showPermissionRequiredDialog(l10n.galleryAccessFeature);
       }
     } else if (status.isPermanentlyDenied) {
       // 영구 거부: 설정 유도
+      final l10n = AppLocalizations.of(context)!;
       _showPermissionRequiredDialog(l10n.galleryAccessFeature, permanent: true);
     }
   }
@@ -207,6 +209,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
       }
     } else {
       // 권한 없음: 사용자 안내
+      final l10n = AppLocalizations.of(context)!;
       _showPermissionRequiredDialog(l10n.cameraFeature);
     }
   }
