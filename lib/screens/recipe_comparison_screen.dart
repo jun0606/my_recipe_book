@@ -59,11 +59,51 @@ class _RecipeComparisonScreenState extends State<RecipeComparisonScreen> {
     } catch (e) {
       print('비교 데이터 로드 중 오류: $e');
     } finally {
+      setState(() => _isLoading = false);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (_isLoading) {
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text('레시피 버전 비교'),
+          backgroundColor: Colors.blue.shade600,
+          foregroundColor: Colors.white,
+        ),
         body: const Center(child: CircularProgressIndicator()),
       );
     }
 
     if (_oldRecipe == null || _currentRecipe == null) {
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text('레시피 버전 비교'),
+          backgroundColor: Colors.blue.shade600,
+          foregroundColor: Colors.white,
+        ),
+        body: const Center(
+          child: Text(l10n.cannotLoadComparisonData),
+        ),
+      );
+    }
+
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('레시피 버전 비교'),
+        backgroundColor: Colors.blue.shade600,
+        foregroundColor: Colors.white,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.refresh),
+            onPressed: _loadComparisonData,
+            tooltip: l10n.refreshTooltip,
+          ),
+        ],
+      ),
+      body: _buildComparisonView(),
+    );
   }
 
   Widget _buildComparisonView() {

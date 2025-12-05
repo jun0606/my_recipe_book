@@ -673,18 +673,6 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
             );
           }).toList(),
       ],
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      key: _scaffoldKey,
-      appBar: AppBar(
-        title: Text(_currentRecipe.title),
-        backgroundColor: Colors.orange.shade600,
-        foregroundColor: Colors.white,
-        elevation: 0,
         actions: [
           IconButton(
             icon: const Icon(Icons.history),
