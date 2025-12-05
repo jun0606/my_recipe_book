@@ -317,6 +317,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
   }
 
   void _addIngredient() {
+    final l10n = AppLocalizations.of(context)!;
     if (_ingredientNameController.text.isNotEmpty &&
         _ingredientAmountController.text.isNotEmpty) {
       final amount = double.tryParse(_ingredientAmountController.text);
