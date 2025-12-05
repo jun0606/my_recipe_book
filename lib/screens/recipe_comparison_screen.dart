@@ -85,7 +85,7 @@ class _RecipeComparisonScreenState extends State<RecipeComparisonScreen> {
           backgroundColor: Colors.blue.shade600,
           foregroundColor: Colors.white,
         ),
-        body: const Center(
+        body: Center(
           child: Text(l10n.cannotLoadComparisonData),
         ),
       );
