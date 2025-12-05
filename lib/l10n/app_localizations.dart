@@ -2049,6 +2049,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Baker\'s Percentage Comparison'**
   String get bakersPercentageComparison;
+
+  /// No description provided for @multiplierLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Multiplier:'**
+  String get multiplierLabel;
+
+  /// No description provided for @calcModePercentage.
+  ///
+  /// In en, this message translates to:
+  /// **'Percentage'**
+  String get calcModePercentage;
+
+  /// No description provided for @calcModeTargetSplit.
+  ///
+  /// In en, this message translates to:
+  /// **'Target Split Count'**
+  String get calcModeTargetSplit;
 }
 
 class _AppLocalizationsDelegate

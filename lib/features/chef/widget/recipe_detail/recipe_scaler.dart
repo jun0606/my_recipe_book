@@ -898,6 +898,7 @@ class _RecipeScalerState extends State<RecipeScaler> {
 
   /// 모드별 입력 필드
   Widget _buildModeSpecificInputField() {
+    final l10n = AppLocalizations.of(context)!;
     if (_calculationMode == CalculationMode.percentage) {
       // 퍼센트계산 모드: 배율 입력
       return Container(

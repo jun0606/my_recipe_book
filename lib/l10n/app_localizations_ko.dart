@@ -1069,4 +1069,13 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get bakersPercentageComparison => '베이커스 퍼센트 비교';
+
+  @override
+  String get multiplierLabel => '배율:';
+
+  @override
+  String get calcModePercentage => '퍼센트계산';
+
+  @override
+  String get calcModeTargetSplit => '목표분할개수';
 }

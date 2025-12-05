@@ -1086,4 +1086,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get bakersPercentageComparison => 'Baker\'s Percentage Comparison';
+
+  @override
+  String get multiplierLabel => 'Multiplier:';
+
+  @override
+  String get calcModePercentage => 'Percentage';
+
+  @override
+  String get calcModeTargetSplit => 'Target Split Count';
 }
