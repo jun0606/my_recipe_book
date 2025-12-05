@@ -957,7 +957,7 @@ class _RecipeScalerState extends State<RecipeScaler> {
                 borderRadius: BorderRadius.circular(4),
               ),
               child: Text(
-                '배',
+                l10n.timesLabel,
                 style: TextStyle(
                   fontSize: 11,
                   fontWeight: FontWeight.w600,
@@ -980,7 +980,7 @@ class _RecipeScalerState extends State<RecipeScaler> {
         child: Row(
           children: [
             Text(
-              '목표 개수:',
+              l10n.targetCountLabel,
               style: TextStyle(
                 fontWeight: FontWeight.w600,
                 color: RecipeScalerTheme.textPrimary,
@@ -1026,7 +1026,7 @@ class _RecipeScalerState extends State<RecipeScaler> {
                 borderRadius: BorderRadius.circular(4),
               ),
               child: Text(
-                '개',
+                l10n.countUnit,
                 style: TextStyle(
                   fontSize: 11,
                   fontWeight: FontWeight.w600,
@@ -1042,13 +1042,14 @@ class _RecipeScalerState extends State<RecipeScaler> {
 
   /// 목표분할개수 모드 계산 실행
   void _calculateForTargetSplit() {
+    final l10n = AppLocalizations.of(context)!;
     final targetCountText = _targetCountController.text;
     final targetCount = int.tryParse(targetCountText) ?? 1;
 
     if (targetCount <= 0) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('목표 개수는 1개 이상이어야 합니다'),
+        SnackBar(
+          content: Text(l10n.targetCountError),
           backgroundColor: Colors.orange,
         ),
       );

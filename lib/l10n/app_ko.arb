@@ -339,5 +339,9 @@
   "instructionsSectionTitle": "조리법",
   "multiplierLabel": "배율:",
   "calcModePercentage": "퍼센트계산",
-  "calcModeTargetSplit": "목표분할개수"
+  "calcModeTargetSplit": "목표분할개수",
+  "timesLabel": "배",
+  "targetCountLabel": "목표 개수:",
+  "countUnit": "개",
+  "targetCountError": "목표 개수는 1개 이상이어야 합니다"
 }

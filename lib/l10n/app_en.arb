@@ -339,5 +339,9 @@
   "instructionsSectionTitle": "Instructions",
   "multiplierLabel": "Multiplier:",
   "calcModePercentage": "Percentage",
-  "calcModeTargetSplit": "Target Split Count"
+  "calcModeTargetSplit": "Target Split Count",
+  "timesLabel": "x",
+  "targetCountLabel": "Target Count:",
+  "countUnit": "ea",
+  "targetCountError": "Target count must be at least 1"
 }
