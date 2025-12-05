@@ -489,6 +489,7 @@ class _RecipeScalerState extends State<RecipeScaler> {
   /// 전/후 비교 카드
   Widget _buildComparisonCard() {
     final baseIngredient = _findBaseIngredient();
+    final l10n = AppLocalizations.of(context)!;
 
     return Container(
       decoration: BoxDecoration(
@@ -519,8 +520,8 @@ class _RecipeScalerState extends State<RecipeScaler> {
                         color: Colors.white,
                       ),
                       const SizedBox(width: 6),
-                      const Text(
-                        '오리지널 레시피',
+                      Text(
+                        l10n.originalRecipe,
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
                           color: Colors.white,
@@ -545,8 +546,8 @@ class _RecipeScalerState extends State<RecipeScaler> {
                         color: Colors.white,
                       ),
                       const SizedBox(width: 6),
-                      const Text(
-                        '계산 결과',
+                      Text(
+                        l10n.calculationResult,
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
                           color: Colors.white,
@@ -604,7 +605,7 @@ class _RecipeScalerState extends State<RecipeScaler> {
       children: [
         // 총량 비교
         _buildComparisonRow(
-          '총량',
+          l10n.totalWeight,
           '${originalTotal.toStringAsFixed(1)}g',
           '${calculatedTotal.toStringAsFixed(1)}g',
         ),
@@ -613,7 +614,7 @@ class _RecipeScalerState extends State<RecipeScaler> {
 
         // 분할개수 비교
         _buildComparisonRow(
-          '분할개수',
+          l10n.splitCount,
           '${originalSplitCount}개',
           '${calculatedSplitCount}개',
         ),
@@ -622,7 +623,7 @@ class _RecipeScalerState extends State<RecipeScaler> {
 
         // 분할 무개 비교
         _buildComparisonRow(
-          '분할 무개',
+          l10n.splitWeight,
           '${originalWeightPerSplit.toStringAsFixed(1)}g',
           '${calculatedWeightPerSplit.toStringAsFixed(1)}g',
         ),
@@ -631,7 +632,7 @@ class _RecipeScalerState extends State<RecipeScaler> {
 
         // 남은재료 무개 비교
         _buildComparisonRow(
-          '남은재료 무개',
+          l10n.remainingWeight,
           '${remainingWeight.toStringAsFixed(1)}g',
           '${remainingWeight.toStringAsFixed(1)}g',
         ),
@@ -727,6 +728,7 @@ class _RecipeScalerState extends State<RecipeScaler> {
 
   /// 베이커스 퍼센트 비교
   Widget _buildBakersPercentageComparison(Ingredient baseIngredient) {
+    final l10n = AppLocalizations.of(context)!;
     // 주요 재료들만 표시 (최대 3개)
     final majorIngredients = widget.recipe.ingredients
         .where((ing) {
@@ -744,7 +746,7 @@ class _RecipeScalerState extends State<RecipeScaler> {
       children: [
         const SizedBox(height: 16),
         Text(
-          '베이커스 퍼센트 비교',
+          l10n.bakersPercentageComparison,
           style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.bold,

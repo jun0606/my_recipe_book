@@ -491,7 +491,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get splitWeight => '분할 무게';
 
   @override
-  String get splitCount => '분할 개수';
+  String get splitCount => '분할개수';
 
   @override
   String get splitWeightOrCountRequired => '분할량 또는 분할 개수를 입력하세요';
@@ -1039,4 +1039,34 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get ovenStepTitle => '오븐 단계';
+
+  @override
+  String get recipeCalculator => '레시피 계산기';
+
+  @override
+  String get calculationControl => '계산 컨트롤';
+
+  @override
+  String get calculationMode => '계산 모드:';
+
+  @override
+  String get baseIngredient => '기준 재료:';
+
+  @override
+  String get runCalculation => '계산 실행';
+
+  @override
+  String get originalRecipe => '오리지널 레시피';
+
+  @override
+  String get calculationResult => '계산 결과';
+
+  @override
+  String get totalWeight => '총량';
+
+  @override
+  String get remainingWeight => '남은재료 무게';
+
+  @override
+  String get bakersPercentageComparison => '베이커스 퍼센트 비교';
 }

@@ -1989,6 +1989,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Oven Step'**
   String get ovenStepTitle;
+
+  /// No description provided for @recipeCalculator.
+  ///
+  /// In en, this message translates to:
+  /// **'Recipe Calculator'**
+  String get recipeCalculator;
+
+  /// No description provided for @calculationControl.
+  ///
+  /// In en, this message translates to:
+  /// **'Calculation Control'**
+  String get calculationControl;
+
+  /// No description provided for @calculationMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Calculation Mode:'**
+  String get calculationMode;
+
+  /// No description provided for @baseIngredient.
+  ///
+  /// In en, this message translates to:
+  /// **'Base Ingredient:'**
+  String get baseIngredient;
+
+  /// No description provided for @runCalculation.
+  ///
+  /// In en, this message translates to:
+  /// **'Run Calculation'**
+  String get runCalculation;
+
+  /// No description provided for @originalRecipe.
+  ///
+  /// In en, this message translates to:
+  /// **'Original Recipe'**
+  String get originalRecipe;
+
+  /// No description provided for @calculationResult.
+  ///
+  /// In en, this message translates to:
+  /// **'Result'**
+  String get calculationResult;
+
+  /// No description provided for @totalWeight.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Weight'**
+  String get totalWeight;
+
+  /// No description provided for @remainingWeight.
+  ///
+  /// In en, this message translates to:
+  /// **'Remaining Weight'**
+  String get remainingWeight;
+
+  /// No description provided for @bakersPercentageComparison.
+  ///
+  /// In en, this message translates to:
+  /// **'Baker\'s Percentage Comparison'**
+  String get bakersPercentageComparison;
 }
 
 class _AppLocalizationsDelegate

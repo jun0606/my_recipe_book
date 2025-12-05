@@ -1056,4 +1056,34 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ovenStepTitle => 'Oven Step';
+
+  @override
+  String get recipeCalculator => 'Recipe Calculator';
+
+  @override
+  String get calculationControl => 'Calculation Control';
+
+  @override
+  String get calculationMode => 'Calculation Mode:';
+
+  @override
+  String get baseIngredient => 'Base Ingredient:';
+
+  @override
+  String get runCalculation => 'Run Calculation';
+
+  @override
+  String get originalRecipe => 'Original Recipe';
+
+  @override
+  String get calculationResult => 'Result';
+
+  @override
+  String get totalWeight => 'Total Weight';
+
+  @override
+  String get remainingWeight => 'Remaining Weight';
+
+  @override
+  String get bakersPercentageComparison => 'Baker\'s Percentage Comparison';
 }

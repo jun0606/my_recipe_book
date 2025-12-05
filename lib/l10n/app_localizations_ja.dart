@@ -490,7 +490,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get splitWeight => '分割重量';
 
   @override
-  String get splitCount => '分割個数';
+  String get splitCount => '分割数';
 
   @override
   String get splitWeightOrCountRequired => '分割重量または分割個数を入力してください';
@@ -1039,4 +1039,34 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get ovenStepTitle => 'オーブンステップ';
+
+  @override
+  String get recipeCalculator => 'レシピ計算機';
+
+  @override
+  String get calculationControl => '計算コントロール';
+
+  @override
+  String get calculationMode => '計算モード:';
+
+  @override
+  String get baseIngredient => '基準材料:';
+
+  @override
+  String get runCalculation => '計算実行';
+
+  @override
+  String get originalRecipe => 'オリジナルレシピ';
+
+  @override
+  String get calculationResult => '計算結果';
+
+  @override
+  String get totalWeight => '総量';
+
+  @override
+  String get remainingWeight => '残り重量';
+
+  @override
+  String get bakersPercentageComparison => 'ベーカーズパーセント比較';
 }

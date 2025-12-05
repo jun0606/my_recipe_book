@@ -882,7 +882,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                                 ),
                                 const SizedBox(width: 12),
                                 Text(
-                                  '재료',
+                                  l10n.ingredientsSectionTitle,
                                   style: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
@@ -950,7 +950,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                                 ),
                                 const SizedBox(width: 12),
                                 Text(
-                                  '조리법',
+                                  l10n.instructionsSectionTitle,
                                   style: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
