@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 /// 발효 단계별 기본 정보 카드 위젯
 /// 레시피의 발효 단계 기본 정보를 표시 (온도, 습도, 시간)
@@ -111,7 +112,7 @@ class _FermentationStepCardState extends State<FermentationStepCard>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '발효 단계 $stepNumber',
+                  AppLocalizations.of(context)!.fermentationStepTitle(stepNumber),
                   style: TextStyle(
                     fontSize: isTablet ? 18 : 16,
                     fontWeight: FontWeight.bold,
@@ -164,11 +165,12 @@ class _FermentationStepCardState extends State<FermentationStepCard>
 
   // 시간 표시 포맷
   String _formatTimeDisplay(double hours) {
+    final l10n = AppLocalizations.of(context)!;
     if (hours >= 1.0) {
-      return '${hours.toStringAsFixed(0)}시간';
+      return l10n.unitHours(hours.toStringAsFixed(0));
     } else {
       final minutes = (hours * 60).round();
-      return '${minutes}분';
+      return l10n.unitMinutes(minutes);
     }
   }
 }

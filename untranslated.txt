@@ -1,1 +1,34 @@
-{}
+{
+  "ja": [
+    "stepCount",
+    "mixinAnalysisTitle",
+    "fermentationAnalysisTitle",
+    "bakingAnalysisTitle",
+    "analyzingScientificCalculations",
+    "stepLabelWithNumber",
+    "preparingAnalysisData",
+    "fermentationStepPrefix",
+    "mainMetricsTitle",
+    "co2GenerationLabel",
+    "volumeExpansionLabel",
+    "fermentationProgressLabel",
+    "acidityLabel",
+    "scoreGradeExcellent",
+    "scoreGradeGood",
+    "scoreGradeFair",
+    "scoreGradeAverage",
+    "scoreGradePoor",
+    "stepLabelText",
+    "measuringTemperature",
+    "mixingStepTitleLabel",
+    "keyMetricsTitle",
+    "doughDevelopmentLabel",
+    "moistureAbsorptionRateLabel",
+    "doughTemperatureLabel",
+    "doughTextureLabel",
+    "calculationError",
+    "calculating",
+    "measuring",
+    "ingredientsMixing"
+  ]
+}

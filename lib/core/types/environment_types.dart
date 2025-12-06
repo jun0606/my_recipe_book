@@ -1,5 +1,6 @@
 // 환경 타입 정의들
 // Flutter Run 오류 해결을 위한 긴급 타입 정의
+import '../../l10n/app_localizations.dart';
 
 /// 계절 열거형
 enum Season {
@@ -8,7 +9,15 @@ enum Season {
   autumn,
   winter;
 
-  /// 표시용 이름
+  /// 표시용 이름 (다국어 지원)
+  String getDisplayName(AppLocalizations l10n) => switch (this) {
+        Season.spring => l10n.seasonSpring,
+        Season.summer => l10n.seasonSummer,
+        Season.autumn => l10n.seasonAutumn,
+        Season.winter => l10n.seasonWinter,
+      };
+
+  /// 기존 displayName 유지 (하위 호환성)
   String get displayName => name;
 
   /// 날짜로부터 계절 결정
@@ -33,7 +42,20 @@ enum OvenType {
   stone,
   professional;
 
-  /// 표시용 이름
+  /// 표시용 이름 (다국어 지원)
+  String getDisplayName(AppLocalizations l10n) => switch (this) {
+        OvenType.convection => l10n.ovenConvection,
+        OvenType.professionalConvection => l10n.ovenProfessionalConvection,
+        OvenType.home => l10n.ovenHome,
+        OvenType.conventional => l10n.ovenConventional,
+        OvenType.deck => l10n.ovenDeck,
+        OvenType.steam => l10n.ovenSteam,
+        OvenType.radiation => l10n.ovenRadiation,
+        OvenType.stone => l10n.ovenStone,
+        OvenType.professional => l10n.ovenProfessional,
+      };
+
+  /// 기존 displayName 유지 (하위 호환성)
   String get displayName => switch (this) {
         OvenType.convection => '대류 오븐',
         OvenType.professionalConvection => '전문 대류 오븐',
@@ -52,7 +74,13 @@ enum FermentationMethod {
   roomTemperature,
   fermenter;
 
-  /// 표시용 이름
+  /// 표시용 이름 (다국어 지원)
+  String getDisplayName(AppLocalizations l10n) => switch (this) {
+        FermentationMethod.roomTemperature => l10n.fermentationRoomTemp,
+        FermentationMethod.fermenter => l10n.fermentationFermenter,
+      };
+
+  /// 기존 displayName 유지 (하위 호환성)
   String get displayName => switch (this) {
         FermentationMethod.roomTemperature => '실온 발효',
         FermentationMethod.fermenter => '발효기 발효',
@@ -80,7 +108,14 @@ enum MixerType {
   professional,
   commercial; // ❌ 4가지 타입 제거: stand, planetary, spiral, hand
 
-  /// 표시용 이름
+  /// 표시용 이름 (다국어 지원)
+  String getDisplayName(AppLocalizations l10n) => switch (this) {
+        MixerType.home => l10n.mixerHome,
+        MixerType.professional => l10n.mixerProfessional,
+        MixerType.commercial => l10n.mixerCommercial,
+      };
+
+  /// 기존 displayName 유지 (하위 호환성)
   String get displayName => switch (this) {
         MixerType.home => '가정용 믹서',
         MixerType.professional => '전문용 믹서',

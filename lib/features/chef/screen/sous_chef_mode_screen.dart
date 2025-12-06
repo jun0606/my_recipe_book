@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import '../../../../l10n/app_localizations.dart';
 
 // 환경 타입들 직접 import (충돌 방지)
 import '../../../../core/types/environment_types.dart';
@@ -172,7 +173,7 @@ class _SousChefModeScreenState extends State<SousChefModeScreen>
 
   // Module selection
   String _selectedModule = 'bread';
-  String _selectedModuleDisplay = '빵 모듈';
+  String _selectedModuleDisplay = ''; // 초기화 시 l10n 사용 불가하므로 빈 문자열로 시작
 
   // 빵 모듈 인스턴스
   BreadModule? _breadModule;
@@ -233,8 +234,8 @@ class _SousChefModeScreenState extends State<SousChefModeScreen>
       print('✅ [SousChefModeScreen] 동적 환경 계산 완료:');
       print('   - 온도: ${_currentEnvironment.temperature}°C');
       print('   - 습도: ${_currentEnvironment.humidity}%');
-      print('   - 계절: ${_currentEnvironment.season.displayName}');
-      print('   - 믹서: ${_currentEnvironment.mixerType.displayName}');
+      print('   - 계절: ${_currentEnvironment.season.name}');
+      print('   - 믹서: ${_currentEnvironment.mixerType.name}');
 
       // 컨트롤러 값들을 계산된 환경 값으로 업데이트
       _updateControllersWithEnvironment(_currentEnvironment);
@@ -321,14 +322,19 @@ class _SousChefModeScreenState extends State<SousChefModeScreen>
     final module = RecipeAnalyzer.analyzeRecipeModule(widget.recipeData);
     setState(() {
       _selectedModule = module;
-      _selectedModuleDisplay = _getModuleDisplayName(module);
+      // _selectedModuleDisplay는 build 메서드에서 l10n을 통해 동적으로 처리됨
     });
     print('모듈 선택: $module');
   }
 
-  // 모듈별 표시 이름
-  String _getModuleDisplayName(String module) {
-    return ModuleKeywords.moduleInfo[module]?['name'] ?? '빵 모듈';
+  // 모듈별 표시 이름 (l10n 필요)
+  String _getModuleDisplayName(String module, AppLocalizations l10n) {
+    switch (module) {
+      case 'bread':
+        return l10n.breadModule;
+      default:
+        return l10n.unknownModule;
+    }
   }
 
   // 아이콘 문자열을 IconData로 변환
@@ -376,15 +382,16 @@ class _SousChefModeScreenState extends State<SousChefModeScreen>
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Sous Chef Mode'),
+        title: Text(l10n.sousChefModeTitle),
         backgroundColor: Colors.pink[400],
         bottom: TabBar(
           controller: _tabController,
           indicatorColor: Colors.white,
-          tabs: const [
-            Tab(text: '분석', icon: Icon(Icons.science)),
+          tabs: [
+            Tab(text: l10n.analysisTab, icon: const Icon(Icons.science)),
           ],
         ),
       ),
@@ -398,16 +405,17 @@ class _SousChefModeScreenState extends State<SousChefModeScreen>
   }
 
   Widget _buildAnalysisTab() {
+    final l10n = AppLocalizations.of(context)!;
     return SingleChildScrollView(
       padding: const EdgeInsets.all(12),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: _getAnalysisTabChildren(),
+        children: _getAnalysisTabChildren(l10n),
       ),
     );
   }
 
-  List<Widget> _getAnalysisTabChildren() {
+  List<Widget> _getAnalysisTabChildren(AppLocalizations l10n) {
     final children = <Widget>[];
 
     // 모듈 선택 UI
@@ -418,9 +426,9 @@ class _SousChefModeScreenState extends State<SousChefModeScreen>
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                '분석 모듈 선택',
-                style: TextStyle(
+              Text(
+                l10n.selectAnalysisModule,
+                style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: Colors.grey,
@@ -449,7 +457,7 @@ class _SousChefModeScreenState extends State<SousChefModeScreen>
                     onTap: () {
                       setState(() {
                         _selectedModule = moduleKey;
-                        _selectedModuleDisplay = moduleData['name'] ?? '빵 모듈';
+                        // _selectedModuleDisplay 업데이트 불필요 (UI에서 동적 처리)
                       });
                     },
                     child: Container(
@@ -475,7 +483,7 @@ class _SousChefModeScreenState extends State<SousChefModeScreen>
                           ),
                           const SizedBox(width: 6),
                           Text(
-                            moduleData['name'] ?? '알 수 없는 모듈',
+                            _getModuleDisplayName(moduleKey, l10n),
                             style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.bold,
@@ -628,7 +636,8 @@ class _SousChefModeScreenState extends State<SousChefModeScreen>
 
   // 환경 입력 카드 - EnvironmentManager 싱글턴 직접 사용 (안정적)
   Widget _buildEnvironmentalInputCard() {
-    final envManager = EnvironmentManager(); // 싱글턴 직접 사용
+    final envManager = EnvironmentManager();
+    final l10n = AppLocalizations.of(context)!;
 
     return Card(
       child: Padding(
@@ -636,9 +645,9 @@ class _SousChefModeScreenState extends State<SousChefModeScreen>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              '베이킹 환경 조건',
-              style: TextStyle(
+            Text(
+              l10n.bakingEnvironmentConditions,
+              style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
                 color: Colors.blue,
@@ -651,9 +660,9 @@ class _SousChefModeScreenState extends State<SousChefModeScreen>
                   child: TextField(
                     controller: _temperatureController,
                     decoration: InputDecoration(
-                      labelText: '온도 (°C)',
+                      labelText: l10n.temperatureLabel,
                       border: const OutlineInputBorder(),
-                      hintText: '${envManager.temperature}°C 현재',
+                      hintText: '${envManager.temperature}°C',
                     ),
                     keyboardType: TextInputType.number,
                     onEditingComplete: () {
@@ -671,9 +680,9 @@ class _SousChefModeScreenState extends State<SousChefModeScreen>
                   child: TextField(
                     controller: _humidityController,
                     decoration: InputDecoration(
-                      labelText: '습도 (%)',
+                      labelText: l10n.humidityLabel,
                       border: const OutlineInputBorder(),
-                      hintText: '${envManager.humidity}% 현재',
+                      hintText: '${envManager.humidity}%',
                     ),
                     keyboardType: TextInputType.number,
                     onEditingComplete: () {
@@ -694,9 +703,9 @@ class _SousChefModeScreenState extends State<SousChefModeScreen>
                 Expanded(
                   child: TextField(
                     controller: _altitudeController,
-                    decoration: const InputDecoration(
-                      labelText: '고도 (m)',
-                      border: OutlineInputBorder(),
+                    decoration: InputDecoration(
+                      labelText: l10n.altitudeLabel,
+                      border: const OutlineInputBorder(),
                     ),
                     keyboardType: TextInputType.number,
                   ),
@@ -705,15 +714,19 @@ class _SousChefModeScreenState extends State<SousChefModeScreen>
                 Expanded(
                   child: DropdownButtonFormField<String>(
                     value: season,
-                    decoration: const InputDecoration(
-                      labelText: '계절',
-                      border: OutlineInputBorder(),
+                    decoration: InputDecoration(
+                      labelText: l10n.seasonLabel,
+                      border: const OutlineInputBorder(),
                     ),
-                    items: const [
-                      DropdownMenuItem(value: 'spring', child: Text('봄')),
-                      DropdownMenuItem(value: 'summer', child: Text('여름')),
-                      DropdownMenuItem(value: 'autumn', child: Text('가을')),
-                      DropdownMenuItem(value: 'winter', child: Text('겨울')),
+                    items: [
+                      DropdownMenuItem(
+                          value: 'spring', child: Text(l10n.seasonSpring)),
+                      DropdownMenuItem(
+                          value: 'summer', child: Text(l10n.seasonSummer)),
+                      DropdownMenuItem(
+                          value: 'autumn', child: Text(l10n.seasonAutumn)),
+                      DropdownMenuItem(
+                          value: 'winter', child: Text(l10n.seasonWinter)),
                     ],
                     onChanged: (value) {
                       if (value != null) {
@@ -727,14 +740,14 @@ class _SousChefModeScreenState extends State<SousChefModeScreen>
             const SizedBox(height: 12),
             DropdownButtonFormField<String>(
               value: ovenType,
-              decoration: const InputDecoration(
-                labelText: '오븐 타입',
-                border: OutlineInputBorder(),
+              decoration: InputDecoration(
+                labelText: l10n.ovenTypeLabel,
+                border: const OutlineInputBorder(),
               ),
               items: OvenType.values
                   .map((oven) => DropdownMenuItem(
                         value: oven.name,
-                        child: Text(oven.displayName),
+                        child: Text(oven.getDisplayName(l10n)),
                       ))
                   .toList(),
               onChanged: (value) {
@@ -746,9 +759,9 @@ class _SousChefModeScreenState extends State<SousChefModeScreen>
             const SizedBox(height: 12),
             DropdownButtonFormField<String>(
               value: fermentationType,
-              decoration: const InputDecoration(
-                labelText: '발효 방식',
-                border: OutlineInputBorder(),
+              decoration: InputDecoration(
+                labelText: l10n.fermentationMethodLabel,
+                border: const OutlineInputBorder(),
               ),
               items: FermentationMethod.values
                   .where((method) =>
@@ -756,7 +769,7 @@ class _SousChefModeScreenState extends State<SousChefModeScreen>
                       method.name == 'proofer')
                   .map((method) => DropdownMenuItem(
                         value: method.name,
-                        child: Text(method.displayName),
+                        child: Text(method.getDisplayName(l10n)),
                       ))
                   .toList(),
               onChanged: (value) {
@@ -770,14 +783,14 @@ class _SousChefModeScreenState extends State<SousChefModeScreen>
             if (_selectedModule == 'bread') ...[
               DropdownButtonFormField<String>(
                 value: selectedMixerType,
-                decoration: const InputDecoration(
-                  labelText: '믹서 타입',
-                  border: OutlineInputBorder(),
+                decoration: InputDecoration(
+                  labelText: l10n.mixerTypeLabel,
+                  border: const OutlineInputBorder(),
                 ),
                 items: MixerType.values
                     .map((mixer) => DropdownMenuItem(
                           value: mixer.name,
-                          child: Text(mixer.displayName),
+                          child: Text(mixer.getDisplayName(l10n)),
                         ))
                     .toList(),
                 onChanged: (value) {
@@ -797,7 +810,7 @@ class _SousChefModeScreenState extends State<SousChefModeScreen>
                 onPressed:
                     _isApplyingSettings ? null : _applyEnvironmentalSettings,
                 icon: _isApplyingSettings
-                    ? SizedBox(
+                    ? const SizedBox(
                         width: 16,
                         height: 16,
                         child: CircularProgressIndicator(
@@ -805,8 +818,10 @@ class _SousChefModeScreenState extends State<SousChefModeScreen>
                           color: Colors.white,
                         ),
                       )
-                    : Icon(Icons.check),
-                label: Text(_isApplyingSettings ? '환경 설정 적용 중...' : '환경 설정 적용'),
+                    : const Icon(Icons.check),
+                label: Text(_isApplyingSettings
+                    ? l10n.applyingSettings
+                    : l10n.applySettings),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue,
                   foregroundColor: Colors.white,
@@ -838,7 +853,8 @@ class _SousChefModeScreenState extends State<SousChefModeScreen>
                           ),
                         )
                       : Icon(Icons.analytics),
-                  label: Text(_isAnalyzing ? '분석 중...' : '분석 시작'),
+                  label:
+                      Text(_isAnalyzing ? l10n.analyzing : l10n.startAnalysis),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.green,
                     foregroundColor: Colors.white,
@@ -858,6 +874,7 @@ class _SousChefModeScreenState extends State<SousChefModeScreen>
 
   // 개선 방법 탭 - Week 2: 모듈 결과 통합 자동화
   Widget _buildImprovementMethodsTab() {
+    final l10n = AppLocalizations.of(context)!;
     return SingleChildScrollView(
       padding: const EdgeInsets.all(12),
       child: Column(
@@ -866,9 +883,9 @@ class _SousChefModeScreenState extends State<SousChefModeScreen>
           // 헤더
           Row(
             children: [
-              const Text(
-                '💡 개선 방법 및 권장사항',
-                style: TextStyle(
+              Text(
+                l10n.improvementMethodsAndRecommendations,
+                style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                   color: Colors.pink,
@@ -878,7 +895,7 @@ class _SousChefModeScreenState extends State<SousChefModeScreen>
               ElevatedButton.icon(
                 onPressed: _generateImprovementSuggestions,
                 icon: const Icon(Icons.refresh),
-                label: const Text('분석 실행'),
+                label: Text(l10n.runAnalysis),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.pink[100],
                   foregroundColor: Colors.pink[800],
@@ -917,6 +934,7 @@ class _SousChefModeScreenState extends State<SousChefModeScreen>
 
   // 환경 기반 추천
   Widget _buildEnvironmentalRecommendations() {
+    final l10n = AppLocalizations.of(context)!;
     final recommendations = _generateEnvironmentalRecommendations();
 
     return Card(
@@ -925,9 +943,9 @@ class _SousChefModeScreenState extends State<SousChefModeScreen>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              '🌡️ 환경 조건 기반 추천',
-              style: TextStyle(
+            Text(
+              l10n.environmentalRecommendations,
+              style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
                 color: Colors.blue,
@@ -962,6 +980,7 @@ class _SousChefModeScreenState extends State<SousChefModeScreen>
 
   // 믹싱 단계 최적화
   Widget _buildMixingOptimization() {
+    final l10n = AppLocalizations.of(context)!;
     final mixingData =
         MixingDataHelper.ensureMixingDataExists(widget.recipeData);
     final optimizedSteps = _optimizeMixingSteps(mixingData);
@@ -972,9 +991,9 @@ class _SousChefModeScreenState extends State<SousChefModeScreen>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              '🔄 믹싱 단계 최적화',
-              style: TextStyle(
+            Text(
+              l10n.mixingStepOptimization,
+              style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
                 color: Colors.green,
@@ -1034,6 +1053,7 @@ class _SousChefModeScreenState extends State<SousChefModeScreen>
 
   // 발효 전략 추천
   Widget _buildFermentationStrategy() {
+    final l10n = AppLocalizations.of(context)!;
     final strategy = _generateFermentationStrategy();
 
     return Card(
@@ -1042,9 +1062,9 @@ class _SousChefModeScreenState extends State<SousChefModeScreen>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              '⏰ 발효 전략 추천',
-              style: TextStyle(
+            Text(
+              l10n.fermentationStrategyRecommendation,
+              style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
                 color: Colors.orange,
@@ -1090,25 +1110,29 @@ class _SousChefModeScreenState extends State<SousChefModeScreen>
 
   // 추가 분석 결과들
   Widget _buildAdditionalAnalysis() {
+    final l10n = AppLocalizations.of(context)!;
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(12),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              '📊 추가 분석 결과',
-              style: TextStyle(
+            Text(
+              l10n.additionalAnalysisResults,
+              style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
                 color: Colors.purple,
               ),
             ),
             const SizedBox(height: 12),
-            _buildAnalysisMetric('예상 성공률', '85%', Colors.green),
-            _buildAnalysisMetric('글루텐 형성 최적화', '적정', Colors.blue),
-            _buildAnalysisMetric('수분 균형', '양호', Colors.green),
-            _buildAnalysisMetric('온도 안정성', '안정', Colors.green),
+            _buildAnalysisMetric(l10n.expectedSuccessRate, '85%', Colors.green),
+            _buildAnalysisMetric(
+                l10n.glutenOptimization, l10n.statusOptimal, Colors.blue),
+            _buildAnalysisMetric(
+                l10n.moistureBalance, l10n.statusGood, Colors.green),
+            _buildAnalysisMetric(
+                l10n.temperatureStability, l10n.statusStable, Colors.green),
           ],
         ),
       ),
@@ -1290,14 +1314,15 @@ class _SousChefModeScreenState extends State<SousChefModeScreen>
 
   // 메모리 사용량 모니터링
   Widget _buildMemoryUsage() {
+    final l10n = AppLocalizations.of(context)!;
     final cacheStats = AnalysisCacheManager.instance.getCacheStats();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          '메모리 사용량',
-          style: TextStyle(
+        Text(
+          l10n.memoryUsage,
+          style: const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w500,
             color: Colors.orange,
@@ -1305,7 +1330,7 @@ class _SousChefModeScreenState extends State<SousChefModeScreen>
         ),
         const SizedBox(height: 4),
         _buildMiniMetric(
-          '캐시 메모리',
+          l10n.cacheMemory,
           '${cacheStats['memoryUsageMB'].toStringAsFixed(1)} MB',
           Colors.orange,
         ),
@@ -1372,6 +1397,7 @@ class _SousChefModeScreenState extends State<SousChefModeScreen>
 
   // 성능 개선 제안
   Widget _buildPerformanceSuggestions() {
+    final l10n = AppLocalizations.of(context)!;
     final suggestions = _generatePerformanceSuggestions();
 
     if (suggestions.isEmpty) {
@@ -1381,9 +1407,9 @@ class _SousChefModeScreenState extends State<SousChefModeScreen>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          '🚀 성능 개선 제안',
-          style: TextStyle(
+        Text(
+          l10n.performanceSuggestions,
+          style: const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w500,
             color: Colors.indigo,
@@ -1489,6 +1515,7 @@ class _SousChefModeScreenState extends State<SousChefModeScreen>
 
   // 환경 조건 수동 업데이트 (버튼 클릭 시)
   Future<void> _applyEnvironmentalSettings() async {
+    final l10n = AppLocalizations.of(context)!;
     setState(() {
       _isApplyingSettings = true;
     });
@@ -1558,7 +1585,7 @@ class _SousChefModeScreenState extends State<SousChefModeScreen>
       // 설정 적용 성공 알림
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('환경 설정이 적용되었습니다.'),
+          content: Text(l10n.settingsApplied),
           backgroundColor: Colors.green,
           duration: Duration(seconds: 2),
         ),
@@ -1567,7 +1594,7 @@ class _SousChefModeScreenState extends State<SousChefModeScreen>
       print('❌ 환경 설정 적용 실패: $e');
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('환경 설정 적용 중 오류가 발생했습니다.'),
+          content: Text(l10n.settingsApplyError),
           backgroundColor: Colors.red,
           duration: Duration(seconds: 2),
         ),
@@ -1581,10 +1608,11 @@ class _SousChefModeScreenState extends State<SousChefModeScreen>
 
   // 분석 수동 시작
   Future<void> _startAnalysis() async {
+    final l10n = AppLocalizations.of(context)!;
     if (_breadModule == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('분석 모듈을 초기화하는 중입니다. 잠시 후 다시 시도해주세요.'),
+          content: Text(l10n.initializingModuleWait),
           backgroundColor: Colors.orange,
         ),
       );
@@ -1601,18 +1629,18 @@ class _SousChefModeScreenState extends State<SousChefModeScreen>
 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('분석이 완료되었습니다.'),
+          content: Text(l10n.analysisComplete),
           backgroundColor: Colors.green,
-          duration: Duration(seconds: 2),
+          duration: const Duration(seconds: 2),
         ),
       );
     } catch (e) {
       print('❌ 분석 실행 실패: $e');
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('분석 중 오류가 발생했습니다.'),
+          content: Text(l10n.analysisError),
           backgroundColor: Colors.red,
-          duration: Duration(seconds: 2),
+          duration: const Duration(seconds: 2),
         ),
       );
     } finally {
@@ -1662,10 +1690,11 @@ class _SousChefModeScreenState extends State<SousChefModeScreen>
 
   /// 검증 오류 표시
   void _showValidationError(List<String> errors) {
+    final l10n = AppLocalizations.of(context)!;
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('입력값 검증 오류'),
+        title: Text(l10n.validationError),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -1679,7 +1708,7 @@ class _SousChefModeScreenState extends State<SousChefModeScreen>
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('확인'),
+            child: Text(l10n.confirm),
           ),
         ],
       ),
@@ -2102,6 +2131,7 @@ class _SousChefModeScreenState extends State<SousChefModeScreen>
   // 믹싱 단계 최적화
   List<Map<String, dynamic>> _optimizeMixingSteps(
       List<Map<String, dynamic>> mixingData) {
+    final l10n = AppLocalizations.of(context)!;
     final optimizedSteps = <Map<String, dynamic>>[];
 
     for (int i = 0; i < mixingData.length; i++) {
@@ -2111,18 +2141,18 @@ class _SousChefModeScreenState extends State<SousChefModeScreen>
       if (_currentEnvironment.temperature > 28) {
         // 고온에서는 믹싱 시간을 줄임
         step['durationMinutes'] = (step['durationMinutes'] as int) - 1;
-        step['comment'] = '${step['comment']} (고온 최적화)';
+        step['comment'] = '${step['comment']}${l10n.optimizationHighTemp}';
       } else if (_currentEnvironment.temperature < 20) {
         // 저온에서는 믹싱 시간을 늘임
         step['durationMinutes'] = (step['durationMinutes'] as int) + 1;
-        step['comment'] = '${step['comment']} (저온 최적화)';
+        step['comment'] = '${step['comment']}${l10n.optimizationLowTemp}';
       }
 
       // 믹서 타입에 따른 속도 조정
       if (selectedMixerType == 'home') {
         if (step['speed'] == '고속') {
           step['speed'] = '중속';
-          step['comment'] = '${step['comment']} (가정용 믹서용 조정)';
+          step['comment'] = '${step['comment']}${l10n.optimizationHomeMixer}';
         }
       }
 

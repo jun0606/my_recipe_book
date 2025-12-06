@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../l10n/app_localizations.dart';
 import 'fermentation_analysis_types.dart';
 import '../../../../services/fermentation_calculator.dart';
 import '../../../../services/fermentation_calculator.dart'
@@ -156,7 +157,8 @@ class _FermentationStepCardEnhancedState
                 Row(
                   children: [
                     Text(
-                      '${analysis.stepNumber}차 발효',
+                      AppLocalizations.of(context)!
+                          .fermentationStepPrefix(analysis.stepNumber),
                       style: TextStyle(
                         fontSize: isTablet ? 16 : 14,
                         fontWeight: FontWeight.bold,
@@ -265,7 +267,7 @@ class _FermentationStepCardEnhancedState
                   ),
                   SizedBox(width: 8),
                   Text(
-                    '주요 메트릭', // 믹싱 카드와 동일하게 "주요 메트릭" 타이틀 통일
+                    AppLocalizations.of(context)!.mainMetricsTitle,
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
@@ -288,13 +290,13 @@ class _FermentationStepCardEnhancedState
                 children: [
                   // 2x2 그리드로 메트릭 카드 배치 - 물리 기반 계산 결과로 업데이트
                   _buildMixingStyleMetricCard(
-                    'CO₂ 생성량',
+                    AppLocalizations.of(context)!.co2GenerationLabel,
                     '${analysis.cumulativeCO2.toStringAsFixed(1)}ml',
                     Colors.blue.shade600, // CO2 색상으로 파랑 사용
                     isTablet,
                   ),
                   _buildMixingStyleMetricCard(
-                    '부피 팽창',
+                    AppLocalizations.of(context)!.volumeExpansionLabel,
                     '${analysis.volumeIncrease.toStringAsFixed(0)}%', // volumeIncrease는 이미 퍼센트 값
                     VolumeExpansionCalculator.getExpansionColor(
                         VolumeExpansionCalculator.percentToExpansion(
@@ -302,14 +304,14 @@ class _FermentationStepCardEnhancedState
                     isTablet,
                   ),
                   _buildMixingStyleMetricCard(
-                    '발효 진행',
+                    AppLocalizations.of(context)!.fermentationProgressLabel,
                     '${(analysis.fermentationProgress * 100).toStringAsFixed(1)}%',
                     _getFermentationProgressColor(
                         analysis.fermentationProgress * 100),
                     isTablet,
                   ),
                   _buildMixingStyleMetricCard(
-                    '산도',
+                    AppLocalizations.of(context)!.acidityLabel,
                     '${analysis.acidity.toStringAsFixed(1)} pH', // 산도 값 표시
                     Colors.deepOrange.shade600, // 산도 색상
                     isTablet,

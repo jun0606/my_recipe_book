@@ -1981,8 +1981,8 @@ abstract class AppLocalizations {
   /// No description provided for @fermentationStepTitle.
   ///
   /// In en, this message translates to:
-  /// **'Fermentation Step'**
-  String get fermentationStepTitle;
+  /// **'Fermentation Step {number}'**
+  String fermentationStepTitle(Object number);
 
   /// No description provided for @ovenStepTitle.
   ///
@@ -2091,6 +2091,1326 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Target count must be at least 1'**
   String get targetCountError;
+
+  /// No description provided for @noDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'No description'**
+  String get noDescription;
+
+  /// No description provided for @mixingSpeedLow.
+  ///
+  /// In en, this message translates to:
+  /// **'Low'**
+  String get mixingSpeedLow;
+
+  /// No description provided for @mixingSpeedMedium.
+  ///
+  /// In en, this message translates to:
+  /// **'Medium'**
+  String get mixingSpeedMedium;
+
+  /// No description provided for @mixingSpeedHigh.
+  ///
+  /// In en, this message translates to:
+  /// **'High'**
+  String get mixingSpeedHigh;
+
+  /// No description provided for @mixingSpeedMax.
+  ///
+  /// In en, this message translates to:
+  /// **'Max'**
+  String get mixingSpeedMax;
+
+  /// No description provided for @mixingSpeedPulse.
+  ///
+  /// In en, this message translates to:
+  /// **'Pulse'**
+  String get mixingSpeedPulse;
+
+  /// No description provided for @mixingSpeedEgg.
+  ///
+  /// In en, this message translates to:
+  /// **'Egg/Foam'**
+  String get mixingSpeedEgg;
+
+  /// No description provided for @sousChefModeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sous Chef Mode'**
+  String get sousChefModeTitle;
+
+  /// No description provided for @analysisTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Analysis'**
+  String get analysisTab;
+
+  /// No description provided for @selectAnalysisModule.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Analysis Module'**
+  String get selectAnalysisModule;
+
+  /// No description provided for @breadModule.
+  ///
+  /// In en, this message translates to:
+  /// **'Bread Module'**
+  String get breadModule;
+
+  /// No description provided for @unknownModule.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown Module'**
+  String get unknownModule;
+
+  /// No description provided for @bakingEnvironmentConditions.
+  ///
+  /// In en, this message translates to:
+  /// **'Baking Environment Conditions'**
+  String get bakingEnvironmentConditions;
+
+  /// No description provided for @altitudeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Altitude (m)'**
+  String get altitudeLabel;
+
+  /// No description provided for @seasonLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Season'**
+  String get seasonLabel;
+
+  /// No description provided for @ovenTypeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Oven Type'**
+  String get ovenTypeLabel;
+
+  /// No description provided for @fermentationMethodLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Fermentation Method'**
+  String get fermentationMethodLabel;
+
+  /// No description provided for @mixerTypeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Mixer Type'**
+  String get mixerTypeLabel;
+
+  /// No description provided for @applySettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Apply Settings'**
+  String get applySettings;
+
+  /// No description provided for @applyingSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Applying...'**
+  String get applyingSettings;
+
+  /// No description provided for @seasonSpring.
+  ///
+  /// In en, this message translates to:
+  /// **'Spring'**
+  String get seasonSpring;
+
+  /// No description provided for @seasonSummer.
+  ///
+  /// In en, this message translates to:
+  /// **'Summer'**
+  String get seasonSummer;
+
+  /// No description provided for @seasonAutumn.
+  ///
+  /// In en, this message translates to:
+  /// **'Autumn'**
+  String get seasonAutumn;
+
+  /// No description provided for @seasonWinter.
+  ///
+  /// In en, this message translates to:
+  /// **'Winter'**
+  String get seasonWinter;
+
+  /// No description provided for @ovenConvection.
+  ///
+  /// In en, this message translates to:
+  /// **'Convection Oven'**
+  String get ovenConvection;
+
+  /// No description provided for @ovenProfessionalConvection.
+  ///
+  /// In en, this message translates to:
+  /// **'Professional Convection Oven'**
+  String get ovenProfessionalConvection;
+
+  /// No description provided for @ovenHome.
+  ///
+  /// In en, this message translates to:
+  /// **'Home Oven'**
+  String get ovenHome;
+
+  /// No description provided for @ovenConventional.
+  ///
+  /// In en, this message translates to:
+  /// **'Conventional Oven'**
+  String get ovenConventional;
+
+  /// No description provided for @ovenDeck.
+  ///
+  /// In en, this message translates to:
+  /// **'Deck Oven'**
+  String get ovenDeck;
+
+  /// No description provided for @ovenSteam.
+  ///
+  /// In en, this message translates to:
+  /// **'Steam Oven'**
+  String get ovenSteam;
+
+  /// No description provided for @ovenRadiation.
+  ///
+  /// In en, this message translates to:
+  /// **'Radiation Oven'**
+  String get ovenRadiation;
+
+  /// No description provided for @ovenStone.
+  ///
+  /// In en, this message translates to:
+  /// **'Stone Oven'**
+  String get ovenStone;
+
+  /// No description provided for @ovenProfessional.
+  ///
+  /// In en, this message translates to:
+  /// **'Professional Oven'**
+  String get ovenProfessional;
+
+  /// No description provided for @fermentationRoomTemp.
+  ///
+  /// In en, this message translates to:
+  /// **'Room Temperature'**
+  String get fermentationRoomTemp;
+
+  /// No description provided for @fermentationFermenter.
+  ///
+  /// In en, this message translates to:
+  /// **'Fermenter'**
+  String get fermentationFermenter;
+
+  /// No description provided for @mixerHome.
+  ///
+  /// In en, this message translates to:
+  /// **'Home Mixer'**
+  String get mixerHome;
+
+  /// No description provided for @mixerProfessional.
+  ///
+  /// In en, this message translates to:
+  /// **'Professional Mixer'**
+  String get mixerProfessional;
+
+  /// No description provided for @mixerCommercial.
+  ///
+  /// In en, this message translates to:
+  /// **'Commercial Mixer'**
+  String get mixerCommercial;
+
+  /// No description provided for @additionalAnalysisResults.
+  ///
+  /// In en, this message translates to:
+  /// **'Additional Analysis Results'**
+  String get additionalAnalysisResults;
+
+  /// No description provided for @expectedSuccessRate.
+  ///
+  /// In en, this message translates to:
+  /// **'Expected Success Rate'**
+  String get expectedSuccessRate;
+
+  /// No description provided for @glutenOptimization.
+  ///
+  /// In en, this message translates to:
+  /// **'Gluten Optimization'**
+  String get glutenOptimization;
+
+  /// No description provided for @moistureBalance.
+  ///
+  /// In en, this message translates to:
+  /// **'Moisture Balance'**
+  String get moistureBalance;
+
+  /// No description provided for @temperatureStability.
+  ///
+  /// In en, this message translates to:
+  /// **'Temperature Stability'**
+  String get temperatureStability;
+
+  /// No description provided for @statusOptimal.
+  ///
+  /// In en, this message translates to:
+  /// **'Optimal'**
+  String get statusOptimal;
+
+  /// No description provided for @statusGood.
+  ///
+  /// In en, this message translates to:
+  /// **'Good'**
+  String get statusGood;
+
+  /// No description provided for @statusStable.
+  ///
+  /// In en, this message translates to:
+  /// **'Stable'**
+  String get statusStable;
+
+  /// No description provided for @fermentationStrategyRecommendation.
+  ///
+  /// In en, this message translates to:
+  /// **'Fermentation Strategy Recommendation'**
+  String get fermentationStrategyRecommendation;
+
+  /// No description provided for @mixingStepOptimization.
+  ///
+  /// In en, this message translates to:
+  /// **'Mixing Step Optimization'**
+  String get mixingStepOptimization;
+
+  /// No description provided for @memoryUsage.
+  ///
+  /// In en, this message translates to:
+  /// **'Memory Usage'**
+  String get memoryUsage;
+
+  /// No description provided for @cacheMemory.
+  ///
+  /// In en, this message translates to:
+  /// **'Cache Memory'**
+  String get cacheMemory;
+
+  /// No description provided for @initializingModuleWait.
+  ///
+  /// In en, this message translates to:
+  /// **'Initializing analysis module. Please try again in a moment.'**
+  String get initializingModuleWait;
+
+  /// No description provided for @analysisComplete.
+  ///
+  /// In en, this message translates to:
+  /// **'Analysis complete.'**
+  String get analysisComplete;
+
+  /// No description provided for @analysisError.
+  ///
+  /// In en, this message translates to:
+  /// **'Error occurred during analysis.'**
+  String get analysisError;
+
+  /// No description provided for @validationError.
+  ///
+  /// In en, this message translates to:
+  /// **'Validation Error'**
+  String get validationError;
+
+  /// No description provided for @confirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm'**
+  String get confirm;
+
+  /// No description provided for @performanceSuggestions.
+  ///
+  /// In en, this message translates to:
+  /// **'Performance Suggestions'**
+  String get performanceSuggestions;
+
+  /// No description provided for @optimizationHighTemp.
+  ///
+  /// In en, this message translates to:
+  /// **' (High Temp Optimization)'**
+  String get optimizationHighTemp;
+
+  /// No description provided for @optimizationLowTemp.
+  ///
+  /// In en, this message translates to:
+  /// **' (Low Temp Optimization)'**
+  String get optimizationLowTemp;
+
+  /// No description provided for @optimizationHomeMixer.
+  ///
+  /// In en, this message translates to:
+  /// **' (Home Mixer Adjustment)'**
+  String get optimizationHomeMixer;
+
+  /// No description provided for @analyzing.
+  ///
+  /// In en, this message translates to:
+  /// **'Analyzing...'**
+  String get analyzing;
+
+  /// No description provided for @startAnalysis.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Analysis'**
+  String get startAnalysis;
+
+  /// No description provided for @improvementMethodsAndRecommendations.
+  ///
+  /// In en, this message translates to:
+  /// **'Improvement Methods and Recommendations'**
+  String get improvementMethodsAndRecommendations;
+
+  /// No description provided for @runAnalysis.
+  ///
+  /// In en, this message translates to:
+  /// **'Run Analysis'**
+  String get runAnalysis;
+
+  /// No description provided for @environmentalRecommendations.
+  ///
+  /// In en, this message translates to:
+  /// **'Environmental Recommendations'**
+  String get environmentalRecommendations;
+
+  /// No description provided for @stepCountLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} Steps'**
+  String stepCountLabel(Object count);
+
+  /// No description provided for @settingsApplied.
+  ///
+  /// In en, this message translates to:
+  /// **'Environmental settings applied.'**
+  String get settingsApplied;
+
+  /// No description provided for @settingsApplyError.
+  ///
+  /// In en, this message translates to:
+  /// **'Error applying environmental settings.'**
+  String get settingsApplyError;
+
+  /// No description provided for @realTimeRecipeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Real Time Recipe'**
+  String get realTimeRecipeTitle;
+
+  /// No description provided for @refresh.
+  ///
+  /// In en, this message translates to:
+  /// **'Refresh'**
+  String get refresh;
+
+  /// No description provided for @realTimeRecipeComingSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Real time recipes are coming soon'**
+  String get realTimeRecipeComingSoon;
+
+  /// No description provided for @realTimeRecipeComingSoonDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'You will soon meet various real time recipes'**
+  String get realTimeRecipeComingSoonDesc;
+
+  /// No description provided for @loadingRealTimeRecipes.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading real time recipes...'**
+  String get loadingRealTimeRecipes;
+
+  /// No description provided for @realTimeRecommendation.
+  ///
+  /// In en, this message translates to:
+  /// **'Real Time Recommendation'**
+  String get realTimeRecommendation;
+
+  /// No description provided for @noTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No Title'**
+  String get noTitle;
+
+  /// No description provided for @start.
+  ///
+  /// In en, this message translates to:
+  /// **'Start'**
+  String get start;
+
+  /// No description provided for @realTimeFeedback.
+  ///
+  /// In en, this message translates to:
+  /// **'Real Time Feedback'**
+  String get realTimeFeedback;
+
+  /// No description provided for @realTimeFeedbackComingSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Real time feedback system is coming soon.\nWe will provide useful tips and advice during the recipe.'**
+  String get realTimeFeedbackComingSoon;
+
+  /// No description provided for @recommendedRecipes.
+  ///
+  /// In en, this message translates to:
+  /// **'Recommended Recipes'**
+  String get recommendedRecipes;
+
+  /// No description provided for @recipeStarted.
+  ///
+  /// In en, this message translates to:
+  /// **'Starting {title} recipe!'**
+  String recipeStarted(Object title);
+
+  /// No description provided for @recipeSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'{title} recipe saved!'**
+  String recipeSaved(Object title);
+
+  /// No description provided for @initializingAnalysisEngine.
+  ///
+  /// In en, this message translates to:
+  /// **'Initializing analysis engine...'**
+  String get initializingAnalysisEngine;
+
+  /// No description provided for @performingScientificCalculations.
+  ///
+  /// In en, this message translates to:
+  /// **'Performing scientific step-by-step calculations...'**
+  String get performingScientificCalculations;
+
+  /// No description provided for @preparingMixingData.
+  ///
+  /// In en, this message translates to:
+  /// **'Preparing mixing step data...'**
+  String get preparingMixingData;
+
+  /// No description provided for @mixingAnalysis.
+  ///
+  /// In en, this message translates to:
+  /// **'Mixing Analysis'**
+  String get mixingAnalysis;
+
+  /// No description provided for @keyMetricsTotalMixing.
+  ///
+  /// In en, this message translates to:
+  /// **'Key Metrics: Total Mixing {minutes} min'**
+  String keyMetricsTotalMixing(Object minutes);
+
+  /// No description provided for @mixingAnalysisComplete.
+  ///
+  /// In en, this message translates to:
+  /// **'Mixing Analysis Complete'**
+  String get mixingAnalysisComplete;
+
+  /// No description provided for @overallScore.
+  ///
+  /// In en, this message translates to:
+  /// **'Overall Score: {score}% ({grade})'**
+  String overallScore(Object grade, Object score);
+
+  /// No description provided for @totalTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Time'**
+  String get totalTime;
+
+  /// No description provided for @glutenDevelopment.
+  ///
+  /// In en, this message translates to:
+  /// **'Gluten Development'**
+  String get glutenDevelopment;
+
+  /// No description provided for @moisture.
+  ///
+  /// In en, this message translates to:
+  /// **'Moisture'**
+  String get moisture;
+
+  /// No description provided for @doughTemperature.
+  ///
+  /// In en, this message translates to:
+  /// **'Dough Temperature'**
+  String get doughTemperature;
+
+  /// No description provided for @currentStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Current Status'**
+  String get currentStatus;
+
+  /// No description provided for @warning.
+  ///
+  /// In en, this message translates to:
+  /// **'Warning'**
+  String get warning;
+
+  /// No description provided for @temperatureWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'Temperature Warning'**
+  String get temperatureWarning;
+
+  /// No description provided for @stepTemperatureWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'Step {number}: Dough Temp {temp} (Recommended: 20-30°C)'**
+  String stepTemperatureWarning(Object number, Object temp);
+
+  /// No description provided for @mixingStepAnalysis.
+  ///
+  /// In en, this message translates to:
+  /// **'Mixing Step Analysis'**
+  String get mixingStepAnalysis;
+
+  /// No description provided for @analyzingMixing.
+  ///
+  /// In en, this message translates to:
+  /// **'Analyzing Mixing...'**
+  String get analyzingMixing;
+
+  /// No description provided for @performingStepCalculations.
+  ///
+  /// In en, this message translates to:
+  /// **'Performing step calculations'**
+  String get performingStepCalculations;
+
+  /// No description provided for @scientificCalculationsInProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Scientific calculations in progress...'**
+  String get scientificCalculationsInProgress;
+
+  /// No description provided for @processingAnalysisData.
+  ///
+  /// In en, this message translates to:
+  /// **'Processing analysis data to calculate metrics.'**
+  String get processingAnalysisData;
+
+  /// No description provided for @fermentationAnalysis.
+  ///
+  /// In en, this message translates to:
+  /// **'Fermentation Analysis'**
+  String get fermentationAnalysis;
+
+  /// No description provided for @totalFermentationTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Fermentation Time'**
+  String get totalFermentationTime;
+
+  /// No description provided for @totalCO2Generation.
+  ///
+  /// In en, this message translates to:
+  /// **'Total CO₂ Generation'**
+  String get totalCO2Generation;
+
+  /// No description provided for @totalFermentationProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Fermentation Progress'**
+  String get totalFermentationProgress;
+
+  /// No description provided for @fermentationStepCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Fermentation Steps'**
+  String get fermentationStepCount;
+
+  /// No description provided for @noData.
+  ///
+  /// In en, this message translates to:
+  /// **'No Data'**
+  String get noData;
+
+  /// No description provided for @fermentationPerfect.
+  ///
+  /// In en, this message translates to:
+  /// **'Perfect Fermentation'**
+  String get fermentationPerfect;
+
+  /// No description provided for @fermentationExcellent.
+  ///
+  /// In en, this message translates to:
+  /// **'Excellent'**
+  String get fermentationExcellent;
+
+  /// No description provided for @fermentationGood.
+  ///
+  /// In en, this message translates to:
+  /// **'Good'**
+  String get fermentationGood;
+
+  /// No description provided for @fermentationAverage.
+  ///
+  /// In en, this message translates to:
+  /// **'Average'**
+  String get fermentationAverage;
+
+  /// No description provided for @fermentationPoor.
+  ///
+  /// In en, this message translates to:
+  /// **'Poor'**
+  String get fermentationPoor;
+
+  /// No description provided for @analysisIncomplete.
+  ///
+  /// In en, this message translates to:
+  /// **'Analysis Incomplete'**
+  String get analysisIncomplete;
+
+  /// No description provided for @actualDataUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Actual data unavailable'**
+  String get actualDataUnavailable;
+
+  /// No description provided for @completedStep.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed Step {number}'**
+  String completedStep(Object number);
+
+  /// No description provided for @stepNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Step {number}'**
+  String stepNumber(Object number);
+
+  /// No description provided for @timeMinutes.
+  ///
+  /// In en, this message translates to:
+  /// **'Time: {minutes} min'**
+  String timeMinutes(Object minutes);
+
+  /// No description provided for @progress.
+  ///
+  /// In en, this message translates to:
+  /// **'Progress'**
+  String get progress;
+
+  /// No description provided for @maillardReaction.
+  ///
+  /// In en, this message translates to:
+  /// **'Maillard'**
+  String get maillardReaction;
+
+  /// No description provided for @crumb.
+  ///
+  /// In en, this message translates to:
+  /// **'Crumb'**
+  String get crumb;
+
+  /// No description provided for @internalTemperature.
+  ///
+  /// In en, this message translates to:
+  /// **'Internal Temp'**
+  String get internalTemperature;
+
+  /// No description provided for @bakingComplete.
+  ///
+  /// In en, this message translates to:
+  /// **'Baking Complete!'**
+  String get bakingComplete;
+
+  /// No description provided for @bakingAnalysis.
+  ///
+  /// In en, this message translates to:
+  /// **'Oven Baking Analysis'**
+  String get bakingAnalysis;
+
+  /// No description provided for @waitingForFermentationAnalysis.
+  ///
+  /// In en, this message translates to:
+  /// **'Waiting for fermentation analysis to complete...'**
+  String get waitingForFermentationAnalysis;
+
+  /// No description provided for @totalBakingTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Baking Time'**
+  String get totalBakingTime;
+
+  /// No description provided for @totalMaillardReaction.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Maillard Reaction'**
+  String get totalMaillardReaction;
+
+  /// No description provided for @averageInternalTemperature.
+  ///
+  /// In en, this message translates to:
+  /// **'Avg Internal Temp'**
+  String get averageInternalTemperature;
+
+  /// No description provided for @bakingStepCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Baking Steps'**
+  String get bakingStepCount;
+
+  /// No description provided for @crustColor.
+  ///
+  /// In en, this message translates to:
+  /// **'Crust Color'**
+  String get crustColor;
+
+  /// No description provided for @crumbBakingProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Crumb Progress'**
+  String get crumbBakingProgress;
+
+  /// No description provided for @crustColorDarkBrown.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark Brown'**
+  String get crustColorDarkBrown;
+
+  /// No description provided for @crustColorBrown.
+  ///
+  /// In en, this message translates to:
+  /// **'Brown'**
+  String get crustColorBrown;
+
+  /// No description provided for @crustColorLightBrown.
+  ///
+  /// In en, this message translates to:
+  /// **'Light Brown'**
+  String get crustColorLightBrown;
+
+  /// No description provided for @crustColorGolden.
+  ///
+  /// In en, this message translates to:
+  /// **'Golden'**
+  String get crustColorGolden;
+
+  /// No description provided for @crustColorLightIvory.
+  ///
+  /// In en, this message translates to:
+  /// **'Light Ivory'**
+  String get crustColorLightIvory;
+
+  /// No description provided for @preparingBakingStepData.
+  ///
+  /// In en, this message translates to:
+  /// **'Preparing baking step analysis data...'**
+  String get preparingBakingStepData;
+
+  /// No description provided for @bakingStepAnalysis.
+  ///
+  /// In en, this message translates to:
+  /// **'Baking Step Analysis'**
+  String get bakingStepAnalysis;
+
+  /// No description provided for @stepProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'{completed}/{total} Steps'**
+  String stepProgress(Object completed, Object total);
+
+  /// No description provided for @scientificBakingCalculationsInProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Scientific baking calculations in progress...'**
+  String get scientificBakingCalculationsInProgress;
+
+  /// No description provided for @performingScientificBakingCalculations.
+  ///
+  /// In en, this message translates to:
+  /// **'Performing scientific baking calculations...'**
+  String get performingScientificBakingCalculations;
+
+  /// No description provided for @performanceMonitoring.
+  ///
+  /// In en, this message translates to:
+  /// **'Performance Monitoring'**
+  String get performanceMonitoring;
+
+  /// No description provided for @analysisDuration.
+  ///
+  /// In en, this message translates to:
+  /// **'Analysis Duration'**
+  String get analysisDuration;
+
+  /// No description provided for @cachePerformance.
+  ///
+  /// In en, this message translates to:
+  /// **'Cache Performance'**
+  String get cachePerformance;
+
+  /// No description provided for @totalEntries.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Entries'**
+  String get totalEntries;
+
+  /// No description provided for @expiredEntries.
+  ///
+  /// In en, this message translates to:
+  /// **'Expired Entries'**
+  String get expiredEntries;
+
+  /// No description provided for @hitRate.
+  ///
+  /// In en, this message translates to:
+  /// **'Hit Rate'**
+  String get hitRate;
+
+  /// No description provided for @successRateStatistics.
+  ///
+  /// In en, this message translates to:
+  /// **'Success Rate Statistics'**
+  String get successRateStatistics;
+
+  /// No description provided for @lowTempWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'Low temperature may prolong fermentation. Move to a warmer place.'**
+  String get lowTempWarning;
+
+  /// No description provided for @highTempWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'High temperature risks over-fermentation. Move to a cooler place.'**
+  String get highTempWarning;
+
+  /// No description provided for @lowHumidityWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'Low humidity may dry out the bread. Keep water nearby.'**
+  String get lowHumidityWarning;
+
+  /// No description provided for @highHumidityWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'High humidity may make the bread heavy. Ensure good ventilation.'**
+  String get highHumidityWarning;
+
+  /// No description provided for @winterRecommendation.
+  ///
+  /// In en, this message translates to:
+  /// **'In winter, increase fermentation time by 20-30%.'**
+  String get winterRecommendation;
+
+  /// No description provided for @summerRecommendation.
+  ///
+  /// In en, this message translates to:
+  /// **'In summer, decrease fermentation time by 10-20%.'**
+  String get summerRecommendation;
+
+  /// No description provided for @optimalEnvironmentMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Current environmental conditions are optimal for baking.'**
+  String get optimalEnvironmentMessage;
+
+  /// No description provided for @coldFermentationStrategy.
+  ///
+  /// In en, this message translates to:
+  /// **'Cold Fermentation Strategy'**
+  String get coldFermentationStrategy;
+
+  /// No description provided for @coldFermentationDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Low temperature requires long fermentation.'**
+  String get coldFermentationDesc;
+
+  /// No description provided for @coldFermentationBenefit1.
+  ///
+  /// In en, this message translates to:
+  /// **'Flavor Enhancement'**
+  String get coldFermentationBenefit1;
+
+  /// No description provided for @coldFermentationBenefit2.
+  ///
+  /// In en, this message translates to:
+  /// **'Rancidity Inhibition'**
+  String get coldFermentationBenefit2;
+
+  /// No description provided for @coldFermentationBenefit3.
+  ///
+  /// In en, this message translates to:
+  /// **'Gluten Structure Strengthening'**
+  String get coldFermentationBenefit3;
+
+  /// No description provided for @warmFermentationStrategy.
+  ///
+  /// In en, this message translates to:
+  /// **'Warm Fermentation Strategy'**
+  String get warmFermentationStrategy;
+
+  /// No description provided for @warmFermentationDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'High temperature leads to rapid fermentation.'**
+  String get warmFermentationDesc;
+
+  /// No description provided for @warmFermentationBenefit1.
+  ///
+  /// In en, this message translates to:
+  /// **'Time Saving'**
+  String get warmFermentationBenefit1;
+
+  /// No description provided for @warmFermentationBenefit2.
+  ///
+  /// In en, this message translates to:
+  /// **'Efficient Production'**
+  String get warmFermentationBenefit2;
+
+  /// No description provided for @warmFermentationBenefit3.
+  ///
+  /// In en, this message translates to:
+  /// **'Quick Results'**
+  String get warmFermentationBenefit3;
+
+  /// No description provided for @standardFermentationStrategy.
+  ///
+  /// In en, this message translates to:
+  /// **'Standard Fermentation Strategy'**
+  String get standardFermentationStrategy;
+
+  /// No description provided for @standardFermentationDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Current environment is optimal for standard fermentation.'**
+  String get standardFermentationDesc;
+
+  /// No description provided for @standardFermentationBenefit1.
+  ///
+  /// In en, this message translates to:
+  /// **'Stable Results'**
+  String get standardFermentationBenefit1;
+
+  /// No description provided for @standardFermentationBenefit2.
+  ///
+  /// In en, this message translates to:
+  /// **'Predictable Quality'**
+  String get standardFermentationBenefit2;
+
+  /// No description provided for @standardFermentationBenefit3.
+  ///
+  /// In en, this message translates to:
+  /// **'Easy Management'**
+  String get standardFermentationBenefit3;
+
+  /// No description provided for @largeCacheSuggestion.
+  ///
+  /// In en, this message translates to:
+  /// **'Cache size is large. Try clearing unnecessary cache.'**
+  String get largeCacheSuggestion;
+
+  /// No description provided for @increaseCacheSuggestion.
+  ///
+  /// In en, this message translates to:
+  /// **'Increasing cache usage may improve performance.'**
+  String get increaseCacheSuggestion;
+
+  /// No description provided for @longAnalysisTimeSuggestion.
+  ///
+  /// In en, this message translates to:
+  /// **'Analysis time is long. Try increasing cache usage.'**
+  String get longAnalysisTimeSuggestion;
+
+  /// No description provided for @fastAnalysisSuggestion.
+  ///
+  /// In en, this message translates to:
+  /// **'Very fast analysis speed! Optimization is working well.'**
+  String get fastAnalysisSuggestion;
+
+  /// No description provided for @optimizedPerformanceMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Performance is currently optimized.'**
+  String get optimizedPerformanceMessage;
+
+  /// No description provided for @unitHours.
+  ///
+  /// In en, this message translates to:
+  /// **'{count}h'**
+  String unitHours(Object count);
+
+  /// No description provided for @unitMinutes.
+  ///
+  /// In en, this message translates to:
+  /// **'{count}m'**
+  String unitMinutes(Object count);
+
+  /// No description provided for @stepCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} Steps'**
+  String stepCount(Object count);
+
+  /// No description provided for @mixinAnalysisTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Mixing Step-by-Step Analysis'**
+  String get mixinAnalysisTitle;
+
+  /// No description provided for @fermentationAnalysisTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Fermentation Analysis'**
+  String get fermentationAnalysisTitle;
+
+  /// No description provided for @bakingAnalysisTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Oven Baking Step-by-Step Analysis'**
+  String get bakingAnalysisTitle;
+
+  /// No description provided for @analyzingScientificCalculations.
+  ///
+  /// In en, this message translates to:
+  /// **'Performing scientific bread calculations...'**
+  String get analyzingScientificCalculations;
+
+  /// No description provided for @stepLabelWithNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Step {number}'**
+  String stepLabelWithNumber(Object number);
+
+  /// No description provided for @preparingAnalysisData.
+  ///
+  /// In en, this message translates to:
+  /// **'Preparing data...'**
+  String get preparingAnalysisData;
+
+  /// No description provided for @mixingStepDefaultTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Mixing Step {number}'**
+  String mixingStepDefaultTitle(Object number);
+
+  /// No description provided for @speedAndDuration.
+  ///
+  /// In en, this message translates to:
+  /// **'{speed} · {duration}m'**
+  String speedAndDuration(Object duration, Object speed);
+
+  /// No description provided for @glutenFormationLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Gluten Formation'**
+  String get glutenFormationLabel;
+
+  /// No description provided for @calculatingLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Calculating...'**
+  String get calculatingLabel;
+
+  /// No description provided for @detailedMetricsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Detailed Metrics'**
+  String get detailedMetricsLabel;
+
+  /// No description provided for @moistureAbsorptionLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Moisture Absorption'**
+  String get moistureAbsorptionLabel;
+
+  /// No description provided for @optimalRangeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Optimal: {min}-{max}'**
+  String optimalRangeLabel(Object max, Object min);
+
+  /// No description provided for @optimalRangeLabelPercent.
+  ///
+  /// In en, this message translates to:
+  /// **'Optimal: {min}-{max}%'**
+  String optimalRangeLabelPercent(Object max, Object min);
+
+  /// No description provided for @optimalRangeLabelTemp.
+  ///
+  /// In en, this message translates to:
+  /// **'Optimal: {min}-{max}°C'**
+  String optimalRangeLabelTemp(Object max, Object min);
+
+  /// No description provided for @viscosityLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Viscosity'**
+  String get viscosityLabel;
+
+  /// No description provided for @rpmLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'RPM'**
+  String get rpmLabel;
+
+  /// No description provided for @rotationSpeedLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Rotation Speed'**
+  String get rotationSpeedLabel;
+
+  /// No description provided for @observedPhenomenaLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Observed Phenomena'**
+  String get observedPhenomenaLabel;
+
+  /// No description provided for @unknownValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown'**
+  String get unknownValue;
+
+  /// No description provided for @errorValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Error'**
+  String get errorValue;
+
+  /// No description provided for @fermentationStepPrefix.
+  ///
+  /// In en, this message translates to:
+  /// **'{number}th Fermentation'**
+  String fermentationStepPrefix(Object number);
+
+  /// No description provided for @mainMetricsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Main Metrics'**
+  String get mainMetricsTitle;
+
+  /// No description provided for @co2GenerationLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'CO₂ Generation'**
+  String get co2GenerationLabel;
+
+  /// No description provided for @volumeExpansionLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Volume Expansion'**
+  String get volumeExpansionLabel;
+
+  /// No description provided for @fermentationProgressLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Fermentation Progress'**
+  String get fermentationProgressLabel;
+
+  /// No description provided for @acidityLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Acidity'**
+  String get acidityLabel;
+
+  /// No description provided for @scoreGradeExcellent.
+  ///
+  /// In en, this message translates to:
+  /// **'Excellent'**
+  String get scoreGradeExcellent;
+
+  /// No description provided for @scoreGradeGood.
+  ///
+  /// In en, this message translates to:
+  /// **'Good'**
+  String get scoreGradeGood;
+
+  /// No description provided for @scoreGradeFair.
+  ///
+  /// In en, this message translates to:
+  /// **'Fair'**
+  String get scoreGradeFair;
+
+  /// No description provided for @scoreGradeAverage.
+  ///
+  /// In en, this message translates to:
+  /// **'Average'**
+  String get scoreGradeAverage;
+
+  /// No description provided for @scoreGradePoor.
+  ///
+  /// In en, this message translates to:
+  /// **'Poor'**
+  String get scoreGradePoor;
+
+  /// No description provided for @stepLabelText.
+  ///
+  /// In en, this message translates to:
+  /// **'Step {number}'**
+  String stepLabelText(Object number);
+
+  /// No description provided for @measuringTemperature.
+  ///
+  /// In en, this message translates to:
+  /// **'Measuring...'**
+  String get measuringTemperature;
+
+  /// No description provided for @mixingStepTitleLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Mixing Step {number}'**
+  String mixingStepTitleLabel(Object number);
+
+  /// No description provided for @keyMetricsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Key Metrics'**
+  String get keyMetricsTitle;
+
+  /// No description provided for @doughDevelopmentLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'🌾 Dough Development'**
+  String get doughDevelopmentLabel;
+
+  /// No description provided for @moistureAbsorptionRateLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'💧 Moisture Absorption Rate'**
+  String get moistureAbsorptionRateLabel;
+
+  /// No description provided for @doughTemperatureLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'🌡️ Dough Temperature'**
+  String get doughTemperatureLabel;
+
+  /// No description provided for @doughTextureLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'⚡ Dough Texture'**
+  String get doughTextureLabel;
+
+  /// No description provided for @calculationError.
+  ///
+  /// In en, this message translates to:
+  /// **'Calculation Error'**
+  String get calculationError;
+
+  /// No description provided for @calculating.
+  ///
+  /// In en, this message translates to:
+  /// **'Calculating...'**
+  String get calculating;
+
+  /// No description provided for @measuring.
+  ///
+  /// In en, this message translates to:
+  /// **'Measuring...'**
+  String get measuring;
+
+  /// No description provided for @ingredientsMixing.
+  ///
+  /// In en, this message translates to:
+  /// **'Mixing Ingredients'**
+  String get ingredientsMixing;
 }
 
 class _AppLocalizationsDelegate

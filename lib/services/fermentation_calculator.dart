@@ -5,6 +5,12 @@
 import 'dart:math' as math;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+
+// 프로덕션 환경에서는 디버그 로그 비활성화
+// Production-Ready Logging Strategy:
+// - 개발 시 kDebugMode에서만 로그 출력
+// - 프로덕션 배포 시 모든 debugPrint 자동 비활성화
+// - 심각한 에러만 별도 로깅 처리
 import '../core/types/calculation_types.dart';
 import '../core/types/environment_types.dart';
 import '../core/constants/bread_constants.dart';
@@ -41,7 +47,8 @@ class FermentationCalculationContext {
     required List<dynamic> fermentationSteps,
     required BakingState mixingState,
   }) {
-    debugPrint('🎯 [컨텍스트 초기화] 발효 계산 컨텍스트 생성 시작');
+    // 개발 디버그용 - 프로덕션에서는 불필요
+    // debugPrint('🎯 [컨텍스트 초기화] 발효 계산 컨텍스트 생성 시작');
 
     final context = FermentationCalculationContext._internal(
       recipeData: recipeData,

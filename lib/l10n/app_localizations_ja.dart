@@ -1035,7 +1035,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mixingStepTitle => 'ミキシングステップ';
 
   @override
-  String get fermentationStepTitle => '発酵ステップ';
+  String fermentationStepTitle(Object number) {
+    return '発酵段階 $number';
+  }
 
   @override
   String get ovenStepTitle => 'オーブンステップ';
@@ -1090,4 +1092,710 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get targetCountError => '目標数は1個以上である必要があります';
+
+  @override
+  String get noDescription => '説明なし';
+
+  @override
+  String get mixingSpeedLow => '低速';
+
+  @override
+  String get mixingSpeedMedium => '中速';
+
+  @override
+  String get mixingSpeedHigh => '高速';
+
+  @override
+  String get mixingSpeedMax => '最高速';
+
+  @override
+  String get mixingSpeedPulse => 'パルス';
+
+  @override
+  String get mixingSpeedEgg => '卵/泡';
+
+  @override
+  String get sousChefModeTitle => 'スーシェフモード';
+
+  @override
+  String get analysisTab => '分析';
+
+  @override
+  String get selectAnalysisModule => '分析モジュール選択';
+
+  @override
+  String get breadModule => 'パンモジュール';
+
+  @override
+  String get unknownModule => '不明なモジュール';
+
+  @override
+  String get bakingEnvironmentConditions => 'ベーキング環境条件';
+
+  @override
+  String get altitudeLabel => '高度 (m)';
+
+  @override
+  String get seasonLabel => '季節';
+
+  @override
+  String get ovenTypeLabel => 'オーブンタイプ';
+
+  @override
+  String get fermentationMethodLabel => '発酵方法';
+
+  @override
+  String get mixerTypeLabel => 'ミキサータイプ';
+
+  @override
+  String get applySettings => '設定を適用';
+
+  @override
+  String get applyingSettings => '適用中...';
+
+  @override
+  String get seasonSpring => '春';
+
+  @override
+  String get seasonSummer => '夏';
+
+  @override
+  String get seasonAutumn => '秋';
+
+  @override
+  String get seasonWinter => '冬';
+
+  @override
+  String get ovenConvection => 'コンベクションオーブン';
+
+  @override
+  String get ovenProfessionalConvection => 'プロ用コンベクション';
+
+  @override
+  String get ovenHome => '家庭用オーブン';
+
+  @override
+  String get ovenConventional => '従来型オーブン';
+
+  @override
+  String get ovenDeck => 'デッキオーブン';
+
+  @override
+  String get ovenSteam => 'スチームオーブン';
+
+  @override
+  String get ovenRadiation => '放射オーブン';
+
+  @override
+  String get ovenStone => '石窯オーブン';
+
+  @override
+  String get ovenProfessional => 'プロ用オーブン';
+
+  @override
+  String get fermentationRoomTemp => '室温発酵';
+
+  @override
+  String get fermentationFermenter => '発酵機';
+
+  @override
+  String get mixerHome => '家庭用ミキサー';
+
+  @override
+  String get mixerProfessional => 'プロ用ミキサー';
+
+  @override
+  String get mixerCommercial => '業務用ミキサー';
+
+  @override
+  String get additionalAnalysisResults => '追加分析結果';
+
+  @override
+  String get expectedSuccessRate => '予想成功率';
+
+  @override
+  String get glutenOptimization => 'グルテン形成最適化';
+
+  @override
+  String get moistureBalance => '水分バランス';
+
+  @override
+  String get temperatureStability => '温度安定性';
+
+  @override
+  String get statusOptimal => '適正';
+
+  @override
+  String get statusGood => '良好';
+
+  @override
+  String get statusStable => '安定';
+
+  @override
+  String get fermentationStrategyRecommendation => '発酵戦略推奨';
+
+  @override
+  String get mixingStepOptimization => 'ミキシング段階最適化';
+
+  @override
+  String get memoryUsage => 'メモリ使用量';
+
+  @override
+  String get cacheMemory => 'キャッシュメモリ';
+
+  @override
+  String get initializingModuleWait => '分析モジュールを初期化中です。しばらくしてからもう一度お試しください。';
+
+  @override
+  String get analysisComplete => '分析が完了しました。';
+
+  @override
+  String get analysisError => '分析中にエラーが発生しました。';
+
+  @override
+  String get validationError => '入力値検証エラー';
+
+  @override
+  String get confirm => '確認';
+
+  @override
+  String get performanceSuggestions => 'パフォーマンス改善提案';
+
+  @override
+  String get optimizationHighTemp => ' (高温最適化)';
+
+  @override
+  String get optimizationLowTemp => ' (低温最適化)';
+
+  @override
+  String get optimizationHomeMixer => ' (家庭用ミキサー調整)';
+
+  @override
+  String get analyzing => '分析中...';
+
+  @override
+  String get startAnalysis => '分析開始';
+
+  @override
+  String get improvementMethodsAndRecommendations => '改善方法および推奨事項';
+
+  @override
+  String get runAnalysis => '分析実行';
+
+  @override
+  String get environmentalRecommendations => '環境条件に基づく推奨';
+
+  @override
+  String stepCountLabel(Object count) {
+    return '$count段階';
+  }
+
+  @override
+  String get settingsApplied => '環境設定が適用されました。';
+
+  @override
+  String get settingsApplyError => '環境設定の適用中にエラーが発生しました。';
+
+  @override
+  String get realTimeRecipeTitle => 'リアルタイムレシピ';
+
+  @override
+  String get refresh => '更新';
+
+  @override
+  String get realTimeRecipeComingSoon => 'リアルタイムレシピは準備中です';
+
+  @override
+  String get realTimeRecipeComingSoonDesc => 'まもなく様々なリアルタイムレシピをご覧いただけます';
+
+  @override
+  String get loadingRealTimeRecipes => 'リアルタイムレシピを読み込み中...';
+
+  @override
+  String get realTimeRecommendation => 'リアルタイム推奨';
+
+  @override
+  String get noTitle => 'タイトルなし';
+
+  @override
+  String get start => '開始';
+
+  @override
+  String get realTimeFeedback => 'リアルタイムフィードバック';
+
+  @override
+  String get realTimeFeedbackComingSoon =>
+      'リアルタイムフィードバックシステムは準備中です。\nレシピ進行中に役立つヒントやアドバイスを提供します。';
+
+  @override
+  String get recommendedRecipes => 'おすすめレシピ';
+
+  @override
+  String recipeStarted(Object title) {
+    return '$title レシピを開始します！';
+  }
+
+  @override
+  String recipeSaved(Object title) {
+    return '$title レシピが保存されました！';
+  }
+
+  @override
+  String get initializingAnalysisEngine => '分析エンジンを初期化中...';
+
+  @override
+  String get performingScientificCalculations => 'パン製造の科学的段階別計算を実行中...';
+
+  @override
+  String get preparingMixingData => 'ミキシング段階データを準備中...';
+
+  @override
+  String get mixingAnalysis => 'ミキシング分析';
+
+  @override
+  String keyMetricsTotalMixing(Object minutes) {
+    return '主要指標: 総ミキシング $minutes分';
+  }
+
+  @override
+  String get mixingAnalysisComplete => 'ミキシング分析完了';
+
+  @override
+  String overallScore(Object grade, Object score) {
+    return '総合スコア: $score% ($grade)';
+  }
+
+  @override
+  String get totalTime => '総時間';
+
+  @override
+  String get glutenDevelopment => 'グルテン発達';
+
+  @override
+  String get moisture => '水分';
+
+  @override
+  String get doughTemperature => '生地温度';
+
+  @override
+  String get currentStatus => '現在の状態';
+
+  @override
+  String get warning => '警告';
+
+  @override
+  String get temperatureWarning => '温度警告';
+
+  @override
+  String stepTemperatureWarning(Object number, Object temp) {
+    return '段階 $number: 生地温度 $temp (推奨: 20-30°C)';
+  }
+
+  @override
+  String get mixingStepAnalysis => 'ミキシング段階別分析';
+
+  @override
+  String get analyzingMixing => 'ミキシング分析進行中...';
+
+  @override
+  String get performingStepCalculations => '段階別計算を実行しています';
+
+  @override
+  String get scientificCalculationsInProgress => '科学的計算進行中...';
+
+  @override
+  String get processingAnalysisData => '分析データを処理してメトリクス値を計算しています。';
+
+  @override
+  String get fermentationAnalysis => '発酵分析';
+
+  @override
+  String get totalFermentationTime => '発酵総時間';
+
+  @override
+  String get totalCO2Generation => '総CO₂生成量';
+
+  @override
+  String get totalFermentationProgress => '総発酵進行率';
+
+  @override
+  String get fermentationStepCount => '発酵段階数';
+
+  @override
+  String get noData => 'データなし';
+
+  @override
+  String get fermentationPerfect => '完璧な発酵';
+
+  @override
+  String get fermentationExcellent => '優秀完了';
+
+  @override
+  String get fermentationGood => '良好完了';
+
+  @override
+  String get fermentationAverage => '普通完了';
+
+  @override
+  String get fermentationPoor => '不十分完了';
+
+  @override
+  String get analysisIncomplete => '分析未完了';
+
+  @override
+  String get actualDataUnavailable => '実際のデータを使用できません';
+
+  @override
+  String completedStep(Object number) {
+    return '完了段階 $number';
+  }
+
+  @override
+  String stepNumber(Object number) {
+    return '段階 $number';
+  }
+
+  @override
+  String timeMinutes(Object minutes) {
+    return '時間: $minutes分';
+  }
+
+  @override
+  String get progress => '進行率';
+
+  @override
+  String get maillardReaction => 'メイラード';
+
+  @override
+  String get crumb => 'クラム';
+
+  @override
+  String get internalTemperature => '内部温度';
+
+  @override
+  String get bakingComplete => 'ベーキング完了！';
+
+  @override
+  String get bakingAnalysis => 'オーブンベーキング分析';
+
+  @override
+  String get waitingForFermentationAnalysis => '発酵分析完了後にベーキング分析を行います...';
+
+  @override
+  String get totalBakingTime => '総ベーキング時間';
+
+  @override
+  String get totalMaillardReaction => '総メイラード反応';
+
+  @override
+  String get averageInternalTemperature => '平均内部温度';
+
+  @override
+  String get bakingStepCount => 'ベーキング段階数';
+
+  @override
+  String get crustColor => 'クラスト色';
+
+  @override
+  String get crumbBakingProgress => 'クラム進行率';
+
+  @override
+  String get crustColorDarkBrown => '濃い茶色';
+
+  @override
+  String get crustColorBrown => '茶色';
+
+  @override
+  String get crustColorLightBrown => '薄い茶色';
+
+  @override
+  String get crustColorGolden => '金色';
+
+  @override
+  String get crustColorLightIvory => '薄いアイボリー';
+
+  @override
+  String get preparingBakingStepData => 'オーブンベーキング段階別分析データを準備中...';
+
+  @override
+  String get bakingStepAnalysis => 'オーブンベーキング段階別分析';
+
+  @override
+  String stepProgress(Object completed, Object total) {
+    return '$completed/$total段階';
+  }
+
+  @override
+  String get scientificBakingCalculationsInProgress => 'パン製造科学的計算進行中...';
+
+  @override
+  String get performingScientificBakingCalculations => 'パン製造科学的ベーキング計算を実行中...';
+
+  @override
+  String get performanceMonitoring => 'パフォーマンス監視';
+
+  @override
+  String get analysisDuration => '分析所要時間';
+
+  @override
+  String get cachePerformance => 'キャッシュパフォーマンス';
+
+  @override
+  String get totalEntries => '総項目';
+
+  @override
+  String get expiredEntries => '期限切れ項目';
+
+  @override
+  String get hitRate => 'ヒット率';
+
+  @override
+  String get successRateStatistics => '成功率統計';
+
+  @override
+  String get lowTempWarning => '温度が低いため、発酵時間が長くなる可能性があります。暖かい場所に移動してください。';
+
+  @override
+  String get highTempWarning => '温度が高いため、過発酵のリスクがあります。涼しい場所に移動してください。';
+
+  @override
+  String get lowHumidityWarning => '湿度が低いため、パンが乾燥する可能性があります。水を近くに置いてください。';
+
+  @override
+  String get highHumidityWarning => '湿度が高いため、パンが重くなる可能性があります。通気の良い場所を確認してください。';
+
+  @override
+  String get winterRecommendation => '冬は発酵時間を20-30%増やすことをお勧めします。';
+
+  @override
+  String get summerRecommendation => '夏は発酵時間を10-20%減らすことをお勧めします。';
+
+  @override
+  String get optimalEnvironmentMessage => '現在の環境条件はパン焼きに適しています。';
+
+  @override
+  String get coldFermentationStrategy => '低温発酵戦略';
+
+  @override
+  String get coldFermentationDesc => '現在の温度が低いため、長時間の発酵が必要です。';
+
+  @override
+  String get coldFermentationBenefit1 => '風味向上';
+
+  @override
+  String get coldFermentationBenefit2 => '酸敗抑制';
+
+  @override
+  String get coldFermentationBenefit3 => 'グルテン構造強化';
+
+  @override
+  String get warmFermentationStrategy => '高温発酵戦略';
+
+  @override
+  String get warmFermentationDesc => '現在の温度が高いため、急速な発酵が進行します。';
+
+  @override
+  String get warmFermentationBenefit1 => '時間節約';
+
+  @override
+  String get warmFermentationBenefit2 => '効率的な生産';
+
+  @override
+  String get warmFermentationBenefit3 => '迅速な結果確認';
+
+  @override
+  String get standardFermentationStrategy => '標準発酵戦略';
+
+  @override
+  String get standardFermentationDesc => '現在の環境は標準発酵に最適です。';
+
+  @override
+  String get standardFermentationBenefit1 => '安定した結果';
+
+  @override
+  String get standardFermentationBenefit2 => '予測可能な品質';
+
+  @override
+  String get standardFermentationBenefit3 => '容易な管理';
+
+  @override
+  String get largeCacheSuggestion => 'キャッシュサイズが大きいです。不要なキャッシュを整理してみてください。';
+
+  @override
+  String get increaseCacheSuggestion => 'キャッシュ活用を増やすとパフォーマンスが向上する可能性があります。';
+
+  @override
+  String get longAnalysisTimeSuggestion => '分析時間が長くなっています。キャッシュ活用を増やしてみてください。';
+
+  @override
+  String get fastAnalysisSuggestion => '非常に速い分析速度！最適化がうまくいっています。';
+
+  @override
+  String get optimizedPerformanceMessage => '現在、パフォーマンスが最適化されています。';
+
+  @override
+  String unitHours(Object count) {
+    return '$count時間';
+  }
+
+  @override
+  String unitMinutes(Object count) {
+    return '$count分';
+  }
+
+  @override
+  String stepCount(Object count) {
+    return '$count Steps';
+  }
+
+  @override
+  String get mixinAnalysisTitle => 'Mixing Step-by-Step Analysis';
+
+  @override
+  String get fermentationAnalysisTitle => 'Fermentation Analysis';
+
+  @override
+  String get bakingAnalysisTitle => 'Oven Baking Step-by-Step Analysis';
+
+  @override
+  String get analyzingScientificCalculations =>
+      'Performing scientific bread calculations...';
+
+  @override
+  String stepLabelWithNumber(Object number) {
+    return 'Step $number';
+  }
+
+  @override
+  String get preparingAnalysisData => 'Preparing data...';
+
+  @override
+  String mixingStepDefaultTitle(Object number) {
+    return 'ミキシング段階 $number';
+  }
+
+  @override
+  String speedAndDuration(Object duration, Object speed) {
+    return '$speed · $duration分';
+  }
+
+  @override
+  String get glutenFormationLabel => 'グルテン形成';
+
+  @override
+  String get calculatingLabel => '計算中...';
+
+  @override
+  String get detailedMetricsLabel => '詳細メトリクス';
+
+  @override
+  String get moistureAbsorptionLabel => '水分吸収率';
+
+  @override
+  String optimalRangeLabel(Object max, Object min) {
+    return '適正範囲: $min-$max';
+  }
+
+  @override
+  String optimalRangeLabelPercent(Object max, Object min) {
+    return '適正範囲: $min-$max%';
+  }
+
+  @override
+  String optimalRangeLabelTemp(Object max, Object min) {
+    return '適正範囲: $min-$max°C';
+  }
+
+  @override
+  String get viscosityLabel => '粘度';
+
+  @override
+  String get rpmLabel => 'RPM';
+
+  @override
+  String get rotationSpeedLabel => '回転速度';
+
+  @override
+  String get observedPhenomenaLabel => '観測現象';
+
+  @override
+  String get unknownValue => '不明';
+
+  @override
+  String get errorValue => 'エラー';
+
+  @override
+  String fermentationStepPrefix(Object number) {
+    return '${number}th Fermentation';
+  }
+
+  @override
+  String get mainMetricsTitle => 'Main Metrics';
+
+  @override
+  String get co2GenerationLabel => 'CO₂ Generation';
+
+  @override
+  String get volumeExpansionLabel => 'Volume Expansion';
+
+  @override
+  String get fermentationProgressLabel => 'Fermentation Progress';
+
+  @override
+  String get acidityLabel => 'Acidity';
+
+  @override
+  String get scoreGradeExcellent => 'Excellent';
+
+  @override
+  String get scoreGradeGood => 'Good';
+
+  @override
+  String get scoreGradeFair => 'Fair';
+
+  @override
+  String get scoreGradeAverage => 'Average';
+
+  @override
+  String get scoreGradePoor => 'Poor';
+
+  @override
+  String stepLabelText(Object number) {
+    return 'Step $number';
+  }
+
+  @override
+  String get measuringTemperature => 'Measuring...';
+
+  @override
+  String mixingStepTitleLabel(Object number) {
+    return 'Mixing Step $number';
+  }
+
+  @override
+  String get keyMetricsTitle => 'Key Metrics';
+
+  @override
+  String get doughDevelopmentLabel => '🌾 Dough Development';
+
+  @override
+  String get moistureAbsorptionRateLabel => '💧 Moisture Absorption Rate';
+
+  @override
+  String get doughTemperatureLabel => '🌡️ Dough Temperature';
+
+  @override
+  String get doughTextureLabel => '⚡ Dough Texture';
+
+  @override
+  String get calculationError => 'Calculation Error';
+
+  @override
+  String get calculating => 'Calculating...';
+
+  @override
+  String get measuring => 'Measuring...';
+
+  @override
+  String get ingredientsMixing => 'Mixing Ingredients';
 }

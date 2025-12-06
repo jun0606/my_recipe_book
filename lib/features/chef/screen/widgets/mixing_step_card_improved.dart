@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_recipe_book/l10n/app_localizations.dart';
 
 /// 개선된 믹싱 단계 카드 위젯
 /// 모바일/태블릿 최적화 및 가독성 향상
@@ -115,7 +116,8 @@ class _MixingStepCardImprovedState extends State<MixingStepCardImproved>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '믹싱 단계 ${widget.stepIndex + 1}',
+                  AppLocalizations.of(context)!
+                      .mixingStepTitleLabel(widget.stepIndex + 1),
                   style: TextStyle(
                     fontSize: isTablet ? 18 : 16,
                     fontWeight: FontWeight.bold,
@@ -231,7 +233,7 @@ class _MixingStepCardImprovedState extends State<MixingStepCardImproved>
             ),
             SizedBox(width: 8),
             Text(
-              '주요 메트릭',
+              AppLocalizations.of(context)!.keyMetricsTitle,
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
@@ -251,25 +253,25 @@ class _MixingStepCardImprovedState extends State<MixingStepCardImproved>
               physics: const NeverScrollableScrollPhysics(),
               children: [
                 _buildMetricCard(
-                  '🌾 반죽 발달',
+                  AppLocalizations.of(context)!.doughDevelopmentLabel,
                   safeGlutenDisplay,
                   _getGlutenColor(glutenFormation),
                   isTablet,
                 ),
                 _buildMetricCard(
-                  '💧 수분 흡수율',
+                  AppLocalizations.of(context)!.moistureAbsorptionRateLabel,
                   safeMoistureDisplay,
                   _getMoistureColor(moisture),
                   isTablet,
                 ),
                 _buildMetricCard(
-                  '🌡️ 반죽 온도',
+                  AppLocalizations.of(context)!.doughTemperatureLabel,
                   safeTemperatureDisplay,
                   _getTemperatureColor(temperature),
                   isTablet,
                 ),
                 _buildMetricCard(
-                  '⚡ 반죽 질감',
+                  AppLocalizations.of(context)!.doughTextureLabel,
                   safeViscosityDisplay,
                   _getViscosityColor(viscosity),
                   isTablet,
@@ -367,13 +369,13 @@ class _MixingStepCardImprovedState extends State<MixingStepCardImproved>
   String _formatGlutenValueSafely(double value) {
     // 빵 제조 과학적 의미 없는 값만 필터링 (컨트롤러에서 -∞ 나올 수 있음)
     if (value <= -0.01 || value.isNaN || value.isInfinite) {
-      return '계산 오류';
+      return AppLocalizations.of(context)!.calculationError;
     }
     // 빵 제조 과학적으로 의미 있는 초기 값도 표시 (0.1% 미만도 의미 성)
     if (value < 0.001) {
       // 매우 낮은 값은 '<' 표시로 의미 전달
       final clampedValue = value;
-      return '재료 혼합중\n${(clampedValue * 100).toStringAsFixed(0)}%';
+      return '${AppLocalizations.of(context)!.ingredientsMixing}\n${(clampedValue * 100).toStringAsFixed(0)}%';
     }
     // 0-1 범위 강제 적용 (clamp)
     final clampedValue = value.clamp(0.0, 1.0);
@@ -384,7 +386,7 @@ class _MixingStepCardImprovedState extends State<MixingStepCardImproved>
   String _formatMoistureValueSafely(double value) {
     // 비정상 값 필터링
     if (value <= 0 || value.isNaN || value.isInfinite) {
-      return '계산 중...';
+      return AppLocalizations.of(context)!.calculating;
     }
     // ✅ 빵 제조 과학 준수: clamp 제거 - 실제 수분 트래킹 결과 표시
     // 수분 흡수율이 100% 초과하는 것도 물리가 허용하는 실제 값으로 유지
@@ -397,7 +399,7 @@ class _MixingStepCardImprovedState extends State<MixingStepCardImproved>
   String _formatTemperatureValueSafely(double value) {
     // 비정상 값 필터링 (-50°C ~ 100°C 범위 밖)
     if (value < -50 || value > 100 || value.isNaN || value.isInfinite) {
-      return '측정 중...';
+      return AppLocalizations.of(context)!.measuring;
     }
     return '${value.toStringAsFixed(0)}°C';
   }
@@ -406,7 +408,7 @@ class _MixingStepCardImprovedState extends State<MixingStepCardImproved>
   String _formatViscosityValueSafely(double value) {
     // 비정상 값 필터링
     if (value <= 0 || value > 10 || value.isNaN || value.isInfinite) {
-      return '측정 중...';
+      return AppLocalizations.of(context)!.measuring;
     }
     return value.toStringAsFixed(2);
   }

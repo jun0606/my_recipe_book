@@ -2,6 +2,7 @@
 // 환경 기반 추천, 믹싱 최적화, 발효 전략을 위한 UI 컴포넌트
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../core/types/environment_types.dart';
 import '../types/screen_types.dart';
 
@@ -50,9 +51,9 @@ class _ImprovementSuggestionsState extends State<ImprovementSuggestions> {
           // 헤더
           Row(
             children: [
-              const Text(
-                '💡 개선 방법 및 권장사항',
-                style: TextStyle(
+              Text(
+                '💡 ${AppLocalizations.of(context)!.improvementMethodsAndRecommendations}',
+                style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                   color: Colors.pink,
@@ -62,7 +63,7 @@ class _ImprovementSuggestionsState extends State<ImprovementSuggestions> {
               ElevatedButton.icon(
                 onPressed: _analyzeAndGenerateSuggestions,
                 icon: const Icon(Icons.refresh),
-                label: const Text('분석 실행'),
+                label: Text(AppLocalizations.of(context)!.runAnalysis),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.pink[100],
                   foregroundColor: Colors.pink[800],
@@ -110,9 +111,9 @@ class _ImprovementSuggestionsState extends State<ImprovementSuggestions> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              '🌡️ 환경 조건 기반 추천',
-              style: TextStyle(
+            Text(
+              '🌡️ ${AppLocalizations.of(context)!.environmentalRecommendations}',
+              style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
                 color: Colors.blue,
@@ -156,9 +157,9 @@ class _ImprovementSuggestionsState extends State<ImprovementSuggestions> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              '🔄 믹싱 단계 최적화',
-              style: TextStyle(
+            Text(
+              '🔄 ${AppLocalizations.of(context)!.mixingStepOptimization}',
+              style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
                 color: Colors.green,
@@ -225,9 +226,9 @@ class _ImprovementSuggestionsState extends State<ImprovementSuggestions> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              '⏰ 발효 전략 추천',
-              style: TextStyle(
+            Text(
+              '⏰ ${AppLocalizations.of(context)!.fermentationStrategyRecommendation}',
+              style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
                 color: Colors.orange,
@@ -278,19 +279,20 @@ class _ImprovementSuggestionsState extends State<ImprovementSuggestions> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              '📊 추가 분석 결과',
-              style: TextStyle(
+            Text(
+              '📊 ${AppLocalizations.of(context)!.additionalAnalysisResults}',
+              style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
                 color: Colors.purple,
               ),
             ),
             const SizedBox(height: 12),
-            _buildAnalysisMetric('예상 성공률', '85%', Colors.green),
-            _buildAnalysisMetric('글루텐 형성 최적화', '적정', Colors.blue),
-            _buildAnalysisMetric('수분 균형', '양호', Colors.green),
-            _buildAnalysisMetric('온도 안정성', '안정', Colors.green),
+            const SizedBox(height: 12),
+            _buildAnalysisMetric(AppLocalizations.of(context)!.expectedSuccessRate, '85%', Colors.green),
+            _buildAnalysisMetric(AppLocalizations.of(context)!.glutenOptimization, AppLocalizations.of(context)!.statusOptimal, Colors.blue),
+            _buildAnalysisMetric(AppLocalizations.of(context)!.moistureBalance, AppLocalizations.of(context)!.statusGood, Colors.green),
+            _buildAnalysisMetric(AppLocalizations.of(context)!.temperatureStability, AppLocalizations.of(context)!.statusStable, Colors.green),
           ],
         ),
       ),
@@ -343,9 +345,9 @@ class _ImprovementSuggestionsState extends State<ImprovementSuggestions> {
           children: [
             Row(
               children: [
-                const Text(
-                  '📈 성능 모니터링',
-                  style: TextStyle(
+                Text(
+                  '📈 ${AppLocalizations.of(context)!.performanceMonitoring}',
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                     color: Colors.purple,
@@ -355,7 +357,7 @@ class _ImprovementSuggestionsState extends State<ImprovementSuggestions> {
                 IconButton(
                   onPressed: () => setState(() {}),
                   icon: const Icon(Icons.refresh, size: 20),
-                  tooltip: '새로고침',
+                  tooltip: AppLocalizations.of(context)!.refresh,
                 ),
               ],
             ),
@@ -363,7 +365,7 @@ class _ImprovementSuggestionsState extends State<ImprovementSuggestions> {
 
             // 분석 시간 모니터링
             _buildPerformanceMetric(
-              '분석 소요 시간',
+              AppLocalizations.of(context)!.analysisDuration,
               _formatDuration(_getLastAnalysisTime()),
               Icons.timer,
               Colors.blue,
@@ -428,9 +430,9 @@ class _ImprovementSuggestionsState extends State<ImprovementSuggestions> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          '캐시 성능',
-          style: TextStyle(
+        Text(
+          AppLocalizations.of(context)!.cachePerformance,
+          style: const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w500,
             color: Colors.green,
@@ -441,21 +443,21 @@ class _ImprovementSuggestionsState extends State<ImprovementSuggestions> {
           children: [
             Expanded(
               child: _buildMiniMetric(
-                '총 항목',
+                AppLocalizations.of(context)!.totalEntries,
                 '${cacheStats['totalEntries']}',
                 Colors.green,
               ),
             ),
             Expanded(
               child: _buildMiniMetric(
-                '만료 항목',
+                AppLocalizations.of(context)!.expiredEntries,
                 '${cacheStats['expiredEntries']}',
                 Colors.orange,
               ),
             ),
             Expanded(
               child: _buildMiniMetric(
-                '적중률',
+                AppLocalizations.of(context)!.hitRate,
                 _calculateCacheHitRate(cacheStats),
                 Colors.blue,
               ),
@@ -472,9 +474,9 @@ class _ImprovementSuggestionsState extends State<ImprovementSuggestions> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          '메모리 사용량',
-          style: TextStyle(
+        Text(
+          AppLocalizations.of(context)!.memoryUsage,
+          style: const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w500,
             color: Colors.orange,
@@ -482,7 +484,7 @@ class _ImprovementSuggestionsState extends State<ImprovementSuggestions> {
         ),
         const SizedBox(height: 4),
         _buildMiniMetric(
-          '캐시 메모리',
+          AppLocalizations.of(context)!.cacheMemory,
           '${cacheStats['memoryUsageMB'].toStringAsFixed(1)} MB',
           Colors.orange,
         ),
@@ -496,9 +498,9 @@ class _ImprovementSuggestionsState extends State<ImprovementSuggestions> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          '성공률 통계',
-          style: TextStyle(
+        Text(
+          AppLocalizations.of(context)!.successRateStatistics,
+          style: const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w500,
             color: Colors.red,
@@ -506,7 +508,7 @@ class _ImprovementSuggestionsState extends State<ImprovementSuggestions> {
         ),
         const SizedBox(height: 4),
         _buildMiniMetric(
-          '평균 성공률',
+          AppLocalizations.of(context)!.averageSuccessRate,
           '${(successRate * 100).toStringAsFixed(1)}%',
           _getSuccessRateColor(successRate),
         ),
@@ -555,9 +557,9 @@ class _ImprovementSuggestionsState extends State<ImprovementSuggestions> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          '🚀 성능 개선 제안',
-          style: TextStyle(
+        Text(
+          '🚀 ${AppLocalizations.of(context)!.performanceSuggestions}',
+          style: const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w500,
             color: Colors.indigo,
@@ -600,6 +602,7 @@ class _ImprovementSuggestionsState extends State<ImprovementSuggestions> {
 
   List<Map<String, dynamic>> _generateEnvironmentalRecommendations() {
     final recommendations = <Map<String, dynamic>>[];
+    final l10n = AppLocalizations.of(context)!;
 
     // 온도 기반 추천
     if (widget.environment.temperature < 20) {
@@ -607,14 +610,14 @@ class _ImprovementSuggestionsState extends State<ImprovementSuggestions> {
         'type': 'environmental',
         'icon': Icons.thermostat,
         'color': Colors.blue,
-        'message': '온도가 낮아 발효 시간이 길어질 수 있습니다. 따뜻한 곳으로 이동하세요.',
+        'message': l10n.lowTempWarning,
       });
     } else if (widget.environment.temperature > 28) {
       recommendations.add({
         'type': 'environmental',
         'icon': Icons.thermostat,
         'color': Colors.red,
-        'message': '온도가 높아 과발효 위험이 있습니다. 서늘한 곳으로 이동하세요.',
+        'message': l10n.highTempWarning,
       });
     }
 
@@ -624,14 +627,14 @@ class _ImprovementSuggestionsState extends State<ImprovementSuggestions> {
         'type': 'environmental',
         'icon': Icons.water_drop,
         'color': Colors.orange,
-        'message': '습도가 낮아 빵이 건조해질 수 있습니다. 물을 가까이 두세요.',
+        'message': l10n.lowHumidityWarning,
       });
     } else if (widget.environment.humidity > 80) {
       recommendations.add({
         'type': 'environmental',
         'icon': Icons.water_drop,
         'color': Colors.blue,
-        'message': '습도가 높아 빵이 무거워질 수 있습니다. 통풍이 잘 되는 곳을 확인하세요.',
+        'message': l10n.highHumidityWarning,
       });
     }
 
@@ -642,14 +645,14 @@ class _ImprovementSuggestionsState extends State<ImprovementSuggestions> {
         'type': 'environmental',
         'icon': Icons.ac_unit,
         'color': Colors.lightBlue,
-        'message': '겨울에는 발효 시간을 20-30% 늘리는 것이 좋습니다.',
+        'message': l10n.winterRecommendation,
       });
     } else if (season == 'summer') {
       recommendations.add({
         'type': 'environmental',
         'icon': Icons.wb_sunny,
         'color': Colors.yellow,
-        'message': '여름에는 발효 시간을 10-20% 줄이는 것이 좋습니다.',
+        'message': l10n.summerRecommendation,
       });
     }
 
@@ -659,7 +662,7 @@ class _ImprovementSuggestionsState extends State<ImprovementSuggestions> {
         'type': 'environmental',
         'icon': Icons.check_circle,
         'color': Colors.green,
-        'message': '현재 환경 조건이 빵 베이킹에 적합합니다.',
+        'message': l10n.optimalEnvironmentMessage,
       });
     }
 
@@ -669,6 +672,7 @@ class _ImprovementSuggestionsState extends State<ImprovementSuggestions> {
   List<Map<String, dynamic>> _optimizeMixingSteps(
       List<Map<String, dynamic>> mixingData) {
     final optimizedSteps = <Map<String, dynamic>>[];
+    final l10n = AppLocalizations.of(context)!;
 
     for (int i = 0; i < mixingData.length; i++) {
       final step = Map<String, dynamic>.from(mixingData[i]);
@@ -677,18 +681,18 @@ class _ImprovementSuggestionsState extends State<ImprovementSuggestions> {
       if (widget.environment.temperature > 28) {
         // 고온에서는 믹싱 시간을 줄임
         step['durationMinutes'] = (step['durationMinutes'] as int) - 1;
-        step['comment'] = '${step['comment']} (고온 최적화)';
+        step['comment'] = '${step['comment']} ${l10n.optimizationHighTemp}';
       } else if (widget.environment.temperature < 20) {
         // 저온에서는 믹싱 시간을 늘임
         step['durationMinutes'] = (step['durationMinutes'] as int) + 1;
-        step['comment'] = '${step['comment']} (저온 최적화)';
+        step['comment'] = '${step['comment']} ${l10n.optimizationLowTemp}';
       }
 
       // 믹서 타입에 따른 속도 조정
       if (widget.environment.mixerType.name == 'home') {
         if (step['speed'] == '고속') {
           step['speed'] = '중속';
-          step['comment'] = '${step['comment']} (가정용 믹서용 조정)';
+          step['comment'] = '${step['comment']} ${l10n.optimizationHomeMixer}';
         }
       }
 
@@ -699,24 +703,25 @@ class _ImprovementSuggestionsState extends State<ImprovementSuggestions> {
   }
 
   Map<String, dynamic> _generateFermentationStrategy() {
+    final l10n = AppLocalizations.of(context)!;
     // 현재 환경에 따른 전략 결정
     if (widget.environment.temperature < 22) {
       return {
-        'title': '저온 발효 전략',
-        'description': '현재 온도가 낮아 장시간 발효가 필요합니다.',
-        'benefits': ['풍미 향상', '산패 억제', '글루텐 구조 강화'],
+        'title': l10n.coldFermentationStrategy,
+        'description': l10n.coldFermentationDesc,
+        'benefits': [l10n.coldFermentationBenefit1, l10n.coldFermentationBenefit2, l10n.coldFermentationBenefit3],
       };
     } else if (widget.environment.temperature > 26) {
       return {
-        'title': '고온 발효 전략',
-        'description': '현재 온도가 높아 빠른 발효가 진행됩니다.',
-        'benefits': ['시간 절약', '효율적인 생산', '빠른 결과 확인'],
+        'title': l10n.warmFermentationStrategy,
+        'description': l10n.warmFermentationDesc,
+        'benefits': [l10n.warmFermentationBenefit1, l10n.warmFermentationBenefit2, l10n.warmFermentationBenefit3],
       };
     } else {
       return {
-        'title': '표준 발효 전략',
-        'description': '현재 환경이 표준 발효에 최적입니다.',
-        'benefits': ['안정적인 결과', '예측 가능한 품질', '쉬운 관리'],
+        'title': l10n.standardFermentationStrategy,
+        'description': l10n.standardFermentationDesc,
+        'benefits': [l10n.standardFermentationBenefit1, l10n.standardFermentationBenefit2, l10n.standardFermentationBenefit3],
       };
     }
   }
@@ -756,27 +761,28 @@ class _ImprovementSuggestionsState extends State<ImprovementSuggestions> {
 
   List<String> _generatePerformanceSuggestions() {
     final suggestions = <String>[];
+    final l10n = AppLocalizations.of(context)!;
     final cacheStats = _getCacheStats();
     final cacheSize = cacheStats['totalEntries'] as int;
     final analysisTime = _getLastAnalysisTime();
 
     // 캐시 크기 기반 제안
     if (cacheSize > 30) {
-      suggestions.add('캐시 크기가 큽니다. 불필요한 캐시를 정리해보세요.');
+      suggestions.add(l10n.largeCacheSuggestion);
     } else if (cacheSize < 5) {
-      suggestions.add('캐시 활용을 늘리면 성능이 향상될 수 있습니다.');
+      suggestions.add(l10n.increaseCacheSuggestion);
     }
 
     // 분석 시간 기반 제안
     if (analysisTime.inMilliseconds > 500) {
-      suggestions.add('분석 시간이 길어집니다. 캐시 활용을 늘려보세요.');
+      suggestions.add(l10n.longAnalysisTimeSuggestion);
     } else if (analysisTime.inMilliseconds < 100) {
-      suggestions.add('매우 빠른 분석 속도! 최적화가 잘 되고 있습니다.');
+      suggestions.add(l10n.fastAnalysisSuggestion);
     }
 
     // 기본 제안
     if (suggestions.isEmpty) {
-      suggestions.add('현재 성능이 최적화되어 있습니다.');
+      suggestions.add(l10n.optimizedPerformanceMessage);
     }
 
     return suggestions;

@@ -1,6 +1,8 @@
 import 'dart:async'; // Timer import
 import 'dart:convert'; // JSON 파싱용 import 복원
+import 'dart:convert'; // JSON 파싱용 import 복원
 import 'package:flutter/material.dart';
+import 'package:my_recipe_book/l10n/app_localizations.dart';
 import '../../../../../core/types/environment_types.dart' as env_types;
 import '../../../../../core/types/calculation_types.dart' as calc_types;
 import '../../../../../core/constants/bread_constants.dart'; // BreadConstants import
@@ -48,10 +50,11 @@ class BakingStepCardEnhanced extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final bool isFinalStep = analysis.stepNumber == totalSteps;
     final String stepTitle = isFinalStep
-        ? '완료 단계 ${analysis.stepNumber}'
-        : '단계 ${analysis.stepNumber}';
+        ? l10n.completedStep(analysis.stepNumber)
+        : l10n.stepNumber(analysis.stepNumber);
 
     return Container(
       margin: const EdgeInsets.only(bottom: 8),
@@ -99,7 +102,7 @@ class BakingStepCardEnhanced extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '시간: ${analysis.time.inMinutes}분',
+                      l10n.timeMinutes(analysis.time.inMinutes),
                       style: TextStyle(
                         fontSize: 11,
                         color: Colors.grey.shade600,
@@ -123,7 +126,7 @@ class BakingStepCardEnhanced extends StatelessWidget {
             children: [
               Expanded(
                 child: _buildMetricCard(
-                  '🔥 진행률',
+                  '🔥 ${l10n.progress}',
                   '${analysis.bakingProgress.toStringAsFixed(1)}%',
                   analysis.bakingProgress >
                           BreadConstants
@@ -140,7 +143,7 @@ class BakingStepCardEnhanced extends StatelessWidget {
               const SizedBox(width: 6),
               Expanded(
                 child: _buildMetricCard(
-                  '🟤 마이야르',
+                  '🟤 ${l10n.maillardReaction}',
                   '${analysis.maillardReaction.toStringAsFixed(1)}',
                   analysis.maillardReaction >
                           BreadConstants
@@ -158,7 +161,7 @@ class BakingStepCardEnhanced extends StatelessWidget {
             children: [
               Expanded(
                 child: _buildMetricCard(
-                  '🍞 크럼브',
+                  '🍞 ${l10n.crumb}',
                   '${analysis.crumbBakingProgress.toStringAsFixed(1)}%',
                   analysis.crumbBakingProgress >
                           BreadConstants
@@ -176,7 +179,7 @@ class BakingStepCardEnhanced extends StatelessWidget {
               const SizedBox(width: 6),
               Expanded(
                 child: _buildMetricCard(
-                  '🌡️ 내부온도',
+                  '🌡️ ${l10n.internalTemperature}',
                   '${analysis.internalTemperature.toStringAsFixed(1)}°C',
                   analysis.internalTemperature >
                           BreadConstants
@@ -209,7 +212,7 @@ class BakingStepCardEnhanced extends StatelessWidget {
                   ),
                   const SizedBox(width: 6),
                   Text(
-                    '베이킹 완료!',
+                    l10n.bakingComplete,
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
@@ -537,6 +540,7 @@ class _BakingAnalysisCardState extends State<BakingAnalysisCard> {
 
   /// ✅ MixingAnalysisCard 패턴 적용 - 헤더 UI 개선
   Widget _buildHeader() {
+    final l10n = AppLocalizations.of(context)!;
     return Container(
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
@@ -567,7 +571,7 @@ class _BakingAnalysisCardState extends State<BakingAnalysisCard> {
               const SizedBox(width: 12),
               Expanded(
                 child: Text(
-                  '🔥 오븐 베이킹 분석',
+                  '🔥 ${l10n.bakingAnalysis}',
                   style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -586,7 +590,7 @@ class _BakingAnalysisCardState extends State<BakingAnalysisCard> {
                   Icons.refresh_rounded,
                   color: Colors.white,
                 ),
-                tooltip: '분석 실행',
+                tooltip: l10n.runAnalysis,
                 iconSize: 20,
               ),
             ],
@@ -647,6 +651,7 @@ class _BakingAnalysisCardState extends State<BakingAnalysisCard> {
 
   /// ✅ 항상 표시되는 분석 결과: 메트릭 카드 → 단계별 분석 순서로 배치
   Widget _buildAnalysisResult() {
+    final l10n = AppLocalizations.of(context)!;
     // 🎯 분석 준비 상태 추가 확인
     final hasResult = _controller?.analysisResult != null;
     final hasFermentationState = widget.fermentationState != null;
@@ -681,7 +686,7 @@ class _BakingAnalysisCardState extends State<BakingAnalysisCard> {
             const SizedBox(width: 12),
             Expanded(
               child: Text(
-                '발효 분석 완료 후 베이킹 분석을 진행합니다...',
+                l10n.waitingForFermentationAnalysis,
                 style: TextStyle(
                   fontSize: 14,
                   color: Colors.orange.shade700,
@@ -731,7 +736,7 @@ class _BakingAnalysisCardState extends State<BakingAnalysisCard> {
           borderRadius: BorderRadius.circular(10),
           border: Border.all(color: Colors.orange.shade200),
         ),
-        child: _buildWaitingAnalysisResult(),
+        child: _buildWaitingAnalysisResult(l10n),
       );
     }
   }
@@ -743,7 +748,7 @@ class _BakingAnalysisCardState extends State<BakingAnalysisCard> {
   }
 
   /// ✅ 계산 대기 중 표시 컴포넌트
-  Widget _buildWaitingAnalysisResult() {
+  Widget _buildWaitingAnalysisResult(AppLocalizations l10n) {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
@@ -767,7 +772,7 @@ class _BakingAnalysisCardState extends State<BakingAnalysisCard> {
               const SizedBox(width: 12),
               Expanded(
                 child: Text(
-                  '과학적 계산 진행 중...',
+                  l10n.scientificCalculationsInProgress,
                   style: TextStyle(
                     fontSize: 13,
                     color: Colors.grey.shade700,
@@ -779,7 +784,7 @@ class _BakingAnalysisCardState extends State<BakingAnalysisCard> {
           ),
           const SizedBox(height: 8),
           Text(
-            '분석 데이터를 처리하여 메트릭 값을 계산하고 있습니다.',
+            l10n.processingAnalysisData,
             style: TextStyle(
               fontSize: 11,
               color: Colors.grey.shade500,
@@ -792,6 +797,7 @@ class _BakingAnalysisCardState extends State<BakingAnalysisCard> {
 
   /// ✅ 오븐 베이킹 분석 완료 카드 - 실데이터 기반 메트릭
   Widget _buildBakingMetricsGrid() {
+    final l10n = AppLocalizations.of(context)!;
     final hasControllerResult = _controller?.analysisResult != null;
     final hasStepAnalysis = _controller?.stepAnalyses.isNotEmpty ?? false;
 
@@ -815,7 +821,7 @@ class _BakingAnalysisCardState extends State<BakingAnalysisCard> {
           children: [
             Expanded(
               child: _buildBakingMetricCard(
-                '⏱️ 베이킹 총시간',
+                '⏱️ ${l10n.totalBakingTime}',
                 '${totalBakingTime}분',
                 Colors.blue.shade600,
               ),
@@ -823,7 +829,7 @@ class _BakingAnalysisCardState extends State<BakingAnalysisCard> {
             const SizedBox(width: 6),
             Expanded(
               child: _buildBakingMetricCard(
-                '🟤 마이야르 반응',
+                '🟤 ${l10n.totalMaillardReaction}',
                 _getFinalCumulativeMaillardReaction().toStringAsFixed(1),
                 Colors.brown.shade600,
               ),
@@ -836,7 +842,7 @@ class _BakingAnalysisCardState extends State<BakingAnalysisCard> {
           children: [
             Expanded(
               child: _buildBakingMetricCard(
-                '🎨 크러스트 색상',
+                '🎨 ${l10n.crustColor}',
                 _getCrustColorDisplay(crustColorValue),
                 Colors.orange.shade600,
               ),
@@ -844,7 +850,7 @@ class _BakingAnalysisCardState extends State<BakingAnalysisCard> {
             const SizedBox(width: 6),
             Expanded(
               child: _buildBakingMetricCard(
-                '🍞 크럼브 진행률',
+                '🍞 ${l10n.crumbBakingProgress}',
                 _getFinalCumulativeCrumbProgress(),
                 Colors.red.shade600,
               ),
@@ -887,11 +893,12 @@ class _BakingAnalysisCardState extends State<BakingAnalysisCard> {
 
   /// 겉빛깔 색상 표시 문자열
   String _getCrustColorDisplay(double colorValue) {
-    if (colorValue >= 90) return '진한 갈색';
-    if (colorValue >= 70) return '갈색';
-    if (colorValue >= 50) return '연한 갈색';
-    if (colorValue >= 30) return '금빛';
-    return '연한 아이보리색';
+    final l10n = AppLocalizations.of(context)!;
+    if (colorValue >= 90) return l10n.crustColorDarkBrown;
+    if (colorValue >= 70) return l10n.crustColorBrown;
+    if (colorValue >= 50) return l10n.crustColorLightBrown;
+    if (colorValue >= 30) return l10n.crustColorGolden;
+    return l10n.crustColorLightIvory;
   }
 
   /// 최종 누적 마이야르 반응 값
@@ -906,7 +913,7 @@ class _BakingAnalysisCardState extends State<BakingAnalysisCard> {
     if (analysisResult != null) {
       return '${analysisResult.finalCumulativeCrumbBakingProgress.toStringAsFixed(1)}%';
     }
-    return '데이터 없음';
+    return AppLocalizations.of(context)!.noData;
   }
 
   /// ✅ MixingAnalysisCard 패턴 적용 - 메트릭 카드 헬퍼 (베이킹용으로 수정)
@@ -967,6 +974,7 @@ class _BakingAnalysisCardState extends State<BakingAnalysisCard> {
 
   /// ✅ 오븐 베이킹 단계별 분석 리스트 표시 - MixingAnalysisCard 패턴 적용 ✨
   Widget _buildExpandableBakingSteps() {
+    final l10n = AppLocalizations.of(context)!;
     final stepAnalyses = _controller?.stepAnalyses ?? [];
     final completedSteps = stepAnalyses.length;
     final totalSteps = _getDynamicBakingTotalSteps();
@@ -999,7 +1007,7 @@ class _BakingAnalysisCardState extends State<BakingAnalysisCard> {
             const SizedBox(width: 12),
             Expanded(
               child: Text(
-                '오븐 베이킹 단계별 분석 데이터 준비 중...',
+                l10n.preparingBakingStepData,
                 style: TextStyle(
                   fontSize: 12,
                   color: Colors.grey.shade700,
@@ -1029,7 +1037,7 @@ class _BakingAnalysisCardState extends State<BakingAnalysisCard> {
             ),
             const SizedBox(width: 8),
             Text(
-              '오븐 베이킹 단계별 분석',
+              l10n.bakingStepAnalysis,
               style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w600,
@@ -1044,7 +1052,7 @@ class _BakingAnalysisCardState extends State<BakingAnalysisCard> {
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text(
-                '${completedSteps}/${totalSteps}단계',
+                l10n.stepProgress(completedSteps, totalSteps),
                 style: TextStyle(
                   fontSize: 10,
                   fontWeight: FontWeight.w500,
@@ -1080,6 +1088,7 @@ class _BakingAnalysisCardState extends State<BakingAnalysisCard> {
   /// ✅ MixingAnalysisCard 패턴 적용: 실시간 단계별 위젯 생성 ✨
   /// BakingStepCardEnhanced를 사용하여 전문화된 카드 표시
   List<Widget> _buildBakingStepWidgets() {
+    final l10n = AppLocalizations.of(context)!;
     final stepAnalyses = _controller?.stepAnalyses ?? [];
     final completedSteps = stepAnalyses.length;
     final totalSteps = _getDynamicBakingTotalSteps();
@@ -1143,7 +1152,7 @@ class _BakingAnalysisCardState extends State<BakingAnalysisCard> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '단계 $stepNumber',
+                        l10n.stepNumber(stepNumber),
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
@@ -1164,7 +1173,7 @@ class _BakingAnalysisCardState extends State<BakingAnalysisCard> {
                           ),
                           const SizedBox(width: 8),
                           Text(
-                            '빵 제조 과학적 계산 진행 중...',
+                            l10n.scientificBakingCalculationsInProgress,
                             style: TextStyle(
                               fontSize: 12,
                               color: Colors.orange.shade600,
@@ -1222,6 +1231,7 @@ class _BakingAnalysisCardState extends State<BakingAnalysisCard> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     debugPrint('🏗️ [BakingAnalysisCard.build] 호출 - 시간: ${DateTime.now()}');
     debugPrint('   - 위젯 해시: ${widget.hashCode}');
     debugPrint('   - 카드 인스턴스 해시: $hashCode');
@@ -1262,7 +1272,7 @@ class _BakingAnalysisCardState extends State<BakingAnalysisCard> {
                     const SizedBox(width: 12),
                     Expanded(
                       child: Text(
-                        '분석 엔진 초기화 중...',
+                        l10n.initializingAnalysisEngine,
                         style: TextStyle(
                           fontSize: 14,
                           color: Colors.grey[600],
@@ -1296,7 +1306,7 @@ class _BakingAnalysisCardState extends State<BakingAnalysisCard> {
                     const SizedBox(width: 12),
                     Expanded(
                       child: Text(
-                        '빵 제조 과학적 베이킹 계산 수행 중...',
+                        l10n.performingScientificBakingCalculations,
                         style: TextStyle(
                           fontSize: 14,
                           color: Colors.orange[700],

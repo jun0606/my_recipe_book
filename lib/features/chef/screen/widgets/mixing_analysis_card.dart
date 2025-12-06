@@ -2,6 +2,7 @@
 /// 컨트롤러 기반 단일 데이터 소스만 사용
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:my_recipe_book/l10n/app_localizations.dart';
 import '../../../../core/types/environment_types.dart';
 import '../../../../core/types/unified_types.dart';
 import '../../../../services/ingredient_analyzer.dart';
@@ -161,6 +162,7 @@ class _MixingAnalysisCardState extends State<MixingAnalysisCard> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final hasAnalysisResult = _analysisResult != null;
     final hasMixingData = _mixingSteps.isNotEmpty;
     final isControllerReady = _controller != null;
@@ -197,7 +199,7 @@ class _MixingAnalysisCardState extends State<MixingAnalysisCard> {
                     const SizedBox(width: 12),
                     Expanded(
                       child: Text(
-                        '분석 엔진 초기화 중...',
+                        l10n.initializingAnalysisEngine,
                         style: TextStyle(
                           fontSize: 14,
                           color: Colors.grey[600],
@@ -231,7 +233,7 @@ class _MixingAnalysisCardState extends State<MixingAnalysisCard> {
                     const SizedBox(width: 12),
                     Expanded(
                       child: Text(
-                        '빵 제조 과학적 단계별 계산 수행 중...',
+                        l10n.performingScientificCalculations,
                         style: TextStyle(
                           fontSize: 14,
                           color: Colors.blue[700],
@@ -260,7 +262,7 @@ class _MixingAnalysisCardState extends State<MixingAnalysisCard> {
                     border: Border.all(color: Colors.grey[200]!),
                   ),
                   child: Text(
-                    '믹싱 단계 데이터가 준비되는 중입니다...',
+                    l10n.preparingMixingData,
                     style: TextStyle(
                       fontSize: 12,
                       color: Colors.grey[600],
@@ -276,6 +278,7 @@ class _MixingAnalysisCardState extends State<MixingAnalysisCard> {
   }
 
   Widget _buildHeader() {
+    final l10n = AppLocalizations.of(context)!;
     final totalWeight = _calculateTotalIngredientWeight();
 
     return Container(
@@ -311,8 +314,8 @@ class _MixingAnalysisCardState extends State<MixingAnalysisCard> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '믹싱 분석',
-                      style: TextStyle(
+                      l10n.mixingAnalysis,
+                      style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
@@ -323,7 +326,12 @@ class _MixingAnalysisCardState extends State<MixingAnalysisCard> {
                         _controller!.stepAnalyses.isNotEmpty) ...[
                       const SizedBox(height: 2),
                       Text(
-                        '주요 메트릭: 총 혼합 ${_controller?.stepAnalyses?.fold(0, (sum, step) => sum + step.durationMinutes) ?? 0}분',
+                        l10n.keyMetricsTotalMixing(_controller?.stepAnalyses
+                                ?.fold<int>(
+                                    0,
+                                    (sum, step) =>
+                                        sum + step.durationMinutes) ??
+                            0),
                         style: TextStyle(
                           fontSize: 10,
                           fontWeight: FontWeight.w400,
@@ -345,7 +353,7 @@ class _MixingAnalysisCardState extends State<MixingAnalysisCard> {
                     Icons.refresh_rounded,
                     color: Colors.white,
                   ),
-                  tooltip: '분석 실행',
+                  tooltip: l10n.runAnalysis,
                   iconSize: 20,
                 ),
               ),
@@ -419,6 +427,7 @@ class _MixingAnalysisCardState extends State<MixingAnalysisCard> {
 
   /// ✅ 컨트롤러 데이터 직접 사용한 분석 결과 UI
   Widget _buildAnalysisResult() {
+    final l10n = AppLocalizations.of(context)!;
     if (_analysisResult == null) return const SizedBox.shrink();
 
     final score = _analysisResult!.overallScore;
@@ -447,7 +456,7 @@ class _MixingAnalysisCardState extends State<MixingAnalysisCard> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '믹싱 분석 완료',
+                      l10n.mixingAnalysisComplete,
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
@@ -455,7 +464,8 @@ class _MixingAnalysisCardState extends State<MixingAnalysisCard> {
                       ),
                     ),
                     Text(
-                      '종합 점수: ${(score * 100).toStringAsFixed(1)}% ($grade)',
+                      l10n.overallScore(
+                          (score * 100).toStringAsFixed(1), grade),
                       style: TextStyle(
                         fontSize: 11,
                         color: color.withOpacity(0.7),
@@ -471,7 +481,7 @@ class _MixingAnalysisCardState extends State<MixingAnalysisCard> {
             children: [
               Expanded(
                 child: _buildMetricCard(
-                  '🕒 총 시간',
+                  '🕒 ${l10n.totalTime}',
                   '${totalTime}분',
                   Colors.blue.shade600,
                 ),
@@ -479,7 +489,7 @@ class _MixingAnalysisCardState extends State<MixingAnalysisCard> {
               const SizedBox(width: 6),
               Expanded(
                 child: _buildMetricCard(
-                  '🌾 글루텐 발달',
+                  '🌾 ${l10n.glutenDevelopment}',
                   '${(_analysisResult!.averageGlutenFormation * 100).round()}%',
                   _getGlutenColor(_analysisResult!.averageGlutenFormation),
                 ),
@@ -491,7 +501,7 @@ class _MixingAnalysisCardState extends State<MixingAnalysisCard> {
             children: [
               Expanded(
                 child: _buildMetricCard(
-                  '💧 수분',
+                  '💧 ${l10n.moisture}',
                   '${_controller?.getFinalMoistureAbsorption().toStringAsFixed(1) ?? '0.0'}%',
                   _getMoistureColorByPercentage(
                       _controller?.getFinalMoistureAbsorption() ?? 0.0),
@@ -500,7 +510,7 @@ class _MixingAnalysisCardState extends State<MixingAnalysisCard> {
               const SizedBox(width: 6),
               Expanded(
                 child: _buildMetricCard(
-                  '🌡️ 반죽온도',
+                  '🌡️ ${l10n.doughTemperature}',
                   '${_analysisResult?.finalDoughTemperature?.toStringAsFixed(1) ?? 'N/A'}°C',
                   _getTemperatureColor(
                       _analysisResult?.finalDoughTemperature ?? 25.0),
@@ -530,7 +540,7 @@ class _MixingAnalysisCardState extends State<MixingAnalysisCard> {
                     ),
                     const SizedBox(width: 6),
                     Text(
-                      '📊 현재 상태',
+                      '📊 ${l10n.currentStatus}',
                       style: TextStyle(
                         fontSize: 13,
                         fontWeight: FontWeight.w600,
@@ -550,7 +560,7 @@ class _MixingAnalysisCardState extends State<MixingAnalysisCard> {
                           borderRadius: BorderRadius.circular(6),
                         ),
                         child: Text(
-                          '경고',
+                          l10n.warning,
                           style: TextStyle(
                             fontSize: 9,
                             fontWeight: FontWeight.w500,
@@ -619,7 +629,7 @@ class _MixingAnalysisCardState extends State<MixingAnalysisCard> {
                                     ),
                                     const SizedBox(width: 3),
                                     Text(
-                                      '온도 경고',
+                                      l10n.temperatureWarning,
                                       style: TextStyle(
                                         fontSize: 10,
                                         fontWeight: FontWeight.bold,
@@ -635,7 +645,11 @@ class _MixingAnalysisCardState extends State<MixingAnalysisCard> {
                                                 35.0 ||
                                             step.doughState.temperature < 18.0)
                                         .map((step) =>
-                                            '단계 ${step.stepNumber}: 반죽온도 ${_formatTemperatureValueSafely(step.doughState.temperature)} (권장: 20-30°C)')
+                                            l10n.stepTemperatureWarning(
+                                                step.stepNumber,
+                                                _formatTemperatureValueSafely(
+                                                    step.doughState
+                                                        .temperature)))
                                         .map((warning) => Padding(
                                               padding: const EdgeInsets.only(
                                                   bottom: 2),
@@ -677,6 +691,7 @@ class _MixingAnalysisCardState extends State<MixingAnalysisCard> {
 
   /// ✅ 컨트롤러 데이터 직접 사용한 단계별 분석 UI
   Widget _buildExpandableMixingSteps() {
+    final l10n = AppLocalizations.of(context)!;
     return Container(
       decoration: BoxDecoration(
         color: Colors.grey.shade50,
@@ -693,7 +708,7 @@ class _MixingAnalysisCardState extends State<MixingAnalysisCard> {
             ),
             const SizedBox(width: 8),
             Text(
-              '믹싱 단계별 분석',
+              l10n.mixingStepAnalysis,
               style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w600,
@@ -708,7 +723,7 @@ class _MixingAnalysisCardState extends State<MixingAnalysisCard> {
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text(
-                '${_mixingSteps.length}단계',
+                l10n.stepCount(_mixingSteps.length),
                 style: TextStyle(
                   fontSize: 10,
                   fontWeight: FontWeight.w500,
@@ -732,11 +747,11 @@ class _MixingAnalysisCardState extends State<MixingAnalysisCard> {
                             CircularProgressIndicator(),
                             const SizedBox(height: 8),
                             Text(
-                              '믹싱 분석 진행 중...',
+                              l10n.analyzingMixing,
                               style: TextStyle(color: Colors.blue.shade600),
                             ),
                             Text(
-                              '단계별 계산을 수행하고 있습니다',
+                              l10n.performingStepCalculations,
                               style: TextStyle(
                                   color: Colors.grey.shade600, fontSize: 12),
                             ),
@@ -820,11 +835,12 @@ class _MixingAnalysisCardState extends State<MixingAnalysisCard> {
 
   /// 점수 등급 계산
   String _getScoreGrade(double score) {
-    if (score >= 0.9) return '최상급';
-    if (score >= 0.8) return '우수';
-    if (score >= 0.7) return '양호';
-    if (score >= 0.6) return '보통';
-    return '개선 필요';
+    final l10n = AppLocalizations.of(context)!;
+    if (score >= 0.9) return l10n.scoreGradeExcellent;
+    if (score >= 0.8) return l10n.scoreGradeGood;
+    if (score >= 0.7) return l10n.scoreGradeFair;
+    if (score >= 0.6) return l10n.scoreGradeAverage;
+    return l10n.scoreGradePoor;
   }
 
   /// 글로텐 형성도에 따른 색상
@@ -930,6 +946,7 @@ class _MixingAnalysisCardState extends State<MixingAnalysisCard> {
 
   /// ✅ 실시간 단계별 분석 UI 위젯 생성 (부분 완료 단계 지원)
   List<Widget> _buildStepAnalysisWidgets() {
+    final l10n = AppLocalizations.of(context)!;
     final completedSteps = _stepAnalyses.length;
     final totalSteps = _mixingSteps.length;
     final widgets = <Widget>[];
@@ -1031,7 +1048,7 @@ class _MixingAnalysisCardState extends State<MixingAnalysisCard> {
                         ),
                         const SizedBox(width: 8),
                         Text(
-                          '빵 제조 과학적 계산 진행 중...',
+                          l10n.analyzingScientificCalculations,
                           style: TextStyle(
                             fontSize: 12,
                             color: Colors.orange.shade600,

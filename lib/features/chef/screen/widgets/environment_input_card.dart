@@ -2,6 +2,7 @@
 // 베이킹 환경 조건 입력을 위한 UI 컴포넌트
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../core/types/environment_types.dart';
 
 class EnvironmentInputCard extends StatefulWidget {
@@ -65,9 +66,9 @@ class _EnvironmentInputCardState extends State<EnvironmentInputCard> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              '베이킹 환경 조건',
-              style: TextStyle(
+            Text(
+              AppLocalizations.of(context)!.bakingEnvironmentConditions,
+              style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
                 color: Colors.blue,
@@ -81,9 +82,9 @@ class _EnvironmentInputCardState extends State<EnvironmentInputCard> {
                 Expanded(
                   child: TextField(
                     controller: _temperatureController,
-                    decoration: const InputDecoration(
-                      labelText: '온도 (°C)',
-                      border: OutlineInputBorder(),
+                    decoration: InputDecoration(
+                      labelText: AppLocalizations.of(context)!.temperatureLabel,
+                      border: const OutlineInputBorder(),
                     ),
                     keyboardType: TextInputType.number,
                     onChanged: (_) => _updateEnvironment(),
@@ -93,9 +94,9 @@ class _EnvironmentInputCardState extends State<EnvironmentInputCard> {
                 Expanded(
                   child: TextField(
                     controller: _humidityController,
-                    decoration: const InputDecoration(
-                      labelText: '습도 (%)',
-                      border: OutlineInputBorder(),
+                    decoration: InputDecoration(
+                      labelText: AppLocalizations.of(context)!.humidityLabel,
+                      border: const OutlineInputBorder(),
                     ),
                     keyboardType: TextInputType.number,
                     onChanged: (_) => _updateEnvironment(),
@@ -111,9 +112,9 @@ class _EnvironmentInputCardState extends State<EnvironmentInputCard> {
                 Expanded(
                   child: TextField(
                     controller: _altitudeController,
-                    decoration: const InputDecoration(
-                      labelText: '고도 (m)',
-                      border: OutlineInputBorder(),
+                    decoration: InputDecoration(
+                      labelText: AppLocalizations.of(context)!.altitudeLabel,
+                      border: const OutlineInputBorder(),
                     ),
                     keyboardType: TextInputType.number,
                     onChanged: (_) => _updateEnvironment(),
@@ -123,14 +124,14 @@ class _EnvironmentInputCardState extends State<EnvironmentInputCard> {
                 Expanded(
                   child: DropdownButtonFormField<String>(
                     value: _season,
-                    decoration: const InputDecoration(
-                      labelText: '계절',
-                      border: OutlineInputBorder(),
+                    decoration: InputDecoration(
+                      labelText: AppLocalizations.of(context)!.seasonLabel,
+                      border: const OutlineInputBorder(),
                     ),
                     items: Season.values
                         .map((season) => DropdownMenuItem(
                               value: season.name,
-                              child: Text(season.displayName),
+                              child: Text(season.getDisplayName(AppLocalizations.of(context)!)),
                             ))
                         .toList(),
                     onChanged: (value) {
@@ -148,14 +149,14 @@ class _EnvironmentInputCardState extends State<EnvironmentInputCard> {
             // 오븐 타입
             DropdownButtonFormField<String>(
               value: _ovenType,
-              decoration: const InputDecoration(
-                labelText: '오븐 타입',
-                border: OutlineInputBorder(),
+              decoration: InputDecoration(
+                labelText: AppLocalizations.of(context)!.ovenTypeLabel,
+                border: const OutlineInputBorder(),
               ),
               items: OvenType.values
                   .map((oven) => DropdownMenuItem(
                         value: oven.name,
-                        child: Text(oven.displayName),
+                        child: Text(oven.getDisplayName(AppLocalizations.of(context)!)),
                       ))
                   .toList(),
               onChanged: (value) {
@@ -170,14 +171,14 @@ class _EnvironmentInputCardState extends State<EnvironmentInputCard> {
             // 발효 방식
             DropdownButtonFormField<String>(
               value: _fermentationType,
-              decoration: const InputDecoration(
-                labelText: '발효 방식',
-                border: OutlineInputBorder(),
+              decoration: InputDecoration(
+                labelText: AppLocalizations.of(context)!.fermentationMethodLabel,
+                border: const OutlineInputBorder(),
               ),
               items: FermentationMethod.values
                   .map((method) => DropdownMenuItem(
                         value: method.name,
-                        child: Text(method.displayName),
+                        child: Text(method.getDisplayName(AppLocalizations.of(context)!)),
                       ))
                   .toList(),
               onChanged: (value) {
@@ -193,14 +194,14 @@ class _EnvironmentInputCardState extends State<EnvironmentInputCard> {
               const SizedBox(height: 12),
               DropdownButtonFormField<String>(
                 value: _mixerType,
-                decoration: const InputDecoration(
-                  labelText: '믹서 타입',
-                  border: OutlineInputBorder(),
+                decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context)!.mixerTypeLabel,
+                  border: const OutlineInputBorder(),
                 ),
                 items: MixerType.values
                     .map((mixer) => DropdownMenuItem(
                           value: mixer.name,
-                          child: Text(mixer.displayName),
+                          child: Text(mixer.getDisplayName(AppLocalizations.of(context)!)),
                         ))
                     .toList(),
                 onChanged: (value) {

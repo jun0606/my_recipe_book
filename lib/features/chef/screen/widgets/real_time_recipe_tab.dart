@@ -2,6 +2,7 @@
 // 실시간 레시피 표시 및 관리 UI 컴포넌트
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RealTimeRecipeTab extends StatefulWidget {
   const RealTimeRecipeTab({super.key});
@@ -30,9 +31,9 @@ class _RealTimeRecipeTabState extends State<RealTimeRecipeTab> {
           // 헤더
           Row(
             children: [
-              const Text(
-                '🍞 실시간 레시피',
-                style: TextStyle(
+              Text(
+                '🍞 ${AppLocalizations.of(context)!.realTimeRecipeTitle}',
+                style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                   color: Colors.pink,
@@ -48,7 +49,7 @@ class _RealTimeRecipeTabState extends State<RealTimeRecipeTab> {
                         child: CircularProgressIndicator(strokeWidth: 2),
                       )
                     : const Icon(Icons.refresh),
-                tooltip: '새로고침',
+                tooltip: AppLocalizations.of(context)!.refresh,
               ),
             ],
           ),
@@ -78,6 +79,7 @@ class _RealTimeRecipeTabState extends State<RealTimeRecipeTab> {
   }
 
   Widget _buildEmptyState() {
+    final l10n = AppLocalizations.of(context)!;
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -89,7 +91,7 @@ class _RealTimeRecipeTabState extends State<RealTimeRecipeTab> {
           ),
           const SizedBox(height: 16),
           Text(
-            '실시간 레시피가 준비 중입니다',
+            l10n.realTimeRecipeComingSoon,
             style: TextStyle(
               fontSize: 16,
               color: Colors.grey[600],
@@ -98,7 +100,7 @@ class _RealTimeRecipeTabState extends State<RealTimeRecipeTab> {
           ),
           const SizedBox(height: 8),
           Text(
-            '곧 다양한 실시간 레시피를 만나보실 수 있습니다',
+            l10n.realTimeRecipeComingSoonDesc,
             style: TextStyle(
               fontSize: 14,
               color: Colors.grey[500],
@@ -109,7 +111,7 @@ class _RealTimeRecipeTabState extends State<RealTimeRecipeTab> {
           ElevatedButton.icon(
             onPressed: _refreshRecipes,
             icon: const Icon(Icons.refresh),
-            label: const Text('새로고침'),
+            label: Text(l10n.refresh),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.pink[100],
               foregroundColor: Colors.pink[800],
@@ -121,15 +123,15 @@ class _RealTimeRecipeTabState extends State<RealTimeRecipeTab> {
   }
 
   Widget _buildLoadingState() {
-    return const Center(
+    return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          CircularProgressIndicator(),
-          SizedBox(height: 16),
+          const CircularProgressIndicator(),
+          const SizedBox(height: 16),
           Text(
-            '실시간 레시피를 불러오는 중...',
-            style: TextStyle(
+            AppLocalizations.of(context)!.loadingRealTimeRecipes,
+            style: const TextStyle(
               fontSize: 16,
               color: Colors.grey[600],
             ),
@@ -140,11 +142,12 @@ class _RealTimeRecipeTabState extends State<RealTimeRecipeTab> {
   }
 
   Widget _buildRecipeList() {
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          '실시간 추천 (${_realTimeRecipes.length})',
+          '${l10n.realTimeRecommendation} (${_realTimeRecipes.length})',
           style: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
@@ -161,6 +164,7 @@ class _RealTimeRecipeTabState extends State<RealTimeRecipeTab> {
   }
 
   Widget _buildRecipeCard(Map<String, dynamic> recipe) {
+    final l10n = AppLocalizations.of(context)!;
     return Card(
       elevation: 2,
       child: Padding(
@@ -172,7 +176,7 @@ class _RealTimeRecipeTabState extends State<RealTimeRecipeTab> {
               children: [
                 Expanded(
                   child: Text(
-                    recipe['title']?.toString() ?? '제목 없음',
+                    recipe['title']?.toString() ?? l10n.noTitle,
                     style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -199,7 +203,7 @@ class _RealTimeRecipeTabState extends State<RealTimeRecipeTab> {
             ),
             const SizedBox(height: 8),
             Text(
-              recipe['description']?.toString() ?? '설명 없음',
+              recipe['description']?.toString() ?? l10n.noDescription,
               style: TextStyle(
                 fontSize: 14,
                 color: Colors.grey[700],
@@ -244,7 +248,7 @@ class _RealTimeRecipeTabState extends State<RealTimeRecipeTab> {
                   child: ElevatedButton.icon(
                     onPressed: () => _startRecipe(recipe),
                     icon: const Icon(Icons.play_arrow, size: 16),
-                    label: const Text('시작하기'),
+                    label: Text(l10n.start),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.pink[100],
                       foregroundColor: Colors.pink[800],
@@ -255,7 +259,7 @@ class _RealTimeRecipeTabState extends State<RealTimeRecipeTab> {
                 IconButton(
                   onPressed: () => _saveRecipe(recipe),
                   icon: const Icon(Icons.bookmark_border),
-                  tooltip: '저장하기',
+                  tooltip: l10n.save,
                 ),
               ],
             ),
@@ -266,15 +270,16 @@ class _RealTimeRecipeTabState extends State<RealTimeRecipeTab> {
   }
 
   Widget _buildRealTimeFeedback() {
+    final l10n = AppLocalizations.of(context)!;
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              '💬 실시간 피드백',
-              style: TextStyle(
+            Text(
+              '💬 ${l10n.realTimeFeedback}',
+              style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
                 color: Colors.purple,
@@ -288,10 +293,9 @@ class _RealTimeRecipeTabState extends State<RealTimeRecipeTab> {
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(color: Colors.purple[200]!),
               ),
-              child: const Text(
-                '실시간 피드백 시스템이 준비 중입니다.\n'
-                '레시피 진행 중 유용한 팁과 조언을 제공해드립니다.',
-                style: TextStyle(
+              child: Text(
+                l10n.realTimeFeedbackComingSoon,
+                style: const TextStyle(
                   fontSize: 14,
                   color: Colors.purple,
                 ),
@@ -304,15 +308,16 @@ class _RealTimeRecipeTabState extends State<RealTimeRecipeTab> {
   }
 
   Widget _buildRecommendedRecipes() {
+    final l10n = AppLocalizations.of(context)!;
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              '⭐ 추천 레시피',
-              style: TextStyle(
+            Text(
+              '⭐ ${l10n.recommendedRecipes}',
+              style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
                 color: Colors.orange,
@@ -447,20 +452,22 @@ class _RealTimeRecipeTabState extends State<RealTimeRecipeTab> {
   }
 
   void _startRecipe(Map<String, dynamic> recipe) {
+    final l10n = AppLocalizations.of(context)!;
     // 레시피 시작 로직
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('${recipe['title']} 레시피를 시작합니다!'),
+        content: Text(l10n.recipeStarted(recipe['title'])),
         backgroundColor: Colors.pink,
       ),
     );
   }
 
   void _saveRecipe(Map<String, dynamic> recipe) {
+    final l10n = AppLocalizations.of(context)!;
     // 레시피 저장 로직
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('${recipe['title']} 레시피가 저장되었습니다!'),
+        content: Text(l10n.recipeSaved(recipe['title'])),
         backgroundColor: Colors.green,
       ),
     );

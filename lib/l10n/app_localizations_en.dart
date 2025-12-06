@@ -1052,7 +1052,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mixingStepTitle => 'Mixing Step';
 
   @override
-  String get fermentationStepTitle => 'Fermentation Step';
+  String fermentationStepTitle(Object number) {
+    return 'Fermentation Step $number';
+  }
 
   @override
   String get ovenStepTitle => 'Oven Step';
@@ -1107,4 +1109,736 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get targetCountError => 'Target count must be at least 1';
+
+  @override
+  String get noDescription => 'No description';
+
+  @override
+  String get mixingSpeedLow => 'Low';
+
+  @override
+  String get mixingSpeedMedium => 'Medium';
+
+  @override
+  String get mixingSpeedHigh => 'High';
+
+  @override
+  String get mixingSpeedMax => 'Max';
+
+  @override
+  String get mixingSpeedPulse => 'Pulse';
+
+  @override
+  String get mixingSpeedEgg => 'Egg/Foam';
+
+  @override
+  String get sousChefModeTitle => 'Sous Chef Mode';
+
+  @override
+  String get analysisTab => 'Analysis';
+
+  @override
+  String get selectAnalysisModule => 'Select Analysis Module';
+
+  @override
+  String get breadModule => 'Bread Module';
+
+  @override
+  String get unknownModule => 'Unknown Module';
+
+  @override
+  String get bakingEnvironmentConditions => 'Baking Environment Conditions';
+
+  @override
+  String get altitudeLabel => 'Altitude (m)';
+
+  @override
+  String get seasonLabel => 'Season';
+
+  @override
+  String get ovenTypeLabel => 'Oven Type';
+
+  @override
+  String get fermentationMethodLabel => 'Fermentation Method';
+
+  @override
+  String get mixerTypeLabel => 'Mixer Type';
+
+  @override
+  String get applySettings => 'Apply Settings';
+
+  @override
+  String get applyingSettings => 'Applying...';
+
+  @override
+  String get seasonSpring => 'Spring';
+
+  @override
+  String get seasonSummer => 'Summer';
+
+  @override
+  String get seasonAutumn => 'Autumn';
+
+  @override
+  String get seasonWinter => 'Winter';
+
+  @override
+  String get ovenConvection => 'Convection Oven';
+
+  @override
+  String get ovenProfessionalConvection => 'Professional Convection Oven';
+
+  @override
+  String get ovenHome => 'Home Oven';
+
+  @override
+  String get ovenConventional => 'Conventional Oven';
+
+  @override
+  String get ovenDeck => 'Deck Oven';
+
+  @override
+  String get ovenSteam => 'Steam Oven';
+
+  @override
+  String get ovenRadiation => 'Radiation Oven';
+
+  @override
+  String get ovenStone => 'Stone Oven';
+
+  @override
+  String get ovenProfessional => 'Professional Oven';
+
+  @override
+  String get fermentationRoomTemp => 'Room Temperature';
+
+  @override
+  String get fermentationFermenter => 'Fermenter';
+
+  @override
+  String get mixerHome => 'Home Mixer';
+
+  @override
+  String get mixerProfessional => 'Professional Mixer';
+
+  @override
+  String get mixerCommercial => 'Commercial Mixer';
+
+  @override
+  String get additionalAnalysisResults => 'Additional Analysis Results';
+
+  @override
+  String get expectedSuccessRate => 'Expected Success Rate';
+
+  @override
+  String get glutenOptimization => 'Gluten Optimization';
+
+  @override
+  String get moistureBalance => 'Moisture Balance';
+
+  @override
+  String get temperatureStability => 'Temperature Stability';
+
+  @override
+  String get statusOptimal => 'Optimal';
+
+  @override
+  String get statusGood => 'Good';
+
+  @override
+  String get statusStable => 'Stable';
+
+  @override
+  String get fermentationStrategyRecommendation =>
+      'Fermentation Strategy Recommendation';
+
+  @override
+  String get mixingStepOptimization => 'Mixing Step Optimization';
+
+  @override
+  String get memoryUsage => 'Memory Usage';
+
+  @override
+  String get cacheMemory => 'Cache Memory';
+
+  @override
+  String get initializingModuleWait =>
+      'Initializing analysis module. Please try again in a moment.';
+
+  @override
+  String get analysisComplete => 'Analysis complete.';
+
+  @override
+  String get analysisError => 'Error occurred during analysis.';
+
+  @override
+  String get validationError => 'Validation Error';
+
+  @override
+  String get confirm => 'Confirm';
+
+  @override
+  String get performanceSuggestions => 'Performance Suggestions';
+
+  @override
+  String get optimizationHighTemp => ' (High Temp Optimization)';
+
+  @override
+  String get optimizationLowTemp => ' (Low Temp Optimization)';
+
+  @override
+  String get optimizationHomeMixer => ' (Home Mixer Adjustment)';
+
+  @override
+  String get analyzing => 'Analyzing...';
+
+  @override
+  String get startAnalysis => 'Start Analysis';
+
+  @override
+  String get improvementMethodsAndRecommendations =>
+      'Improvement Methods and Recommendations';
+
+  @override
+  String get runAnalysis => 'Run Analysis';
+
+  @override
+  String get environmentalRecommendations => 'Environmental Recommendations';
+
+  @override
+  String stepCountLabel(Object count) {
+    return '$count Steps';
+  }
+
+  @override
+  String get settingsApplied => 'Environmental settings applied.';
+
+  @override
+  String get settingsApplyError => 'Error applying environmental settings.';
+
+  @override
+  String get realTimeRecipeTitle => 'Real Time Recipe';
+
+  @override
+  String get refresh => 'Refresh';
+
+  @override
+  String get realTimeRecipeComingSoon => 'Real time recipes are coming soon';
+
+  @override
+  String get realTimeRecipeComingSoonDesc =>
+      'You will soon meet various real time recipes';
+
+  @override
+  String get loadingRealTimeRecipes => 'Loading real time recipes...';
+
+  @override
+  String get realTimeRecommendation => 'Real Time Recommendation';
+
+  @override
+  String get noTitle => 'No Title';
+
+  @override
+  String get start => 'Start';
+
+  @override
+  String get realTimeFeedback => 'Real Time Feedback';
+
+  @override
+  String get realTimeFeedbackComingSoon =>
+      'Real time feedback system is coming soon.\nWe will provide useful tips and advice during the recipe.';
+
+  @override
+  String get recommendedRecipes => 'Recommended Recipes';
+
+  @override
+  String recipeStarted(Object title) {
+    return 'Starting $title recipe!';
+  }
+
+  @override
+  String recipeSaved(Object title) {
+    return '$title recipe saved!';
+  }
+
+  @override
+  String get initializingAnalysisEngine => 'Initializing analysis engine...';
+
+  @override
+  String get performingScientificCalculations =>
+      'Performing scientific step-by-step calculations...';
+
+  @override
+  String get preparingMixingData => 'Preparing mixing step data...';
+
+  @override
+  String get mixingAnalysis => 'Mixing Analysis';
+
+  @override
+  String keyMetricsTotalMixing(Object minutes) {
+    return 'Key Metrics: Total Mixing $minutes min';
+  }
+
+  @override
+  String get mixingAnalysisComplete => 'Mixing Analysis Complete';
+
+  @override
+  String overallScore(Object grade, Object score) {
+    return 'Overall Score: $score% ($grade)';
+  }
+
+  @override
+  String get totalTime => 'Total Time';
+
+  @override
+  String get glutenDevelopment => 'Gluten Development';
+
+  @override
+  String get moisture => 'Moisture';
+
+  @override
+  String get doughTemperature => 'Dough Temperature';
+
+  @override
+  String get currentStatus => 'Current Status';
+
+  @override
+  String get warning => 'Warning';
+
+  @override
+  String get temperatureWarning => 'Temperature Warning';
+
+  @override
+  String stepTemperatureWarning(Object number, Object temp) {
+    return 'Step $number: Dough Temp $temp (Recommended: 20-30°C)';
+  }
+
+  @override
+  String get mixingStepAnalysis => 'Mixing Step Analysis';
+
+  @override
+  String get analyzingMixing => 'Analyzing Mixing...';
+
+  @override
+  String get performingStepCalculations => 'Performing step calculations';
+
+  @override
+  String get scientificCalculationsInProgress =>
+      'Scientific calculations in progress...';
+
+  @override
+  String get processingAnalysisData =>
+      'Processing analysis data to calculate metrics.';
+
+  @override
+  String get fermentationAnalysis => 'Fermentation Analysis';
+
+  @override
+  String get totalFermentationTime => 'Total Fermentation Time';
+
+  @override
+  String get totalCO2Generation => 'Total CO₂ Generation';
+
+  @override
+  String get totalFermentationProgress => 'Total Fermentation Progress';
+
+  @override
+  String get fermentationStepCount => 'Fermentation Steps';
+
+  @override
+  String get noData => 'No Data';
+
+  @override
+  String get fermentationPerfect => 'Perfect Fermentation';
+
+  @override
+  String get fermentationExcellent => 'Excellent';
+
+  @override
+  String get fermentationGood => 'Good';
+
+  @override
+  String get fermentationAverage => 'Average';
+
+  @override
+  String get fermentationPoor => 'Poor';
+
+  @override
+  String get analysisIncomplete => 'Analysis Incomplete';
+
+  @override
+  String get actualDataUnavailable => 'Actual data unavailable';
+
+  @override
+  String completedStep(Object number) {
+    return 'Completed Step $number';
+  }
+
+  @override
+  String stepNumber(Object number) {
+    return 'Step $number';
+  }
+
+  @override
+  String timeMinutes(Object minutes) {
+    return 'Time: $minutes min';
+  }
+
+  @override
+  String get progress => 'Progress';
+
+  @override
+  String get maillardReaction => 'Maillard';
+
+  @override
+  String get crumb => 'Crumb';
+
+  @override
+  String get internalTemperature => 'Internal Temp';
+
+  @override
+  String get bakingComplete => 'Baking Complete!';
+
+  @override
+  String get bakingAnalysis => 'Oven Baking Analysis';
+
+  @override
+  String get waitingForFermentationAnalysis =>
+      'Waiting for fermentation analysis to complete...';
+
+  @override
+  String get totalBakingTime => 'Total Baking Time';
+
+  @override
+  String get totalMaillardReaction => 'Total Maillard Reaction';
+
+  @override
+  String get averageInternalTemperature => 'Avg Internal Temp';
+
+  @override
+  String get bakingStepCount => 'Baking Steps';
+
+  @override
+  String get crustColor => 'Crust Color';
+
+  @override
+  String get crumbBakingProgress => 'Crumb Progress';
+
+  @override
+  String get crustColorDarkBrown => 'Dark Brown';
+
+  @override
+  String get crustColorBrown => 'Brown';
+
+  @override
+  String get crustColorLightBrown => 'Light Brown';
+
+  @override
+  String get crustColorGolden => 'Golden';
+
+  @override
+  String get crustColorLightIvory => 'Light Ivory';
+
+  @override
+  String get preparingBakingStepData =>
+      'Preparing baking step analysis data...';
+
+  @override
+  String get bakingStepAnalysis => 'Baking Step Analysis';
+
+  @override
+  String stepProgress(Object completed, Object total) {
+    return '$completed/$total Steps';
+  }
+
+  @override
+  String get scientificBakingCalculationsInProgress =>
+      'Scientific baking calculations in progress...';
+
+  @override
+  String get performingScientificBakingCalculations =>
+      'Performing scientific baking calculations...';
+
+  @override
+  String get performanceMonitoring => 'Performance Monitoring';
+
+  @override
+  String get analysisDuration => 'Analysis Duration';
+
+  @override
+  String get cachePerformance => 'Cache Performance';
+
+  @override
+  String get totalEntries => 'Total Entries';
+
+  @override
+  String get expiredEntries => 'Expired Entries';
+
+  @override
+  String get hitRate => 'Hit Rate';
+
+  @override
+  String get successRateStatistics => 'Success Rate Statistics';
+
+  @override
+  String get lowTempWarning =>
+      'Low temperature may prolong fermentation. Move to a warmer place.';
+
+  @override
+  String get highTempWarning =>
+      'High temperature risks over-fermentation. Move to a cooler place.';
+
+  @override
+  String get lowHumidityWarning =>
+      'Low humidity may dry out the bread. Keep water nearby.';
+
+  @override
+  String get highHumidityWarning =>
+      'High humidity may make the bread heavy. Ensure good ventilation.';
+
+  @override
+  String get winterRecommendation =>
+      'In winter, increase fermentation time by 20-30%.';
+
+  @override
+  String get summerRecommendation =>
+      'In summer, decrease fermentation time by 10-20%.';
+
+  @override
+  String get optimalEnvironmentMessage =>
+      'Current environmental conditions are optimal for baking.';
+
+  @override
+  String get coldFermentationStrategy => 'Cold Fermentation Strategy';
+
+  @override
+  String get coldFermentationDesc =>
+      'Low temperature requires long fermentation.';
+
+  @override
+  String get coldFermentationBenefit1 => 'Flavor Enhancement';
+
+  @override
+  String get coldFermentationBenefit2 => 'Rancidity Inhibition';
+
+  @override
+  String get coldFermentationBenefit3 => 'Gluten Structure Strengthening';
+
+  @override
+  String get warmFermentationStrategy => 'Warm Fermentation Strategy';
+
+  @override
+  String get warmFermentationDesc =>
+      'High temperature leads to rapid fermentation.';
+
+  @override
+  String get warmFermentationBenefit1 => 'Time Saving';
+
+  @override
+  String get warmFermentationBenefit2 => 'Efficient Production';
+
+  @override
+  String get warmFermentationBenefit3 => 'Quick Results';
+
+  @override
+  String get standardFermentationStrategy => 'Standard Fermentation Strategy';
+
+  @override
+  String get standardFermentationDesc =>
+      'Current environment is optimal for standard fermentation.';
+
+  @override
+  String get standardFermentationBenefit1 => 'Stable Results';
+
+  @override
+  String get standardFermentationBenefit2 => 'Predictable Quality';
+
+  @override
+  String get standardFermentationBenefit3 => 'Easy Management';
+
+  @override
+  String get largeCacheSuggestion =>
+      'Cache size is large. Try clearing unnecessary cache.';
+
+  @override
+  String get increaseCacheSuggestion =>
+      'Increasing cache usage may improve performance.';
+
+  @override
+  String get longAnalysisTimeSuggestion =>
+      'Analysis time is long. Try increasing cache usage.';
+
+  @override
+  String get fastAnalysisSuggestion =>
+      'Very fast analysis speed! Optimization is working well.';
+
+  @override
+  String get optimizedPerformanceMessage =>
+      'Performance is currently optimized.';
+
+  @override
+  String unitHours(Object count) {
+    return '${count}h';
+  }
+
+  @override
+  String unitMinutes(Object count) {
+    return '${count}m';
+  }
+
+  @override
+  String stepCount(Object count) {
+    return '$count Steps';
+  }
+
+  @override
+  String get mixinAnalysisTitle => 'Mixing Step-by-Step Analysis';
+
+  @override
+  String get fermentationAnalysisTitle => 'Fermentation Analysis';
+
+  @override
+  String get bakingAnalysisTitle => 'Oven Baking Step-by-Step Analysis';
+
+  @override
+  String get analyzingScientificCalculations =>
+      'Performing scientific bread calculations...';
+
+  @override
+  String stepLabelWithNumber(Object number) {
+    return 'Step $number';
+  }
+
+  @override
+  String get preparingAnalysisData => 'Preparing data...';
+
+  @override
+  String mixingStepDefaultTitle(Object number) {
+    return 'Mixing Step $number';
+  }
+
+  @override
+  String speedAndDuration(Object duration, Object speed) {
+    return '$speed · ${duration}m';
+  }
+
+  @override
+  String get glutenFormationLabel => 'Gluten Formation';
+
+  @override
+  String get calculatingLabel => 'Calculating...';
+
+  @override
+  String get detailedMetricsLabel => 'Detailed Metrics';
+
+  @override
+  String get moistureAbsorptionLabel => 'Moisture Absorption';
+
+  @override
+  String optimalRangeLabel(Object max, Object min) {
+    return 'Optimal: $min-$max';
+  }
+
+  @override
+  String optimalRangeLabelPercent(Object max, Object min) {
+    return 'Optimal: $min-$max%';
+  }
+
+  @override
+  String optimalRangeLabelTemp(Object max, Object min) {
+    return 'Optimal: $min-$max°C';
+  }
+
+  @override
+  String get viscosityLabel => 'Viscosity';
+
+  @override
+  String get rpmLabel => 'RPM';
+
+  @override
+  String get rotationSpeedLabel => 'Rotation Speed';
+
+  @override
+  String get observedPhenomenaLabel => 'Observed Phenomena';
+
+  @override
+  String get unknownValue => 'Unknown';
+
+  @override
+  String get errorValue => 'Error';
+
+  @override
+  String fermentationStepPrefix(Object number) {
+    return '${number}th Fermentation';
+  }
+
+  @override
+  String get mainMetricsTitle => 'Main Metrics';
+
+  @override
+  String get co2GenerationLabel => 'CO₂ Generation';
+
+  @override
+  String get volumeExpansionLabel => 'Volume Expansion';
+
+  @override
+  String get fermentationProgressLabel => 'Fermentation Progress';
+
+  @override
+  String get acidityLabel => 'Acidity';
+
+  @override
+  String get scoreGradeExcellent => 'Excellent';
+
+  @override
+  String get scoreGradeGood => 'Good';
+
+  @override
+  String get scoreGradeFair => 'Fair';
+
+  @override
+  String get scoreGradeAverage => 'Average';
+
+  @override
+  String get scoreGradePoor => 'Poor';
+
+  @override
+  String stepLabelText(Object number) {
+    return 'Step $number';
+  }
+
+  @override
+  String get measuringTemperature => 'Measuring...';
+
+  @override
+  String mixingStepTitleLabel(Object number) {
+    return 'Mixing Step $number';
+  }
+
+  @override
+  String get keyMetricsTitle => 'Key Metrics';
+
+  @override
+  String get doughDevelopmentLabel => '🌾 Dough Development';
+
+  @override
+  String get moistureAbsorptionRateLabel => '💧 Moisture Absorption Rate';
+
+  @override
+  String get doughTemperatureLabel => '🌡️ Dough Temperature';
+
+  @override
+  String get doughTextureLabel => '⚡ Dough Texture';
+
+  @override
+  String get calculationError => 'Calculation Error';
+
+  @override
+  String get calculating => 'Calculating...';
+
+  @override
+  String get measuring => 'Measuring...';
+
+  @override
+  String get ingredientsMixing => 'Mixing Ingredients';
 }

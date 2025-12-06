@@ -5,6 +5,7 @@
 import 'dart:async'; // Timer import
 import 'dart:convert'; // JSON 파싱용 import 복원
 import 'package:flutter/material.dart';
+import 'package:my_recipe_book/l10n/app_localizations.dart';
 import 'dart:math' as math;
 import '../../../../../core/types/environment_types.dart' as env_types;
 import '../../../../../core/constants/bread_constants.dart'; // 상수 참조용 import
@@ -244,7 +245,7 @@ class _FermentationAnalysisCardState extends State<FermentationAnalysisCard> {
               const SizedBox(width: 12),
               Expanded(
                 child: Text(
-                  '🍞 발효 분석',
+                  '🍞 ${AppLocalizations.of(context)!.fermentationAnalysis}',
                   style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -260,7 +261,7 @@ class _FermentationAnalysisCardState extends State<FermentationAnalysisCard> {
                   Icons.refresh_rounded,
                   color: Colors.white,
                 ),
-                tooltip: '분석 실행',
+                tooltip: AppLocalizations.of(context)!.runAnalysis,
                 iconSize: 20,
               ),
             ],
@@ -397,7 +398,8 @@ class _FermentationAnalysisCardState extends State<FermentationAnalysisCard> {
               const SizedBox(width: 12),
               Expanded(
                 child: Text(
-                  '과학적 계산 진행 중...',
+                  AppLocalizations.of(context)!
+                      .scientificCalculationsInProgress,
                   style: TextStyle(
                     fontSize: 13,
                     color: Colors.grey.shade700,
@@ -409,7 +411,7 @@ class _FermentationAnalysisCardState extends State<FermentationAnalysisCard> {
           ),
           const SizedBox(height: 8),
           Text(
-            '분석 데이터를 처리하여 메트릭 값을 계산하고 있습니다.',
+            AppLocalizations.of(context)!.processingAnalysisData,
             style: TextStyle(
               fontSize: 11,
               color: Colors.grey.shade500,
@@ -459,7 +461,7 @@ class _FermentationAnalysisCardState extends State<FermentationAnalysisCard> {
           children: [
             Expanded(
               child: _buildFermentationMetricCard(
-                '⏱️ 발효 총시간',
+                '⏱️ ${AppLocalizations.of(context)!.totalFermentationTime}',
                 '${totalFermentationTime}분',
                 Colors.blue.shade600,
               ),
@@ -467,7 +469,7 @@ class _FermentationAnalysisCardState extends State<FermentationAnalysisCard> {
             const SizedBox(width: 6),
             Expanded(
               child: _buildFermentationMetricCard(
-                '🫧 총 CO₂ 생성량',
+                '🫧 ${AppLocalizations.of(context)!.totalCO2Generation}',
                 _getTotalCO2Generation(),
                 Colors.purple.shade600,
               ),
@@ -480,7 +482,7 @@ class _FermentationAnalysisCardState extends State<FermentationAnalysisCard> {
           children: [
             Expanded(
               child: _buildFermentationMetricCard(
-                '📊 총 발효 진행률',
+                '📊 ${AppLocalizations.of(context)!.totalFermentationProgress}',
                 _getTotalFermentationProgress(),
                 Colors.green.shade600,
               ),
@@ -488,7 +490,7 @@ class _FermentationAnalysisCardState extends State<FermentationAnalysisCard> {
             const SizedBox(width: 6),
             Expanded(
               child: _buildFermentationMetricCard(
-                '📋 발효 단계수',
+                '📋 ${AppLocalizations.of(context)!.fermentationStepCount}',
                 _getFermentationStepsCount(),
                 Colors.teal.shade600,
               ),
@@ -500,9 +502,10 @@ class _FermentationAnalysisCardState extends State<FermentationAnalysisCard> {
   }
 
   String _getYeastAmountFromIngredients() {
+    final l10n = AppLocalizations.of(context)!;
     // ✅ 컨트롤러 단계 분석(계산 결과)이 아닌 레시피 재료(원본 데이터)에서 직접 추출
     var ingredients = widget.recipeData['ingredients'];
-    if (ingredients is! List) return '데이터 없음';
+    if (ingredients is! List) return l10n.noData;
 
     double totalYeast = 0.0;
     for (var ingredient in ingredients.where((ing) => ing is Map)) {
@@ -529,13 +532,14 @@ class _FermentationAnalysisCardState extends State<FermentationAnalysisCard> {
       }
     }
 
-    return totalYeast > 0 ? '${totalYeast.toStringAsFixed(1)}g' : '데이터 없음';
+    return totalYeast > 0 ? '${totalYeast.toStringAsFixed(1)}g' : l10n.noData;
   }
 
   String _getFlourAmountFromIngredients() {
+    final l10n = AppLocalizations.of(context)!;
     // 레시피 재료에서 밀가루 함량 추출
     var ingredients = widget.recipeData['ingredients'];
-    if (ingredients is! List) return '데이터 없음';
+    if (ingredients is! List) return l10n.noData;
 
     double totalFlour = 0.0;
     for (var ingredient in ingredients.where((ing) => ing is Map)) {
@@ -553,26 +557,28 @@ class _FermentationAnalysisCardState extends State<FermentationAnalysisCard> {
       }
     }
 
-    return totalFlour > 0 ? '${totalFlour.toStringAsFixed(1)}g' : '데이터 없음';
+    return totalFlour > 0 ? '${totalFlour.toStringAsFixed(1)}g' : l10n.noData;
   }
 
   String _getFermentationStepsCount() {
+    final l10n = AppLocalizations.of(context)!;
     if (_controller?.stepAnalyses != null &&
         _controller!.stepAnalyses.isNotEmpty) {
-      return '${_controller!.stepAnalyses.length}단계';
+      return l10n.stepCount(_controller!.stepAnalyses.length);
     }
 
-    return '실제 데이터를 사용할 수 없음';
+    return l10n.actualDataUnavailable;
   }
 
   /// 완료 레벨 제거 (단순 텍스트 표시) - BreadConstants 상수 참조
   String _calculateFermentationCompletionLevel() {
+    final l10n = AppLocalizations.of(context)!;
     if (_controller == null || !_controller!.hasStepAnalysis) {
-      return '분석 미완료';
+      return l10n.analysisIncomplete;
     }
 
     final analyses = _controller!.stepAnalyses;
-    if (analyses.isEmpty) return '데이터 없음';
+    if (analyses.isEmpty) return l10n.noData;
 
     // CO₂ 생성량 기반 평가 - 빅데이터 준수 상수 사용
     final totalCo2 = analyses.fold<double>(
@@ -584,46 +590,47 @@ class _FermentationAnalysisCardState extends State<FermentationAnalysisCard> {
     if (totalCo2 >= BreadConstants.fermentationCO2ThresholdExcellent &&
         avgCo2PerStep >=
             BreadConstants.fermentationCO2AverageThresholdExcellent) {
-      return '완벽 발효';
+      return l10n.fermentationPerfect;
     } else if (totalCo2 >= BreadConstants.fermentationCO2ThresholdGood &&
         avgCo2PerStep >= BreadConstants.fermentationCO2AverageThresholdGood) {
-      return '우수 완료';
+      return l10n.fermentationExcellent;
     } else if (totalCo2 >= BreadConstants.fermentationCO2ThresholdModerate &&
         avgCo2PerStep >=
             BreadConstants.fermentationCO2AverageThresholdModerate) {
-      return '양호 완료';
+      return l10n.fermentationGood;
     } else if (totalCo2 >= BreadConstants.fermentationCO2ThresholdMinimum &&
         avgCo2PerStep >=
             BreadConstants.fermentationCO2AverageThresholdMinimum) {
-      return '보통 완료';
+      return l10n.fermentationAverage;
     } else {
-      return '미흡 완료';
+      return l10n.fermentationPoor;
     }
   }
 
   /// 완료 레벨 색상 결정
   Color _getCompletionLevelColor(String level) {
-    switch (level) {
-      case '완벽 발효':
-        return Colors.green.shade700;
-      case '우수 완료':
-        return Colors.blue.shade700;
-      case '양호 완료':
-        return Colors.orange.shade700;
-      case '보통 완료':
-        return Colors.amber.shade700;
-      case '미흡 완료':
-        return Colors.red.shade700;
-      default:
-        return Colors.grey.shade600;
+    final l10n = AppLocalizations.of(context)!;
+    if (level == l10n.fermentationPerfect) {
+      return Colors.green.shade700;
+    } else if (level == l10n.fermentationExcellent) {
+      return Colors.blue.shade700;
+    } else if (level == l10n.fermentationGood) {
+      return Colors.orange.shade700;
+    } else if (level == l10n.fermentationAverage) {
+      return Colors.amber.shade700;
+    } else if (level == l10n.fermentationPoor) {
+      return Colors.red.shade700;
+    } else {
+      return Colors.grey.shade600;
     }
   }
 
   /// 총 CO₂ 생성량 계산 - 마지막 단계의 누적 값 직접 사용 (빵 과학적 L 단위 표시)
   String _getTotalCO2Generation() {
+    final l10n = AppLocalizations.of(context)!;
     if (_controller == null || !_controller!.hasStepAnalysis) {
       debugPrint('🧪 [메트릭 총 CO2] 컨트롤러 없음 또는 단계 분석 없음');
-      return '데이터 없음';
+      return AppLocalizations.of(context)!.noData;
     }
 
     final analyses = _controller!.stepAnalyses;
@@ -655,6 +662,7 @@ class _FermentationAnalysisCardState extends State<FermentationAnalysisCard> {
 
   /// 총 발효 진행률 합산 - 컨트롤러에서 통일된 총 진행률 사용
   String _getTotalFermentationProgress() {
+    final l10n = AppLocalizations.of(context)!;
     debugPrint('🔍 [총 진행률 비교 디버깅 시작]');
 
     // 컨트롤러의 통합된 총 진행률
@@ -698,7 +706,7 @@ class _FermentationAnalysisCardState extends State<FermentationAnalysisCard> {
       return '${(finalProgress * 100).toStringAsFixed(1)}%';
     }
 
-    return '데이터 없음';
+    return l10n.noData;
   }
 
   /// ✅ MixingAnalysisCard 패턴 적용 - 메트릭 카드 헬퍼
@@ -766,6 +774,7 @@ class _FermentationAnalysisCardState extends State<FermentationAnalysisCard> {
   /// ✅ 발효 단계별 분석 리스트 표시 - MixingAnalysisCard 패턴 적용 ✨
   /// 믹싱 카드처럼 단계별 실시간 업데이트 지원
   Widget _buildExpandableFermentationSteps() {
+    final l10n = AppLocalizations.of(context)!;
     final stepAnalyses = _controller?.stepAnalyses ?? [];
     final completedSteps = stepAnalyses.length;
     final totalSteps = _getDynamicFermentationTotalSteps(); // ✅ 하드코딩 제거!
@@ -798,7 +807,7 @@ class _FermentationAnalysisCardState extends State<FermentationAnalysisCard> {
             const SizedBox(width: 12),
             Expanded(
               child: Text(
-                '발효 단계별 분석 데이터 준비 중...',
+                l10n.preparingAnalysisData,
                 style: TextStyle(
                   fontSize: 12,
                   color: Colors.grey.shade700,
@@ -828,7 +837,7 @@ class _FermentationAnalysisCardState extends State<FermentationAnalysisCard> {
             ),
             const SizedBox(width: 8),
             Text(
-              '발효 단계별 분석',
+              l10n.fermentationAnalysisTitle,
               style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w600,
@@ -854,11 +863,19 @@ class _FermentationAnalysisCardState extends State<FermentationAnalysisCard> {
           ],
         ),
         children: [
-          Padding(
-            padding: const EdgeInsets.all(12),
-            child: Column(
-              children:
-                  _buildFermentationStepWidgets(), // ✅ 믹싱 패턴 적용: 실시간 단계별 위젯 목록
+          ConstrainedBox(
+            constraints: BoxConstraints(
+              maxHeight: MediaQuery.of(context).size.height *
+                  0.6, // 화면의 60%로 제한하여 overflow 방지
+            ),
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(12),
+                child: Column(
+                  children:
+                      _buildFermentationStepWidgets(), // ✅ 믹싱 패턴 적용: 실시간 단계별 위젯 목록
+                ),
+              ),
             ),
           ),
         ],

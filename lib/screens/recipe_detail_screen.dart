@@ -1046,7 +1046,8 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
 
           // 단계 내용 또는 미입력 안내
           if (mixingSteps == null || mixingSteps.isEmpty) ...[
-            _buildEmptyStepsInfo(context, l10n.mixingStep, Colors.blue.shade600),
+            _buildEmptyStepsInfo(
+                context, l10n.mixingStep, Colors.blue.shade600),
           ] else ...[
             _buildStepsList(mixingSteps, Colors.blue.shade600),
           ],
@@ -1086,7 +1087,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
               ),
               const SizedBox(width: 8),
               Text(
-                l10n.fermentationStepTitle,
+                l10n.fermentationStepTitle(""),
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -1099,7 +1100,8 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
 
           // 단계 내용 또는 미입력 안내
           if (fermentationSteps == null || fermentationSteps.isEmpty) ...[
-            _buildEmptyStepsInfo(context, l10n.fermentationStep, Colors.purple.shade600),
+            _buildEmptyStepsInfo(
+                context, l10n.fermentationStep, Colors.purple.shade600),
           ] else ...[
             _buildStepsList(fermentationSteps, Colors.purple.shade600),
           ],
@@ -1161,7 +1163,8 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
     );
   }
 
-  Widget _buildEmptyStepsInfo(BuildContext context, String stepType, Color color) {
+  Widget _buildEmptyStepsInfo(
+      BuildContext context, String stepType, Color color) {
     final l10n = AppLocalizations.of(context)!;
     return Container(
       padding: const EdgeInsets.all(16),
@@ -1219,7 +1222,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
     if (stepCount > 3) {
       return ExpansionTile(
         title: Text(
-          '$stepCount개 단계',
+          AppLocalizations.of(context)!.stepCountLabel(stepCount),
           style: TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w600,
@@ -1246,6 +1249,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
 
   Widget _buildStepItem(
       Map<String, dynamic> step, int stepNumber, Color color) {
+    final l10n = AppLocalizations.of(context)!;
     // 유연한 키 처리 - 여러 키를 시도
     final description = step['description'] ??
         step['desc'] ??
